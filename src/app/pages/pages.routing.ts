@@ -10,6 +10,7 @@ import { ListEstilistaComponent } from './estilista/list-estilista/list-estilist
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 
+
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -18,19 +19,15 @@ const routes: Routes = [
       {path: '', component: DashboardComponent},
       {path: 'progress', component: ProgressComponent},
       {path: 'grafica1', component: Grafica1Component},
+      //Rutas para estilista
       {path: 'estilista/nuevo', component: CreateEstilistaComponent},
       {path: 'estilista/list', component: ListEstilistaComponent},
       {path: 'estilista/edit/:id', component: CreateEstilistaComponent},
-      {path: 'cliente/nuevo', component: CreateClienteComponent},
+      //Rutas para cliente
+      {path:'cliente/nuevo', component: CreateClienteComponent},
       {path: 'cliente/list', component: ListClienteComponent},
-      {path: 'cliente/edit/:id', component: CreateClienteComponent},
-
-
-
-
-
-
-      
+      {path: 'cliente/edit/:id', component:CreateClienteComponent}
+   
     ]
   },
 ];

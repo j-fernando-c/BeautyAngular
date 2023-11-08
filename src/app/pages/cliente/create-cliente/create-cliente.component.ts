@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente.interfaces';
 import { ClienteService } from 'src/app/services/cliente.service';
 
@@ -10,46 +10,52 @@ import { ClienteService } from 'src/app/services/cliente.service';
   styleUrls: ['./create-cliente.component.css']
 })
 export class CreateClienteComponent implements OnInit {
-  constructor(private servicioCliente:ClienteService, private fb:FormBuilder, private route:ActivatedRoute){
+
+  constructor(
+    private fb: FormBuilder, 
+    private clienteServicio:ClienteService,
+    private routes:ActivatedRoute,
+    private router:Router){
+
 
   }
   id!:number;
   sExiste:boolean=false;
+  myForm: FormGroup = this.fb.group({
 
-  myForm2: FormGroup = this.fb.group({
-    correo_cliente: ['', [Validators.required, Validators.email]],
+    telefono:['',[Validators.required,Validators.pattern('^[0-9]{10}$')]],
     direccion:['', Validators.required],
-    telefono:['',[Validators.required,Validators.pattern('^[0-9]{10}$')]]
+    correo_cliente: ['', [Validators.required, Validators.email]],
 
   });
   ngOnInit(): void {
-    this.id=this.route.snapshot.params['id']
+    this.id=this.routes.snapshot.params['id']
     if(this.id){
       this.sExiste=true
-      this.servicioCliente.getOneCliente(this.id).subscribe((res:Cliente)=>{
-        this.myForm2.setValue({
+      this.clienteServicio.getOneCliente(this.id).subscribe((res:Cliente)=>{
+        this.myForm.patchValue({
           correo_cliente:res.correo_cliente,
           direccion:res.direccion,
           telefono:res.telefono
         })
-        console.log(res)
       })
     }
-    
 
     
   }
 
+  onSave(cliente:Cliente){
+    if (this.sExiste) {
+      this.clienteServicio.actualizarCliente(this.id, cliente).subscribe((res:Cliente)=>{
+        this.router.navigateByUrl("/dashboard/cliente/list")
+      })      
+  }else{
+    this.clienteServicio.createCliente(cliente).subscribe(res=>{
+      this.router.navigateByUrl("/dashboard/cliente/list")
+    })
+        this.myForm.markAllAsTouched()
 
-  onSave(cliente:Cliente) {
-    if (this.myForm2.valid) {
-      this.servicioCliente.createCliente(cliente).subscribe(res=>{
-        
-      })
-          this.myForm2.markAllAsTouched()
-          
-    }
-
+  }
   }
 
 }

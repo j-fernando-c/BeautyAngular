@@ -1,35 +1,32 @@
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Cliente } from './../../../interfaces/cliente.interfaces';
-import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-
-import { ClienteService } from 'src/app/services/cliente.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Cliente } from 'src/app/interfaces/cliente.interfaces';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-list-cliente',
   templateUrl: './list-cliente.component.html',
   styleUrls: ['./list-cliente.component.css']
 })
-export class ListClienteComponent {
-  Cliente:Cliente[]=[]
-  private formData!: Cliente;
-  title: any;
-  subcripcion!: Subscription;
-  constructor(private servicioCliente:ClienteService, private fb:FormBuilder,private routes:Router){
+export class ListClienteComponent implements OnInit {
 
-  }
+  constructor(private clienteServicio:ClienteService, private fb:FormBuilder,private routes:Router){}
+  cliente:Cliente[]=[];
+  subcripcion!: Subscription;
   ngOnInit(): void {
-    this.servicioCliente.getCliente().subscribe(data=>{
-      console.log(this.Cliente=data)
+    this.clienteServicio.getCliente().subscribe(data=>{
+      console.log(this.cliente=data)
     });
 
-    this.subcripcion=this.servicioCliente.refresh.subscribe(()=>{
-      this.servicioCliente.getCliente().subscribe(data=>{
-        console.log(this.Cliente=data)
+    this.subcripcion=this.clienteServicio.refresh.subscribe(()=>{
+      this.clienteServicio.getCliente().subscribe(data=>{
+        console.log(this.cliente=data)
       });
     })
+  }
 
 
 
-}}
+}

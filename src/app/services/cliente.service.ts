@@ -8,6 +8,7 @@ import { Cliente } from '../interfaces/cliente.interfaces';
 })
 export class ClienteService {
 
+  
   private refresh$ = new Subject<void>
   private url ="http://localhost:3000/api/cliente/"
   constructor(private http: HttpClient) { }
@@ -32,6 +33,7 @@ export class ClienteService {
   actualizarCliente(id:number, body:Cliente):Observable<Cliente>{
     return this.http.put<Cliente>(this.url + id, body);
   }
+
   getOneCliente(id:number):Observable<Cliente>{
     return this.http.get<Cliente>(this.url + id)
   }

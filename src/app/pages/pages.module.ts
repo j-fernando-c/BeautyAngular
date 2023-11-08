@@ -16,9 +16,9 @@ import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { ListEstilistaComponent } from './estilista/list-estilista/list-estilista.component';
 import { CreateEstilistaComponent } from './estilista/create-estilista/create-estilista.component';
-import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
-import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { FiltroPipe } from './estilista/pipe/filtro.pipe';
+import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
+import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 
 
 
@@ -30,9 +30,11 @@ import { FiltroPipe } from './estilista/pipe/filtro.pipe';
     PagesComponent,
     ListEstilistaComponent,
     CreateEstilistaComponent,
-    ListClienteComponent,
-    CreateClienteComponent,
+    
+    
     FiltroPipe,
+                CreateClienteComponent,
+                ListClienteComponent,
   ],
   exports: [
     DashboardComponent,

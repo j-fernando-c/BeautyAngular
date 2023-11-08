@@ -1,24 +1,33 @@
-<button class="btn btn-primary" routerLink="/dashboard/cliente/nuevo">Nuevo cliente</button>
-<table class="table">
+
+
+<button class="btn btn-primary mb-4" routerLink="/dashboard/cliente/nuevo">Nuevo cliente</button>
+
+<table class="table table-lg">
     <thead>
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Correo</th>
-        <th scope="col">telefono</th>
         <th scope="col">Dirección</th>
+        <th scope="col">telefono</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of Cliente">
+      <tr *ngFor="let i of cliente">
         <th scope="row">{{i.id_cliente}}</th>
         <td>{{i.correo_cliente}}</td>
-        <td>{{i.telefono}}</td>
         <td>{{i.direccion}}</td>
+        <td>{{i.telefono}}</td>
 
+  
         <td>  
-          <a class="btn btn-warning" routerLink="/dashboard/cliente/edit/{{i.id_cliente}}">Editar</a>
+          <a class="btn btn-warning" routerLink="/dashboard/cliente/edit/{{i.id_cliente}}" >Editar</a>
+
           <a class="btn btn-danger ml-3" >Eliminar</a>
         </td>
     </tbody>
   </table>
+  <div class="contenedor-paginacion">
+    <button type="button" class="btn btn-secondary" >Anterior</button>
+    <button type="button" class="btn btn-secondary ml-4">Siguiente</button>
+  </div>

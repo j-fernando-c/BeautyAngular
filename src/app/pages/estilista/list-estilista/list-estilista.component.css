@@ -1,0 +1,8 @@
+.contenedor-paginacion{
+    display: flex;
+    justify-content: center;
+}
+.contenedor-busqueda{
+    display: flex;
+    justify-content: space-between;
+}

@@ -11,9 +11,10 @@ import { EstilistaService } from 'src/app/services/estilista.service';
   styleUrls: ['./list-estilista.component.css']
 })
 export class ListEstilistaComponent implements OnInit {
+  pages:number=0;
+  //Contiene los estilistas
   estilista:Estilista[]=[]
-  private formData!: Estilista;
-  title: any;
+  serach:string=''
   subcripcion!: Subscription;
   constructor(private servicioEstilista:EstilistaService, private fb:FormBuilder,private routes:Router){
 
@@ -29,9 +30,23 @@ export class ListEstilistaComponent implements OnInit {
       });
     })
 
+    
+  }
+  //Metodos para la páginacion
+  nextPage(){
+    this.pages+=7
+  }  
+//Metodos para la paginacion
+  anteriorPage(){
+    if(this.pages>0){
+      this.pages-=7
 
+    }
   }
 
+  buscarEstilista(nombre:string){
+    this.serach=nombre;
+  }
 
 
 

@@ -18,6 +18,7 @@ import { ListEstilistaComponent } from './estilista/list-estilista/list-estilist
 import { CreateEstilistaComponent } from './estilista/create-estilista/create-estilista.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
+import { FiltroPipe } from './estilista/pipe/filtro.pipe';
 
 
 
@@ -31,6 +32,7 @@ import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.
     CreateEstilistaComponent,
     ListClienteComponent,
     CreateClienteComponent,
+    FiltroPipe,
   ],
   exports: [
     DashboardComponent,

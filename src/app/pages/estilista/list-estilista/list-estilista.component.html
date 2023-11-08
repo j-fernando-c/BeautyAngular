@@ -1,5 +1,9 @@
-<button class="btn btn-primary" routerLink="/dashboard/estilista/nuevo">Nuevo estilista</button>
-<table class="table">
+
+
+<input type="text" class="form-control"  placeholder="Buscar estilista..." #buscar (keyup)="buscarEstilista(buscar.value)">
+<button class="btn btn-primary mb-4" routerLink="/dashboard/estilista/nuevo">Nuevo estilista</button>
+
+<table class="table table-lg">
     <thead>
       <tr>
         <th scope="col">Id</th>
@@ -9,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of estilista">
+      <tr *ngFor="let i of estilista | filtro:pages:serach">
         <th scope="row">{{i.id_estilista}}</th>
         <td>{{i.correo_estilista}}</td>
         <td>{{i.telefono}}</td>
@@ -21,3 +25,7 @@
         </td>
     </tbody>
   </table>
+  <div class="contenedor-paginacion">
+    <button type="button" class="btn btn-secondary" (click)="anteriorPage()">Anterior</button>
+    <button type="button" class="btn btn-secondary ml-4"(click)="nextPage()">Siguiente</button>
+  </div>

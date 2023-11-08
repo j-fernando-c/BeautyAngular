@@ -16,8 +16,7 @@ export class CreateClienteComponent implements OnInit {
   id!:number;
   sExiste:boolean=false;
 
-  myForm: FormGroup = this.fb.group({
-
+  myForm2: FormGroup = this.fb.group({
     correo_cliente: ['', [Validators.required, Validators.email]],
     direccion:['', Validators.required],
     telefono:['',[Validators.required,Validators.pattern('^[0-9]{10}$')]]
@@ -28,7 +27,7 @@ export class CreateClienteComponent implements OnInit {
     if(this.id){
       this.sExiste=true
       this.servicioCliente.getOneCliente(this.id).subscribe((res:Cliente)=>{
-        this.myForm.setValue({
+        this.myForm2.setValue({
           correo_cliente:res.correo_cliente,
           direccion:res.direccion,
           telefono:res.telefono
@@ -43,11 +42,11 @@ export class CreateClienteComponent implements OnInit {
 
 
   onSave(cliente:Cliente) {
-    if (this.myForm.valid) {
+    if (this.myForm2.valid) {
       this.servicioCliente.createCliente(cliente).subscribe(res=>{
         
       })
-          this.myForm.markAllAsTouched()
+          this.myForm2.markAllAsTouched()
           
     }
 

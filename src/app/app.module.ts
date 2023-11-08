@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import{HttpClientModule} from '@angular/common/http'
 //modulos
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
     AppRoutingModule,
     PagesModule,
     AuthModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })

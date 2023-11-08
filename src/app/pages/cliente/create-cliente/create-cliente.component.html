@@ -1,0 +1,25 @@
+<form [formGroup]="myForm" (ngSubmit)="onSave(myForm.value)" method="post">
+    <div class="mb-3">
+      <label for="" class="form-label">Ingrese el correo</label>
+      <input type="email" class="form-control" formControlName="correo_cliente" >
+      <span class="text-danger" *ngIf="myForm.get('correo_cliente')?.invalid && myForm.get('correo_cliente')?.touched">
+        El email es requerido y debe ser válido
+      </span>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Ingrese la direccion</label>
+        <input type="text" class="form-control" formControlName="direccion" >
+        <span class="text-danger" *ngIf="myForm.get('direccion')?.invalid && myForm.get('direccion')?.touched">
+          La dirección es requeridad
+        </span>
+      </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Ingrese telefono</label>
+        <input type="text" class="form-control" formControlName="telefono" >
+        <span class="text-danger" *ngIf="myForm.get('telefono')?.invalid && myForm.get('telefono')?.touched">
+          El telefono es requerido
+        </span>
+      </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+

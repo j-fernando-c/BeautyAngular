@@ -3,7 +3,7 @@ import { EstilistaService } from 'src/app/services/estilista.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-estilista',
@@ -15,7 +15,8 @@ export class CreateEstilistaComponent implements OnInit {
   constructor(
     private servicioEstilista:EstilistaService, 
     private fb:FormBuilder,
-    private route:ActivatedRoute){
+    private route:ActivatedRoute,
+    private router:Router){
 
   }
   id!:number;
@@ -42,12 +43,16 @@ export class CreateEstilistaComponent implements OnInit {
 
 
   onSave(estilista:Estilista) {
-    if (this.myForm.valid) {
+    if (this.sExiste) {
+        this.servicioEstilista.actualizarEstilista(this.id, estilista).subscribe((res:Estilista)=>{
+          this.router.navigateByUrl("/dashboard/estilista/list")
+        })      
+    }else{
       this.servicioEstilista.createEstilista(estilista).subscribe(res=>{
-        console.log(res)
+        this.router.navigateByUrl("/dashboard/estilista/list")
       })
           this.myForm.markAllAsTouched()
-          
+
     }
 
   }

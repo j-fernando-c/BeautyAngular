@@ -18,9 +18,9 @@ export class CreateClienteComponent implements OnInit {
 
   myForm: FormGroup = this.fb.group({
 
-    telefono:['',[Validators.required,Validators.pattern('^[0-9]{10}$')]],
     correo_cliente: ['', [Validators.required, Validators.email]],
-    direccion:['', Validators.required]
+    direccion:['', Validators.required],
+    telefono:['',[Validators.required,Validators.pattern('^[0-9]{10}$')]]
 
   });
   ngOnInit(): void {
@@ -28,11 +28,12 @@ export class CreateClienteComponent implements OnInit {
     if(this.id){
       this.sExiste=true
       this.servicioCliente.getOneCliente(this.id).subscribe((res:Cliente)=>{
-        this.myForm.patchValue({
+        this.myForm.setValue({
           correo_cliente:res.correo_cliente,
           direccion:res.direccion,
           telefono:res.telefono
         })
+        console.log(res)
       })
     }
     

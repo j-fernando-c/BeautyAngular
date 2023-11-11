@@ -6,7 +6,8 @@
 <table class="table table-lg">
     <thead>
       <tr>
-        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
         <th scope="col">Correo</th>
         <th scope="col">telefono</th>
         <th scope="col">Acciones</th>
@@ -14,14 +15,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let i of estilista | filtro:pages:serach">
-        <th scope="row">{{i.id_estilista}}</th>
-        <td>{{i.correo_estilista}}</td>
+        
+        <td>{{i.nombre}}</td>
+        <td>{{i.apellido}}</td>
+        <td>{{i.email}}</td>
         <td>{{i.telefono}}</td>
-  
         <td>  
-          <a class="btn btn-warning" routerLink="/dashboard/estilista/edit/{{i.id_estilista}}" >Editar</a>
-
-          <a class="btn btn-danger ml-3" >Eliminar</a>
+          <a class="btn btn-warning" routerLink="/dashboard/estilista/edit/{{i._id}}" >Editar</a>
+          <a class="btn btn-danger ml-3" (click)="eliminarEstilista(i._id)">Eliminar</a>
         </td>
     </tbody>
   </table>

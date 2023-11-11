@@ -11,7 +11,7 @@ export class FiltroPipe implements PipeTransform {
     if(serach.length==0)
     return Estilistas.slice(pages,pages+7)
     
-    const filtrarEstilistas=Estilistas.filter(es=>es.correo_estilista.includes(serach))
+    const filtrarEstilistas=Estilistas.filter(es=>es.nombre.includes(serach))
     return filtrarEstilistas.slice(pages,pages+7)
     
   }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente.interfaces';
 import { ClienteService } from 'src/app/services/cliente.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-cliente',
@@ -51,6 +52,8 @@ export class CreateClienteComponent implements OnInit {
       })      
   }else{
     this.clienteServicio.createCliente(cliente).subscribe(res=>{
+
+      
       this.router.navigateByUrl("/dashboard/cliente/list")
     })
         this.myForm.markAllAsTouched()

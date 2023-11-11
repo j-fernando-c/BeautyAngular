@@ -32,6 +32,14 @@ export class ListEstilistaComponent implements OnInit {
 
     
   }
+
+  //Metodo para eliminar
+  eliminarEstilista(id:string){
+    this.servicioEstilista.EliminarEstilista(id).subscribe(res=>{
+      console.log("Se eliminó con exito")
+    })
+
+  }
   //Metodos para la páginacion
   nextPage(){
     this.pages+=7

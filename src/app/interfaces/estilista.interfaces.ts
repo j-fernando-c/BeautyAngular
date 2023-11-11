@@ -1,6 +1,8 @@
 export interface Estilista {
-    id_estilista:     number;
-    correo_estilista: string;
+    _id:     string;
+    nombre:           string;
+    apellido:         string;
+    email:            string;
     estado:           boolean;
     telefono:         string;
 }

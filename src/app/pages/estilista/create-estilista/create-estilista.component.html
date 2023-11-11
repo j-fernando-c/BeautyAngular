@@ -1,8 +1,27 @@
 <form [formGroup]="myForm" method="post">
+  <div class="mb-3">
+    <label for="" class="form-label">Ingrese nombre</label>
+    <input type="text" class="form-control" formControlName="nombre" >
+    <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched ">
+        El nombre es requerido
+      </span>
+      <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
+        El nombre no debe contener números.
+      </span>
+  </div>   <div class="mb-3">
+    <label for="" class="form-label">Ingrese apellido</label>
+    <input type="text" class="form-control" formControlName="apellido" >
+    <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
+        El apellido es requerido
+      </span>
+      <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('pattern')">
+        El apellido no debe contener números.
+      </span>
+  </div>
     <div class="mb-3">
       <label for="" class="form-label">Ingrese el correo</label>
-      <input type="email" class="form-control" formControlName="correo_estilista" >
-      <span class="text-danger" *ngIf="myForm.get('correo_estilista')?.invalid && myForm.get('correo_estilista')?.touched">
+      <input type="email" class="form-control" formControlName="email" >
+      <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
         El email es requerido y debe ser válido
       </span>
     </div>
@@ -13,5 +32,5 @@
             El telefono es requerido
           </span>
       </div>
-    <button type="submit" class="btn btn-primary"[disabled]="!myForm.valid" (click)="onSave(myForm.value)">Guardar</button>
+    <button type="submit" class="btn btn-primary"[disabled]="!myForm.invalid" (click)="onSave(myForm.value)">Guardar</button>
   </form>

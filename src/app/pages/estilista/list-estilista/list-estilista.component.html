@@ -1,32 +1,35 @@
-
-
-<input type="text" class="form-control"  placeholder="Buscar estilista..." #buscar (keyup)="buscarEstilista(buscar.value)">
+<input type="text" class="form-control" placeholder="Buscar estilista..." #buscar
+  (keyup)="buscarEstilista(buscar.value)">
 <button class="btn btn-primary mb-4" routerLink="/dashboard/estilista/nuevo">Nuevo estilista</button>
 
 <table class="table table-lg">
-    <thead>
-      <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Correo</th>
-        <th scope="col">telefono</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let i of estilista | filtro:pages:serach">
-        
-        <td>{{i.nombre}}</td>
-        <td>{{i.apellido}}</td>
-        <td>{{i.email}}</td>
-        <td>{{i.telefono}}</td>
-        <td>  
-          <a class="btn btn-warning" routerLink="/dashboard/estilista/edit/{{i._id}}" >Editar</a>
-          <a class="btn btn-danger ml-3" (click)="eliminarEstilista(i._id)">Eliminar</a>
-        </td>
-    </tbody>
-  </table>
-  <div class="contenedor-paginacion">
-    <button type="button" class="btn btn-secondary" (click)="anteriorPage()">Anterior</button>
-    <button type="button" class="btn btn-secondary ml-4"(click)="nextPage()">Siguiente</button>
-  </div>
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Correo</th>
+      <th scope="col">telefono</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of estilista  | filtro:pages:serach; let c =index ">
+      <th scope="row">{{c+1}}</th>
+      <td>{{i.nombre}}</td>
+      <td>{{i.apellido}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.telefono}}</td>
+      <td><button (click)="cambioEstado(i._id)"
+          [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>
+      <td>
+        <a class="btn btn-warning" routerLink="/dashboard/estilista/edit/{{i._id}}">Editar</a>
+        <a class="btn btn-danger ml-3" (click)="eliminarEstilista(i._id)">Eliminar</a>
+      </td>
+  </tbody>
+</table>
+<div class="contenedor-paginacion">
+  <button type="button" class="btn btn-secondary" (click)="anteriorPage()">Anterior</button>
+  <button type="button" class="btn btn-secondary ml-4" (click)="nextPage()">Siguiente</button>
+</div>

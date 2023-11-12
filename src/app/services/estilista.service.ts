@@ -10,6 +10,8 @@ export class EstilistaService {
 
   private refresh$ = new Subject<void>
   private url ="http://localhost:5000/api/estilistas/"
+  private url2 ="http://localhost:5000/api/estilistas/estado/"
+
   constructor(private http: HttpClient) { }
 
 
@@ -44,5 +46,8 @@ export class EstilistaService {
       })
 
       )
+  }
+  actulizarEstado(id:string):Observable<Estilista>{
+    return this.http.get<Estilista>(this.url2+id)
   }
 }

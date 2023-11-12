@@ -63,6 +63,7 @@ export class CreateEstilistaComponent implements OnInit {
           title: '¡Guardado!',
           text: 'La información se ha guardado exitosamente.',
         });
+        console.log(res)
         this.router.navigateByUrl("/dashboard/estilista/list")
       })
           this.myForm.markAllAsTouched()

@@ -10,7 +10,8 @@ export class ClienteService {
 
   
   private refresh$ = new Subject<void>
-  private url ="http://localhost:3000/api/cliente/"
+  private url ="http://localhost:5000/api/clientes/"
+  private url2 ="http://localhost:5000/api/clientes/estado/"
   constructor(private http: HttpClient) { }
 
 
@@ -36,5 +37,17 @@ export class ClienteService {
 
   getOneCliente(id:number):Observable<Cliente>{
     return this.http.get<Cliente>(this.url + id)
+  }
+
+  eliminarCliente(id:string):Observable<Cliente>{
+    return this.http.delete<Cliente>(this.url+id)
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      }))
+  }
+
+  actulizarEstado(id:string):Observable<Cliente>{
+    return this.http.get<Cliente>(this.url2+id)
   }
 }

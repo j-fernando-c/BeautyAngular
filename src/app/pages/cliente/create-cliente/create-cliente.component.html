@@ -1,19 +1,31 @@
 
 <form [formGroup]="myForm" method="post">
+  <div class="mb-3">
+    <label for="" class="form-label">Ingrese nombre</label>
+    <input type="text" class="form-control" formControlName="nombre" >
+    <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched ">
+        El nombre es requerido
+      </span>
+      <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
+        El nombre no debe contener números.
+      </span>
+  </div>   <div class="mb-3">
+    <label for="" class="form-label">Ingrese apellido</label>
+    <input type="text" class="form-control" formControlName="apellido" >
+    <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
+        El apellido es requerido
+      </span>
+      <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('pattern')">
+        El apellido no debe contener números.
+      </span>
+  </div>
     <div class="mb-3">
       <label for="" class="form-label">Ingrese el correo</label>
-      <input type="email" class="form-control" formControlName="correo_cliente" >
-      <span class="text-danger" *ngIf="myForm.get('correo_cliente')?.invalid && myForm.get('correo_cliente')?.touched">
+      <input type="email" class="form-control" formControlName="email" >
+      <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
         El email es requerido y debe ser válido
       </span>
     </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Ingrese direccion</label>
-        <input type="text" class="form-control" formControlName="direccion" >
-        <span class="text-danger" *ngIf="myForm.get('direccion')?.invalid && myForm.get('direccion')?.touched">
-            La dirección es requerida
-          </span>
-      </div>
     <div class="mb-3">
         <label for="" class="form-label">Ingrese telefono</label>
         <input type="text" class="form-control" formControlName="telefono" >
@@ -21,5 +33,12 @@
             El telefono es requerido
           </span>
       </div>
-    <button type="submit" class="btn btn-primary"[disabled]="!myForm.valid" (click)="onSave(myForm.value)">Guardar</button>
+      <div class="mb-3">
+        <label for="" class="form-label">Ingrese dirección</label>
+        <input type="text" class="form-control" formControlName="direccion" >
+        <span class="text-danger" *ngIf="myForm.get('direccion')?.invalid && myForm.get('direccion')?.touched">
+            La dirección es requerida
+          </span>
+      </div>
+    <button type="submit" class="btn btn-primary" (click)="onSave(myForm.value)">Guardar</button>
   </form>

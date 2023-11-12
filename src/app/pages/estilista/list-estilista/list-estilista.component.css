@@ -6,3 +6,27 @@
     display: flex;
     justify-content: space-between;
 }
+
+.estado{
+    width: 80%;
+    background-color: transparent;
+    border: 1px solid green;
+    border-radius:  2em;
+    padding: 0.2em;
+    text-align: center;
+    cursor: pointer;
+    color: green;
+}
+
+.estado-cambiado{
+    width: 80%;
+    background-color: transparent;
+    border: 1px solid red;
+    border-radius:  2em;
+    padding: 0.2em;
+    text-align: center;
+    cursor: pointer;
+    color: red;
+
+}
+

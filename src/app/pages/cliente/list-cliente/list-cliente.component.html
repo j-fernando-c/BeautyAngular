@@ -1,7 +1,10 @@
 
 
 <button class="btn btn-primary mb-4" routerLink="/dashboard/cliente/nuevo">Nuevo cliente</button>
-<table class="table table-lg ">
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+        <table class="table table-lg ">
     <thead>
       <tr>
         <th scope="col">Id</th>
@@ -24,14 +27,17 @@
         <td>{{i.telefono}}</td>
         <td><button (click)="cambioEstado(i._id)"
           [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>
-      
-        <td>  
+
+        <td>
           <a class="btn btn-warning" routerLink="/dashboard/cliente/edit/{{i._id}}" >Editar</a>
 
           <a class="btn btn-danger ml-3" (click)="eliminarCliente(i._id)" >Eliminar</a>
         </td>
     </tbody>
-  </table>
+        </table>
+      </div>
+  </div>
+</div>
   <div class="contenedor-paginacion">
     <button type="button" class="btn btn-secondary" >Anterior</button>
     <button type="button" class="btn btn-secondary ml-4">Siguiente</button>

@@ -1,7 +1,7 @@
-
-
+<input type="text" class="form-control" placeholder="Buscar cliente..." #buscar
+  (keyup)="buscarEstilista(buscar.value)">
 <button class="btn btn-primary mb-4" routerLink="/dashboard/cliente/nuevo">Nuevo cliente</button>
-<table class="table table-lg ">
+<table class="table ">
     <thead>
       <tr>
         <th scope="col">Id</th>
@@ -11,11 +11,11 @@
         <th scope="col">Dirección</th>
         <th scope="col">Teléfono</th>
         <th scope="col">Estado</th>
-        <th scope="col">Acciones</th>
+        <th *ngIf="estado" scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of cliente; let c=index">
+      <tr *ngFor="let i of cliente | filtro2:pages:serach; let c=index">
         <th scope="row">{{c+1}}</th>
         <td>{{i.nombre}}</td>
         <td>{{i.apellido}}</td>
@@ -23,16 +23,14 @@
         <td>{{i.direccion}}</td>
         <td>{{i.telefono}}</td>
         <td><button (click)="cambioEstado(i._id)"
-          [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>
-      
-        <td>  
+          [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>      
+        <td *ngIf="estado">  
           <a class="btn btn-warning" routerLink="/dashboard/cliente/edit/{{i._id}}" >Editar</a>
-
-          <a class="btn btn-danger ml-3" (click)="eliminarCliente(i._id)" >Eliminar</a>
+          <a class="btn btn-danger ml-1" (click)="eliminarCliente(i._id)" >Eliminar</a>
         </td>
     </tbody>
   </table>
   <div class="contenedor-paginacion">
-    <button type="button" class="btn btn-secondary" >Anterior</button>
-    <button type="button" class="btn btn-secondary ml-4">Siguiente</button>
+    <button type="button" class="btn btn-secondary" (click)="anteriorPage()" >Anterior</button>
+    <button type="button" class="btn btn-secondary ml-4" (click)="nextPage()">Siguiente</button>
   </div>

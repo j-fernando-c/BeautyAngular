@@ -16,7 +16,8 @@ export class ListClienteComponent implements OnInit {
   constructor(private clienteServicio:ClienteService, private fb:FormBuilder,private routes:Router){}
   cliente:Cliente[]=[];
   subcripcion!: Subscription;
-
+  pages:number=0
+  serach: string = ''
   estado:boolean=true;
   textoEstado:string='Activo'
   ngOnInit(): void {
@@ -61,6 +62,22 @@ export class ListClienteComponent implements OnInit {
         })
       }
     })
+
   }
+       //Metodos para la páginacion
+       nextPage() {
+        this.pages += 7
+      }
+      //Metodos para la paginacion
+      anteriorPage() {
+        if (this.pages > 0) {
+          this.pages -= 7
+    
+        }
+      }
+    
+      buscarEstilista(nombre: string) {
+        this.serach = nombre;
+      }
 
 }

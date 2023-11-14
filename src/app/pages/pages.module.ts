@@ -21,6 +21,7 @@ import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
+import { FiltroPipe2 } from './cliente/pipe/filtro2.pipe';
 
 
 
@@ -35,6 +36,7 @@ import { CreateServicioComponent } from './servicio/create-servicio/create-servi
     
     
     FiltroPipe,
+    FiltroPipe2,
                 CreateClienteComponent,
                 ListClienteComponent,
                 ListServicioComponent,

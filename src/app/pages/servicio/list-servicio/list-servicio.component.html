@@ -1,0 +1,34 @@
+<button class="btn btn-primary mb-4" routerLink="/dashboard/servicio/nuevo">Nuevo servicio</button>
+<table class="table table-lg ">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Nombre servicio</th>
+        <th scope="col">Duración</th>
+        <th scope="col">Estilista</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of servicio; let c=index">
+        <th scope="row">{{c+1}}</th>
+        <td>{{i.imagen}}</td>
+        <td>{{i.nombre_servicio}}</td>
+        <td>{{i.duracion}}</td>
+        <td>{{i.estilista}}</td>
+        <td><button (click)="cambioEstado(i._id)"
+          [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>
+      
+        <td>  
+          <a class="btn btn-warning" routerLink="/dashboard/servicio/edit/{{i._id}}" >Editar</a>
+
+          <a class="btn btn-danger ml-3" (click)="eliminarServicio(i._id)">Eliminar</a>
+        </td>
+    </tbody>
+  </table>
+  <div class="contenedor-paginacion">
+    <button type="button" class="btn btn-secondary" >Anterior</button>
+    <button type="button" class="btn btn-secondary ml-4">Siguiente</button>
+  </div>

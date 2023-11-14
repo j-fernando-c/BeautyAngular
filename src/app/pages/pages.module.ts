@@ -19,6 +19,8 @@ import { CreateEstilistaComponent } from './estilista/create-estilista/create-es
 import { FiltroPipe } from './estilista/pipe/filtro.pipe';
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
+import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
+import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
 
 
 
@@ -35,6 +37,8 @@ import { ListClienteComponent } from './cliente/list-cliente/list-cliente.compon
     FiltroPipe,
                 CreateClienteComponent,
                 ListClienteComponent,
+                ListServicioComponent,
+                CreateServicioComponent,
   ],
   exports: [
     DashboardComponent,

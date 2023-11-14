@@ -9,6 +9,8 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { ListEstilistaComponent } from './estilista/list-estilista/list-estilista.component';
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
+import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
+import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,13 @@ const routes: Routes = [
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
       {path: 'cliente/list', component: ListClienteComponent},
-      {path: 'cliente/edit/:id', component:CreateClienteComponent}
+      {path: 'cliente/edit/:id', component:CreateClienteComponent},
+
+      //Ruta para servicio
+      {path:'servicio/nuevo', component:CreateServicioComponent},
+      {path:'servicio/list', component:ListServicioComponent},
+      {path:'servicio/edit/:id', component: CreateServicioComponent}
+
    
     ]
   },

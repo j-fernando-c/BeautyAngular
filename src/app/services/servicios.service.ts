@@ -1,0 +1,45 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, Subject, tap } from 'rxjs';
+import { Servicio } from '../interfaces/servicios.interfaces';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ServiciosService {
+  private refresh$ = new Subject<void>
+  constructor(private http:HttpClient) { }
+
+  private url = 'http://localhost:5000/api/servicios/'
+
+  get refresh(){
+    return this.refresh$;
+  }
+
+  getServicios():Observable<Servicio[]>{
+    return this.http.get<Servicio[]>(this.url)
+
+  }
+
+  
+  createServicio(body:Servicio):Observable<Servicio>{
+    return this.http.post<Servicio>(this.url, body)
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
+  }
+
+
+  eliminarServicio(id:string):Observable<Servicio>{
+    return this.http.delete<Servicio>(this.url+id)   
+     .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
+  }
+}

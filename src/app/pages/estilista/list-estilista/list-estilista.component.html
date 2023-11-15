@@ -1,15 +1,17 @@
-<input type="text" class="form-control" placeholder="Buscar estilista..." #buscar
-  (keyup)="buscarEstilista(buscar.value)">
-<button class="btn btn-primary mb-4" routerLink="/dashboard/estilista/nuevo">Nuevo estilista</button>
+<div class="contenido-superior">
+  <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/estilista/nuevo">Nuevo estilista</button>
+  <input type="text" class="sm" placeholder="Buscar estilista..." #buscar (keyup)="buscarEstilista(buscar.value)">
+</div>
+<div class="table-responsive">
 
-<table class="table table-lg">
+<table class="table table-lg table-hover">
   <thead>
     <tr>
-      <th scope="col">Id</th>
+      <th scope="col">ID</th>
       <th scope="col">Nombre</th>
       <th scope="col">Apellido</th>
       <th scope="col">Correo</th>
-      <th scope="col">telefono</th>
+      <th scope="col">Teléfono</th>
       <th scope="col">Estado</th>
       <th scope="col">Acciones</th>
     </tr>
@@ -21,15 +23,16 @@
       <td>{{i.apellido}}</td>
       <td>{{i.email}}</td>
       <td>{{i.telefono}}</td>
-      <td><button (click)="cambioEstado(i._id)"
+      <td><button (click)="cambioEstado(c, i._id)"
           [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>
       <td>
-        <a class="btn btn-warning" routerLink="/dashboard/estilista/edit/{{i._id}}">Editar</a>
-        <a class="btn btn-danger ml-3" (click)="eliminarEstilista(i._id)">Eliminar</a>
+        <a class="btn btn-warning btn-sm" routerLink="/dashboard/estilista/edit/{{i._id}}">Editar</a>
+        <a class="btn btn-danger btn-sm ml-1" (click)="eliminarEstilista(i._id)">Eliminar</a>
       </td>
   </tbody>
 </table>
+</div>
 <div class="contenedor-paginacion">
-  <button type="button" class="btn btn-secondary" (click)="anteriorPage()">Anterior</button>
-  <button type="button" class="btn btn-secondary ml-4" (click)="nextPage()">Siguiente</button>
+  <button type="button" class="btn btn-secondary btn-sm" (click)="anteriorPage()">Anterior</button>
+  <button type="button" class="btn btn-secondary btn-sm ml-4" (click)="nextPage()">Siguiente</button>
 </div>

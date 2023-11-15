@@ -41,7 +41,7 @@ export class ListEstilistaComponent implements OnInit {
 
 
   }
-  cambioEstado(id:string){
+  cambioEstado( index:number,id:string){
     this.estado=!this.estado
     if(this.estado){
       this.textoEstado='Activo'

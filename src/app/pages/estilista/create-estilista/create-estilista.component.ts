@@ -24,7 +24,7 @@ export class CreateEstilistaComponent implements OnInit {
   sExiste:boolean=false;
   myForm: FormGroup = this.fb.group({
 
-    telefono:['',[Validators.required,Validators.pattern('^[0-9]{10}$')]],
+    telefono:['',[Validators.required,Validators.pattern(/^[0-9]{10}$/)]],
     nombre:['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
     apellido:['', [Validators.required, Validators.pattern(/^[^\d]+$/) ]],
     email: ['', [Validators.required, Validators.email]],

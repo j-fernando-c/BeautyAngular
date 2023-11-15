@@ -21,6 +21,10 @@ export class ServiciosService {
 
   }
 
+  getOneServicio(id:string):Observable<Servicio>{
+    return this.http.get<Servicio>(this.url + id)
+  }
+
   
   createServicio(body:Servicio):Observable<Servicio>{
     return this.http.post<Servicio>(this.url, body)
@@ -42,4 +46,9 @@ export class ServiciosService {
 
       )
   }
+
+  actualizarServicio(id:string, body:Servicio):Observable<Servicio>{
+    return this.http.put<Servicio>(this.url + id, body);
+  }
+
 }

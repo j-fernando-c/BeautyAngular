@@ -13,7 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class ListClienteComponent implements OnInit {
 
-  constructor(private clienteServicio:ClienteService, private fb:FormBuilder,private routes:Router){}
+  constructor(private clienteServicio:ClienteService){}
+  
   cliente:Cliente[]=[];
   subcripcion!: Subscription;
   pages:number=0

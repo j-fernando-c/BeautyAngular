@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 import { NgChartsModule } from 'ng2-charts';
 
@@ -19,6 +23,8 @@ import { CreateEstilistaComponent } from './estilista/create-estilista/create-es
 import { FiltroPipe } from './estilista/pipe/filtro.pipe';
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+
 
 
 
@@ -30,11 +36,12 @@ import { ListClienteComponent } from './cliente/list-cliente/list-cliente.compon
     PagesComponent,
     ListEstilistaComponent,
     CreateEstilistaComponent,
-    
-    
+
+
     FiltroPipe,
                 CreateClienteComponent,
                 ListClienteComponent,
+                UsuarioComponent,
   ],
   exports: [
     DashboardComponent,
@@ -48,8 +55,13 @@ import { ListClienteComponent } from './cliente/list-cliente/list-cliente.compon
     RouterModule,
     FormsModule,
     ComponentsModule,
-    NgChartsModule, 
-    ReactiveFormsModule
+    NgChartsModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSortModule,
+    MatTableModule
   ]
 })
 export class PagesModule { }

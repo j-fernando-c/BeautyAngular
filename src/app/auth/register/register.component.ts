@@ -54,10 +54,9 @@ export class RegisterComponent implements OnInit {
 
           if (error.status === 400 && error.error && error.error.error === 'Este correo electronico ya existe') {
             Swal.fire('Error', 'Este correo electrónico ya está registrado', 'error');
-          } else if (error.status === 400 && error.error && error.error.errors) {
-            // Manejar otros errores de validación específicos de la API
-            const errorMessages = Object.values(error.error.errors).join('\n');
-            Swal.fire('Error de validación', errorMessages, 'error');
+          } else if (error.status === 400 && error.error && error.error.error) {
+            // Manejar errores de validación específicos de la API
+            Swal.fire('Error de validación', error.error.error, 'error');
           } else {
             Swal.fire('Error', 'Hubo un problema al registrar el usuario', 'error');
           }

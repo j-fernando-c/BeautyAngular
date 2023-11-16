@@ -22,7 +22,7 @@
         <td><button (click)="cambioEstado(i._id)"
           [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</button></td>
       
-        <td>  
+        <td *ngIf="i.estado">  
           <a class="btn btn-warning" routerLink="/dashboard/servicio/edit/{{i._id}}" >Editar</a>
 
           <a class="btn btn-danger ml-3" (click)="eliminarServicio(i._id)">Eliminar</a>

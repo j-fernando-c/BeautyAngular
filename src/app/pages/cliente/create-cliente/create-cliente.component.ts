@@ -16,21 +16,19 @@ export class CreateClienteComponent implements OnInit {
     private fb: FormBuilder,
     private clienteServicio: ClienteService,
     private routes: ActivatedRoute,
-    private router: Router) {
+    private router: Router
+  ) {}
 
-
-  }
   id!: number;
   sExiste: boolean = false;
   myForm: FormGroup = this.fb.group({
-
     telefono: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     direccion: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    nombre: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-    apellido: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-
+    email: ['', [Validators.required, Validators.email, this.validateEmail]],
+    nombre: ['', [Validators.required, Validators.pattern(/^[^\d\s]+$/)]], // expresion regular que No permite dígitos ni espacios
+    apellido: ['', [Validators.required, Validators.pattern(/^[^\d\s]+$/)]], // No permite dígitos ni espacios
   });
+
   ngOnInit(): void {
     this.id = this.routes.snapshot.params['id']
     if (this.id) {
@@ -45,8 +43,6 @@ export class CreateClienteComponent implements OnInit {
         })
       })
     }
-
-
   }
 
   onSave(cliente: Cliente) {
@@ -64,14 +60,21 @@ export class CreateClienteComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: '¡Guardado!',
-          text: 'La información se ha guardado exitosamente.',
+          text: 'El Usuario se ha guardado exitosamente.',
         });
 
         this.router.navigateByUrl("/dashboard/cliente/list")
       })
       this.myForm.markAllAsTouched()
-
     }
   }
 
+  // Función de validación personalizada para verificar la extensión .com en el correo electrónico
+  validateEmail(control: any) {
+    const email = control.value.toLowerCase();
+    if (!email.endsWith('.com')) {
+      return { invalidEmail: true };
+    }
+    return null;
+  }
 }

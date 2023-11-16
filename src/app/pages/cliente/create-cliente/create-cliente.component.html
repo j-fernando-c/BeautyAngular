@@ -1,24 +1,24 @@
-
 <form [formGroup]="myForm" method="post">
   <div class="mb-3">
     <label for="" class="form-label">Ingrese nombre</label>
-    <input type="text" class="form-control" formControlName="nombre" >
-    <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched ">
-        El nombre es requerido
-      </span>
-      <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
-        El nombre no debe contener números.
-      </span>
-  </div>   <div class="mb-3">
+    <input type="text" class="form-control" formControlName="nombre">
+    <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched">
+      El nombre es requerido
+      <p *ngIf="myForm.get('nombre')?.hasError('pattern')">
+        El nombre no debe contener números ni espacios en blanco.
+      </p>
+    </span>
+  </div>
+  <div class="mb-3">
     <label for="" class="form-label">Ingrese apellido</label>
     <input type="text" class="form-control" formControlName="apellido" >
     <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
         El apellido es requerido
+        <p *ngIf="myForm.get('apellido')?.hasError('pattern')">
+          el apellido no debe contener números ni espacios en blanco
+        </p>
       </span>
-      <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('pattern')">
-        El apellido no debe contener números.
-      </span>
-  </div>
+    </div>
     <div class="mb-3">
       <label for="" class="form-label">Ingrese el correo</label>
       <input type="email" class="form-control" formControlName="email" >
@@ -40,5 +40,8 @@
             La dirección es requerida
           </span>
       </div>
-    <button type="submit" class="btn btn-primary" (click)="onSave(myForm.value)">Guardar</button>
+      <div class="botones">
+        <button type="submit" class="btn btn-primary btn-lg" (click)="onSave(myForm.value)">Guardar</button>
+        <a routerLink="/dashboard/cliente/list" routerLinkActive="active"><button  class="btn btn-warning btn-lg">Atrás</button></a>
+    </div>
   </form>

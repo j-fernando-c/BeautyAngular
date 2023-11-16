@@ -19,8 +19,6 @@ export class ListClienteComponent implements OnInit {
   subcripcion!: Subscription;
   pages:number=0
   serach: string = ''
-  estado:boolean=true;
-  textoEstado:string='Activo'
   ngOnInit(): void {
     //Metódo para listar
     this.clienteServicio.getCliente().subscribe(data=>{
@@ -35,12 +33,7 @@ export class ListClienteComponent implements OnInit {
   }
 
   cambioEstado(id:string){
-    this.estado=!this.estado
-    if(this.estado){
-      this.textoEstado='Activo'
-    }else{
-      this.textoEstado='Inactivo'
-    }
+
     this.clienteServicio.actulizarEstado(id).subscribe(res=>{
       console.log(res)
     })

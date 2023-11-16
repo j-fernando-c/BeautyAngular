@@ -21,8 +21,7 @@ export class ListEstilistaComponent implements OnInit {
 
   subcripcion!: Subscription;
 
-  estado:boolean=true;
-  textoEstado:string='Activo'
+ 
 
   constructor(private servicioEstilista: EstilistaService, private fb: FormBuilder, private routes: Router) {
 
@@ -41,13 +40,7 @@ export class ListEstilistaComponent implements OnInit {
 
 
   }
-  cambioEstado( index:number,id:string){
-    this.estado=!this.estado
-    if(this.estado){
-      this.textoEstado='Activo'
-    }else{
-      this.textoEstado='Inactivo'
-    }
+  cambioEstado(id:string){
     this.servicioEstilista.actulizarEstado(id).subscribe(res=>{
       console.log(res)
     })

@@ -1,9 +1,7 @@
-<div class="contenido-superior">
+<input type="text" class="form-control" placeholder="Buscar estilista..." #buscar
+  (keyup)="buscarEstilista(buscar.value)">
   <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/estilista/nuevo">Nuevo estilista</button>
-  <input type="text" class="sm" placeholder="Buscar estilista..." #buscar (keyup)="buscarEstilista(buscar.value)">
-</div>
 <div class="table-responsive">
-
 <table class="table table-lg table-hover">
   <thead>
     <tr>
@@ -19,13 +17,13 @@
   <tbody>
     <tr *ngFor="let i of estilista  | filtro:pages:serach; let c =index ">
       <th scope="row">{{c+1}}</th>
-      <td>{{i.nombre}}</td>
-      <td>{{i.apellido}}</td>
+      <td>{{i.nombre | titlecase}}</td>
+      <td>{{i.apellido | titlecase}}</td>
       <td>{{i.email}}</td>
       <td>{{i.telefono}}</td>
-      <td><button (click)="cambioEstado(c, i._id)"
-          [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>
-      <td>
+      <td><button (click)="cambioEstado(i._id)"
+          [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</button></td>
+      <td *ngIf="i.estado">
         <a class="btn btn-warning btn-sm" routerLink="/dashboard/estilista/edit/{{i._id}}">Editar</a>
         <a class="btn btn-danger btn-sm ml-1" (click)="eliminarEstilista(i._id)">Eliminar</a>
       </td>

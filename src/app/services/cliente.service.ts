@@ -49,5 +49,11 @@ export class ClienteService {
 
   actulizarEstado(id:string):Observable<Cliente>{
     return this.http.get<Cliente>(this.url2+id)
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
   }
 }

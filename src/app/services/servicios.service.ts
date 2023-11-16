@@ -11,6 +11,7 @@ export class ServiciosService {
   constructor(private http:HttpClient) { }
 
   private url = 'http://localhost:5000/api/servicios/'
+  private url2 ='http://localhost:5000/api/servicios/estado/'
 
   get refresh(){
     return this.refresh$;
@@ -49,6 +50,16 @@ export class ServiciosService {
 
   actualizarServicio(id:string, body:Servicio):Observable<Servicio>{
     return this.http.put<Servicio>(this.url + id, body);
+  }
+
+  actualizarEstado(id:string):Observable<Servicio>{
+    return this.http.get<Servicio>(this.url2 + id) 
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
   }
 
 }

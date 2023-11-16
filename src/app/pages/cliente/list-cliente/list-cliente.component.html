@@ -11,20 +11,20 @@
         <th scope="col">Dirección</th>
         <th scope="col">Teléfono</th>
         <th scope="col">Estado</th>
-        <th *ngIf="estado" scope="col">Acciones</th>
+        <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let i of cliente | filtro2:pages:serach; let c=index">
         <th scope="row">{{c+1}}</th>
-        <td>{{i.nombre}}</td>
-        <td>{{i.apellido}}</td>
+        <td>{{i.nombre | titlecase}} </td>
+        <td>{{i.apellido | titlecase}}</td>
         <td>{{i.email}}</td>
-        <td>{{i.direccion}}</td>
+        <td>{{i.direccion | titlecase}}</td>
         <td>{{i.telefono}}</td>
         <td><button (click)="cambioEstado(i._id)"
-          [ngClass]="{'estado':estado, 'estado-cambiado':!estado}">{{textoEstado}}</button></td>      
-        <td *ngIf="estado">  
+          [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</button></td>      
+        <td *ngIf="i.estado" >  
           <a class="btn btn-warning btn-sm" routerLink="/dashboard/cliente/edit/{{i._id}}" >Editar</a>
           <a class="btn btn-danger btn-sm ml-1" (click)="eliminarCliente(i._id)" >Eliminar</a>
         </td>

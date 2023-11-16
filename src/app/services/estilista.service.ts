@@ -49,5 +49,11 @@ export class EstilistaService {
   }
   actulizarEstado(id:string):Observable<Estilista>{
     return this.http.get<Estilista>(this.url2+id)
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
   }
 }

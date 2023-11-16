@@ -1,3 +1,8 @@
+.contenedor-paginacion{
+    display: flex;
+    justify-content: center;
+}
+
 .estado{
     width: 80%;
     background-color: transparent;

@@ -21,18 +21,22 @@ export class ListServicioComponent implements OnInit {
     this.servicioServices.getServicios().subscribe(res=>{
       this.servicio=res;
     })
+//Metódo que me permite refrescar
+    this.subcripcion = this.servicioServices.refresh.subscribe(() => {
+      this.servicioServices.getServicios().subscribe(data => {
+        console.log(this.servicio = data)
+      });
+    })
   }
-
+//Metódo que me permite cambiar de estado
   cambioEstado(id:string){
-    this.estado=!this.estado
-    if(this.estado){
-      this.textoEstado='Activo'
-    }else{
-      this.textoEstado='Inactivo'
-    }
+    this.servicioServices.actualizarEstado(id).subscribe(res=>{
+      console.log(res);
+    })
+  
 
   }
-
+//Metodo que me permite eliminar
   eliminarServicio(id:string){
     Swal.fire({
       title: '¿Estás seguro?',

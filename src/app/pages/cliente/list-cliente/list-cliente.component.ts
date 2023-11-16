@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 
 
+
 @Component({
   selector: 'app-list-cliente',
   templateUrl: './list-cliente.component.html',
@@ -20,7 +21,7 @@ export class ListClienteComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   dataSource = new MatTableDataSource<Cliente>([]);
-  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'email', 'direccion', 'telefono', 'estado', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'email', 'direccion', 'telefono', 'estado', 'acciones'];
 
   constructor(private clienteServicio: ClienteService, private fb: FormBuilder, private router: Router) { }
   cliente: Cliente[] = [];
@@ -47,17 +48,15 @@ export class ListClienteComponent implements OnInit {
     });
   }
 
-  cambioEstado(id: string) {
-    this.estado = !this.estado;
-    if (this.estado) {
-      this.textoEstado = 'Activo';
-    } else {
-      this.textoEstado = 'Inactivo';
-    }
-    this.clienteServicio.actulizarEstado(id).subscribe(res => {
-      console.log(res);
+  cambioEstado(id: string, nuevoEstado: boolean) {
+    this.clienteServicio.actualizarEstado(id, nuevoEstado).subscribe(res => {
+      const clienteIndex = this.cliente.findIndex(c => c._id === id);
+      if (clienteIndex !== -1) {
+        this.cliente[clienteIndex].estado = res.estado;
+      }
     });
   }
+
 
 //Metódo para eliminar
 eliminarCliente(id:string){

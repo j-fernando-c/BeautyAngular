@@ -1,12 +1,18 @@
-<button class="btn btn-primary mb-4" routerLink="/dashboard/cliente/nuevo">Nuevo cliente</button>
-
 <div class="row">
   <div class="col-12">
     <div class="card">
-      <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-      </mat-form-field>
+      <div class="d-flex align-items-center">
+        <div class="agregar">
+          <button class="btn btn-primary" routerLink="/dashboard/cliente/nuevo">Nuevo cliente</button>
+        </div>
+
+        <div class="filter">
+          <mat-form-field appearance="outline">
+            <mat-label>Busqueda</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Alvaro" #input>
+          </mat-form-field>
+        </div>
+      </div>
 
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
@@ -44,10 +50,9 @@
           <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
             <td mat-cell *matCellDef="let row">
-              <button (click)="cambioEstado(row._id)"
-                      [ngClass]="{'estado': row.estado, 'estado-cambiado': !row.estado}">
-                {{row.textoEstado}}
-              </button>
+              <mat-slide-toggle [checked]="row.estado" (change)="cambioEstado(row._id, $event.checked)" [color]="row.estado ? 'primary' : 'warn'">
+                {{row.estado ? 'Activo' : 'Inactivo'}}
+              </mat-slide-toggle>
             </td>
           </ng-container>
 

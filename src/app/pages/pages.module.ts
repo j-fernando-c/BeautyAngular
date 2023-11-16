@@ -24,6 +24,7 @@ import { FiltroPipe } from './estilista/pipe/filtro.pipe';
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -61,7 +62,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
     MatInputModule,
     MatFormFieldModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatSlideToggleModule
   ]
 })
 export class PagesModule { }

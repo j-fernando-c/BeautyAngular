@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Cliente } from 'src/app/interfaces/cliente.interfaces';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-list-cliente',
@@ -12,66 +17,69 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-cliente.component.css']
 })
 export class ListClienteComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private clienteServicio:ClienteService){}
-  
-  cliente:Cliente[]=[];
+  dataSource = new MatTableDataSource<Cliente>([]);
+  displayedColumns: string[] = ['nombre', 'apellido', 'email', 'direccion', 'telefono', 'estado', 'acciones'];
+
+  constructor(private clienteServicio: ClienteService, private fb: FormBuilder, private router: Router) { }
+  cliente: Cliente[] = [];
   subcripcion!: Subscription;
-  pages:number=0
-  serach: string = ''
+
+  estado: boolean = true;
+  textoEstado: string = 'Activo';
+
   ngOnInit(): void {
-    //Metódo para listar
-    this.clienteServicio.getCliente().subscribe(data=>{
-      console.log(this.cliente=data)
+    // Método para listar
+    this.clienteServicio.getCliente().subscribe(data => {
+      this.cliente = data;
+      this.dataSource.data = this.cliente;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-    //Metódo para refrescar
-    this.subcripcion=this.clienteServicio.refresh.subscribe(()=>{
-      this.clienteServicio.getCliente().subscribe(data=>{
-        console.log(this.cliente=data)
+
+    // Método para refrescar
+    this.subcripcion = this.clienteServicio.refresh.subscribe(() => {
+      this.clienteServicio.getCliente().subscribe(data => {
+        this.cliente = data;
+        this.dataSource.data = this.cliente;
       });
-    })
+    });
   }
 
-  cambioEstado(id:string){
-
-    this.clienteServicio.actulizarEstado(id).subscribe(res=>{
-      console.log(res)
-    })
+  cambioEstado(id: string, nuevoEstado: boolean) {
+    this.clienteServicio.actualizarEstado(id, nuevoEstado).subscribe(res => {
+      const clienteIndex = this.cliente.findIndex(c => c._id === id);
+      if (clienteIndex !== -1) {
+        this.cliente[clienteIndex].estado = res.estado;
+      }
+    });
   }
+
 
 //Metódo para eliminar
-  eliminarCliente(id:string){
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¡No podrás revertir esto!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminarlo'
-    }).then((result)=>{
-      if(result.isConfirmed){
-        this.clienteServicio.eliminarCliente(id).subscribe(res=>{
-          console.log("Se eliminó con exito")
-        })
-      }
-    })
+eliminarCliente(id:string){
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: '¡No podrás revertir esto!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminarlo'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      this.clienteServicio.eliminarCliente(id).subscribe(res=>{
+        console.log("Se eliminó con exito")
+      })
+    }
+  })
 
+}
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-       //Metodos para la páginacion
-       nextPage() {
-        this.pages += 7
-      }
-      //Metodos para la paginacion
-      anteriorPage() {
-        if (this.pages > 0) {
-          this.pages -= 7
-    
-        }
-      }
-    
-      buscarEstilista(nombre: string) {
-        this.serach = nombre;
-      }
-
 }

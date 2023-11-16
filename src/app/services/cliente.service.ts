@@ -8,7 +8,7 @@ import { Cliente } from '../interfaces/cliente.interfaces';
 })
 export class ClienteService {
 
-  
+
   private refresh$ = new Subject<void>
   private url ="http://localhost:5000/api/clientes/"
   private url2 ="http://localhost:5000/api/clientes/estado/"
@@ -47,13 +47,13 @@ export class ClienteService {
       }))
   }
 
-  actulizarEstado(id:string):Observable<Cliente>{
-    return this.http.get<Cliente>(this.url2+id)
-    .pipe(
-      tap(()=>{
-        this.refresh$.next();
-      })
-
-      )
+  actualizarEstado(id: string, nuevoEstado: boolean): Observable<{ estado: boolean }> {
+    const body = { estado: nuevoEstado };
+    return this.http.put<{ estado: boolean }>(`${this.url}${id}/estado`, body)
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        })
+      );
   }
 }

@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 import { NgChartsModule } from 'ng2-charts';
 
@@ -24,6 +28,9 @@ import { CreateServicioComponent } from './servicio/create-servicio/create-servi
 //Me permite filtrar
 import { FiltroPipe2 } from './cliente/pipe/filtro2.pipe';
 import { FiltroPipe } from './estilista/pipe/filtro.pipe';
+import { UsuarioComponent } from './usuario/usuario.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 
@@ -37,12 +44,17 @@ import { FiltroPipe } from './estilista/pipe/filtro.pipe';
     CreateEstilistaComponent,
 
 
+
+
     FiltroPipe,
     FiltroPipe2,
     CreateClienteComponent,
     ListClienteComponent,
     ListServicioComponent,
     CreateServicioComponent,
+                CreateClienteComponent,
+                ListClienteComponent,
+                UsuarioComponent,
   ],
   exports: [
     DashboardComponent,
@@ -57,7 +69,13 @@ import { FiltroPipe } from './estilista/pipe/filtro.pipe';
     FormsModule,
     ComponentsModule,
     NgChartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSortModule,
+    MatTableModule,
+    MatSlideToggleModule
   ]
 })
 export class PagesModule { }

@@ -30,3 +30,38 @@
     color: red;
 
 }
+.agregar{
+  margin-left: 20px;
+  margin-right: 500px;
+}
+.filter {
+  margin-top: 20px;
+}
+
+.filter mat-form-field {
+  width: 600px; /* Cambia el valor según tus necesidades */
+  margin-right: 20px;
+}
+
+.filter input {
+  width: 100%; /* Otra opción para asegurar que el input ocupe el ancho completo del contenedor */
+}
+
+
+/* Puedes ajustar estos colores según tus preferencias */
+::ng-deep .mat-slide-toggle.mat-primary .mat-slide-toggle-bar {
+  background-color: green;
+}
+
+::ng-deep .mat-slide-toggle.mat-warn .mat-slide-toggle-bar {
+  background-color: red;
+}
+
+::ng-deep .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: darkgreen;
+}
+
+::ng-deep .mat-slide-toggle.mat-warn.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: darkred;
+}
+

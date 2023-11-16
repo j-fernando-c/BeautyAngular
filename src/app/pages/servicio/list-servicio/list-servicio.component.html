@@ -1,34 +1,35 @@
-<button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/servicio/nuevo">Nuevo servicio</button>
+<button class="btn btn-primary mb-4" routerLink="/dashboard/servicio/nuevo">Nuevo servicio</button>
 <table class="table table-lg ">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre servicio</th>
-      <th scope="col">Duración</th>
-      <th scope="col">Precio</th>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        
+        <th scope="col">Nombre servicio</th>
+        <th scope="col">Duración</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Estilista</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of servicio; let c=index">
+        <th scope="row">{{c+1}}</th>
+        <td>{{i.nombre_servicio}}</td>
+        <td>{{i.duracion}}</td>
+        <td>{{i.precio}}</td>
+        <td>{{i.estilista.nombre}} {{i.estilista.apellido}}</td>
+        <td><button (click)="cambioEstado(i._id)"
+          [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</button></td>
+      
+        <td>  
+          <a class="btn btn-warning" routerLink="/dashboard/servicio/edit/{{i._id}}" >Editar</a>
 
-      <th scope="col">Estilista</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let i of servicio; let c=index">
-      <th scope="row">{{c+1}}</th>
-      <td>{{i.nombre_servicio | titlecase}}</td>
-      <td>{{i.duracion}}</td>
-      <td>{{i.precio | currency:'COP':'symbol':'1.0-0'}}</td>
-      <td>{{i.estilista.nombre | titlecase}} {{i.estilista.apellido}}</td>
-      <td><button (click)="cambioEstado(i._id)" [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado
-          ? 'Activo' : 'Inactivo'}}</button></td>
-
-      <td *ngIf="i.estado">
-        <a class="btn btn-warning btn-sm" routerLink="/dashboard/servicio/edit/{{i._id}}">Editar</a>
-        <a class="btn btn-danger btn-sm ml-1" (click)="eliminarServicio(i._id)">Eliminar</a>
-      </td>
-  </tbody>
-</table>
-<div class="contenedor-paginacion">
-  <button type="button" class="btn btn-secondary btn-sm">Anterior</button>
-  <button type="button" class="btn btn-secondary btn-sm ml-4">Siguiente</button>
-</div>
+          <a class="btn btn-danger ml-3" (click)="eliminarServicio(i._id)">Eliminar</a>
+        </td>
+    </tbody>
+  </table>
+  <div class="contenedor-paginacion">
+    <button type="button" class="btn btn-secondary" >Anterior</button>
+    <button type="button" class="btn btn-secondary ml-4">Siguiente</button>
+  </div>

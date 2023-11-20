@@ -1,33 +1,52 @@
-<form [formGroup]="myForm" method="post">
-    <div class="mb-3">
-        <label for="" class="form-label">Ingrese nombre del servicio</label>
-        <input type="text" class="form-control" formControlName="nombre_servicio">
-        <span class="text-danger" *ngIf="myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched ">
-            El nombre del servicio es requerido.
-        </span>
-        <span class="text-danger" *ngIf="myForm.get('nombre_servicio')?.hasError('pattern')">
-            El nombre del servicio no debe contener números.
-        </span>
+<div class="container mt-5">
+    <div class="card sombra">
+        <div class="card-body">
+            <form [formGroup]="myForm" method="post">
+                <div class="mb-3">
+                    <label for="" class="form-label required">Nombre:</label>
+                    <input type="text" class="form-control" formControlName="nombre_servicio"
+                        placeholder="Ingrese nombre del servicio"
+                        [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched}">
+                    <span class="text-danger"
+                        *ngIf="myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched ">
+                        El nombre del servicio es requerido.
+                    </span>
+                    <span class="text-danger" *ngIf="myForm.get('nombre_servicio')?.hasError('pattern')">
+                        El nombre del servicio no debe contener números.
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label required">Duración:</label>
+                    <input type="time" class="form-control" formControlName="duracion"
+                        placeholder="Ingrese la duración"
+                        [ngClass]="{'input-error':myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched}">
+                        <span class="text-danger" *ngIf="myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched">
+                            La duración es requerida
+                        </span>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label required" >Precio:</label>
+                    <input type="number" class="form-control" formControlName="precio" placeholder="Ingrese el precio"
+                    [ngClass]="{'input-error':myForm.get('precio')?.invalid && myForm.get('precio')?.touched}">
+                    <span class="text-danger" *ngIf="myForm.get('precio')?.invalid && myForm.get('precio')?.touched">
+                        El precio es requerido.
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                        formControlName="estilista">
+                        <option value="">Selecione un estilista</option>
+                        <option [value]="estilistas._id" *ngFor="let estilistas of estilista">{{estilistas.nombre}}
+                            {{estilistas.apellido}}</option>
+                    </select>
+                    <span class="text-danger"
+                        *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
+                        Por favor, seleccione una opción
+                    </span>
+                </div>
+                <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid"
+                    (click)="onSave(myForm.value)">Guardar</button>
+            </form>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Ingrese la duración</label>
-        <input type="time" class="form-control" formControlName="duracion">
-    </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Ingrese el precio</label>
-        <input type="number" class="form-control" formControlName="precio">
-        <span class="text-danger" *ngIf="myForm.get('precio')?.invalid && myForm.get('precio')?.touched">
-            El precio es requerido.
-        </span>
-    </div>
-<div class="mb-3">
-    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" formControlName="estilista">
-        <option value="">Selecione un estilista</option>
-        <option [value]="estilistas._id" *ngFor="let estilistas of estilista">{{estilistas.nombre}} {{estilistas.apellido}}</option>
-    </select>
-    <span class="text-danger" *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
-        Por favor, seleccione una opción
-    </span>
 </div>
-    <button type="submit" class="btn btn-primary"[disabled]="myForm.invalid" (click)="onSave(myForm.value)">Guardar</button>
-</form>

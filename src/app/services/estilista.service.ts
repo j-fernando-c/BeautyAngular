@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Estilista } from '../interfaces/estilista.interfaces';
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -22,14 +22,18 @@ export class EstilistaService {
     return this.http.get<Estilista[]>(this.url)
   }
 
-  createEstilista(body:Estilista):Observable<Estilista>{
+  createEstilista(body: Estilista): Observable<Estilista> {
     return this.http.post<Estilista>(this.url, body)
-    .pipe(
-      tap(()=>{
-        this.refresh$.next();
-      })
-
-      )
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        }),
+        catchError((error) => {
+          console.error('Error en la solicitud HTTP:', error);
+          // Puedes manejar el error de alguna manera, por ejemplo, lanzando un nuevo Observable con throwError
+          return throwError(error);
+        })
+      );
   }
   actualizarEstilista(id:string, body:Estilista):Observable<Estilista>{
     return this.http.put<Estilista>(this.url + id, body);

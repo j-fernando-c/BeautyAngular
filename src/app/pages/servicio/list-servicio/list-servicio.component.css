@@ -2,26 +2,39 @@
     display: flex;
     justify-content: center;
 }
-
+.barra{
+    border: 1px solid  rgba(116, 90, 242);
+    border-radius: 10px;
+    padding: 5px;
+    color: rgba(116, 90, 242);
+}
 .estado{
-    width: 80%;
-    background-color: transparent;
-    border: 1px solid green;
-    border-radius:  2em;
-    padding: 0.2em;
+    background-color: rgba(116, 90, 242);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
     text-align: center;
     cursor: pointer;
-    color: green;
+    color: white;
 }
 
 .estado-cambiado{
-    width: 80%;
-    background-color: transparent;
-    border: 1px solid red;
-    border-radius:  2em;
-    padding: 0.2em;
+    background-color:#242a33;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
     text-align: center;
     cursor: pointer;
-    color: red;
+    color: white;
 
+}
+#link{
+    color: white;
+}
+.sombra{
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1),
+                -4px 4px 8px rgba(0, 0, 0, 0.1);
 }

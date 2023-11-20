@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { NgChartsModule } from 'ng2-charts';
 
@@ -24,10 +25,14 @@ import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
+import { CalendarioComponent } from './cita/calendario/calendario.component';
 
 //Me permite filtrar
 import { FiltroPipe2 } from './cliente/pipe/filtro2.pipe';
 import { FiltroPipe } from './estilista/pipe/filtro.pipe';
+import { FiltroPipeServicio } from './servicio/pipe/filtro3.pipe';
+
+
 import { UsuarioComponent } from './usuario/usuario.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
@@ -48,13 +53,15 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
     FiltroPipe,
     FiltroPipe2,
+    FiltroPipeServicio,
     CreateClienteComponent,
     ListClienteComponent,
     ListServicioComponent,
     CreateServicioComponent,
-                CreateClienteComponent,
-                ListClienteComponent,
-                UsuarioComponent,
+    CreateClienteComponent,
+    ListClienteComponent,
+    UsuarioComponent,
+    CalendarioComponent,
   ],
   exports: [
     DashboardComponent,
@@ -75,7 +82,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatSortModule,
     MatTableModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    FullCalendarModule
   ]
 })
 export class PagesModule { }

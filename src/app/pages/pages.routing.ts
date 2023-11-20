@@ -11,6 +11,7 @@ import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
+import { CalendarioComponent } from './cita/calendario/calendario.component';
 
 
 const routes: Routes = [
@@ -27,13 +28,16 @@ const routes: Routes = [
       {path: 'estilista/edit/:id', component: CreateEstilistaComponent},
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
-      {path: 'cliente/list', component: ListClienteComponent},
-      {path: 'cliente/edit/:id', component:CreateClienteComponent},
+      {path:'cliente/list', component: ListClienteComponent},
+      {path:'cliente/edit/:id', component:CreateClienteComponent},
 
       //Ruta para servicio
       {path:'servicio/nuevo', component:CreateServicioComponent},
       {path:'servicio/list', component:ListServicioComponent},
-      {path:'servicio/edit/:id', component: CreateServicioComponent}
+      {path:'servicio/edit/:id', component: CreateServicioComponent},
+
+      //Ruta para cita
+      {path:'cita', component:CalendarioComponent}
 
    
     ]

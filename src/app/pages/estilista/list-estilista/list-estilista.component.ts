@@ -29,12 +29,12 @@ export class ListEstilistaComponent implements OnInit {
   ngOnInit(): void {
     //Metódo para listar
     this.servicioEstilista.getEstilistas().subscribe(data => {
-      console.log(this.estilista = data)
+      this.estilista = data
     });
     //Metódo para refrescar
     this.subcripcion = this.servicioEstilista.refresh.subscribe(() => {
       this.servicioEstilista.getEstilistas().subscribe(data => {
-        console.log(this.estilista = data)
+        this.estilista = data
       });
     })
 
@@ -53,9 +53,10 @@ export class ListEstilistaComponent implements OnInit {
       title: '¿Estás seguro?',
       text: '¡No podrás revertir esto!',
       icon: 'warning',
+      iconColor: '#745af2',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#745af2',
+      cancelButtonColor: '#745af2',
       confirmButtonText: 'Sí, eliminarlo'
     }).then((result) => {
       if (result.isConfirmed) {

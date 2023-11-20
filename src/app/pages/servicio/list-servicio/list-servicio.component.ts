@@ -10,7 +10,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-servicio.component.css']
 })
 export class ListServicioComponent implements OnInit {
-
+    //Variable para buscar
+  serach: string = ''
+  pages: number = 0;
   servicio:Servicio[]=[];
   subcripcion!: Subscription;
 
@@ -42,9 +44,10 @@ export class ListServicioComponent implements OnInit {
       title: '¿Estás seguro?',
       text: '¡No podrás revertir esto!',
       icon: 'warning',
+      iconColor:'#745af2',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#745af2',
+      cancelButtonColor: '#745af2',
       confirmButtonText: 'Sí, eliminarlo'
     }).then((result)=>{
       if(result.isConfirmed){
@@ -54,4 +57,20 @@ export class ListServicioComponent implements OnInit {
       }
     })
   }
+
+  nextPage() {
+    this.pages += 7
+  }
+  //Metodos para la paginacion
+  anteriorPage() {
+    if (this.pages > 0) {
+      this.pages -= 7
+
+    }
+  }
+
+  buscarEstilista(nombre: string) {
+    this.serach = nombre;
+  }
+
 }

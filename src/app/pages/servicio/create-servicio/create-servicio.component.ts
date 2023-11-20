@@ -28,7 +28,7 @@ export class CreateServicioComponent implements OnInit {
     //Validación formulario
   myForm: FormGroup = this.fb.group({
     nombre_servicio: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-    duracion: ['00:00', Validators.required],
+    duracion: ['', Validators.required],
     precio: ['', Validators.required],
     estilista: ['', Validators.required]
   })
@@ -58,6 +58,7 @@ export class CreateServicioComponent implements OnInit {
         this.servicioService.actualizarServicio(this.id, servicio).subscribe((servicio:Servicio)=>{
           Swal.fire({
             icon: 'success',
+            iconColor: '#745af2',
             title: '¡Actualizado!',
             text: 'La información se ha actualizado exitosamente.',
           });
@@ -67,6 +68,7 @@ export class CreateServicioComponent implements OnInit {
       this.servicioService.createServicio(servicio).subscribe(res=>{
         Swal.fire({
           icon: 'success',
+          iconColor: '#745af2',
           title: '¡Guardado!',
           text: 'La información se ha actualizado exitosamente.',
         });

@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
       this.http.post<any>('http://localhost:5000/register', userData).subscribe(
         (response) => {
           console.log('Usuario registrado:', response);
+          localStorage.setItem('token', response.token);
           Swal.fire('Éxito', 'Usuario registrado correctamente', 'success');
           this.router.navigate(['/dashboard']);
         },

@@ -1,3 +1,4 @@
+import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { CreateEstilistaComponent } from './estilista/create-estilista/create-estilista.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,8 @@ import { ListClienteComponent } from './cliente/list-cliente/list-cliente.compon
 import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 import { CalendarioComponent } from './cita/calendario/calendario.component';
+import { AddCitaComponent } from './cita/add-cita/add-cita.component';
+import { CitaComponent } from './turno/cita/cita.component';
 
 
 const routes: Routes = [
@@ -37,7 +40,12 @@ const routes: Routes = [
       {path:'servicio/edit/:id', component: CreateServicioComponent},
 
       //Ruta para cita
-      {path:'cita', component:CalendarioComponent}
+      {path:'turno/list', component:CitaComponent},
+      {path:'turno/nuevo', component:AddTurnoComponent},
+      {path:'turno/editar/:id', component:AddCitaComponent},
+      {path:'cita/list', component:CalendarioComponent}
+
+
 
    
     ]

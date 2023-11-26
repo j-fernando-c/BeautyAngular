@@ -1,0 +1,22 @@
+<form [formGroup]="myForm" (ngSubmit)="onSave(myForm.value)" method="post">
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Seleccione estilista</mat-label>
+            <mat-select formControlName="extendedProps" multiple class="mat-select-lg"> 
+                <mat-option *ngFor="let estilista of estilista" [value]="estilista._id">{{estilista.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>  
+    <div class="form-row">
+        <div class="mb-3">
+            <label for="" class="form-label">Hora inicio:</label>
+            <p-calendar  inputStyleClass="form-control" [showTime]="true" [showSeconds]="true"
+                formControlName="start"></p-calendar>
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Hora fin: </label>
+            <p-calendar [showTime]="true"  [showSeconds]="true" formControlName="end"></p-calendar>
+        </div>
+    </div>
+    <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
+        [disabled]="myForm.invalid">Guardar</button>
+</form>

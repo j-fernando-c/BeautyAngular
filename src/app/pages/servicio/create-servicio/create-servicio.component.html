@@ -3,7 +3,7 @@
         <div class="card-body">
             <form [formGroup]="myForm" method="post">
                 <div class="mb-3">
-                    <label for="" class="form-label required">Nombre:</label>
+                    <label  class="form-label required">Nombre:</label>
                     <input type="text" class="form-control" formControlName="nombre_servicio"
                         placeholder="Ingrese nombre del servicio"
                         [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched}">
@@ -16,7 +16,7 @@
                     </span>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label required">Duración:</label>
+                    <label  class="form-label required">Duración:</label>
                     <input type="time" class="form-control" formControlName="duracion"
                         placeholder="Ingrese la duración"
                         [ngClass]="{'input-error':myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched}">
@@ -25,7 +25,7 @@
                         </span>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label required" >Precio:</label>
+                    <label  class="form-label required" >Precio:</label>
                     <input type="number" class="form-control" formControlName="precio" placeholder="Ingrese el precio"
                     [ngClass]="{'input-error':myForm.get('precio')?.invalid && myForm.get('precio')?.touched}">
                     <span class="text-danger" *ngIf="myForm.get('precio')?.invalid && myForm.get('precio')?.touched">

@@ -1,0 +1,37 @@
+<cdk-accordion class="example-accordion">
+
+    <cdk-accordion-item *ngFor="let item of items; let index=index" #accordionItem="cdkAccordionItem"
+        class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+        [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+        <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+            {{ item }}
+            <span class="example-accordion-item-description">
+                Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+            </span>
+        </div>
+        <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+            
+            <form [formGroup]="myForm" (ngSubmit)="onSave(myForm.value)" method="post">
+                <div class="form-row">
+                    <div class="mb-3">
+                        <label class="form-label">Titulo: </label>
+                        <input type="text" class="form-control" placeholder="Ingrese titulo al evento" formControlName="title">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Hora inicio:</label>
+                        <p-calendar inputStyleClass="form-control" [showTime]="true" [showSeconds]="true"
+                            formControlName="start"></p-calendar>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Hora fin: </label>
+                        <p-calendar [showTime]="true" [showSeconds]="true" formControlName="end"></p-calendar>
+                    </div>
+                </div>
+                <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
+                    [disabled]="myForm.invalid">Guardar</button>
+            </form>
+        </div>
+    </cdk-accordion-item>
+</cdk-accordion>

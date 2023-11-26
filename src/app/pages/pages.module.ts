@@ -1,3 +1,5 @@
+import { CalendarModule } from 'primeng/calendar';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -6,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select'; 
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { NgChartsModule } from 'ng2-charts';
@@ -14,6 +17,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { RouterModule } from '@angular/router'
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { CdkAccordionItem } from '@angular/cdk/accordion';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -35,6 +40,10 @@ import { FiltroPipeServicio } from './servicio/pipe/filtro3.pipe';
 
 import { UsuarioComponent } from './usuario/usuario.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { AddCitaComponent } from './cita/add-cita/add-cita.component';
+import { CitaComponent } from './turno/cita/cita.component';
+import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 
 
 
@@ -62,6 +71,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ListClienteComponent,
     UsuarioComponent,
     CalendarioComponent,
+    AddCitaComponent,
+    CitaComponent,
+    AddTurnoComponent,
   ],
   exports: [
     DashboardComponent,
@@ -83,7 +95,16 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSortModule,
     MatTableModule,
     MatSlideToggleModule,
-    FullCalendarModule
+    FullCalendarModule,
+    MatDatepickerModule,
+    CalendarModule, 
+    MatSelectModule,
+    CdkAccordionModule,
+    
+    
+  
+    
+    
   ]
 })
 export class PagesModule { }

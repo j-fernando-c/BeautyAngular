@@ -10,6 +10,10 @@ import { ListEstilistaComponent } from './estilista/list-estilista/list-estilist
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
 
+import { ListUsuarioComponent } from './usuario/list-usuario/list-usuario.component';
+import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.component';
+import { RolesComponent } from './roles/roles.component';
+
 
 const routes: Routes = [
   {
@@ -26,8 +30,15 @@ const routes: Routes = [
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
       {path: 'cliente/list', component: ListClienteComponent},
-      {path: 'cliente/edit/:id', component:CreateClienteComponent}
-   
+      {path: 'cliente/edit/:id', component:CreateClienteComponent},
+      //Rutas para Usuario
+      {path: 'usuarios/list', component:ListUsuarioComponent},
+      {path: 'usuarios/nuevo', component:CreateUsuarioComponent},
+      //Rutas para Roles
+      {path: 'roles/list', component:RolesComponent},
+
+
+
     ]
   },
 ];

@@ -23,8 +23,10 @@ import { CreateEstilistaComponent } from './estilista/create-estilista/create-es
 import { FiltroPipe } from './estilista/pipe/filtro.pipe';
 import { CreateClienteComponent } from './cliente/create-cliente/create-cliente.component';
 import { ListClienteComponent } from './cliente/list-cliente/list-cliente.component';
-import { UsuarioComponent } from './usuario/usuario.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { RolesComponent } from './roles/roles.component';
+import { ListUsuarioComponent } from './usuario/list-usuario/list-usuario.component';
+import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.component';
 
 
 
@@ -42,7 +44,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     FiltroPipe,
                 CreateClienteComponent,
                 ListClienteComponent,
-                UsuarioComponent,
+                RolesComponent,
+                ListUsuarioComponent,
+                CreateUsuarioComponent,
   ],
   exports: [
     DashboardComponent,

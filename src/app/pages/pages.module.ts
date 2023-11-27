@@ -27,6 +27,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { RolesComponent } from './roles/roles.component';
 import { ListUsuarioComponent } from './usuario/list-usuario/list-usuario.component';
 import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.component';
+import { ConfigComponent } from './config/config.component';
 
 
 
@@ -47,6 +48,7 @@ import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.
                 RolesComponent,
                 ListUsuarioComponent,
                 CreateUsuarioComponent,
+                ConfigComponent,
   ],
   exports: [
     DashboardComponent,

@@ -11,33 +11,28 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
   roles: string[] = [];
   menuItems: MenuItem[] = [];
+  userRole: string = ''; // Nueva propiedad para almacenar el rol del usuario
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
-    this.usuarioService.getRoles().subscribe(
-      (roles) => {
-        this.roles = roles.map((role) => role.nombre);
-        this.configureMenu();
-      },
-      (error) => {
-        console.error('Error al obtener roles:', error);
-      }
-    );
+    this.configureMenu();
   }
 
   private configureMenu() {
+    console.log('Roles del usuario:', this.roles);
     // Aquí defines la estructura de tu menú basándote en los roles del usuario
     // Por ejemplo:
     this.menuItems = [
-      { label: 'Dashboard', route: '/dashboard', roles: ['admin', 'estilista', 'cliente'] },
+
+      { label: 'Dashboard', route: '/dashboard/dashboard', roles: ['admin'] },
       { label: 'Turnos', route: '/turnos', roles: ['admin', 'estilista'] },
       { label: 'Citas', route: '/citas', roles: ['admin', 'estilista', 'cliente'] },
-      { label: 'estilista', route: '/citas', roles: ['admin', 'estilista'] },
-      { label: 'cliente', route: '/citas', roles: ['admin', 'estilista', 'cliente'] },
-      { label: 'servicio', route: '/citas', roles: ['admin', 'estilista', 'cliente'] },
-      { label: 'roles', route: '/citas', roles: ['admin', 'estilista'] },
-      { label: 'configuracion', route: '/citas', roles: ['admin', 'estilista', 'cliente'] },
+      { label: 'estilista', route: '/dashboard/estilista/list', roles: ['admin', 'estilista'] },
+      { label: 'cliente', route: '/dashboard/cliente/list', roles: ['admin', 'estilista'] },
+      { label: 'servicio', route: '/', roles: ['admin', 'estilista', 'cliente'] },
+      { label: 'roles', route: '/dashboard/roles/list', roles: ['admin'] },
+      { label: 'configuracion', route: '/', roles: ['admin', 'estilista', 'cliente'] },
       // ... otros elementos de menú ...
     ];
   }

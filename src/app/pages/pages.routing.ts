@@ -13,6 +13,7 @@ import { ListClienteComponent } from './cliente/list-cliente/list-cliente.compon
 import { ListUsuarioComponent } from './usuario/list-usuario/list-usuario.component';
 import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.component';
 import { RolesComponent } from './roles/roles.component';
+import { ConfigComponent } from './config/config.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     children: [
       {path: '', component: DashboardComponent},
       {path: 'progress', component: ProgressComponent},
+      {path: 'dashboard', component: DashboardComponent},
       {path: 'grafica1', component: Grafica1Component},
       //Rutas para estilista
       {path: 'estilista/nuevo', component: CreateEstilistaComponent},
@@ -36,6 +38,8 @@ const routes: Routes = [
       {path: 'usuarios/nuevo', component:CreateUsuarioComponent},
       //Rutas para Roles
       {path: 'roles/list', component:RolesComponent},
+      {path: 'config', component:ConfigComponent},
+
 
 
 

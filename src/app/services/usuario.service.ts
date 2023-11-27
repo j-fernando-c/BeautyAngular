@@ -9,7 +9,8 @@ import { Role } from '../interfaces/role.interfaces';
 })
 export class UsuarioService {
   private refresh$ = new Subject<void>
-  private url ="http://localhost:5000/api/role/"
+  private url ="http://localhost:5000/api/roles/"
+  private loginUrl = "http://localhost:5000"
 
   constructor(private http: HttpClient) { }
 
@@ -18,9 +19,14 @@ export class UsuarioService {
     }
 
 
-  getOneRole(id:string):Observable<Role>{
-    return this.http.get<Role>(this.url + id)
-  }
+    getOneRole(id:string):Observable<Role>{
+      return this.http.get<Role>(this.url + id)
+    }
+
+    login(email: string, contrasena: string): Observable<any> {
+      const body = { email, contrasena };
+      return this.http.post(`${this.loginUrl}/login`, body);
+    }
 
 
 }

@@ -1,13 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';  // Asegúrate de instalar el paquete: npm install @auth0/angular-jwt
+import { Router, NavigationEnd } from '@angular/router';  // Importa NavigationEnd
+import { BehaviorSubject } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private jwtHelper = new JwtHelperService();
+  private userRoles: string[] = [];
+  // private rolesSubject = new Subject<string[]>();
 
-  constructor(private http: HttpClient) { }
+  private rolesSubject = new BehaviorSubject<string[]>([]);
+
+
+  constructor(private http: HttpClient, private router: Router) {
+    // Suscribe al evento NavigationEnd para actualizar los roles al cambiar de ruta
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.loadUserRoles();
+      }
+    });
+  }
 
   private loginUrl = "http://localhost:5000/login"
   private registerUrl = "http://localhost:5000/register";
@@ -27,9 +45,36 @@ export class AuthService {
         catchError((error: any) => throwError(error))
       );
   }
+   // Nuevo método para obtener la información del usuario y sus roles desde el token
+   getUserInfo(): { _id: string, roles: string[] } | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+        const decodedToken = this.jwtHelper.decodeToken(token);
+        console.log('Decoded Token:', decodedToken);
+        return decodedToken;
+    }
+    return null;
+}
+
+private loadUserRoles(): void {
+  const userInfo = this.getUserInfo();
+  console.log('User Info:', userInfo);
+
+  if (userInfo) {
+    this.userRoles = userInfo.roles;
+    this.rolesSubject.next(this.userRoles);
+    console.log('User Roles:', this.userRoles);
+  }
+}
+
+   // Nuevo método para obtener los roles del usuario como un observable
+   getRolesObservable(): Observable<string[]> {
+    return this.rolesSubject.asObservable();
+  }
 
 
-  //logica del guard para proteccion de directivas
+
+  //logica del guard para proteccion de directivas, los guards siempre reciben booleanos
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -8,47 +10,47 @@ import { Router } from '@angular/router';
   styles: [],
 })
 export class SidebarComponent implements OnInit {
-  roles: string[] = [];
-  menuItems: MenuItem[] = [];
-  userRole: string = '';
+  userRoles: string[] = [];
+  private rolesSubscription: Subscription;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
+
   ngOnInit(): void {
-    this.usuarioService.getRoles().subscribe((roles) => {
-      this.roles = roles.map((role) => role.nombre);
-      console.log('Roles del usuario:', this.roles);
-      this.configureMenu();
-      console.log('Elementos del menú:', this.getMenuItems());
+    this.loadUserRoles();
+    this.rolesSubscription = this.authService.getRolesObservable().subscribe((roles) => {
+      this.userRoles = roles;
     });
   }
 
-  private configureMenu() {
-    console.log('Configuración del menú:', this.menuItems);
-    this.menuItems = [
-      { label: 'Dashboard', route: '/dashboard/dashboard', roles: ['admin'] },
-      { label: 'Turnos', route: '/turnos', roles: ['admin', 'estilista'] },
-      { label: 'Citas', route: '/citas', roles: ['admin', 'estilista', 'cliente'] },
-      { label: 'Estilistas', route: '/dashboard/estilista/list', roles: ['admin', 'estilista'] },
-      { label: 'Clientes', route: '/dashboard/cliente/list', roles: ['admin', 'estilista'] },
-      { label: 'Servicios', route: '/', roles: ['admin', 'estilista', 'cliente'] },
-      { label: 'Roles', route: '/dashboard/roles/list', roles: ['admin'] },
-      { label: 'Configuración', route: '/', roles: ['admin', 'estilista', 'cliente'] },
-    ];
+  ngOnDestroy(): void {
+    this.rolesSubscription.unsubscribe(); // Desuscribirse para evitar posibles fugas de memoria
   }
 
-  hasRole(role: string): boolean {
-    const hasRole = this.roles.includes(role);
-    console.log(`Usuario tiene el rol ${role}: ${hasRole}`);
-    return hasRole;
+
+
+  private loadUserRoles(): void {
+    const userInfo = this.authService.getUserInfo();
+    if (userInfo) {
+      this.userRoles = userInfo.roles;
+    }
   }
 
-  getMenuItems(): MenuItem[] {
-    return this.menuItems.filter((item) => item.roles.some((role) => this.hasRole(role)));
-  }
-}
+  canAccessModule(moduleName: string): boolean {
+    console.log('Checking access for module:', moduleName);
+    console.log('User roles:', this.userRoles);
+    // Lógica para verificar si el usuario tiene acceso al módulo
 
-interface MenuItem {
-  label: string;
-  route: string;
-  roles: string[];
+    // Si el usuario tiene el rol 'admin', tiene acceso a todos los módulos
+    if (this.userRoles.includes('admin')) {
+      return true;
+    }
+
+    // Si el usuario tiene el rol 'estilista', solo tiene acceso a CLIENTES, TURNOS y CITAS
+    if (this.userRoles.includes('estilista')) {
+      return ['CLIENTES', 'TURNOS', 'CITAS'].includes(moduleName);
+    }
+
+    // En cualquier otro caso, no tiene acceso
+    return false;
+  }
 }

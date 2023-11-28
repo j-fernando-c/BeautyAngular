@@ -5,44 +5,43 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class SidebarComponent implements OnInit {
   roles: string[] = [];
   menuItems: MenuItem[] = [];
-  userRole: string = ''; // Nueva propiedad para almacenar el rol del usuario
+  userRole: string = '';
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
-
   ngOnInit(): void {
-    this.configureMenu();
+    this.usuarioService.getRoles().subscribe((roles) => {
+      this.roles = roles.map((role) => role.nombre);
+      console.log('Roles del usuario:', this.roles);
+      this.configureMenu();
+      console.log('Elementos del menú:', this.getMenuItems());
+    });
   }
 
   private configureMenu() {
-    console.log('Roles del usuario:', this.roles);
-    // Aquí defines la estructura de tu menú basándote en los roles del usuario
-    // Por ejemplo:
+    console.log('Configuración del menú:', this.menuItems);
     this.menuItems = [
-
       { label: 'Dashboard', route: '/dashboard/dashboard', roles: ['admin'] },
       { label: 'Turnos', route: '/turnos', roles: ['admin', 'estilista'] },
       { label: 'Citas', route: '/citas', roles: ['admin', 'estilista', 'cliente'] },
-      { label: 'estilista', route: '/dashboard/estilista/list', roles: ['admin', 'estilista'] },
-      { label: 'cliente', route: '/dashboard/cliente/list', roles: ['admin', 'estilista'] },
-      { label: 'servicio', route: '/', roles: ['admin', 'estilista', 'cliente'] },
-      { label: 'roles', route: '/dashboard/roles/list', roles: ['admin'] },
-      { label: 'configuracion', route: '/', roles: ['admin', 'estilista', 'cliente'] },
-      // ... otros elementos de menú ...
+      { label: 'Estilistas', route: '/dashboard/estilista/list', roles: ['admin', 'estilista'] },
+      { label: 'Clientes', route: '/dashboard/cliente/list', roles: ['admin', 'estilista'] },
+      { label: 'Servicios', route: '/', roles: ['admin', 'estilista', 'cliente'] },
+      { label: 'Roles', route: '/dashboard/roles/list', roles: ['admin'] },
+      { label: 'Configuración', route: '/', roles: ['admin', 'estilista', 'cliente'] },
     ];
   }
 
-  // Método para verificar si el usuario tiene un rol específico
   hasRole(role: string): boolean {
-    return this.roles.includes(role);
+    const hasRole = this.roles.includes(role);
+    console.log(`Usuario tiene el rol ${role}: ${hasRole}`);
+    return hasRole;
   }
 
-  // Método para filtrar elementos del menú según los roles del usuario
   getMenuItems(): MenuItem[] {
     return this.menuItems.filter((item) => item.roles.some((role) => this.hasRole(role)));
   }

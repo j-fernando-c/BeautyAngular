@@ -15,23 +15,25 @@ import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.
 import { RolesComponent } from './roles/roles.component';
 import { ConfigComponent } from './config/config.component';
 
+import { AuthGuard } from '../auth.guard';
+
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'dashboard' ,canActivate: [AuthGuard] ,
     component: PagesComponent,
     children: [
       {path: '', component: DashboardComponent},
       {path: 'progress', component: ProgressComponent},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'grafica1', component: Grafica1Component},
+      {path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]},
+      {path: 'grafica1', component: Grafica1Component,canActivate: [AuthGuard]},
       //Rutas para estilista
       {path: 'estilista/nuevo', component: CreateEstilistaComponent},
       {path: 'estilista/list', component: ListEstilistaComponent},
       {path: 'estilista/edit/:id', component: CreateEstilistaComponent},
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
-      {path: 'cliente/list', component: ListClienteComponent},
+      {path: 'cliente/list', component: ListClienteComponent,canActivate: [AuthGuard]},
       {path: 'cliente/edit/:id', component:CreateClienteComponent},
       //Rutas para Usuario
       {path: 'usuarios/list', component:ListUsuarioComponent},

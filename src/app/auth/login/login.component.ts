@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,15 +13,12 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  user = {
-    email: '',
-    contrasena: ''
-  }
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
 
@@ -34,17 +32,20 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
 
   onSave(): void {
-    if(!this.myForm.valid){
-      Swal.fire('Error', 'Complete el formulario', 'error')
+    if (!this.myForm.valid) {
+      Swal.fire('Error', 'Complete el formulario', 'error');
+      return;
     }
 
-    if(this.myForm.valid){
-      const userData = this.myForm.value;
-      this.http.post<any>('http://localhost:5000/login', userData).subscribe(
+    const { email, contrasena } = this.myForm.value;
+    this.loading = true;
+
+    this.authService.login(email, contrasena).subscribe(
       (response: any) => {
         console.log('Usuario registrado:', response);
         const token = response.token;
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('token', token);
+        console.log('Token JWT:', token); // Agrega este log
         Swal.fire('Éxito', 'Inicio de sesión exitoso', 'success');
         this.router.navigate(['/dashboard']);
       },
@@ -59,8 +60,6 @@ export class LoginComponent implements OnInit {
       }
     ).add(() => this.loading = false);
   }
-    }
-
-  }
+}
 
 

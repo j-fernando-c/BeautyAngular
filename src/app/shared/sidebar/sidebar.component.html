@@ -4,52 +4,108 @@
 <aside class="left-sidebar">
   <!-- Sidebar scroll-->
   <div class="scroll-sidebar">
-  <!-- Sidebar navigation-->
-  <nav class="sidebar-nav">
-    <ul id="sidebarnav">
-      <li class="user-profile">
-        <a href="#" aria-expanded="false"><img src="./assets/images/users/profile.png" alt="user" /><span class="hide-menu">Admin </span></a>
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+        <li class="user-profile">
+          <a href="#" aria-expanded="false">
+            <img src="./assets/images/users/profile.png" alt="user" />
+            <span class="hide-menu">Admin </span>
+          </a>
           <ul aria-expanded="false" class="collapse">
-                  <li><a href="javascript:void()">Mi Perfil </a></li>
-                  <li><a href="javascript:void()">Agenda</a></li>
-                  <li><a href="javascript:void()">Configuracion de Citas </a></li>
-                  <li><a href="index.html">Salir</a></li>
+            <li><a href="javascript:void()">Mi Perfil </a></li>
+            <li><a href="javascript:void()">Agenda</a></li>
+            <li><a href="javascript:void()">Configuracion de Citas </a></li>
+            <li><a href="index.html">Salir</a></li>
           </ul>
-      </li>
-      <li class="nav-devider"></li>
-      <li class="nav-small-cap">PERSONAL</li>
-      <li> <a routerLink="/dashboard" routerLinkActive="active" aria-expanded="false"><i class="fa-solid fa-chart-line"></i><span class="hide-menu">DASHBOARD</span></a>
-      <!-- <ul aria-expanded="false" class="collapse">
-          <li><a href="index.html">Minimal </a></li>
-          <li><a href="index2.html">Analytical</a></li>
-          <li><a href="index3.html">Demographical</a></li>
-          <li><a href="index4.html">Modern</a></li>
-      </ul> -->
-      <!-- botones para el sideabar en la seccion Del dashboard -->
-      </li>
-      <li class="nav-small-cap">AGENDA</li>
-        <li> <a routerLink="/dashboard/turno/list" routerLinkActive="active" aria-expanded="false"><i class="fa-regular fa-calendar-check"></i><span class="hide-menu">Agenda</span></a></li>
-        <li> <a routerLink="/dashboard/cita/list" routerLinkActive="active" aria-expanded="false"><i class="fa-regular fa-calendar-days"></i><span class="hide-menu">CITAS</span></a></li>
-      <li class="nav-small-cap">ADMINISTRAR PERSONAL</li>
-        <li> <a routerLink="/dashboard/estilista/list" routerLinkActive="active" aria-expanded="false"><i class="fa-solid fa-scissors" ></i><span class="hide-menu">ESTILISTAS</span></a></li>
-        <li> <a routerLink="/dashboard/cliente/list" routerLinkActive="active" aria-expanded="false"><i class="fa-solid fa-users"></i><span class="hide-menu">CLIENTES</span></a></li>
-        <li> <a href="#" aria-expanded="false"><i class="fa-solid fa-user"></i><span class="hide-menu">USUARIOS</span></a></li>
+        </li>
+        <li class="nav-devider"></li>
 
-      <li class="nav-small-cap">GESTIÓN</li>
-        <li> <a href="#" aria-expanded="false"><i class="fa-solid fa-cart-shopping"></i><span class="hide-menu">VENTAS</span></a></li>
-        <li> <a routerLink="/dashboard/servicio/list" routerLinkActive="active" aria-expanded="false"><i class="fa-solid fa-scissors"></i><span class="hide-menu">SERVICIOS</span></a></li>
-        <li> <a href="#" aria-expanded="false"><i class="fa-regular fa-face-smile"></i><span class="hide-menu">ROLES</span></a></li>
-        <li> <a href="#" aria-expanded="false"><i class="fa-solid fa-gear"></i><span class="hide-menu">CONFIGURACIÓN</span></a></li>
+        <li *ngIf="canAccessModule('admin')" class="nav-small-cap">PERSONAL</li>
+
+        <li *ngIf="canAccessModule('admin')">
+          <a routerLink="/dashboard/dashboard" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="hide-menu">DASHBOARD</span>
+          </a>
+        </li>
+
+        <li class="nav-small-cap">AGENDA</li>
+
+        <li *ngIf="canAccessModule('admin') || canAccessModule('estilista') || canAccessModule('cliente')">
+          <a href="#" aria-expanded="false">
+            <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">TURNOS </span>
+          </a>
+        </li>
+
+        <li *ngIf="canAccessModule('admin') || canAccessModule('cliente') ">
+          <a href="#" aria-expanded="false">
+            <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">CITAS</span>
+          </a>
+        </li>
+
+        <li *ngIf="canAccessModule('admin') || canAccessModule('estilista')" class="nav-small-cap">ADMINISTRAR PERSONAL</li>
+
+        <li *ngIf="canAccessModule('admin')">
+          <a routerLink="/dashboard/estilista/list" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-solid fa-scissors"></i>
+            <span class="hide-menu">ESTILISTAS</span>
+          </a>
+        </li>
+
+        <li *ngIf="canAccessModule('admin') || canAccessModule('estilista')">
+          <a routerLink="/dashboard/cliente/list" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-solid fa-users"></i>
+            <span class="hide-menu">CLIENTES</span>
+          </a>
+        </li>
+
+        <li *ngIf="canAccessModule('admin')">
+          <a routerLink="/dashboard/usuarios/list" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-solid fa-user"></i>
+            <span class="hide-menu">USUARIOS</span>
+          </a>
+        </li>
+
+
+        <li class="nav-small-cap">GESTIÓN</li>
+
+        <li>
+          <a href="#" aria-expanded="false">
+            <i class="fa-solid fa-cart-shopping"></i><span class="hide-menu">VENTAS</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" aria-expanded="false">
+            <i class="fa-solid fa-scissors"></i><span class="hide-menu">SERVICIOS</span>
+          </a>
+        </li>
+
+        <li *ngIf="canAccessModule('admin')">
+          <a routerLink="/dashboard/roles/list" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-regular fa-face-smile"></i>
+            <span class="hide-menu">ROLES</span>
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/dashboard/config" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-solid fa-gear"></i>
+            <span class="hide-menu">CONFIGURACIÓN</span>
+          </a>
+        </li>
+
       </ul>
-  </nav>
-  <!-- End Sidebar navigation -->
+    </nav>
+    <!-- End Sidebar navigation -->
   </div>
   <!-- End Sidebar scroll-->
-  </aside>
-  <!-- ============================================================== -->
-  <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-  <!-- ============================================================== -->
-  <script src="https://kit.fontawesome.com/b3b94f5364.js" crossorigin="anonymous"></script>
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<script src="https://kit.fontawesome.com/b3b94f5364.js" crossorigin="anonymous"></script>
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->

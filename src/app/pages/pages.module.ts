@@ -38,8 +38,11 @@ import { FiltroPipe } from './estilista/pipe/filtro.pipe';
 import { FiltroPipeServicio } from './servicio/pipe/filtro3.pipe';
 
 
-import { UsuarioComponent } from './usuario/usuario.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { RolesComponent } from './roles/roles.component';
+import { ListUsuarioComponent } from './usuario/list-usuario/list-usuario.component';
+import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.component';
+import { ConfigComponent } from './config/config.component';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { CitaComponent } from './turno/cita/cita.component';
@@ -67,7 +70,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CreateServicioComponent,
     CreateClienteComponent,
     ListClienteComponent,
-    UsuarioComponent,
+    RolesComponent,
+                ListUsuarioComponent,
+                CreateUsuarioComponent,
+                ConfigComponent,
     CalendarioComponent,
     AddCitaComponent,
     CitaComponent,

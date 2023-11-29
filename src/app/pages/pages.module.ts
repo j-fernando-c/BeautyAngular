@@ -44,6 +44,8 @@ import { MatDatepickerModule} from '@angular/material/datepicker';
 import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { CitaComponent } from './turno/cita/cita.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 
 
@@ -56,10 +58,6 @@ import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
     PagesComponent,
     ListEstilistaComponent,
     CreateEstilistaComponent,
-
-
-
-
     FiltroPipe,
     FiltroPipe2,
     FiltroPipeServicio,
@@ -74,6 +72,7 @@ import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
     AddCitaComponent,
     CitaComponent,
     AddTurnoComponent,
+    
   ],
   exports: [
     DashboardComponent,
@@ -100,6 +99,10 @@ import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
     CalendarModule, 
     MatSelectModule,
     CdkAccordionModule,
+    NgxChartsModule
+    
+
+    
     
     
   

@@ -1,1 +1,43 @@
-<p>dashboard works!</p>
+<div class="content">
+    <div class="cards">
+        <div class="card">
+            <div class="box">
+                <h1>{{cantidadEstilistas}}</h1>
+                <h2>Total estilistas</h2>
+                <img src="./assets/images/Estilistas2.png" alt="">
+            </div>
+        </div>
+        <div class="card">
+            <div class="box">
+                <h1>{{cantidadClientes}}</h1>
+                <h2>Total clientes </h2>
+                <img src="./assets/images/Clientes.png" alt="">
+            </div>
+        </div>
+        <div class="card">
+            <div class="box">
+                <h1>{{cantidadServicios}}</h1>
+                <h2>Total servicios</h2>
+                <img src="./assets/images/Services.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contenedor-barras">
+    <ngx-charts-bar-vertical
+    [view]="view"
+    [customColors]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showGridLines]="showGridLines"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    >
+</ngx-charts-bar-vertical>
+</div>

@@ -6,6 +6,7 @@ import { Estilista } from 'src/app/interfaces/estilista.interfaces';
 import { EstilistaService } from 'src/app/services/estilista.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-list-estilista',
   templateUrl: './list-estilista.component.html',
@@ -82,5 +83,7 @@ export class ListEstilistaComponent implements OnInit {
   buscarEstilista(nombre: string) {
     this.serach = nombre;
   }
+
+
 
 }

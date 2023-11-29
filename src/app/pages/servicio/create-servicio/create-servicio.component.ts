@@ -58,7 +58,7 @@ export class CreateServicioComponent implements OnInit {
         this.servicioService.actualizarServicio(this.id, servicio).subscribe((servicio:Servicio)=>{
           Swal.fire({
             icon: 'success',
-            iconColor: '#745af2',
+            iconColor: 'success',
             title: '¡Actualizado!',
             text: 'La información se ha actualizado exitosamente.',
           });
@@ -68,7 +68,7 @@ export class CreateServicioComponent implements OnInit {
       this.servicioService.createServicio(servicio).subscribe(res=>{
         Swal.fire({
           icon: 'success',
-          iconColor: '#745af2',
+          iconColor: 'success',
           title: '¡Guardado!',
           text: 'La información se ha actualizado exitosamente.',
         });

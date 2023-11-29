@@ -1,0 +1,28 @@
+.cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.cards .card .box{
+    width: 300px;
+    height: 100px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2), 0 6px 20px 0 rgba(0,0,0, 0.19);
+}
+h3{
+    color: #8999;
+}
+img{
+    width: 50px;
+}
+
+.contenedor-barras{
+    width: 600px;
+    margin-top: 20px 0;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2), 0 6px 20px 0 rgba(0,0,0, 0.19);
+}

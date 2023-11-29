@@ -12,10 +12,12 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    NopagefoundComponent]
+    NopagefoundComponent,
+    ]
     ,
   
   imports: [
@@ -24,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PagesModule,
     AuthModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
   bootstrap: [AppComponent]
 })

@@ -58,12 +58,9 @@ export class AuthService {
 
 private loadUserRoles(): void {
   const userInfo = this.getUserInfo();
-  console.log('User Info:', userInfo);
-
   if (userInfo) {
-    this.userRoles = userInfo.roles;
-    this.rolesSubject.next(this.userRoles);
-    console.log('User Roles:', this.userRoles);
+    this.userRoles = userInfo.roles; // Asegúrate de que esto es un array de strings
+    this.rolesSubject.next(this.userRoles); // Notificar cambios a los suscriptores
   }
 }
 

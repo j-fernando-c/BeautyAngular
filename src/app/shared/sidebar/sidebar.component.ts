@@ -45,9 +45,13 @@ export class SidebarComponent implements OnInit {
       return true;
     }
 
-    // Si el usuario tiene el rol 'estilista', solo tiene acceso a CLIENTES, TURNOS y CITAS
-    if (this.userRoles.includes('estilista')) {
-      return ['CLIENTES', 'TURNOS', 'CITAS'].includes(moduleName);
+     // Convierte el nombre del módulo a minúsculas para hacer coincidir con el formato del rol
+    const lowerCaseModuleName = moduleName.toLowerCase();
+
+
+    // Verifica si el usuario tiene acceso al módulo según su rol
+    if (this.userRoles.includes(lowerCaseModuleName)) {
+      return true;
     }
 
     // En cualquier otro caso, no tiene acceso

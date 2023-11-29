@@ -8,7 +8,7 @@
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
         <li class="user-profile">
-          <a href="#" aria-expanded="false">
+          <a  aria-expanded="false">
             <img src="./assets/images/users/profile.png" alt="user" />
             <span class="hide-menu">Admin </span>
           </a>
@@ -16,7 +16,7 @@
             <li><a href="javascript:void()">Mi Perfil </a></li>
             <li><a href="javascript:void()">Agenda</a></li>
             <li><a href="javascript:void()">Configuracion de Citas </a></li>
-            <li><a href="index.html">Salir</a></li>
+            <li><a routerLink="/login" routerLinkActive="active">Salir</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
@@ -76,8 +76,8 @@
           </a>
         </li>
 
-        <li>
-          <a href="#" aria-expanded="false">
+        <li *ngIf="canAccessModule('admin')">
+          <a routerLink="/dashboard/servicio/list" routerLinkActive="active" aria-expanded="false">
             <i class="fa-solid fa-scissors"></i><span class="hide-menu">SERVICIOS</span>
           </a>
         </li>

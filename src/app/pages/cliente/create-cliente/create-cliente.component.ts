@@ -24,7 +24,7 @@ export class CreateClienteComponent implements OnInit {
   myForm: FormGroup = this.fb.group({
     telefono: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     direccion: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email, this.validateEmail]],
+    email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     nombre: ['', [Validators.required, Validators.pattern(/^[^\d\s]+$/)]], // expresion regular que No permite dígitos ni espacios
     apellido: ['', [Validators.required, Validators.pattern(/^[^\d\s]+$/)]], // No permite dígitos ni espacios
   });
@@ -50,6 +50,7 @@ export class CreateClienteComponent implements OnInit {
       this.clienteServicio.actualizarCliente(this.id, cliente).subscribe((res: Cliente) => {
         Swal.fire({
           icon: 'success',
+          iconColor:'#745af2',
           title: '¡Guardado!',
           text: 'La información se ha actualizado exitosamente.',
         });
@@ -59,6 +60,7 @@ export class CreateClienteComponent implements OnInit {
       this.clienteServicio.createCliente(cliente).subscribe(res => {
         Swal.fire({
           icon: 'success',
+          iconColor:'#745af2',
           title: '¡Guardado!',
           text: 'El Usuario se ha guardado exitosamente.',
         });
@@ -70,10 +72,10 @@ export class CreateClienteComponent implements OnInit {
   }
 
   // Función de validación personalizada para verificar la extensión .com en el correo electrónico
-  validateEmail(control: any) {
-    const email = control.value.toLowerCase();
-    if (!email.endsWith('.com')) {
-      return { invalidEmail: true };
+  validarExtensionCom(control:any) {
+    const email = control.value;
+    if (email && !email.endsWith('.com')) {
+      return { sinExtensionCom: true };
     }
     return null;
   }

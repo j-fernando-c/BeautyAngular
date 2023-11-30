@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(email, contrasena).subscribe(
       (response: any) => {
-        console.log('Usuario logeado:', response);
+        // console.log('Usuario logeado:', response);
         const token = response.token;
         localStorage.setItem('token', token);
         console.log('Token JWT:', token); // Agrega este log

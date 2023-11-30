@@ -33,13 +33,13 @@
         <li class="nav-small-cap">AGENDA</li>
 
         <li *ngIf="canAccessModule('admin') || canAccessModule('estilista') || canAccessModule('cliente')">
-          <a href="#" aria-expanded="false">
+          <a routerLink="/dashboard/turno/list" aria-expanded="false">
             <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">TURNOS </span>
           </a>
         </li>
 
         <li *ngIf="canAccessModule('admin') || canAccessModule('cliente') ">
-          <a href="#" aria-expanded="false">
+          <a routerLink="/dashboard/cita/list" aria-expanded="false">
             <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">CITAS</span>
           </a>
         </li>

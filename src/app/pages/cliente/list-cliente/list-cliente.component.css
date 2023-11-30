@@ -1,67 +1,78 @@
-.contenedor-paginacion{
-    display: flex;
-    justify-content: center;
-}
-.contenedor-busqueda{
-    display: flex;
-    justify-content: space-between;
+.contenedor-paginacion {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem; /* Espacio adicional en la parte superior */
 }
 
-
-.estado{
-    
-    background-color: transparent;
-    border: 1px solid green;
-    border-radius:  2em;
-    padding: 0.2em;
-    text-align: center;
-    cursor: pointer;
-    color: green;
-}
-
-.estado-cambiado{
-    
-    background-color: transparent;
-    border: 1px solid red;
-    border-radius:  2em;
-    padding: 0.2em;
-    text-align: center;
-    cursor: pointer;
-    color: red;
+.barra {
+  border: 1px solid rgba(116, 90, 242);
+  border-radius: 15px;
+  width: 300px;
+  padding: 7px;
+  color: rgba(116, 90, 242);
 
 }
-.agregar{
-  margin-left: 20px;
-  margin-right: 500px;
-}
-.filter {
-  margin-top: 20px;
+
+.estado,
+.estado-cambiado {
+  background-color: rgba(116, 90, 242);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  text-align: center;
+  cursor: pointer;
+  color: white;
 }
 
-.filter mat-form-field {
-  width: 600px; /* Cambia el valor según tus necesidades */
-  margin-right: 20px;
+.estado-cambiado {
+  background-color: #242a33;
 }
 
-.filter input {
-  width: 100%; /* Otra opción para asegurar que el input ocupe el ancho completo del contenedor */
+#link {
+  color: white;
 }
 
-
-/* Puedes ajustar estos colores según tus preferencias */
-::ng-deep .mat-slide-toggle.mat-primary .mat-slide-toggle-bar {
-  background-color: green;
+.sombra {
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-::ng-deep .mat-slide-toggle.mat-warn .mat-slide-toggle-bar {
-  background-color: red;
+/* Reglas para el diseño responsivo */
+@media (max-width: 768px) {
+  .table-responsive.sombra {
+      overflow-x: auto;
+  }
+
+  th,
+  td {
+      text-align: left;
+      width: 100%;
+      display: block;
+      box-sizing: border-box;
+      margin-bottom: 0.5rem; /* Espacio entre tarjetas */
+  }
+
+  th {
+      font-weight: bold;
+  }
+
+   td {
+      border-bottom: 1px solid #dee2e6;
+  }
+
+  th,
+   td:before {
+      display: none;
+  }
+
+  .contenedor-paginacion {
+      margin-top: 0;
+  }
+
+  .barra {
+      margin-bottom: 4px;
+  }
 }
 
-::ng-deep .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-  background-color: darkgreen;
-}
-
-::ng-deep .mat-slide-toggle.mat-warn.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-  background-color: darkred;
-}
 

@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     const userData = this.myForm.value;
     this.authService.register(userData).subscribe(
       (response) => {
-        console.log('Usuario registrado:', response);
+        // console.log('Usuario registrado:', response);
         localStorage.setItem('token', response.token);
         Swal.fire('Éxito', 'Usuario registrado correctamente', 'success');
         this.router.navigate(['/login']);

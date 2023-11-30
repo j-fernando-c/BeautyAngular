@@ -47,13 +47,13 @@ export class ClienteService {
       }))
   }
 
-  actualizarEstado(id: string, nuevoEstado: boolean): Observable<{ estado: boolean }> {
-    const body = { estado: nuevoEstado };
-    return this.http.put<{ estado: boolean }>(`${this.url}${id}/estado`, body)
-      .pipe(
-        tap(() => {
-          this.refresh$.next();
-        })
-      );
+  actulizarEstado(id:string):Observable<Cliente>{
+    return this.http.get<Cliente>(this.url2+id)
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
   }
 }

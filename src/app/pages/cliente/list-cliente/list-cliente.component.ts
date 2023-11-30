@@ -17,16 +17,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-cliente.component.css']
 })
 export class ListClienteComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  dataSource = new MatTableDataSource<Cliente>([]);
-  displayedColumns: string[] = ['nombre', 'apellido', 'email', 'direccion', 'telefono', 'estado', 'acciones'];
-
+ 
   constructor(private clienteServicio: ClienteService, private fb: FormBuilder, private router: Router) { }
+    //Para la paginación
+  pages: number = 0;
   cliente: Cliente[] = [];
   subcripcion!: Subscription;
-
+  serach: string = ''
   estado: boolean = true;
   textoEstado: string = 'Activo';
 
@@ -34,26 +31,20 @@ export class ListClienteComponent implements OnInit {
     // Método para listar
     this.clienteServicio.getCliente().subscribe(data => {
       this.cliente = data;
-      this.dataSource.data = this.cliente;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+
     });
 
     // Método para refrescar
     this.subcripcion = this.clienteServicio.refresh.subscribe(() => {
       this.clienteServicio.getCliente().subscribe(data => {
         this.cliente = data;
-        this.dataSource.data = this.cliente;
       });
     });
   }
 
-  cambioEstado(id: string, nuevoEstado: boolean) {
-    this.clienteServicio.actualizarEstado(id, nuevoEstado).subscribe(res => {
-      const clienteIndex = this.cliente.findIndex(c => c._id === id);
-      if (clienteIndex !== -1) {
-        this.cliente[clienteIndex].estado = res.estado;
-      }
+  cambioEstado(id: string) {
+    this.clienteServicio.actulizarEstado(id).subscribe(res => {
+
     });
   }
 
@@ -64,9 +55,10 @@ eliminarCliente(id:string){
     title: '¿Estás seguro?',
     text: '¡No podrás revertir esto!',
     icon: 'warning',
+    iconColor:'#745af2',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
+    confirmButtonColor: '#745af2',
+    cancelButtonColor: '#745af2',
     confirmButtonText: 'Sí, eliminarlo'
   }).then((result)=>{
     if(result.isConfirmed){
@@ -78,8 +70,21 @@ eliminarCliente(id:string){
 
 }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  //Metodos para la páginacion
+  nextPage() {
+    this.pages += 7
   }
+  //Metodos para la paginacion
+  anteriorPage() {
+    if (this.pages > 0) {
+      this.pages -= 7
+
+    }
+  }
+
+  buscarCliente(nombre: string) {
+    this.serach = nombre;
+  }
+
+
 }

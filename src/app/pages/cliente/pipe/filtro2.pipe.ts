@@ -11,8 +11,10 @@ export class FiltroPipe2 implements PipeTransform {
     if(serach.length==0)
     return Clientes.slice(pages,pages+7)
     
-    const filtrarClientes=Clientes.filter(es=>es.nombre.includes(serach)|| es.apellido.includes(serach) 
-    || es.email.includes(serach))
+    const filtrarClientes=Clientes.filter(es=>
+      es.nombre.toLocaleLowerCase().includes(serach)|| 
+      es.apellido.toLocaleLowerCase().includes(serach) 
+    || es.email.toLocaleLowerCase().includes(serach))
     return filtrarClientes.slice(pages,pages+7)
     
   }

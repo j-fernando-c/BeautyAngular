@@ -16,11 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class RolesComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
-  dataSource = new MatTableDataSource<Role>([]);
-  displayedColumns: string[] = ['nombre'];
 
   constructor(private rolesService: RolesService, private fb: FormBuilder, private router: Router) { }
   role: Role[] = [];
@@ -30,11 +26,9 @@ export class RolesComponent implements OnInit {
   ngOnInit(): void {
     // Método para listar
     this.rolesService.getRoles().subscribe(data => {
-      console.log(data);
+      
       this.role = data;
-      this.dataSource.data = this.role;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+
     });
 
 
@@ -42,8 +36,4 @@ export class RolesComponent implements OnInit {
 
 
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 }

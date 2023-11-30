@@ -19,6 +19,9 @@ import { ConfigComponent } from './config/config.component';
 
 import { AuthGuard } from '../auth.guard';
 import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
+import { CitaComponent } from './turno/cita/cita.component';
+import { CalendarioComponent } from './cita/calendario/calendario.component';
+import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 
 
 const routes: Routes = [
@@ -48,9 +51,16 @@ const routes: Routes = [
       //Ruta servicios
       {path:'servicio/list', component:ListServicioComponent, canActivate: [AuthGuard]},
       {path:'servicio/nuevo', component:CreateServicioComponent, canActivate: [AuthGuard]},
-      {path:'servicio/edit/:id', component:CreateServicioComponent, canActivate: [AuthGuard]}
+      {path:'servicio/edit/:id', component:CreateServicioComponent, canActivate: [AuthGuard]},
 
-    
+      //Ruta turno
+      {path:'turno/list', component:CitaComponent, canActivate:[AuthGuard]},
+      {path:'turno/nuevo', component:AddTurnoComponent, canActivate:[AuthGuard]},
+
+      //Ruta cita
+      {path:'cita/list', component:CalendarioComponent, canActivate:[AuthGuard]},
+      {path:'cita/nuevo', component:AddCitaComponent, canActivate:[AuthGuard]}
+
 
 
 

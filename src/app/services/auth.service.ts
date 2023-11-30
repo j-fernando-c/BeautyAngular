@@ -50,7 +50,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = this.jwtHelper.decodeToken(token);
-        console.log('Decoded Token:', decodedToken);
+        // console.log('Decoded Token:', decodedToken);
         return decodedToken;
     }
     return null;

@@ -36,8 +36,8 @@ export class SidebarComponent implements OnInit {
   }
 
   canAccessModule(moduleName: string): boolean {
-    console.log('Checking access for module:', moduleName);
-    console.log('User roles:', this.userRoles);
+    // console.log('Checking access for module:', moduleName);
+    // console.log('User roles:', this.userRoles);
     // Lógica para verificar si el usuario tiene acceso al módulo
 
     // Si el usuario tiene el rol 'admin', tiene acceso a todos los módulos

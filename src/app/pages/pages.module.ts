@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import {MatSelectModule} from '@angular/material/select'; 
+import {MatSelectModule} from '@angular/material/select';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { NgChartsModule } from 'ng2-charts';
@@ -49,6 +49,8 @@ import { CitaComponent } from './turno/cita/cita.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
+
 
 
 
@@ -64,6 +66,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FiltroPipe,
     FiltroPipe2,
     FiltroPipeServicio,
+    FiltroPipeUsuario,
     CreateClienteComponent,
     ListClienteComponent,
     ListServicioComponent,
@@ -78,7 +81,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AddCitaComponent,
     CitaComponent,
     AddTurnoComponent,
-    
+
   ],
   exports: [
     DashboardComponent,
@@ -102,18 +105,18 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatSlideToggleModule,
     FullCalendarModule,
     MatDatepickerModule,
-    CalendarModule, 
+    CalendarModule,
     MatSelectModule,
     CdkAccordionModule,
     NgxChartsModule
-    
 
-    
-    
-    
-  
-    
-    
+
+
+
+
+
+
+
   ]
 })
 export class PagesModule { }

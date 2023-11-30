@@ -37,7 +37,7 @@ const routes: Routes = [
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
       {path: 'cliente/list', component: ListClienteComponent,canActivate: [AuthGuard]},
-      {path: 'cliente/edit/:id', component:CreateClienteComponent, canActivate: [AuthGuard]}, 
+      {path: 'cliente/edit/:id', component:CreateClienteComponent, canActivate: [AuthGuard]},
       //Rutas para Usuario
       {path: 'usuarios/list', component:ListUsuarioComponent, canActivate: [AuthGuard]},
       {path: 'usuarios/nuevo', component:CreateUsuarioComponent, canActivate: [AuthGuard]},
@@ -50,7 +50,7 @@ const routes: Routes = [
       {path:'servicio/nuevo', component:CreateServicioComponent, canActivate: [AuthGuard]},
       {path:'servicio/edit/:id', component:CreateServicioComponent, canActivate: [AuthGuard]}
 
-    
+
 
 
 

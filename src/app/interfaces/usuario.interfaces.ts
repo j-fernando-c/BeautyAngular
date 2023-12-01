@@ -1,10 +1,9 @@
 export interface Usuario {
-  _id:     string;
-  nombre:           string;
-  apellido:         string;
-  email:          string;
-  estado:         boolean;
-  roles: string[];
-  // telefono:       string;
-  // direccion:      string;
+  _id: string;
+  nombre: string;
+  apellido: string;
+  email: string;
+  estado: boolean;
+  roles: { nombre: string }[]; // roles es un array de objetos con una propiedad nombre
+  // otros campos que puedas tener...
 }

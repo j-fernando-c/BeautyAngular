@@ -18,12 +18,16 @@ export class ListUsuarioComponent implements OnInit {
   //Contiene los usuarios
   usuario: Usuario[] = [];
 
+
   //Variable para buscar
   serach: string = '';
 
   rolesDeUsuarios: { [key: string]: string[] } = {};
 
   subcripcion!: Subscription;
+
+  estado:boolean=true;
+  textoEstado:string='Activo'
 
   constructor(private usuarioService: UsuarioService, private fb: FormBuilder, private routes: Router) {
 

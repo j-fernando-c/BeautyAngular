@@ -38,11 +38,11 @@ export class UsuarioService {
   }
 
 
-  actualizarUsuario(id:number, body:Usuario):Observable<Usuario>{
+  actualizarUsuario(id:string, body:Usuario):Observable<Usuario>{
     return this.http.put<Usuario>(this.url + id, body);
   }
 
-  getOneUsuario(id:number):Observable<Usuario>{
+  getOneUsuario(id:string):Observable<Usuario>{
     return this.http.get<Usuario>(this.url + id)
   }
 

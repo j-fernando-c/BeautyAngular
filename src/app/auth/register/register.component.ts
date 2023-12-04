@@ -21,10 +21,18 @@ export class RegisterComponent implements OnInit {
   myForm: FormGroup = this.formBuilder.group({
     nombre: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
     apellido: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],
     recontrasena: ['', [Validators.required,]],
   });
+
+  validarExtensionCom(control:any) {
+    const email = control.value;
+    if (email && !email.endsWith('.com')) {
+      return { sinExtensionCom: true };
+    }
+    return null;
+  }
 
   ngOnInit(): void {}
 

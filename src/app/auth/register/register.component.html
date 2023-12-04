@@ -47,6 +47,10 @@
               <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
                 El email es requerido y debe ser válido
               </span>
+              <br>
+              <span class="text-danger" *ngIf="myForm.get('email')?.hasError('sinExtensionCom')">
+                El correo electrónico debe tener la extensión ".com".
+              </span>
             </div>
         </div>
         <div class="form-group ">

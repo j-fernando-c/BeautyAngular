@@ -6,7 +6,8 @@
                     <label  class="form-label required">Nombre:</label>
                     <input type="text" class="form-control" formControlName="nombre_servicio"
                         placeholder="Ingrese nombre del servicio"
-                        [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched}">
+                        [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched, 
+                    'input-pattern-error': myForm.get('nombre_servicio')?.hasError('pattern')}">
                     <span class="text-danger"
                         *ngIf="myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched ">
                         El nombre del servicio es requerido.

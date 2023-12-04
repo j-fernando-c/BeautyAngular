@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-estilista.component.css']
 })
 export class ListEstilistaComponent implements OnInit {
+
   //Para la paginación
   pages: number = 0;
   //Contiene los estilistas
@@ -27,6 +28,7 @@ export class ListEstilistaComponent implements OnInit {
   constructor(private servicioEstilista: EstilistaService, private fb: FormBuilder, private routes: Router) {
 
   }
+  
   ngOnInit(): void {
     //Metódo para listar
     this.servicioEstilista.getEstilistas().subscribe(data => {

@@ -28,38 +28,39 @@ const routes: Routes = [
   {
     path: 'dashboard'  ,
     component: PagesComponent,
+    canActivate:[AuthGuard],
     children: [
-      {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
+      {path: '', component: DashboardComponent, },
       {path: 'progress', component: ProgressComponent},
-      {path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]},
-      {path: 'grafica1', component: Grafica1Component,canActivate: [AuthGuard]},
+      {path: 'dashboard', component: DashboardComponent,},
+      {path: 'grafica1', component: Grafica1Component,},
       //Rutas para estilista
-      {path: 'estilista/nuevo', component: CreateEstilistaComponent, canActivate: [AuthGuard]},
-      {path: 'estilista/list', component: ListEstilistaComponent, canActivate: [AuthGuard]},
-      {path: 'estilista/edit/:id', component: CreateEstilistaComponent, canActivate: [AuthGuard]},
+      {path: 'estilista/nuevo', component: CreateEstilistaComponent, },
+      {path: 'estilista/list', component: ListEstilistaComponent, },
+      {path: 'estilista/edit/:id', component: CreateEstilistaComponent, },
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
-      {path: 'cliente/list', component: ListClienteComponent,canActivate: [AuthGuard]},
-      {path: 'cliente/edit/:id', component:CreateClienteComponent, canActivate: [AuthGuard]}, 
+      {path: 'cliente/list', component: ListClienteComponent,},
+      {path: 'cliente/edit/:id', component:CreateClienteComponent, }, 
       //Rutas para Usuario
-      {path: 'usuarios/list', component:ListUsuarioComponent, canActivate: [AuthGuard]},
-      {path: 'usuarios/nuevo', component:CreateUsuarioComponent, canActivate: [AuthGuard]},
+      {path: 'usuarios/list', component:ListUsuarioComponent, },
+      {path: 'usuarios/nuevo', component:CreateUsuarioComponent, },
       //Rutas para Roles
-      {path: 'roles/list', component:RolesComponent, canActivate: [AuthGuard]},
-      {path: 'config', component:ConfigComponent, canActivate: [AuthGuard]},
+      {path: 'roles/list', component:RolesComponent},
+      {path: 'config', component:ConfigComponent},
 
       //Ruta servicios
-      {path:'servicio/list', component:ListServicioComponent, canActivate: [AuthGuard]},
-      {path:'servicio/nuevo', component:CreateServicioComponent, canActivate: [AuthGuard]},
-      {path:'servicio/edit/:id', component:CreateServicioComponent, canActivate: [AuthGuard]},
+      {path:'servicio/list', component:ListServicioComponent},
+      {path:'servicio/nuevo', component:CreateServicioComponent},
+      {path:'servicio/edit/:id', component:CreateServicioComponent},
 
       //Ruta turno
-      {path:'turno/list', component:CitaComponent, canActivate:[AuthGuard]},
-      {path:'turno/nuevo', component:AddTurnoComponent, canActivate:[AuthGuard]},
+      {path:'turno/list', component:CitaComponent},
+      {path:'turno/nuevo', component:AddTurnoComponent},
 
       //Ruta cita
-      {path:'cita/list', component:CalendarioComponent, canActivate:[AuthGuard]},
-      {path:'cita/nuevo', component:AddCitaComponent, canActivate:[AuthGuard]}
+      {path:'cita/list', component:CalendarioComponent},
+      {path:'cita/nuevo', component:AddCitaComponent}
 
 
 

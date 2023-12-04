@@ -13,6 +13,10 @@
 .input-error{
     border: 1px solid red;
 }
+.input-pattern-error{
+    border: 1px solid red;
+  }
+  
 
 .disabled{
     background-color: transparent;

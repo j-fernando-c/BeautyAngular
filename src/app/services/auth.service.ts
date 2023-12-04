@@ -11,6 +11,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+
+  private refresh$ = new Subject<void>
   private jwtHelper = new JwtHelperService();
   private userRoles: string[] = [];
   // private rolesSubject = new Subject<string[]>();
@@ -29,6 +31,8 @@ export class AuthService {
 
   private loginUrl = "http://localhost:5000/login"
   private registerUrl = "http://localhost:5000/register";
+  private forgot = 'http://localhost:5000/forgot-password';
+  private actualizacionContrasena = "http://localhost:5000/cambio/";
 
 
   login(email: string, contrasena: string): Observable<any> {
@@ -45,27 +49,27 @@ export class AuthService {
         catchError((error: any) => throwError(error))
       );
   }
-   // Nuevo método para obtener la información del usuario y sus roles desde el token
-   getUserInfo(): { _id: string, roles: string[] } | null {
+  // Nuevo método para obtener la información del usuario y sus roles desde el token
+  getUserInfo(): { _id: string, roles: string[] } | null {
     const token = localStorage.getItem('token');
     if (token) {
-        const decodedToken = this.jwtHelper.decodeToken(token);
-        // console.log('Decoded Token:', decodedToken);
-        return decodedToken;
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      // console.log('Decoded Token:', decodedToken);
+      return decodedToken;
     }
     return null;
-}
-
-private loadUserRoles(): void {
-  const userInfo = this.getUserInfo();
-  if (userInfo) {
-    this.userRoles = userInfo.roles; // Asegúrate de que esto es un array de strings
-    this.rolesSubject.next(this.userRoles); // Notificar cambios a los suscriptores
   }
-}
 
-   // Nuevo método para obtener los roles del usuario como un observable
-   getRolesObservable(): Observable<string[]> {
+  private loadUserRoles(): void {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      this.userRoles = userInfo.roles; // Asegúrate de que esto es un array de strings
+      this.rolesSubject.next(this.userRoles); // Notificar cambios a los suscriptores
+    }
+  }
+
+  // Nuevo método para obtener los roles del usuario como un observable
+  getRolesObservable(): Observable<string[]> {
     return this.rolesSubject.asObservable();
   }
 
@@ -74,5 +78,26 @@ private loadUserRoles(): void {
   //logica del guard para proteccion de directivas, los guards siempre reciben booleanos
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token')
+  }
+
+  get refresh() {
+    return this.refresh$;
+  }
+  //Me permite enviarle un email a la persona 
+  existeEmail(body: any) {
+    return this.http.post(this.forgot, body)
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        }),
+      )
+  }
+
+  enviarNuevaContrasena(id: string, token: string, body: any) {
+    return this.http.put(this.actualizacionContrasena + id + `/` + token, body)
   }
 }

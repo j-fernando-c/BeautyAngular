@@ -22,7 +22,7 @@ export class CreateClienteComponent implements OnInit {
   id!: number;
   sExiste: boolean = false;
   myForm: FormGroup = this.fb.group({
-    telefono: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+    telefono: ['', [Validators.required,  Validators.pattern(/^\d{7,10}$/)]],
     direccion: ['', Validators.required],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     nombre: ['', [Validators.required, Validators.pattern(/^[^\d\s]+$/)]], // expresion regular que No permite dígitos ni espacios

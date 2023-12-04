@@ -23,12 +23,6 @@ export class UsuarioService {
       })
     );
   }
-
-
-
-
-
-
 }
 
 

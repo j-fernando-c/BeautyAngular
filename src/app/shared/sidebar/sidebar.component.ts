@@ -57,4 +57,9 @@ export class SidebarComponent implements OnInit {
     // En cualquier otro caso, no tiene acceso
     return false;
   }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login'])
+  }
 }

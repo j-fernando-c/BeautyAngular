@@ -24,7 +24,10 @@
   cursor: pointer;
   color: white;
 }
+th{
+  color: rgb(116, 90, 242);
 
+}
 .estado-cambiado {
   background-color: #242a33;
 }

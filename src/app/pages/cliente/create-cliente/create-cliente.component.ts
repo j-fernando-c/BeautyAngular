@@ -25,8 +25,8 @@ export class CreateClienteComponent implements OnInit {
     telefono: ['', [Validators.required,  Validators.pattern(/^\d{7,10}$/)]],
     direccion: ['', Validators.required],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
-    nombre: ['', [Validators.required, Validators.pattern(/^[^\d\s]+$/)]], // expresion regular que No permite dígitos ni espacios
-    apellido: ['', [Validators.required, Validators.pattern(/^[^\d\s]+$/)]], // No permite dígitos ni espacios
+    nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]], // expresion regular que No permite dígitos ni espacios
+    apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]], // No permite dígitos ni espacios
   });
 
   ngOnInit(): void {
@@ -74,7 +74,7 @@ export class CreateClienteComponent implements OnInit {
   // Función de validación personalizada para verificar la extensión .com en el correo electrónico
   validarExtensionCom(control:any) {
     const email = control.value;
-    if (email && !email.endsWith('.com')) {
+    if (email && !email.endsWith('.com')&& !email.endsWith('.co')) {
       return { sinExtensionCom: true };
     }
     return null;

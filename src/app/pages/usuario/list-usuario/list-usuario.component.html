@@ -33,7 +33,7 @@
                 [ngClass]="{'estado': i.estado, 'estado-cambiado': !i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</a>
             </td>
             <td *ngIf="i.estado">
-              <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/estilista/edit/{{i._id}}">
+              <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/usuarios/edit/{{i._id}}">
                 Editar <i class="fas fa-pencil-alt"></i>
               </a>
               <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarUsuario(i._id)">

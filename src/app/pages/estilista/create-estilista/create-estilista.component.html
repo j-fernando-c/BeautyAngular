@@ -12,7 +12,7 @@
               El nombre es requerido
             </span><br>
             <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
-              El nombre no debe contener números ni espacios en blanco.
+              El nombre no debe contener números ni espacios en blanco ni caracteres especiales.
             </span>
           </div>
           <div class="form-group col-md-6">
@@ -36,7 +36,7 @@
             El email es requerido.
           </span><br>
           <span class="text-danger" *ngIf="myForm.get('email')?.hasError('sinExtensionCom')">
-            El correo electrónico debe tener la extensión ".com".
+            El correo electrónico debe una extensión válida.
           </span>
         </div>
         <div class="mb-3">

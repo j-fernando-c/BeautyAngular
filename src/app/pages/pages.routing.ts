@@ -45,6 +45,8 @@ const routes: Routes = [
       //Rutas para Usuario
       {path: 'usuarios/list', component:ListUsuarioComponent, },
       {path: 'usuarios/nuevo', component:CreateUsuarioComponent, },
+      {path: 'usuarios/edit/:id', component:CreateUsuarioComponent, },
+
       //Rutas para Roles
       {path: 'roles/list', component:RolesComponent},
       {path: 'config', component:ConfigComponent},

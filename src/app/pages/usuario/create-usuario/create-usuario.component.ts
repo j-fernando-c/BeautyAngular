@@ -43,7 +43,7 @@ constructor(formbuilder:FormBuilder,
 
   validarExtensionCom(control:any) {
     const email = control.value;
-    if (email && !email.endsWith('.com')) {
+    if (email && !email.endsWith('.com') && !email.endsWith('.co')) {
       return { sinExtensionCom: true };
     }
     return null;
@@ -51,7 +51,7 @@ constructor(formbuilder:FormBuilder,
 
   ngOnInit(): void {
     this.rolesService.getRoles().subscribe(data => {
-      console.log(this.roles = data)
+      
     });
 
     this.id = this.route.snapshot.params['id']

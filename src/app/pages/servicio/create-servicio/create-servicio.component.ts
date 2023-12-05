@@ -34,7 +34,7 @@ export class CreateServicioComponent implements OnInit {
   })
   ngOnInit(): void {
     this.estilistaService.getEstilistas().subscribe(data => {
-      console.log(this.estilista = data)
+      this.estilista=data.filter(estilista=>estilista.estado==true);
     });
 
     //Me permite recuperar el id

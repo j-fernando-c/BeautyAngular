@@ -35,12 +35,12 @@
 
           </span><br>
           <span class="text-danger" *ngIf="myForm.get('email')?.hasError('sinExtensionCom')">
-            El correo electrónico debe tener la extensión ".com".
+            El correo electrónico debe una extensión válida.
           </span>
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">contraseña</label>
-          <input type="text" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
+          <input type="password" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
             [ngClass]="{'input-error':myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched}">
           <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
             la contraseña es requerida

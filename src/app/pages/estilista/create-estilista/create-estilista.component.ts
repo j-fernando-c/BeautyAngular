@@ -26,8 +26,8 @@ export class CreateEstilistaComponent implements OnInit {
   myForm: FormGroup = this.fb.group({
 
     telefono: ['', [Validators.required,  Validators.pattern(/^\d{7,10}$/)]],
-    nombre: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-    apellido: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
+    nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]],
+    apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
 
   });
@@ -38,7 +38,7 @@ export class CreateEstilistaComponent implements OnInit {
 
   validarExtensionCom(control:any) {
     const email = control.value;
-    if (email && !email.endsWith('.com')) {
+    if (email && !email.endsWith('.com') && !email.endsWith('.co')) {
       return { sinExtensionCom: true };
     }
     return null;

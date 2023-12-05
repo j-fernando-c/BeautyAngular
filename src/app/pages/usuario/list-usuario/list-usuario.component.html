@@ -23,10 +23,8 @@
             <td>{{i.nombre | titlecase}}</td>
             <td>{{i.apellido | titlecase}}</td>
             <td>{{i.email}}</td>
-            <td>
-              <ul *ngFor="let rol of i.roles">
+            <td *ngFor="let rol of i.roles">
                 {{rol.nombre}}
-              </ul>
             </td>
             <td>
               <a id="link" (click)="cambioEstado(i._id)"

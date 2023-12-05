@@ -23,12 +23,12 @@ export class ListEstilistaComponent implements OnInit {
 
   subcripcion!: Subscription;
 
- 
+
 
   constructor(private servicioEstilista: EstilistaService, private fb: FormBuilder, private routes: Router) {
 
   }
-  
+
   ngOnInit(): void {
     //Metódo para listar
     this.servicioEstilista.getEstilistas().subscribe(data => {
@@ -85,6 +85,7 @@ export class ListEstilistaComponent implements OnInit {
   buscarEstilista(nombre: string) {
     this.serach = nombre;
   }
+
 
 
 

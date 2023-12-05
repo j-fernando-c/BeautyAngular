@@ -36,3 +36,9 @@
   cursor: pointer;
   color: white;
 }
+
+.botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

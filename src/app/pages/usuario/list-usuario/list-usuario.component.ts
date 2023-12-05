@@ -68,7 +68,7 @@ export class ListUsuarioComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarlo'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuarioService.eliminarUsuario(id).subscribe(res => {
+        this.usuarioService.EliminarUsuario(id).subscribe(res => {
           console.log("Se eliminó con exito")
         })
       }

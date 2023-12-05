@@ -41,12 +41,11 @@ const routes: Routes = [
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
       {path: 'cliente/list', component: ListClienteComponent,},
-      {path: 'cliente/edit/:id', component:CreateClienteComponent, }, 
+      {path: 'cliente/edit/:id', component:CreateClienteComponent, },
       //Rutas para Usuario
       {path: 'usuarios/list', component:ListUsuarioComponent, },
       {path: 'usuarios/nuevo', component:CreateUsuarioComponent, },
       {path: 'usuarios/edit/:id', component:CreateUsuarioComponent, },
-
       //Rutas para Roles
       {path: 'roles/list', component:RolesComponent},
       {path: 'config', component:ConfigComponent},

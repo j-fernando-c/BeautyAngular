@@ -5,7 +5,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Nombre</label>
-            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese nombre" [ngClass]="{'input-error':myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched, 
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese nombre" [ngClass]="{'input-error':myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched,
               'input-pattern-error': myForm.get('nombre')?.hasError('pattern') }">
             <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched ">
               El nombre es requerido
@@ -16,7 +16,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Apellido</label>
-            <input type="text" class="form-control" formControlName="apellido" placeholder="Ingrese apellido" [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched, 
+            <input type="text" class="form-control" formControlName="apellido" placeholder="Ingrese apellido" [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched,
               'input-pattern-error': myForm.get('apellido')?.hasError('pattern')}">
             <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
               El apellido es requerido
@@ -29,7 +29,7 @@
         <div class="mb-3">
           <label for="" class="form-label required">Email </label>
           <input type="email" class="form-control" formControlName="email" placeholder="Ingrese correo electrónico"
-            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched, 
+            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched,
             'input-pattern-error': myForm.get('email')?.hasError('sinExtensionCom')}">
           <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
             El email es requerido.
@@ -58,8 +58,11 @@
             La dirección es requerida
           </span>
         </div>
+        <div class="botones">
         <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
           [disabled]="myForm.invalid" (click)="onSave(myForm.value)">Guardar</button>
+          <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/cliente/list">Atrás</button>
+        </div>
       </form>
     </div>
   </div>

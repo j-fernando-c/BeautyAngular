@@ -13,6 +13,9 @@
             </span><br>
             <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
               El nombre no debe contener números ni espacios en blanco ni caracteres especiales.
+            </span><br>
+            <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('maxLength')">
+              No debe exceder los veinte caracteres
             </span>
           </div>
           <div class="form-group col-md-6">

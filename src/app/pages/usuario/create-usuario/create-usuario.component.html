@@ -6,18 +6,20 @@
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Nombre</label>
             <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese nombre"
-              [ngClass]="{'input-error':myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched }">
+              [ngClass]="{'input-error':myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched,
+              'input-pattern-error': myForm.get('nombre')?.hasError('pattern')  }">
             <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched ">
               El nombre es requerido
             </span><br>
             <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
-              El nombre no debe contener números ni espacios en blanco.
+              El nombre no debe contener números ni espacios en blanco ni caracteres especiales.
             </span>
           </div>
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Apellido</label>
             <input type="text" class="form-control" formControlName="apellido" placeholder="Ingrese apellido"
-              [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched}">
+              [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched, 
+              'input-pattern-error': myForm.get('apellido')?.hasError('pattern') }">
             <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
               El apellido es requerido
             </span><br>
@@ -29,7 +31,8 @@
         <div class="mb-3">
           <label for="" class="form-label required">Email </label>
           <input type="email" class="form-control" formControlName="email" placeholder="Ingrese correo electrónico"
-            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched}">
+            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched, 
+            'input-pattern-error': myForm.get('email')?.hasError('pattern') }">
           <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
             El email es requerido.
 
@@ -40,20 +43,21 @@
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">contraseña</label>
-          <input type="password" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
-            [ngClass]="{'input-error':myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched}">
+          <input type="text" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
+            [ngClass]="{'input-error':myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched,
+            'input-pattern-error': myForm.get('contrasena')?.hasError('pattern') }">
           <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
-            la contraseña es requerida
+            La contraseña es requerida
             <br>
             <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('pattern')">
-            la contraseña debe de tener al menos 6 digitos
+            La contraseña debe de tener al menos 6 digitos
             </span>
           </span>
         </div>
           <div class="mb-3">
             <label for="" class="form-label required">Rol</label>
             <select class="form-control" formControlName="roles">
-              <option *ngFor="let role of roles" [value]="role.nombre">{{ role.nombre }}</option>
+              <option *ngFor="let role of roles" [value]="role._id">{{ role.nombre }}</option>
             </select>
             <span class="text-danger"
             *ngIf="myForm.get('roles')?.invalid && myForm.get('roles')?.touched">

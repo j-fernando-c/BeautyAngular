@@ -26,8 +26,8 @@ export class CreateUsuarioComponent implements OnInit {
   id!: string;
   sExiste: boolean = false;
   myForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-    apellido: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
+    nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]],
+    apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],
     roles: ['', Validators.required]

@@ -48,3 +48,26 @@ Login register and recover password Page
     right: 0px;
     position: absolute;
     height: 100%; }
+
+
+.button{
+  background-color: rgba(110, 48, 131, 1);
+  color: white;
+
+}
+
+.input{
+  border: none;
+  border-bottom: 1px solid rgba(110, 48, 131, 1);
+  outline: none;
+  box-sizing: border-box;
+  
+}
+
+.input:focus {
+  border: none;
+  border-bottom: 1px solid rgba(110, 48, 131, 1);
+  outline: none;
+  box-sizing: border-box;
+  
+}

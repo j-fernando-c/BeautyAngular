@@ -30,7 +30,7 @@
                     <input type="number" class="form-control" formControlName="precio" placeholder="Ingrese el precio"
                     [ngClass]="{'input-error':myForm.get('precio')?.invalid && myForm.get('precio')?.touched}">
                     <span class="text-danger" *ngIf="myForm.get('precio')?.invalid && myForm.get('precio')?.touched">
-                        El precio es requerido.
+                        El precio es requerido y debe ser válido.
                     </span>
                 </div>
                 <div class="mb-3">

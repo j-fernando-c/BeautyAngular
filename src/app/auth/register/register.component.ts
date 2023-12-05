@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
     const recontrasena = this.myForm.get('recontrasena')?.value;
 
     if (!this.myForm.valid) {
-      Swal.fire('Error', 'Complete el formulario', 'error');
+      Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;
     } else if (contrasena.length < 6) {
       Swal.fire('Error', 'La contraseña debe tener al menos 6 caracteres', 'error');

@@ -6,7 +6,7 @@
                     <label  class="form-label required">Nombre:</label>
                     <input type="text" class="form-control" formControlName="nombre_servicio"
                         placeholder="Ingrese nombre del servicio"
-                        [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched, 
+                        [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched,
                     'input-pattern-error': myForm.get('nombre_servicio')?.hasError('pattern')}">
                     <span class="text-danger"
                         *ngIf="myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched ">
@@ -46,8 +46,12 @@
                         Por favor, seleccione una opción
                     </span>
                 </div>
+                <div class="botones">
                 <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid"
                     (click)="onSave(myForm.value)">Guardar</button>
+                    <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/servicio/list">Atrás</button>
+                  </div>
+
             </form>
         </div>
     </div>

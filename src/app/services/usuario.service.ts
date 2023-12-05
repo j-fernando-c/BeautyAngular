@@ -46,7 +46,7 @@ export class UsuarioService {
     return this.http.get<Usuario>(this.url + id)
   }
 
-  eliminarUsuario(id:string):Observable<Usuario>{
+  EliminarUsuario(id:string):Observable<Usuario>{
     return this.http.delete<Usuario>(this.url+id)
     .pipe(
       tap(()=>{

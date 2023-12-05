@@ -16,7 +16,7 @@
 .input-pattern-error{
     border: 1px solid red;
   }
-  
+
 
 .disabled{
     background-color: transparent;
@@ -36,4 +36,11 @@
     text-align: center;
     cursor: pointer;
     color: white;
+}
+
+
+.botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

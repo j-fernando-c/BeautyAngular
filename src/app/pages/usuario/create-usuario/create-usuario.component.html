@@ -40,10 +40,14 @@
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">contraseña</label>
-          <input type="text" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
+          <input type="password" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
             [ngClass]="{'input-error':myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched}">
           <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
             la contraseña es requerida
+            <br>
+            <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('pattern')">
+            la contraseña debe de tener al menos 6 digitos
+            </span>
           </span>
         </div>
           <div class="mb-3">
@@ -57,20 +61,11 @@
         </span>
           </div>
 
-        <!-- <div class="mb-3">
-          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-              formControlName="roles">
-              <option value="">Selecione Rol</option>
-              <option [value]="roles._id" *ngFor="let roles of roles">{{roles.nombre}}</option>
-          </select>
-          <span class="text-danger"
-              *ngIf="myForm.get('roles')?.invalid && myForm.get('roles')?.touched">
-              Por favor, seleccione un rol
-          </span>
-      </div> -->
+        <div class="botones">
         <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid"
           (click)="onSave(myForm.value)">Guardar</button>
-        <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/usuarios/list">Anterior</button>
+        <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/usuarios/list">Atrás</button>
+      </div>
       </form>
 
     </div>

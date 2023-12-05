@@ -34,7 +34,8 @@
                     </span>
                 </div>
                 <div class="mb-3">
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                  <label for="" class="form-label required">Estilista</label>
+                    <select class="form-control"
                         formControlName="estilista">
                         <option value="">Selecione un estilista</option>
                         <option [value]="estilistas._id" *ngFor="let estilistas of estilista">{{estilistas.nombre}}

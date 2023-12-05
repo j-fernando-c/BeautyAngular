@@ -1,1 +1,52 @@
-<p>list-usuario works!</p>
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/usuarios/nuevo">Agregar Usuario</button>
+      <input type="text" class="barra mb-4" placeholder="Buscar usuario..." #buscar (keyup)="buscarUsuario(buscar.value)">
+    </div>
+    <div class="table-responsive sombra">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of usuario | filtroUsuario:pages:serach; let c = index">
+            <th scope="row">{{c + 1}}</th>
+            <td>{{i.nombre | titlecase}}</td>
+            <td>{{i.apellido | titlecase}}</td>
+            <td>{{i.email}}</td>
+            <td>
+              <ul *ngFor="let rol of i.roles">
+                {{rol.nombre}}
+              </ul>
+            </td>
+            <td>
+              <a id="link" (click)="cambioEstado(i._id)"
+                [ngClass]="{'estado': i.estado, 'estado-cambiado': !i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</a>
+            </td>
+            <td *ngIf="i.estado">
+              <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/estilista/edit/{{i._id}}">
+                Editar <i class="fas fa-pencil-alt"></i>
+              </a>
+              <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarUsuario(i._id)">
+                Eliminar <i class="fas fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="contenedor-paginacion mt-3">
+      <button type="button" class="btn btn-primary btn-sm" (click)="anteriorPage()">Anterior</button>
+      <button type="button" class="btn btn-primary btn-sm ml-4" (click)="nextPage()">Siguiente</button>
+    </div>
+  </div>
+</div>

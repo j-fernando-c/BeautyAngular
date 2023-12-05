@@ -1,1 +1,78 @@
-<p>create-usuario works!</p>
+<div class="container mt-5">
+  <div class="card sombra">
+    <div class="card-body">
+      <form [formGroup]="myForm" method="post">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="" class="form-label required">Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese nombre"
+              [ngClass]="{'input-error':myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched }">
+            <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched ">
+              El nombre es requerido
+            </span><br>
+            <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
+              El nombre no debe contener números ni espacios en blanco.
+            </span>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="" class="form-label required">Apellido</label>
+            <input type="text" class="form-control" formControlName="apellido" placeholder="Ingrese apellido"
+              [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched}">
+            <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
+              El apellido es requerido
+            </span><br>
+            <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('pattern')">
+              El números no debe contener números ni espacios en blanco.
+            </span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label required">Email </label>
+          <input type="email" class="form-control" formControlName="email" placeholder="Ingrese correo electrónico"
+            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched}">
+          <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
+            El email es requerido.
+
+          </span><br>
+          <span class="text-danger" *ngIf="myForm.get('email')?.hasError('sinExtensionCom')">
+            El correo electrónico debe tener la extensión ".com".
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label required">contraseña</label>
+          <input type="text" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
+            [ngClass]="{'input-error':myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched}">
+          <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
+            la contraseña es requerida
+          </span>
+        </div>
+          <div class="mb-3">
+            <label for="" class="form-label required">Rol</label>
+            <select class="form-control" formControlName="roles">
+              <option *ngFor="let role of roles" [value]="role.nombre">{{ role.nombre }}</option>
+            </select>
+            <span class="text-danger"
+            *ngIf="myForm.get('roles')?.invalid && myForm.get('roles')?.touched">
+            Por favor, seleccione un rol
+        </span>
+          </div>
+
+        <!-- <div class="mb-3">
+          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+              formControlName="roles">
+              <option value="">Selecione Rol</option>
+              <option [value]="roles._id" *ngFor="let roles of roles">{{roles.nombre}}</option>
+          </select>
+          <span class="text-danger"
+              *ngIf="myForm.get('roles')?.invalid && myForm.get('roles')?.touched">
+              Por favor, seleccione un rol
+          </span>
+      </div> -->
+        <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid"
+          (click)="onSave(myForm.value)">Guardar</button>
+        <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/usuarios/list">Anterior</button>
+      </form>
+
+    </div>
+  </div>
+</div>

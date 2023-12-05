@@ -40,8 +40,13 @@ const routes: Routes = [
       {path: 'estilista/edit/:id', component: CreateEstilistaComponent, },
       //Rutas para cliente
       {path:'cliente/nuevo', component: CreateClienteComponent},
+<<<<<<< HEAD
       {path: 'cliente/list', component: ListClienteComponent,},
       {path: 'cliente/edit/:id', component:CreateClienteComponent, }, 
+=======
+      {path: 'cliente/list', component: ListClienteComponent,canActivate: [AuthGuard]},
+      {path: 'cliente/edit/:id', component:CreateClienteComponent, canActivate: [AuthGuard]},
+>>>>>>> f6ba60bf435be25a139db63375dc247647e49098
       //Rutas para Usuario
       {path: 'usuarios/list', component:ListUsuarioComponent, },
       {path: 'usuarios/nuevo', component:CreateUsuarioComponent, },
@@ -62,6 +67,10 @@ const routes: Routes = [
       {path:'cita/list', component:CalendarioComponent},
       {path:'cita/nuevo', component:AddCitaComponent}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f6ba60bf435be25a139db63375dc247647e49098
 
 
 

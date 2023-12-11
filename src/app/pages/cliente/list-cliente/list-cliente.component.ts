@@ -9,35 +9,43 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 
-
-
 @Component({
   selector: 'app-list-cliente',
   templateUrl: './list-cliente.component.html',
   styleUrls: ['./list-cliente.component.css']
 })
 export class ListClienteComponent implements OnInit {
- 
+
+  // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
+  dataSource = new MatTableDataSource<Cliente>();
+  displayedColumns: string[] = [ 'nombre', 'apellido', 'email', 'telefono', 'direccion', 'estado', 'acciones'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(private clienteServicio: ClienteService, private fb: FormBuilder, private router: Router) { }
-    //Para la paginación
+
   pages: number = 0;
-  cliente: Cliente[] = [];
   subcripcion!: Subscription;
-  serach: string = ''
+  serach: string = '';
   estado: boolean = true;
   textoEstado: string = 'Activo';
+
 
   ngOnInit(): void {
     // Método para listar
     this.clienteServicio.getCliente().subscribe(data => {
-      this.cliente = data;
-
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
 
     // Método para refrescar
     this.subcripcion = this.clienteServicio.refresh.subscribe(() => {
       this.clienteServicio.getCliente().subscribe(data => {
-        this.cliente = data;
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
     });
   }
@@ -48,37 +56,32 @@ export class ListClienteComponent implements OnInit {
     });
   }
 
-
-//Metódo para eliminar
-eliminarCliente(id:string){
-  Swal.fire({
-    title: '¿Estás seguro?',
-    text: '¡No podrás revertir esto!',
-    icon: 'warning',
-    iconColor:'#745af2',
-    showCancelButton: true,
-    confirmButtonColor: '#745af2',
-    cancelButtonColor: '#745af2',
-    confirmButtonText: 'Sí, eliminarlo'
-  }).then((result)=>{
-    if(result.isConfirmed){
-      this.clienteServicio.eliminarCliente(id).subscribe(res=>{
-        console.log("Se eliminó con exito")
-      })
-    }
-  })
-
-}
-
-  //Metodos para la páginacion
-  nextPage() {
-    this.pages += 7
+  eliminarCliente(id: string) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir esto!',
+      icon: 'warning',
+      iconColor: '#745af2',
+      showCancelButton: true,
+      confirmButtonColor: '#745af2',
+      cancelButtonColor: '#745af2',
+      confirmButtonText: 'Sí, eliminarlo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.clienteServicio.eliminarCliente(id).subscribe(res => {
+          console.log("Se eliminó con exito");
+        });
+      }
+    });
   }
-  //Metodos para la paginacion
+
+  nextPage() {
+    this.pages += 7;
+  }
+
   anteriorPage() {
     if (this.pages > 0) {
-      this.pages -= 7
-
+      this.pages -= 7;
     }
   }
 
@@ -86,5 +89,9 @@ eliminarCliente(id:string){
     this.serach = nombre;
   }
 
-
+  aplicarFiltro(event: Event): void {
+    const valor = (event.target as HTMLInputElement).value;
+    this.serach = valor.trim().toLowerCase();
+    this.dataSource.filter = valor;
+  }
 }

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import {Usuario} from 'src/app/interfaces/usuario.interfaces'
+import { Usuario } from 'src/app/interfaces/usuario.interfaces';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-list-usuario',
@@ -13,49 +15,54 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-usuario.component.css']
 })
 export class ListUsuarioComponent implements OnInit {
-  //Para la paginación
+  // Para la paginación
   pages: number = 0;
-  //Contiene los usuarios
-  usuario: Usuario[] = [];
 
+  // Contiene los usuarios
+  usuarios: Usuario[] = [];
+  dataSource = new MatTableDataSource<Usuario>();
+  displayedColumns: string[] = [ 'nombre', 'apellido', 'email', 'rol', 'estado', 'acciones'];
 
-  //Variable para buscar
-  serach: string = '';
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  rolesDeUsuarios: { [key: string]: string[] } = {};
+  // Variable para buscar
+  search: string = '';
 
   subcripcion!: Subscription;
 
-  estado:boolean=true;
-  textoEstado:string='Activo'
+  estado: boolean = true;
+  textoEstado: string = 'Activo';
 
-  constructor(private usuarioService: UsuarioService, private fb: FormBuilder, private routes: Router) {
-
-  }
+  constructor(private usuarioService: UsuarioService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    //Metódo para listar
+    // Método para listar
     this.usuarioService.getUsuarios().subscribe(data => {
-      this.usuario = data
+      this.usuarios = data;
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-    //Metódo para refrescar
+
+    // Método para refrescar
     this.subcripcion = this.usuarioService.refresh.subscribe(() => {
       this.usuarioService.getUsuarios().subscribe(data => {
-        this.usuario = data
+        this.usuarios = data;
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
-    })
-
-
-  }
-  cambioEstado(id:string){
-    this.usuarioService.actulizarEstado(id).subscribe(res=>{
-      console.log(res)
-    })
+    });
   }
 
+  cambioEstado(id: string) {
+    this.usuarioService.actulizarEstado(id).subscribe(res => {
+      console.log(res);
+    });
+  }
 
-
-  //Metodo para eliminar
+  // Método para eliminar
   eliminarUsuario(id: string) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -66,30 +73,30 @@ export class ListUsuarioComponent implements OnInit {
       confirmButtonColor: '#745af2',
       cancelButtonColor: '#745af2',
       confirmButtonText: 'Sí, eliminarlo'
-    }).then((result) => {
+    }).then(result => {
       if (result.isConfirmed) {
         this.usuarioService.EliminarUsuario(id).subscribe(res => {
-          console.log("Se eliminó con exito")
-        })
+          console.log('Se eliminó con éxito');
+        });
       }
-    })
+    });
+  }
 
-  }
-  //Metodos para la páginacion
+  // Métodos para la paginación
   nextPage() {
-    this.pages += 7
+    this.pages += 7;
   }
-  //Metodos para la paginacion
+
+  // Métodos para la paginación
   anteriorPage() {
     if (this.pages > 0) {
-      this.pages -= 7
-
+      this.pages -= 7;
     }
   }
 
-  buscarUsuario(nombre: string) {
-    this.serach = nombre;
+  aplicarFiltro(valor: string): void {
+    this.search = valor.trim().toLowerCase();
+    this.dataSource.filter = valor;
   }
-
 
 }

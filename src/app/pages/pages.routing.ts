@@ -1,3 +1,4 @@
+import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { CreateEstilistaComponent } from './estilista/create-estilista/create-estilista.component';
@@ -68,7 +69,8 @@ const routes: Routes = [
 
       //Ruta ventas
       {path: 'venta/list', component:ListVentasComponent},
-      {path: 'venta/nuevo', component: AddVentasComponent}
+      {path: 'venta/nuevo', component: AddVentasComponent},
+      {path: 'venta/detalle/:id', component:DetalleVentaComponent}
 
 
 

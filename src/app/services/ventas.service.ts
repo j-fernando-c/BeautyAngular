@@ -20,6 +20,10 @@ export class VentasService {
     return this.http.get<Ventas[]>(this.url)
   }
 
+  getOneVenta(id:string):Observable<Ventas>{
+    return this.http.get<Ventas>(this.url + id)
+  }
+
   createVenta(body: Ventas): Observable<Ventas> {
     return this.http.post<Ventas>(this.url, body)
       .pipe(
@@ -31,6 +35,16 @@ export class VentasService {
 
   actulizarEstado(id:string):Observable<Ventas>{
     return this.http.get<Ventas>(this.url2+id)
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
+  }
+
+  EliminarVenta(id:string):Observable<Ventas>{
+    return this.http.delete<Ventas>(this.url + id)
     .pipe(
       tap(()=>{
         this.refresh$.next();

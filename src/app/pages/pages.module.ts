@@ -53,6 +53,8 @@ import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
 import { Grafica3Component } from './dashboard/grafica3/grafica3.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
+import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
+
 
 
 
@@ -87,6 +89,8 @@ import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
     Grafica3Component,
     ListVentasComponent,
     AddVentasComponent,
+    DetalleVentaComponent,
+
     
 
   ],
@@ -115,7 +119,8 @@ import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
     CalendarModule,
     MatSelectModule,
     CdkAccordionModule,
-    NgxChartsModule
+    NgxChartsModule,
+
 
 
 

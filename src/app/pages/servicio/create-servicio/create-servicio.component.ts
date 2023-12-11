@@ -27,7 +27,8 @@ export class CreateServicioComponent implements OnInit {
 
     //Validación formulario
   myForm: FormGroup = this.fb.group({
-    nombre_servicio: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
+    nombre_servicio: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ][a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ\s\-_]*[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]$/
+      ),]],
     duracion: ['', Validators.required],
     precio: ['', Validators.required],
     estilista: ['', Validators.required]
@@ -35,6 +36,7 @@ export class CreateServicioComponent implements OnInit {
   ngOnInit(): void {
     this.estilistaService.getEstilistas().subscribe(data => {
       this.estilista=data.filter(estilista=>estilista.estado==true);
+      
     });
 
     //Me permite recuperar el id
@@ -46,7 +48,7 @@ export class CreateServicioComponent implements OnInit {
           nombre_servicio: servicio.nombre_servicio,
           duracion: servicio.duracion,
           precio: servicio.precio,
-          estilista: servicio.estilista.nombre
+          estilista: servicio.estilista.map(servicio => ({ _id: servicio._id, nombre: servicio.nombre }))
 
         })
       })

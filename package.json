@@ -30,6 +30,7 @@
     "@swimlane/ngx-charts": "^20.5.0",
     "@types/d3-scale": "^4.0.8",
     "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.11.2",
     "chart.js": "^4.3.0",
     "force": "^0.0.3",
     "jspdf": "^2.5.1",

@@ -15,8 +15,7 @@
 }
 .input-pattern-error{
     border: 1px solid red;
-  }
-
+}
 
 .disabled{
     background-color: transparent;
@@ -44,4 +43,3 @@
   flex-direction: row;
   justify-content: space-around;
 }
-

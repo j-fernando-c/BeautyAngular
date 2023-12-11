@@ -12,8 +12,7 @@ export class FiltroPipeServicio implements PipeTransform {
       return servicios.slice(pages, pages + 7)
 
     const filtrarServicios = servicios.filter(es => 
-      es.nombre_servicio.toLowerCase().includes(serach) ||
-      es.estilista.nombre.toLowerCase().includes(serach)       
+      es.nombre_servicio.toLowerCase().includes(serach)       
       )
     return filtrarServicios.slice(pages, pages + 7)
 

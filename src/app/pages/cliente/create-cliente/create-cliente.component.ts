@@ -25,8 +25,10 @@ export class CreateClienteComponent implements OnInit {
     telefono: ['', [Validators.required,  Validators.pattern(/^\d{7,10}$/)]],
     direccion: ['', Validators.required],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
-    nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]], // expresion regular que No permite dígitos ni espacios
-    apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/)]], // No permite dígitos ni espacios
+    nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+(?: [A-Za-z]+)?$/), 
+    Validators.maxLength(20), Validators.minLength(3)]],
+    apellido: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+(?: [A-Za-z]+)?$/), 
+    Validators.maxLength(20), Validators.minLength(3)]],
   });
 
   ngOnInit(): void {

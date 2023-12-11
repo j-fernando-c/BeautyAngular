@@ -1,6 +1,5 @@
 
 import { Component } from '@angular/core';
-import { Cliente } from 'src/app/interfaces/cliente.interfaces';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { EstilistaService } from 'src/app/services/estilista.service';
 import { ServiciosService } from 'src/app/services/servicios.service';
@@ -16,6 +15,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class DashboardComponent {
 
   single: any[]=[]
+  citasPorDias:any[]=[]
   singleUusario:any[]=[];
   cantidadEstilistas:number=0;
   cantidadClientes:number=0;
@@ -31,8 +31,9 @@ export class DashboardComponent {
     private serviciosServices: ServiciosService,
     private usuarioService:UsuarioService){}
 
-  ngOnInit() {
-    this.estilistasService.getEstilistas().subscribe(estilistas => {
+    
+    ngOnInit() {
+      this.estilistasService.getEstilistas().subscribe(estilistas => {
       this.cantidadEstilistas = estilistas.length;
       
     });

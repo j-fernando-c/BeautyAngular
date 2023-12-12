@@ -102,9 +102,6 @@ export class ListEstilistaComponent implements OnInit {
     this.dataSource.filter = valor;
   }
 
-  buscarEstilista(nombre: string) {
-    this.search = nombre;
-  }
 
 
 

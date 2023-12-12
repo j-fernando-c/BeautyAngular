@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         // console.log('Usuario logeado:', response);
         const token = response.token;
         localStorage.setItem('token', token);
-        console.log('Token JWT:', token); // Agrega este log
+        // console.log('Token JWT:', token);
         Swal.fire('Éxito', 'Inicio de sesión exitoso', 'success');
         this.router.navigate(['/dashboard']);
       },

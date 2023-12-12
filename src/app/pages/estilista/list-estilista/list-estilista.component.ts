@@ -28,7 +28,7 @@ export class ListEstilistaComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   //Variable para buscar
-  serach: string = ''
+  search: string = ''
 
   subcripcion!: Subscription;
 
@@ -98,12 +98,12 @@ export class ListEstilistaComponent implements OnInit {
   }
 
   aplicarFiltro(valor: string): void {
-    this.serach = valor.trim().toLowerCase();
+    this.search = valor.trim().toLowerCase();
     this.dataSource.filter = valor;
   }
 
   buscarEstilista(nombre: string) {
-    this.serach = nombre;
+    this.search = nombre;
   }
 
 

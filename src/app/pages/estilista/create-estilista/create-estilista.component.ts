@@ -1,11 +1,10 @@
-import { Estilista } from './../../../interfaces/estilista.interfaces';
-
 import { EstilistaService } from 'src/app/services/estilista.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Estilista } from 'src/app/interfaces/estilista.interfaces';
 
 @Component({
   selector: 'app-create-estilista',
@@ -26,8 +25,10 @@ export class CreateEstilistaComponent implements OnInit {
   myForm: FormGroup = this.fb.group({
 
     telefono: ['', [Validators.required,  Validators.pattern(/^\d{7,10}$/)]],
-    nombre: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-    apellido: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
+    nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+(?: [A-Za-z]+)?$/),
+    Validators.maxLength(20), Validators.minLength(3)]],
+    apellido: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+(?: [A-Za-z]+)?$/),
+    Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],
 
@@ -37,9 +38,9 @@ export class CreateEstilistaComponent implements OnInit {
     return this.myForm.get('nombre');
   }
 
-  validarExtensionCom(control:any) {
+  validarExtensionCom(control: any) {
     const email = control.value;
-    if (email && !email.endsWith('.com')) {
+    if (email && !email.endsWith('.com') && !email.endsWith('.co')) {
       return { sinExtensionCom: true };
     }
     return null;
@@ -81,7 +82,7 @@ export class CreateEstilistaComponent implements OnInit {
     }
     if (this.myForm.invalid) {
 
-    }else{
+    } else {
       this.servicioEstilista.createEstilista(estilista).subscribe((res: Estilista) => {
         Swal.fire({
           icon: 'success',

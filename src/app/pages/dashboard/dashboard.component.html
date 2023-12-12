@@ -25,19 +25,24 @@
 </div>
 
 <div class="contenedor-barras">
-    <ngx-charts-bar-vertical
-    [view]="view"
-    [customColors]="colorScheme"
-    [results]="single"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showGridLines]="showGridLines"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    >
-</ngx-charts-bar-vertical>
+    <div class="contenedores">
+        <ngx-charts-bar-vertical [view]="view" [customColors]="colorScheme" [results]="single" [gradient]="gradient"
+            [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showGridLines]="showGridLines"
+            [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical>
+    </div>
+    <div class="contenedores">
+        <ngx-charts-bar-vertical [view]="view" [customColors]="colorScheme" [results]="singleUusario"
+            [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+            [showGridLines]="showGridLines" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel1" [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical>
+    </div>
+    <div class="contenedores">
+        <app-grafica3></app-grafica3>
+    </div>
 </div>
+
+
+

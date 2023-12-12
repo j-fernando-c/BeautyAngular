@@ -1,3 +1,4 @@
+import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { CreateEstilistaComponent } from './estilista/create-estilista/create-estilista.component';
@@ -22,6 +23,8 @@ import { CreateServicioComponent } from './servicio/create-servicio/create-servi
 import { CitaComponent } from './turno/cita/cita.component';
 import { CalendarioComponent } from './cita/calendario/calendario.component';
 import { AddCitaComponent } from './cita/add-cita/add-cita.component';
+import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
+import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 
 
 const routes: Routes = [
@@ -61,7 +64,14 @@ const routes: Routes = [
 
       //Ruta cita
       {path:'cita/list', component:CalendarioComponent},
-      {path:'cita/nuevo', component:AddCitaComponent}
+      {path:'cita/nuevo', component:AddCitaComponent},
+
+
+      //Ruta ventas
+      {path: 'venta/list', component:ListVentasComponent},
+      {path: 'venta/nuevo', component: AddVentasComponent},
+      {path: 'venta/detalle/:id', component:DetalleVentaComponent}
+
 
 
 

@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary btn-sm mb-4 " routerLink="/dashboard/venta/nuevo">Agregar venta</button>
+      <input type="text" class="barra mb-4" placeholder="Buscar ventas..." #buscar>
+    </div>
+    <div class="table-responsive sombra">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Clientes</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Medio de pago</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of ventas; let c =index  ">
+            <th scope="row">{{c+1}}</th>
+            <td>{{i.cliente.nombre | titlecase}} {{i.cliente.apellido | titlecase}}</td>
+            <td>{{i.servicio.nombre_servicio | titlecase}}</td>
+            <td>{{i.servicio.precio | currency:'COP':'symbol':'1.2-2'}}</td>
+            <td>{{i.metodoPago | titlecase}}</td>
+            <td>
+              <a id="link" (click)="cambioEstado(i._id)"
+                [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Pagado' : 'Pendiente'}}</a>
+            </td>
+            <td>
+              <a id="link" class="btn btn-warning btn-sm" routerLink="/dashboard/venta/detalle/{{i._id}}">Ver <i class="fa-solid fa-eye"></i></a>
+              <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarVenta(i._id)">
+                Eliminar <i class="fas fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

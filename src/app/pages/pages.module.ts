@@ -50,6 +50,11 @@ import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
+import { Grafica3Component } from './dashboard/grafica3/grafica3.component';
+import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
+import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
+import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
+
 
 
 
@@ -81,6 +86,12 @@ import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
     AddCitaComponent,
     CitaComponent,
     AddTurnoComponent,
+    Grafica3Component,
+    ListVentasComponent,
+    AddVentasComponent,
+    DetalleVentaComponent,
+
+    
 
   ],
   exports: [
@@ -108,7 +119,8 @@ import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
     CalendarModule,
     MatSelectModule,
     CdkAccordionModule,
-    NgxChartsModule
+    NgxChartsModule,
+
 
 
 

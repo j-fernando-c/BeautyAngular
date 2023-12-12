@@ -1,0 +1,44 @@
+<h1 class="titulo">Resumen de pago</h1>
+<div class="contenedor">
+    <div class="contenedor-principal">
+        <div class="card1 " *ngIf="venta">
+            <div class="box1">
+                <h1>Monto total:</h1>
+                <h2>{{venta.servicio.precio | currency:'COP':'symbol':'1.2-2'}}</h2>
+            </div>
+        </div>
+        <div class="card1" *ngIf="venta">
+            <div class="box2">
+                <h1>Nombre del servicio:</h1>
+                <h2>{{venta.servicio.nombre_servicio |titlecase}}</h2>
+            </div>
+        </div>
+        <div class="card3" *ngIf="venta">
+            <div class="box2">
+                <h1>Metodo de pago:</h1>
+                <h2>{{venta.metodoPago}}</h2>
+                <h1>Estado de la venta:</h1>
+                <a id="link" [ngClass]="{'estado':venta.estado, 'estado-cambiado':!venta.estado}">{{venta.estado ?
+                    'Pagada' : 'Pendiente'}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="contenedor-principal2">
+        <div class="card2" *ngIf="venta">
+            <div class="box3">
+                <h1>Nombre del cliente</h1>
+                <h2>{{venta.cliente.nombre | titlecase}} {{venta.cliente.apellido | titlecase}}</h2>
+                <h1>Email:</h1>
+                <h2>{{venta.cliente.email}}</h2>
+                <h1>Teléfono:</h1>
+                <h2>{{venta.cliente.telefono}}</h2>
+                <h1>Dirección</h1>
+                <h2>{{venta.cliente.direccion}}</h2>
+            </div>
+            <div class="botones">
+                <a id="link" class="btn btn-danger btn-sm" (click)="eliminarVenta()"> Eliminar</a>
+                <a id="link" class="btn btn-warning btn-sm" routerLink="/dashboard/venta/list">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

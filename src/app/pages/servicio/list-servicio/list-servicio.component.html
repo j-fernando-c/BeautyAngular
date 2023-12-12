@@ -1,51 +1,53 @@
-
 <div class="card">
   <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <button class="btn btn-primary btn-sm mb-4 " routerLink="/dashboard/servicio/nuevo">Agregar servicio</button>
-        <input type="text" class="barra mb-4" placeholder="Buscar servicio..." #buscar
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary btn-sm mb-4 " routerLink="/dashboard/servicio/nuevo">Agregar servicio</button>
+      <input type="text" class="barra mb-4" placeholder="Buscar servicio..." #buscar
         (keyup)="buscarEstilista(buscar.value)">
-      </div>
-      <div class="table-responsive sombra">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nombre servicio</th>
-              <th scope="col">Duración</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Estilista</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let i of servicio | filtroServicio:pages:serach; let c =index ">
-              <th scope="row">{{c+1}}</th>
-              <td>{{i.nombre_servicio | titlecase}}</td>
-              <td>{{i.duracion}}</td>
-              <td>{{i.precio | currency:'COP':'symbol':'1.2-2'}}</td>
-              <td>{{ i.estilista ? i.estilista.nombre : 'N/A' }}</td>
-              <td>
-                <a id="link" (click)="cambioEstado(i._id)"
+    </div>
+    <div class="table-responsive sombra">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre servicio</th>
+            <th scope="col">Duración</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Estilista</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of servicio | filtroServicio:pages:serach; let c =index ">
+            <th scope="row">{{c+1}}</th>
+            <td>{{i.nombre_servicio | titlecase}}</td>
+            <td>{{i.duracion}}</td>
+            <td>{{i.precio | currency:'COP':'symbol':'1.2-2'}}</td>
+            <td>
+              <ul>
+                <li *ngFor="let estilista of i.estilista">{{estilista.nombre}} {{estilista.apellido}}</li>
+              </ul>
+            </td>
+            <td>
+              <a id="link" (click)="cambioEstado(i._id)"
                 [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</a>
-              </td>
-              <td *ngIf="i.estado">
-                <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/servicio/edit/{{i._id}}">
-                  Editar <i class="fas fa-pencil-alt"></i>
-                </a>
-                <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarServicio(i._id)">
-                  Eliminar <i class="fas fa-trash-alt"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="contenedor-paginacion mt-3">
-        <button type="button" class="btn btn-primary btn-sm" (click)="anteriorPage()">Anterior</button>
-        <button type="button" class="btn btn-primary btn-sm ml-4" (click)="nextPage()">Siguiente</button>
-      </div>
+            </td>
+            <td *ngIf="i.estado">
+              <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/servicio/edit/{{i._id}}">
+                Editar <i class="fas fa-pencil-alt"></i>
+              </a>
+              <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarServicio(i._id)">
+                Eliminar <i class="fas fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="contenedor-paginacion mt-3">
+      <button type="button" class="btn btn-primary btn-sm" (click)="anteriorPage()">Anterior</button>
+      <button type="button" class="btn btn-primary btn-sm ml-4" (click)="nextPage()">Siguiente</button>
     </div>
   </div>
-
+</div>

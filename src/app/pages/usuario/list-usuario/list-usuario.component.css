@@ -42,7 +42,7 @@ th{
 }
 
 /* Reglas para el diseño responsivo */
-@media (max-width: 768px) {
+@media (max-width: 970px) {
   .table-responsive.sombra {
       overflow-x: auto;
   }

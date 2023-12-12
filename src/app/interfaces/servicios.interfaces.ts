@@ -1,17 +1,19 @@
 export interface Servicio {
     _id:             string;
     nombre_servicio: string;
-    duracion:        Date;
+    duracion:        string;
     precio:          number;
     estado:          boolean;
-    estilista:       Estilista;
+    estilista:       Estilista[];
+
 }
 
 export interface Estilista {
-    _id:      string;
-    nombre:   string;
-    apellido: string;
-    email:    string;
-    telefono: string;
-    estado:   boolean;
+    _id:       string;
+    nombre:    string;
+    apellido:  string;
+    email:     string;
+    telefono:  string;
+    estado:    boolean;
+
 }

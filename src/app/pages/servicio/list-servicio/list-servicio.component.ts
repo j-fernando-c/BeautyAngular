@@ -22,6 +22,7 @@ export class ListServicioComponent implements OnInit {
   ngOnInit(): void {
     this.servicioServices.getServicios().subscribe(res=>{
       this.servicio=res;
+
     })
 //Metódo que me permite refrescar
     this.subcripcion = this.servicioServices.refresh.subscribe(() => {

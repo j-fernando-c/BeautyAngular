@@ -1,8 +1,7 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { id } from '@swimlane/ngx-charts';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,8 +29,18 @@ export class ResetPasswordComponent implements OnInit {
 
 
   myForm: FormGroup = this.fb.group({
-    contrasena: ['', [Validators.required, Validators.minLength(6)]]
-  })
+    nueva: ['', [Validators.required, Validators.minLength(6)]],
+    contrasena: ['', [Validators.required, Validators.minLength(6)]],
+  }, { validators: this.validarContraseñas.bind(this) });
+
+  // ... (resto del código)
+
+  validarContraseñas(control: AbstractControl): ValidationErrors | null {
+    const password1 = control.get('nueva')?.value;
+    const password2 = control.get('contrasena')?.value;
+
+    return password1 !== password2 ? { contrasenasNoCoinciden: true } : null;
+  }
 
 
   onSave(body: any) {

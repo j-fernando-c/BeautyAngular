@@ -11,9 +11,9 @@
                     <span class="text-danger"
                         *ngIf="myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched ">
                         El nombre del servicio es requerido.
-                    </span>
+                    </span><br>
                     <span class="text-danger" *ngIf="myForm.get('nombre_servicio')?.hasError('pattern')">
-                        El nombre del servicio no debe contener números.
+                        El nombre del servicio no debe contener números ni caracteres especiales.
                     </span>
                 </div>
                 <div class="mb-3">
@@ -30,17 +30,17 @@
                     <input type="number" class="form-control" formControlName="precio" placeholder="Ingrese el precio"
                     [ngClass]="{'input-error':myForm.get('precio')?.invalid && myForm.get('precio')?.touched}">
                     <span class="text-danger" *ngIf="myForm.get('precio')?.invalid && myForm.get('precio')?.touched">
-                        El precio es requerido.
+                        El precio es requerido y debe ser válido.
                     </span>
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label required">Estilista</label>
-                    <select class="form-control"
-                        formControlName="estilista">
-                        <option value="">Selecione un estilista</option>
-                        <option [value]="estilistas._id" *ngFor="let estilistas of estilista">{{estilistas.nombre}}
-                            {{estilistas.apellido}}</option>
-                    </select>
+                  <mat-form-field class="form-control">
+                    <mat-label>Seleccione estilista</mat-label>
+                    <mat-select formControlName="estilista" multiple class="mat-select-lg"> 
+                        <mat-option *ngFor="let estilista of estilista" [value]="estilista._id">{{estilista.nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>  
                     <span class="text-danger"
                         *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
                         Por favor, seleccione una opción

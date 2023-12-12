@@ -58,7 +58,7 @@ export class ListUsuarioComponent implements OnInit {
 
   cambioEstado(id: string) {
     this.usuarioService.actulizarEstado(id).subscribe(res => {
-      console.log(res);
+      // console.log(res);
     });
   }
 

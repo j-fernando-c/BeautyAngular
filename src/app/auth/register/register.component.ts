@@ -19,8 +19,10 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   myForm: FormGroup = this.formBuilder.group({
-    nombre: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
-    apellido: ['', [Validators.required, Validators.pattern(/^[^\d]+$/)]],
+    nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
+    Validators.maxLength(20), Validators.minLength(3)]],
+    apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
+    Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],
     recontrasena: ['', [Validators.required,]],

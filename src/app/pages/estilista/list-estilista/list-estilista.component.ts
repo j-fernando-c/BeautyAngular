@@ -1,9 +1,12 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Estilista } from 'src/app/interfaces/estilista.interfaces';
 import { EstilistaService } from 'src/app/services/estilista.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 
 
@@ -18,6 +21,12 @@ export class ListEstilistaComponent implements OnInit {
   pages: number = 0;
   //Contiene los estilistas
   estilista: Estilista[] = []
+  dataSource = new MatTableDataSource<Estilista>();
+  displayedColumns: string[] = ['nombre', 'apellido', 'email', 'telefono', 'estado', 'acciones'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   //Variable para buscar
   serach: string = ''
 
@@ -32,12 +41,19 @@ export class ListEstilistaComponent implements OnInit {
   ngOnInit(): void {
     //Metódo para listar
     this.servicioEstilista.getEstilistas().subscribe(data => {
-      this.estilista = data
+      this.estilista = data;
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
+
     //Metódo para refrescar
     this.subcripcion = this.servicioEstilista.refresh.subscribe(() => {
       this.servicioEstilista.getEstilistas().subscribe(data => {
-        this.estilista = data
+        this.estilista = data;
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
     })
 
@@ -78,8 +94,12 @@ export class ListEstilistaComponent implements OnInit {
   anteriorPage() {
     if (this.pages > 0) {
       this.pages -= 7
-
     }
+  }
+
+  aplicarFiltro(valor: string): void {
+    this.serach = valor.trim().toLowerCase();
+    this.dataSource.filter = valor;
   }
 
   buscarEstilista(nombre: string) {

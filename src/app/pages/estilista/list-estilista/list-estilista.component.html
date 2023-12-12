@@ -1,52 +1,73 @@
-
 <div class="card">
   <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <button class="btn btn-primary btn-sm mb-4 " routerLink="/dashboard/estilista/nuevo">Agregar estilista</button>
-        <input type="text" class="barra mb-4" placeholder="Buscar estilista..." #buscar
-        (keyup)="buscarEstilista(buscar.value)">
-      </div>
-      <div class="table-responsive sombra">
-        <table  class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Apellido</th>
-              <th scope="col">Correo</th>
-              <th scope="col">Teléfono</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let i of estilista | filtro:pages:serach; let c =index ">
-              <th scope="row">{{c+1}}</th>
-              <td>{{i.nombre | titlecase}}</td>
-              <td>{{i.apellido | titlecase}}</td>
-              <td>{{i.email}}</td>
-              <td>{{i.telefono}}</td>
-              <td>
-                <a id="link" (click)="cambioEstado(i._id)"
-                [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Activo' : 'Inactivo'}}</a>
-              </td>
-              <td *ngIf="i.estado">
-                <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/estilista/edit/{{i._id}}">
-                  Editar <i class="fas fa-pencil-alt"></i>
-                </a>
-                <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarEstilista(i._id)">
-                  Eliminar <i class="fas fa-trash-alt"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="contenedor-paginacion mt-3">
-        <button type="button" class="btn btn-primary btn-sm" (click)="anteriorPage()">Anterior</button>
-        <button type="button" class="btn btn-primary btn-sm ml-4" (click)="nextPage()">Siguiente</button>
-      </div>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/estilista/nuevo">Agregar estilista</button>
+      <input type="text" class="barra mb-4" placeholder="Buscar estilista..." #buscar (keyup)="buscarEstilista(buscar.value)">
+    </div>
+    <div class="table-responsive sombra">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let estilista">{{ estilista.nombre | titlecase }}</td>
+        </ng-container>
+
+        <!-- Apellido Column -->
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+          <td mat-cell *matCellDef="let estilista">{{ estilista.apellido | titlecase }}</td>
+        </ng-container>
+
+        <!-- Correo Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+          <td mat-cell *matCellDef="let estilista">{{ estilista.email }}</td>
+        </ng-container>
+
+        <!-- Teléfono Column -->
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+          <td mat-cell *matCellDef="let estilista">{{ estilista.telefono }}</td>
+        </ng-container>
+
+        <!-- Estado Column -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let estilista">
+            <a id="link" (click)="cambioEstado(estilista._id)"
+              [ngClass]="{'estado': estilista.estado, 'estado-cambiado': !estilista.estado}">
+              {{ estilista.estado ? 'Activo' : 'Inactivo' }}
+            </a>
+          </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let estilista" [ngSwitch]="estilista.estado">
+            <ng-container *ngSwitchCase="true">
+              <!-- Contenido cuando el estilista está activo -->
+              <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/estilista/edit/{{ estilista._id }}">
+                Editar <i class="fas fa-pencil-alt"></i>
+              </a>
+              <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarEstilista(estilista._id)">
+                Eliminar <i class="fas fa-trash-alt"></i>
+              </a>
+            </ng-container>
+            <ng-container *ngSwitchCase="false">
+              <!-- Contenido cuando el estilista está inactivo -->
+              <!-- Puedes poner algo diferente o dejarlo vacío -->
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <!-- Define las filas de la tabla -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <!-- Agrega el paginador -->
+      <mat-paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
-
-  
+</div>

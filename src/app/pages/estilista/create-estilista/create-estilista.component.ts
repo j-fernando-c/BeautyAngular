@@ -25,9 +25,9 @@ export class CreateEstilistaComponent implements OnInit {
   myForm: FormGroup = this.fb.group({
 
     telefono: ['', [Validators.required,  Validators.pattern(/^\d{7,10}$/)]],
-    nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+(?: [A-Za-z]+)?$/),
+    nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
-    apellido: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+(?: [A-Za-z]+)?$/),
+    apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],

@@ -34,9 +34,9 @@ export class ListServicioComponent implements OnInit {
 //Metódo que me permite cambiar de estado
   cambioEstado(id:string){
     this.servicioServices.actualizarEstado(id).subscribe(res=>{
-      
+
     })
-  
+
 
   }
 //Metodo que me permite eliminar

@@ -6,16 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grafica3.component.css']
 })
 export class Grafica3Component implements OnInit {
-  citasPorDia: any[];
-  view: [number, number] = [500, 400];
+  citasPorDia: any[]=[];
+
   ngOnInit(): void {
-    this.citasPorDia=[
-      {
-        "dia": "lunes",
-        "cantidad": 19
-      }
-    ]
+    this.citasPorDia = [
+      { name: 'Lunes', value: 10 },
+      { name: 'Martes', value: 15 },
+      { name: 'Miércoles', value: 8 },
+      { name: 'Jueves', value: 20 },
+      { name: 'Viernes', value: 12 },
+    ];
   }
+
+
 
   // options
   showXAxis = true;
@@ -24,15 +27,13 @@ export class Grafica3Component implements OnInit {
   showLegend = true;
   showGridLines=false;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Citas por día';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Total';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#ffd9e1', '#ffd9e1', '#ffd9e1', '#ffd9e1']
   };
-
-  
 
 
 }

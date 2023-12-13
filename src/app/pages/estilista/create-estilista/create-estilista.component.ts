@@ -31,6 +31,7 @@ export class CreateEstilistaComponent implements OnInit {
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],
+    recontrasena: ['', Validators.required],
 
   });
 
@@ -40,7 +41,7 @@ export class CreateEstilistaComponent implements OnInit {
 
   validarExtensionCom(control: any) {
     const email = control.value;
-    if (email && !email.endsWith('.com') && !email.endsWith('.co')) {
+    if (email && !email.endsWith('.com') && !email.endsWith('.org') && !email.endsWith('.co') && !email.endsWith('.edu')) {
       return { sinExtensionCom: true };
     }
     return null;
@@ -54,7 +55,9 @@ export class CreateEstilistaComponent implements OnInit {
           nombre: res.nombre,
           apellido: res.apellido,
           email: res.email,
-          telefono: res.telefono
+          telefono: res.telefono,
+          contrasena:res.contrasena
+
         })
       })
     }
@@ -63,11 +66,15 @@ export class CreateEstilistaComponent implements OnInit {
 
   onSave(estilista: Estilista) {
     const contrasena = this.myForm.get('contrasena')?.value;
+    const recontrasena = this.myForm.get('recontrasena')?.value;
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;
     } else if (contrasena.length < 6) {
       Swal.fire('Error', 'La contraseña debe tener al menos 6 caracteres', 'error');
+      return;
+    }else if (contrasena !== recontrasena){
+      Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
       return;
     }else if (this.sExiste) {
       this.servicioEstilista.actualizarEstilista(this.id, estilista).subscribe((res: Estilista) => {
@@ -83,18 +90,26 @@ export class CreateEstilistaComponent implements OnInit {
     if (this.myForm.invalid) {
 
     } else {
-      this.servicioEstilista.createEstilista(estilista).subscribe((res: Estilista) => {
-        Swal.fire({
-          icon: 'success',
-          iconColor: '#745af2',
-          title: '¡Guardado!',
-          text: 'La información se ha guardado exitosamente.',
-        });
-
-        this.router.navigateByUrl("/dashboard/estilista/list")
-      },
-      )
-
+      this.servicioEstilista.createEstilista(estilista).subscribe({
+        next: (res) => {
+          Swal.fire({
+            icon: 'success',
+            iconColor: '#745af2',
+            title: '¡Guardado!',
+            text: 'La información se ha guardado exitosamente.',
+          });
+          this.router.navigateByUrl("/dashboard/estilista/list");
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            iconColor: '#f25252',
+            title: 'Error en la recuperación',
+            text: 'El correo ya existe',
+          });
+        }
+      });
+    }
     }
   }
-}
+

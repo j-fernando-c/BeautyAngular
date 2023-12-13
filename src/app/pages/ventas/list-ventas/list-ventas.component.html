@@ -1,42 +1,50 @@
 <div class="card">
   <div class="card-body">
     <div class="d-flex justify-content-between">
-      <button class="btn btn-primary btn-sm mb-4 " routerLink="/dashboard/venta/nuevo">Agregar venta</button>
-      <input type="text" class="barra mb-4" placeholder="Buscar ventas..." #buscar>
+      <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/venta/nuevo">Agregar venta</button>
+      <input type="text" class="barra mb-4" placeholder="Buscar ventas..." #buscar (keyup)="aplicarFiltro(buscar.value)">
     </div>
     <div class="table-responsive sombra">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Clientes</th>
-            <th scope="col">Servicio</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Medio de pago</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let i of ventas; let c =index  ">
-            <th scope="row">{{c+1}}</th>
-            <td>{{i.cliente.nombre | titlecase}} {{i.cliente.apellido | titlecase}}</td>
-            <td>{{i.servicio.nombre_servicio | titlecase}}</td>
-            <td>{{i.servicio.precio | currency:'COP':'symbol':'1.2-2'}}</td>
-            <td>{{i.metodoPago | titlecase}}</td>
-            <td>
-              <a id="link" (click)="cambioEstado(i._id)"
-                [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{i.estado ? 'Pagado' : 'Pendiente'}}</a>
-            </td>
-            <td>
-              <a id="link" class="btn btn-warning btn-sm" routerLink="/dashboard/venta/detalle/{{i._id}}">Ver <i class="fa-solid fa-eye"></i></a>
-              <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarVenta(i._id)">
-                Eliminar <i class="fas fa-trash-alt"></i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="clientes">
+          <th mat-header-cell *matHeaderCellDef>Clientes</th>
+          <td mat-cell *matCellDef="let i">{{ i.cliente.nombre | titlecase }} {{ i.cliente.apellido | titlecase }}</td>
+        </ng-container>
+        <ng-container matColumnDef="servicios">
+          <th mat-header-cell *matHeaderCellDef>Servicio</th>
+          <td mat-cell *matCellDef="let i">{{ i.servicio.nombre_servicio | titlecase }}</td>
+        </ng-container>
+        <ng-container matColumnDef="precio">
+          <th mat-header-cell *matHeaderCellDef>Precio</th>
+          <td mat-cell *matCellDef="let i">{{ i.servicio.precio | currency:'COP':'symbol':'1.2-2' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="medio-pago">
+          <th mat-header-cell *matHeaderCellDef>Medio de pago</th>
+          <td mat-cell *matCellDef="let i">{{ i.metodoPago | titlecase }}</td>
+        </ng-container>
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let i">
+            <a id="link" (click)="cambioEstado(i._id)"
+              [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">{{ i.estado ? 'Pagado' : 'Pendiente' }}</a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let i">
+            <a id="link" class="btn btn-warning btn-sm" routerLink="/dashboard/venta/detalle/{{ i._id }}">Ver <i class="fa-solid fa-eye"></i></a>
+            <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarVenta(i._id)">
+              Eliminar <i class="fas fa-trash-alt"></i>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+    </div>
+    <mat-paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons></mat-paginator>
+    <div class="contenedor-paginacion mt-3">
     </div>
   </div>
 </div>

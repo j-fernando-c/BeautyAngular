@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Servicio } from 'src/app/interfaces/servicios.interfaces';
 import { ServiciosService } from 'src/app/services/servicios.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,23 +14,36 @@ import Swal from 'sweetalert2';
 })
 export class ListServicioComponent implements OnInit {
     //Variable para buscar
-  serach: string = ''
+    search: string = ''
   pages: number = 0;
   servicio:Servicio[]=[];
+
+  dataSource = new MatTableDataSource<Servicio>();
+  displayedColumns: string[] = [ 'nombre-servicio', 'duracion', 'precio', 'estilista-nombre', 'estado', 'acciones'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   subcripcion!: Subscription;
 
   estado:boolean=true;
-  textoEstado:string='Activo'
+  textoEstado:string='Activo';
+
   constructor(private servicioServices:ServiciosService){}
   ngOnInit(): void {
-    this.servicioServices.getServicios().subscribe(res=>{
-      this.servicio=res;
+    this.servicioServices.getServicios().subscribe(data=>{
+      this.servicio=data;
+      this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
 
     })
 //Metódo que me permite refrescar
     this.subcripcion = this.servicioServices.refresh.subscribe(() => {
       this.servicioServices.getServicios().subscribe(data => {
-        this.servicio = data
+        this.servicio = data;
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
     })
   }
@@ -70,8 +86,8 @@ export class ListServicioComponent implements OnInit {
     }
   }
 
-  buscarEstilista(nombre: string) {
-    this.serach = nombre;
+  aplicarFiltro(valor: string): void {
+    this.search = valor.trim().toLowerCase();
+    this.dataSource.filter = valor;
   }
-
 }

@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 
   validarExtensionCom(control:any) {
     const email = control.value;
-    if (email && !email.endsWith('.com')) {
+    if (email && !email.endsWith('.com') && !email.endsWith('.org') && !email.endsWith('.co') && !email.endsWith('.edu')) {
       return { sinExtensionCom: true };
     }
     return null;

@@ -1,9 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Subscription, from } from 'rxjs';
 import { Ventas } from 'src/app/interfaces/ventas.interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { VentasService } from 'src/app/services/ventas.service';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,6 +14,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-ventas.component.css']
 })
 export class ListVentasComponent implements OnInit {
+
+  pages: number = 0;
+
+  // Contiene los usuarios
+  dataSource = new MatTableDataSource<Ventas>();
+  displayedColumns: string[] = [ 'clientes', 'servicios', 'precio', 'medio-pago', 'estado', 'acciones'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+    // Variable para buscar
+    search: string = '';
+
   modalSwith: boolean = false;
   ventas: Ventas[] = []
   subcripcion!: Subscription;
@@ -21,12 +36,18 @@ export class ListVentasComponent implements OnInit {
 
   ngOnInit(): void {
     this.ventasService.getVentas().subscribe(data => {
-      this.ventas = data
+      this.ventas = data;
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
     //Metódo para refrescar
     this.subcripcion = this.ventasService.refresh.subscribe(() => {
       this.ventasService.getVentas().subscribe(data => {
-        this.ventas = data
+        this.ventas = data;
+        this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       });
     })
   }
@@ -55,6 +76,23 @@ export class ListVentasComponent implements OnInit {
     })
 
   }
+
+    // Métodos para la paginación
+    nextPage() {
+      this.pages += 7;
+    }
+
+    // Métodos para la paginación
+    anteriorPage() {
+      if (this.pages > 0) {
+        this.pages -= 7;
+      }
+    }
+
+    aplicarFiltro(valor: string): void {
+      this.search = valor.trim().toLowerCase();
+      this.dataSource.filter = valor;
+    }
 
 }
 

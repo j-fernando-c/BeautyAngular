@@ -53,7 +53,7 @@
           </a>
         </li>
 
-        <li *ngIf="canAccessModule('admin') || canAccessModule('estilista')">
+        <li *ngIf="canAccessModule('admin')">
           <a routerLink="/dashboard/cliente/list" routerLinkActive="active" aria-expanded="false">
             <i class="fa-solid fa-users"></i>
             <span class="hide-menu">CLIENTES</span>
@@ -70,7 +70,7 @@
 
         <li class="nav-small-cap">GESTIÓN</li>
 
-        <li>
+        <li *ngIf="canAccessModule('admin')">
           <a routerLink="/dashboard/venta/list" routerLinkActive="active" aria-expanded="false">
             <i class="fa-solid fa-cart-shopping"></i><span class="hide-menu">VENTAS</span>
           </a>

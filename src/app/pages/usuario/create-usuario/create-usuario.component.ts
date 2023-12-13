@@ -32,6 +32,7 @@ export class CreateUsuarioComponent implements OnInit {
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],
+    recontrasena: ['', Validators.required],
     roles: ['', Validators.required]
   });
 
@@ -61,6 +62,7 @@ export class CreateUsuarioComponent implements OnInit {
             nombre: res.nombre,
             apellido: res.apellido,
             email: res.email,
+            contrasena: res.contrasena,
             roles: res.roles.map(role => ({ _id: role._id, nombre: role.nombre }))
           });
         }
@@ -74,11 +76,16 @@ export class CreateUsuarioComponent implements OnInit {
       usuario.roles = [{ _id: usuario.roles, nombre: usuario.roles }];
     }
     const contrasena = this.myForm.get('contrasena')?.value;
+    const recontrasena = this.myForm.get('recontrasena')?.value;
+
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;
     } else if (contrasena.length < 6) {
       Swal.fire('Error', 'La contraseña debe tener al menos 6 caracteres', 'error');
+      return;
+    }else if (contrasena !== recontrasena){
+      Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
       return;
     } else if (this.sExiste) {
       this.usuarioService.actualizarUsuario(this.id, usuario).subscribe((res: Usuario) => {
@@ -91,15 +98,26 @@ export class CreateUsuarioComponent implements OnInit {
         this.router.navigateByUrl("/dashboard/usuarios/list");
       });
     } else {
-      this.usuarioService.createUsuario(usuario).subscribe((res: Usuario) => {
-        Swal.fire({
-          icon: 'success',
-          iconColor: '#745af2',
-          title: '¡Guardado!',
-          text: 'La información se ha guardado exitosamente.',
-        });
-        this.router.navigateByUrl("/dashboard/usuarios/list");
+      this.usuarioService.createUsuario(usuario).subscribe({
+        next: (res) => {
+          Swal.fire({
+            icon: 'success',
+            iconColor: '#745af2',
+            title: '¡Guardado!',
+            text: 'La información se ha guardado exitosamente.',
+          });
+          this.router.navigateByUrl("/dashboard/usuarios/list");
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            iconColor: '#f25252',
+            title: 'Error en la recuperación',
+            text: 'El correo ya existe',
+          });
+        }
       });
     }
+    }
   }
-}
+

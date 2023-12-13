@@ -31,6 +31,7 @@ export class CreateClienteComponent implements OnInit {
     Validators.maxLength(20), Validators.minLength(3)]],
   });
 
+
   ngOnInit(): void {
     this.id = this.routes.snapshot.params['id']
     if (this.id) {
@@ -48,6 +49,21 @@ export class CreateClienteComponent implements OnInit {
   }
 
   onSave(cliente: Cliente) {
+
+    const contrasena = this.myForm.get('contrasena')?.value;
+    const recontrasena = this.myForm.get('recontrasena')?.value;
+
+    if (!this.myForm.valid) {
+      Swal.fire('Error', 'Complete el formulario correctamente', 'error');
+      return;
+    } else if (contrasena.length < 6) {
+      Swal.fire('Error', 'La contraseña debe tener al menos 6 caracteres', 'error');
+      return;
+    } else if (contrasena !== recontrasena) {
+      Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
+      return;
+    }
+
     if (this.sExiste) {
       this.clienteServicio.actualizarCliente(this.id, cliente).subscribe((res: Cliente) => {
         Swal.fire({
@@ -76,7 +92,7 @@ export class CreateClienteComponent implements OnInit {
   // Función de validación personalizada para verificar la extensión .com en el correo electrónico
   validarExtensionCom(control:any) {
     const email = control.value;
-    if (email && !email.endsWith('.com')&& !email.endsWith('.co')) {
+    if (email && !email.endsWith('.com') && !email.endsWith('.org') && !email.endsWith('.co') && !email.endsWith('.edu')) {
       return { sinExtensionCom: true };
     }
     return null;

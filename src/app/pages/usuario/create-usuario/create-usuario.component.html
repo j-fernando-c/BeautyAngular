@@ -18,7 +18,7 @@
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Apellido</label>
             <input type="text" class="form-control" formControlName="apellido" placeholder="Ingrese apellido"
-              [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched, 
+              [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched,
               'input-pattern-error': myForm.get('apellido')?.hasError('pattern') }">
             <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
               El apellido es requerido
@@ -31,7 +31,7 @@
         <div class="mb-3">
           <label for="" class="form-label required">Email </label>
           <input type="email" class="form-control" formControlName="email" placeholder="Ingrese correo electrónico"
-            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched, 
+            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched,
             'input-pattern-error': myForm.get('email')?.hasError('pattern') }">
           <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
             El email es requerido.
@@ -42,17 +42,21 @@
           </span>
         </div>
         <div class="mb-3">
-          <label for="" class="form-label required">contraseña</label>
-          <input type="text" class="form-control" formControlName="contrasena" placeholder="Ingrese la contraseña"
-            [ngClass]="{'input-error':myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched,
-            'input-pattern-error': myForm.get('contrasena')?.hasError('pattern') }">
+        <div class="form-group ">
+          <label for="" class="form-label">Ingrese su contraseña: </label>
+          <input class="form-control input" type="password" formControlName="contrasena" >
           <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
-            La contraseña es requerida
-            <br>
-            <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('pattern')">
-            La contraseña debe de tener al menos 6 digitos
+              La contraseña es requerida
             </span>
-          </span>
+        </div>
+
+          <div class="form-group">
+            <label for="" class="form-label">Confirme su contraseña: </label>
+            <input class="form-control input" type="password" formControlName="recontrasena" >
+            <span class="text-danger" *ngIf="myForm.get('recontrasena')?.invalid && myForm.get('recontrasena')?.touched">
+                La confirmación de contraseña es requerida
+              </span>
+          </div>
         </div>
           <div class="mb-3">
             <label for="" class="form-label required">Rol</label>

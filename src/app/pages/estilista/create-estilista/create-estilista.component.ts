@@ -63,7 +63,6 @@ export class CreateEstilistaComponent implements OnInit {
     }
   }
 
-
   onSave(estilista: Estilista) {
     const contrasena = this.myForm.get('contrasena')?.value;
     const recontrasena = this.myForm.get('recontrasena')?.value;

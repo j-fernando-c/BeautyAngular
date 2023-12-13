@@ -66,6 +66,15 @@ export class CreateEstilistaComponent implements OnInit {
   onSave(estilista: Estilista) {
     const contrasena = this.myForm.get('contrasena')?.value;
     const recontrasena = this.myForm.get('recontrasena')?.value;
+
+    if (contrasena && contrasena.length < 6) {
+      Swal.fire('Error', 'La nueva contraseña debe tener al menos 6 caracteres', 'error');
+      return;
+    }
+
+    // Actualizar usuario y/o contraseña
+    const body = { ...estilista, contrasena: contrasena || contrasena };
+
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;

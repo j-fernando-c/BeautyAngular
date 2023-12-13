@@ -60,4 +60,10 @@ export class EstilistaService {
 
       )
   }
+
+
+  actualizarContraseña(id: string, contrasena: string): Observable<any> {
+    const body = { contrasena };
+    return this.http.put(`${this.url}${id}/actualizar-contrasena`, body);
+  }
 }

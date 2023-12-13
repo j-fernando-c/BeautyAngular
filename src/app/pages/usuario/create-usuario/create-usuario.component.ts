@@ -62,7 +62,6 @@ export class CreateUsuarioComponent implements OnInit {
             nombre: res.nombre,
             apellido: res.apellido,
             email: res.email,
-            contrasena: res.contrasena,
             roles: res.roles.map(role => ({ _id: role._id, nombre: role.nombre }))
           });
         }
@@ -78,17 +77,26 @@ export class CreateUsuarioComponent implements OnInit {
     const contrasena = this.myForm.get('contrasena')?.value;
     const recontrasena = this.myForm.get('recontrasena')?.value;
 
+    if (contrasena && contrasena.length < 6) {
+      Swal.fire('Error', 'La nueva contraseña debe tener al menos 6 caracteres', 'error');
+      return;
+    }
+
+    // Actualizar usuario y/o contraseña
+    const body = { ...usuario, contrasena: contrasena || contrasena };
+
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;
     } else if (contrasena.length < 6) {
       Swal.fire('Error', 'La contraseña debe tener al menos 6 caracteres', 'error');
       return;
-    }else if (contrasena !== recontrasena){
+    } else if (contrasena !== recontrasena) {
       Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
       return;
     } else if (this.sExiste) {
-      this.usuarioService.actualizarUsuario(this.id, usuario).subscribe((res: Usuario) => {
+
+      this.usuarioService.actualizarUsuario(this.id, body).subscribe((res: Usuario) => {
         Swal.fire({
           icon: 'success',
           iconColor: '#745af2',
@@ -118,6 +126,5 @@ export class CreateUsuarioComponent implements OnInit {
         }
       });
     }
-    }
   }
-
+}

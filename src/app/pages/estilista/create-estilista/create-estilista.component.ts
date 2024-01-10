@@ -94,9 +94,6 @@ export class CreateEstilistaComponent implements OnInit {
         });
         this.router.navigateByUrl("/dashboard/estilista/list")
       })
-    }
-    if (this.myForm.invalid) {
-
     } else {
       this.servicioEstilista.createEstilista(estilista).subscribe({
         next: (res) => {

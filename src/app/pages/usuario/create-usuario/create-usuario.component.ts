@@ -62,7 +62,8 @@ export class CreateUsuarioComponent implements OnInit {
             nombre: res.nombre,
             apellido: res.apellido,
             email: res.email,
-            roles: res.roles.map(role => ({ _id: role._id, nombre: role.nombre }))
+            roles: res.roles.map(role => ({ _id: role._id, nombre: role.nombre })),
+            contrasena: res.contrasena
           });
         }
       });

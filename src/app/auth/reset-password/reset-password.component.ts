@@ -46,6 +46,7 @@ export class ResetPasswordComponent implements OnInit {
   onSave(body: any) {
     this.auth.enviarNuevaContrasena(this.id, this.token, body).subscribe({
       next: (res) => {
+        console.log(res);
         Swal.fire({
           icon: 'success',
           iconColor: '#4caf50',

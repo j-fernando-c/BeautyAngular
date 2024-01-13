@@ -53,7 +53,8 @@ export class EditUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.rolesService.getRoles().subscribe(data => {
-      this.roles = data;
+      this.roles = data.filter(role => role.nombre !== 'estilista');
+      console.log('Roles:', this.roles);
     });
 
     this.id = this.route.snapshot.params['id'];

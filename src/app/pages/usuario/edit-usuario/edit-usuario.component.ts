@@ -6,14 +6,15 @@ import { RolesService } from 'src/app/services/roles.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-create-usuario',
-  templateUrl: './create-usuario.component.html',
-  styleUrls: ['./create-usuario.component.css']
+  selector: 'app-edit-usuario',
+  templateUrl: './edit-usuario.component.html',
+  styleUrls: ['./edit-usuario.component.css']
 })
-export class CreateUsuarioComponent implements OnInit {
+export class EditUsuarioComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
@@ -22,6 +23,7 @@ export class CreateUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { }
+
 
   roles: Role[] = [];
   id!: string;
@@ -32,8 +34,6 @@ export class CreateUsuarioComponent implements OnInit {
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
-    contrasena: ['', Validators.required],
-    recontrasena: ['', Validators.required],
     roles: [[], Validators.required]
   });
 
@@ -49,9 +49,12 @@ export class CreateUsuarioComponent implements OnInit {
     return null;
   }
 
+  selectedRole: string | null = null;
+
   ngOnInit(): void {
     this.rolesService.getRoles().subscribe(data => {
       this.roles = data.filter(role => role.nombre !== 'estilista');
+      console.log('Roles:', this.roles);
     });
 
     this.id = this.route.snapshot.params['id'];
@@ -59,12 +62,13 @@ export class CreateUsuarioComponent implements OnInit {
       this.sExiste = true;
       this.usuarioService.getOneUsuario(this.id).subscribe((res: Usuario | null) => {
         if (res) {
+          const roleId = res.roles.length > 0 ? res.roles[0]._id : null;
+          this.selectedRole = roleId;
           this.myForm.patchValue({
             nombre: res.nombre,
             apellido: res.apellido,
             email: res.email,
-            roles: res.roles.map(role => ({ _id: role._id, nombre: role.nombre })),
-            contrasena: res.contrasena
+            roles: roleId,
           });
         }
       });
@@ -76,46 +80,24 @@ export class CreateUsuarioComponent implements OnInit {
     if (typeof usuario.roles === 'string') {
       usuario.roles = [{ _id: usuario.roles, nombre: usuario.roles }];
     }
-    const contrasena = this.myForm.get('contrasena')?.value;
-    const recontrasena = this.myForm.get('recontrasena')?.value;
 
-    if (contrasena && contrasena.length < 6) {
-      Swal.fire('Error', 'La nueva contraseña debe tener al menos 6 caracteres', 'error');
-      return;
-    }
 
     // Actualizar usuario y/o contraseña
-    const body = { ...usuario, roles: usuario.roles.map(role => role.nombre), contrasena: contrasena || contrasena };
-    console.log('Body antes de enviar:', JSON.stringify(body));
+    const body = { ...usuario };
 
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;
-    } else if (contrasena.length < 6) {
-      Swal.fire('Error', 'La contraseña debe tener al menos 6 caracteres', 'error');
-      return;
-    } else if (contrasena !== recontrasena) {
-      Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
-      return;
-    } else {
-      this.usuarioService.createUsuario(usuario).subscribe({
-        next: (res) => {
-          Swal.fire({
-            icon: 'success',
-            iconColor: '#745af2',
-            title: '¡Guardado!',
-            text: 'La información se ha guardado exitosamente.',
-          });
-          this.router.navigateByUrl("/dashboard/usuarios/list");
-        },
-        error: (error) => {
-          Swal.fire({
-            icon: 'error',
-            iconColor: '#f25252',
-            title: 'Error en la recuperación',
-            text: 'El correo ya existe',
-          });
-        }
+    } else if (this.sExiste) {
+
+      this.usuarioService.actualizarUsuario(this.id, body).subscribe((res: Usuario) => {
+        Swal.fire({
+          icon: 'success',
+          iconColor: '#745af2',
+          title: '¡Actualizado!',
+          text: 'La información se ha actualizado exitosamente.',
+        });
+        this.router.navigateByUrl("/dashboard/usuarios/list");
       });
     }
   }

@@ -22,6 +22,7 @@ export class UsuarioService {
   }
 
   createUsuario(body: Usuario): Observable<Usuario> {
+    console.log('Body antes de enviar:', body);
     return this.http.post<Usuario>(this.apiUrl, body)
       .pipe(
         tap(() => {

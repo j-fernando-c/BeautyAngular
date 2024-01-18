@@ -15,6 +15,8 @@ import { ListClienteComponent } from './cliente/list-cliente/list-cliente.compon
 
 import { ListUsuarioComponent } from './usuario/list-usuario/list-usuario.component';
 import { CreateUsuarioComponent } from './usuario/create-usuario/create-usuario.component';
+import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.component';
+
 import { RolesComponent } from './roles/roles.component';
 import { ConfigComponent } from './config/config.component';
 
@@ -49,7 +51,7 @@ const routes: Routes = [
       //Rutas para Usuario
       {path: 'usuarios/list', component:ListUsuarioComponent, },
       {path: 'usuarios/nuevo', component:CreateUsuarioComponent, },
-      {path: 'usuarios/edit/:id', component:CreateUsuarioComponent, },
+      {path: 'usuarios/edit/:id', component:EditUsuarioComponent, },
       //Rutas para Roles
       {path: 'roles/list', component:RolesComponent},
       {path: 'config', component:ConfigComponent},

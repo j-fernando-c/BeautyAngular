@@ -1,0 +1,46 @@
+.sombra{
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1),
+              -4px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.required::after{
+  content: ' * ';
+  color: rgb(255, 73, 73);
+
+}
+
+.input-error{
+  border: 1px solid red;
+}
+
+.input-pattern-error{
+  border: 1px solid red;
+}
+
+.disabled{
+  background-color: transparent;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  text-align: center;
+  cursor: pointer;
+}
+.activo{
+  background-color: rgba(116, 90, 242);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+
+
+.botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

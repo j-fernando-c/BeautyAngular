@@ -21,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NopagefoundComponent,
     ]
     ,
-  
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
+
   ],
   providers:  [AuthGuard],
   bootstrap: [AppComponent]

@@ -54,6 +54,9 @@ import { Grafica3Component } from './dashboard/grafica3/grafica3.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
+import { NgxMaterialTimepickerModule, NgxTimepickerFieldComponent } from 'ngx-material-timepicker';
+import { NgxMaterialTimepicker12HoursFaceComponent } from 'ngx-material-timepicker/src/app/material-timepicker/components/timepicker-12-hours-face/ngx-material-timepicker-12-hours-face.component';
+import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
 
 
 
@@ -90,6 +93,7 @@ import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.comp
     ListVentasComponent,
     AddVentasComponent,
     DetalleVentaComponent,
+    EditTurnoComponent,
 
     
 
@@ -120,6 +124,7 @@ import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.comp
     MatSelectModule,
     CdkAccordionModule,
     NgxChartsModule,
+    NgxMaterialTimepickerModule
 
 
 

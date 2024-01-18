@@ -72,7 +72,7 @@ export class CreateServicioComponent implements OnInit {
           icon: 'success',
           iconColor: 'success',
           title: '¡Guardado!',
-          text: 'La información se ha actualizado exitosamente.',
+          text: 'La información se ha guardado exitosamente.',
         });
         console.log(res)
         this.router.navigateByUrl("/dashboard/servicio/list")

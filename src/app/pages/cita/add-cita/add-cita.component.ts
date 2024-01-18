@@ -1,8 +1,12 @@
+import { Cliente } from './../../../interfaces/ventas.interfaces';
 import { EstilistaService } from './../../../services/estilista.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Estilista } from 'src/app/interfaces/estilista.interfaces';
+import { Servicio } from 'src/app/interfaces/servicios.interfaces';
 import { ITurnos } from 'src/app/interfaces/turnos.interfaces';
+import { ClienteService } from 'src/app/services/cliente.service';
+import { ServiciosService } from 'src/app/services/servicios.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 
 @Component({
@@ -11,16 +15,28 @@ import { TurnosService } from 'src/app/services/turnos.service';
   styleUrls: ['./add-cita.component.css']
 })
 export class AddCitaComponent implements OnInit {
-  estilista:Estilista[];
+  estilista:Estilista[]=[];
+  servicio:Servicio[]=[];
+  cliente:Cliente[]=[];
 
   constructor(
     private fb:FormBuilder, 
     private estilistaService:EstilistaService,
-    private turnosService:TurnosService){}
+    private turnosService:TurnosService,
+    private clienteService:ClienteService,
+    private servicioService:ServiciosService){}
   ngOnInit(): void {
     this.estilistaService.getEstilistas().subscribe(data => {
-      console.log(this.estilista = data)
+      this.estilista=data.filter(estilista=>estilista.estado==true);
       
+    })
+
+    this.servicioService.getServicios().subscribe(res=>{
+      this.servicio=res.filter(servicio=>servicio.estado==true);
+    })
+
+    this.clienteService.getCliente().subscribe(res=>{
+      this.cliente=res.filter(cliente=>cliente.estado==true);
     })
   }
     myForm :FormGroup=this.fb.group({

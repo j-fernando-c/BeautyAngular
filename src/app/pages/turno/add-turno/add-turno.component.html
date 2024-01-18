@@ -1,37 +1,59 @@
-<cdk-accordion class="example-accordion">
-
-    <cdk-accordion-item *ngFor="let item of items; let index=index" #accordionItem="cdkAccordionItem"
-        class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
-        [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
-        <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-            {{ item }}
-            <span class="example-accordion-item-description">
-                Click to {{ accordionItem.expanded ? 'close' : 'open' }}
-            </span>
+<div class="container mt-5">
+  <div class="card sombra">
+    <div class="card-body">
+      <form [formGroup]="myForm" method="post">
+        <div class="mb-3">
+          <label for="" class="form-label required">Estilista</label>
+          <select class="form-control" formControlName="estilista">
+            <option value="">Seleccione un estilista</option>
+            <option [value]="estilista._id" *ngFor="let estilista of Estilista">{{estilista.nombre}}
+              {{estilista.apellido}}</option>
+          </select>
+          <span class="text-danger" *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
+            Por favor, seleccione un estilista.
+          </span>
         </div>
-        <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
-            [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
-            
-            <form [formGroup]="myForm" (ngSubmit)="onSave(myForm.value)" method="post">
-                <div class="form-row">
-                    <div class="mb-3">
-                        <label class="form-label">Titulo: </label>
-                        <input type="text" class="form-control" placeholder="Ingrese titulo al evento" formControlName="title">
-
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Hora inicio:</label>
-                        <p-calendar inputStyleClass="form-control" [showTime]="true" [showSeconds]="true"
-                            formControlName="start"></p-calendar>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Hora fin: </label>
-                        <p-calendar [showTime]="true" [showSeconds]="true" formControlName="end"></p-calendar>
-                    </div>
-                </div>
-                <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
-                    [disabled]="myForm.invalid">Guardar</button>
-            </form>
+        <div class="mb-3">
+          <label for="" class="form-label required">Día</label>
+          <select class="form-control" formControlName="dia">
+            <option value="">Seleccione un día</option>
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sabádo</option>
+            <option value="domingo">Domingo</option>
+          </select>
+          <span class="text-danger" *ngIf="myForm.get('dia')?.invalid && myForm.get('dia')?.touched">
+            Por favor, seleccione un día.
+          </span>
         </div>
-    </cdk-accordion-item>
-</cdk-accordion>
+        <div class="mb-3">
+          <label for="" class="form-label required">Turno mañana</label>
+          <input class="form-control" formControlName="inicioM" [ngxTimepicker]="picker">
+          <ngx-material-timepicker #picker ></ngx-material-timepicker>
+        </div>
+        <div class="mb-3">
+          <input class="form-control" formControlName="finM" [ngxTimepicker]="picker2">
+          <ngx-material-timepicker #picker2></ngx-material-timepicker>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label required">Turno tarde</label>
+          <input class="form-control" formControlName="inicioT" [ngxTimepicker]="picker3">
+          <ngx-material-timepicker #picker3></ngx-material-timepicker>
+
+        </div>
+        <div class="mb-3">
+          <input class="form-control" formControlName="finT" [ngxTimepicker]="picker4">
+          <ngx-material-timepicker #picker4></ngx-material-timepicker>
+        </div>
+        <div class="botones">
+          <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
+            (click)="onSave(myForm.value)">Guardar</button>
+          <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/turno/list">Atrás</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,56 @@
-<button class="btn btn-primary" routerLink="/dashboard/turno/nuevo">Agregar turnos</button>
+<div class="card">
+  <div class="card-body">
+    <div class="container">
+      <button class="btn btn-primary" routerLink="/dashboard/turno/nuevo">Agregar turno</button>
+      <select class="" name="" id="" (change)="onEstilistaChange($event)" [(ngModel)]="estilistaSeleccionado">
+        <option value="">selecciona un estilista</option>
+        <option [value]="estilista._id" *ngFor="let estilista of Estilistas">{{estilista.nombre | titlecase}} {{estilista.apellido | titlecase}}
+        </option>
+      </select>
 
+    </div>
+    <div class="table-responsive sombra">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Día</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Turno mañana</th>
+            <th scope="col">Turno tarde</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let turno of turnos">
+            <td>{{ turno.dia | titlecase }}</td>
+            <td>
+              <a id="link" (click)="cambioEstado(turno._id)"
+              [ngClass]="{'estado':turno.estado, 'estado-cambiado':!turno.estado}">
+                {{ turno.estado ? 'Activo' : 'Inactivo' }}
+              </a>
+            </td>  
+            
+            <td *ngIf="turno.estado">
+              <input class=""[value]="turno.inicioM | date:'h:mm a'" readonly>
+     
 
-<full-calendar #calendar  [options]="calendarOptions"></full-calendar>
+              <input class=""[value]="(turno.finM | date:'h:mm a') ?? ''" readonly>
+
+            </td>
+
+            <td *ngIf="turno.estado">
+              <input class=""[value]="turno.inicioT | date:'h:mm a'" readonly>
+     
+
+              <input class=""[value]="(turno.finT | date:'h:mm a') ?? ''" readonly>
+            </td>
+            <td>
+              <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/turno/edit/{{turno._id}}">
+                Editar <i class="fas fa-pencil-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

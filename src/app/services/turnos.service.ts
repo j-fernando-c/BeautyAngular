@@ -15,7 +15,7 @@ export class TurnosService {
   private url3 ="http://localhost:5000/api/turnos/edit/"
   private url4 ="http://localhost:5000/api/turnos/"
 
-  
+
 
 
 
@@ -27,7 +27,7 @@ export class TurnosService {
       })
     );
   }
-  
+
 
   createTurnos(body:ITurnos):Observable<ITurnos>{
     return this.http.post<ITurnos>(this.url, body)
@@ -40,22 +40,17 @@ export class TurnosService {
         this.refresh$.next();
       })
 
-<<<<<<< HEAD
-
-
-=======
       )
   }
 
   actualizarTurno(id:string, body:ITurnos):Observable<ITurnos>{
     return this.http.put<ITurnos>(this.url4 + id, body);
   }
-  
+
   getOneTurno(id:string):Observable<ITurnos>{
     return this.http.get<ITurnos>(this.url3 + id)
   }
-  
->>>>>>> ba38569c4a8e012c092edc1f11bd485a290371db
+
 
 
 }

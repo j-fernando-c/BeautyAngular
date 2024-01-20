@@ -15,6 +15,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
+
 import { NgChartsModule } from 'ng2-charts';
 
 //modulos
@@ -59,15 +60,12 @@ import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component'
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.component';
-<<<<<<< HEAD
-import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
-import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
-import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
-=======
 import { NgxMaterialTimepickerModule, NgxTimepickerFieldComponent } from 'ngx-material-timepicker';
 import { NgxMaterialTimepicker12HoursFaceComponent } from 'ngx-material-timepicker/src/app/material-timepicker/components/timepicker-12-hours-face/ngx-material-timepicker-12-hours-face.component';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
->>>>>>> ba38569c4a8e012c092edc1f11bd485a290371db
+import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
+import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
+import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
 
 
 
@@ -105,13 +103,10 @@ import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
     AddVentasComponent,
     DetalleVentaComponent,
     EditUsuarioComponent,
-<<<<<<< HEAD
-    CalendarioAgendaComponent,
-    DetalleCitaComponent,
-    AgregarCitaComponent,
-=======
     EditTurnoComponent,
->>>>>>> ba38569c4a8e012c092edc1f11bd485a290371db
+    AgregarCitaComponent,
+    DetalleCitaComponent,
+    CalendarioAgendaComponent
 
 
 

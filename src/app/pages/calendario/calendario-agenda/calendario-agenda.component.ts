@@ -8,8 +8,8 @@ import esLocale from '@fullcalendar/core/locales/es';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Citas } from 'src/app/interfaces/citas';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Router } from '@angular/router';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 
 @Component({

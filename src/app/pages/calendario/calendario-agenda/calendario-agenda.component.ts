@@ -1,47 +1,50 @@
-import { Component, ViewChild } from '@angular/core';
+import { CitasService } from '../../../services/citas.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions, EventApi } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list';
 import esLocale from '@fullcalendar/core/locales/es';
 import interactionPlugin from '@fullcalendar/interaction';
-import { ITurnos } from 'src/app/interfaces/turnos.interfaces';
+import { Citas } from 'src/app/interfaces/citas';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { TurnosService } from 'src/app/services/turnos.service';
 import { Router } from '@angular/router';
 
+
 @Component({
-  selector: 'app-cita',
-  templateUrl: './cita.component.html',
-  styleUrls: ['./cita.component.css']
+  selector: 'app-calendario-agenda',
+  templateUrl: './calendario-agenda.component.html',
+  styleUrls: ['./calendario-agenda.component.css']
 })
-export class CitaComponent {
+export class CalendarioAgendaComponent implements OnInit{
+
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-  turnos: ITurnos[] = []
-  constructor(private fb: FormBuilder, private turnosService: TurnosService, private router:Router) { }
-  myForm :FormGroup=this.fb.group({
-    start:['', Validators.required],
-    end:['', Validators.required],
-  })
+
+  constructor(private fb: FormBuilder, private citasService: CitasService, private router:Router) { }
+
+  turnos: Citas[] = []
+
+
+
+
   ngOnInit(): void {
-    this.turnosService.getTurnos().subscribe(data => {
-      const eventos = data.map((evento: ITurnos) => {
+    this.citasService.getCitas().subscribe(data => {
+      const eventos = data.map((evento: Citas) => {
         return {
 
-          title: evento.title, // Puedes cambiar el título según tu estructura de datos
-          start: evento.start,
-          end: evento.end,
+          title: evento.servicio,
+          date: evento.fecha,
+          extendedProps: { cita: evento },
 
         }
       });
       this.calendarOptions.events = eventos;
-
     })
-
-
   };
+
+
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin], // Agrega listPlugin a la lista de plugins
     initialView: 'timeGridWeek',
@@ -52,30 +55,26 @@ export class CitaComponent {
       right: 'timeGridWeek,timeGridDay, dayGridMonth, listWeek' // user can switch between the two
     },
 
-    // validRange: {
-    //   start: new Date(), // Solo permite fechas desde la fecha actual
-    // },
     dayMaxEvents: 3,
     events: [],
     eventBackgroundColor:'#dbcbf7',
     eventClick: this.handleEventClick.bind(this),
-    // Otros ajustes y opciones...
+
 
 
   }
 
   handleEventClick(clickInfo: { event: EventApi }) {
     const event = clickInfo.event;
+    const citaId = event.extendedProps['cita']['_id'];
 
-    // Obtiene los valores de nombre y apellido de extendedProps
+    this.router.navigate(['/dashboard/detalle-cita', citaId]);
+  }
 
-
-    // Puedes usar estas propiedades como necesit
-    this.myForm.patchValue({
-      start: event.start,
-      end: event.end,
-// O establece otros campos según tus necesidades
-    });
+  abrirFormulario() {
+    // Puedes abrir un formulario o modal aquí
+    // Por ejemplo, puedes navegar a una nueva ruta para mostrar el formulario
+    this.router.navigate(['/dashboard/cita/agregar']);
   }
 
 

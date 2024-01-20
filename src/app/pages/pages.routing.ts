@@ -28,6 +28,9 @@ import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 
+import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
+import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
+import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
 
 const routes: Routes = [
   {
@@ -68,6 +71,10 @@ const routes: Routes = [
       {path:'cita/list', component:CalendarioComponent},
       {path:'cita/nuevo', component:AddCitaComponent},
 
+      //Ruta cita
+      {path:'citas/list', component:CalendarioAgendaComponent},
+      {path:'cita/detalle', component:DetalleCitaComponent},
+      {path:'cita/agregar', component:AgregarCitaComponent},
 
       //Ruta ventas
       {path: 'venta/list', component:ListVentasComponent},

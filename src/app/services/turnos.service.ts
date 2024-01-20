@@ -19,15 +19,13 @@ export class TurnosService {
 
   }
 
-
-  
   createTurnos(body:ITurnos):Observable<ITurnos>{
     return this.http.post<ITurnos>(this.url, body)
   }
 
 
-  
-  
+
+
 
 
 }

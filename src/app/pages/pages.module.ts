@@ -9,7 +9,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
+
+//full calendar
 import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 import { NgChartsModule } from 'ng2-charts';
 
@@ -55,6 +59,9 @@ import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component'
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.component';
+import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
+import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
+import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
 
 
 
@@ -92,6 +99,9 @@ import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.compon
     AddVentasComponent,
     DetalleVentaComponent,
     EditUsuarioComponent,
+    CalendarioAgendaComponent,
+    DetalleCitaComponent,
+    AgregarCitaComponent,
 
 
 

@@ -1,82 +1,52 @@
-import { Component, ViewChild } from '@angular/core';
-import { CalendarOptions, EventApi } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid'
-import listPlugin from '@fullcalendar/list';
-import esLocale from '@fullcalendar/core/locales/es';
-import interactionPlugin from '@fullcalendar/interaction';
+import { Component, OnInit } from '@angular/core';
 import { ITurnos } from 'src/app/interfaces/turnos.interfaces';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 import { TurnosService } from 'src/app/services/turnos.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { EstilistaService } from 'src/app/services/estilista.service';
+import { Estilista } from 'src/app/interfaces/estilista.interfaces';
 
 @Component({
   selector: 'app-cita',
   templateUrl: './cita.component.html',
   styleUrls: ['./cita.component.css']
 })
-export class CitaComponent {
+export class CitaComponent implements OnInit {
+  Estilistas: Estilista[] = [];
+  id: string;
+  turnos: ITurnos[] = [];
+  estilistaSeleccionado: string = ''; // Definir la propiedad estilistaSeleccionado
 
-  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-  turnos: ITurnos[] = []
-  constructor(private fb: FormBuilder, private turnosService: TurnosService, private router:Router) { }
-  myForm :FormGroup=this.fb.group({
-    start:['', Validators.required],
-    end:['', Validators.required],
-  })
+  constructor(
+    private servicesEstilista: EstilistaService,
+    private turnosService: TurnosService,
+    private route: ActivatedRoute
+  ) { }
+
   ngOnInit(): void {
-    this.turnosService.getTurnos().subscribe(data => {
-      const eventos = data.map((evento: ITurnos) => {
-        return {
 
-          title: evento.title, // Puedes cambiar el título según tu estructura de datos
-          start: evento.start,
-          end: evento.end,
 
-        }
-      });
-      this.calendarOptions.events = eventos;
+    this.servicesEstilista.getEstilistas().subscribe((res) => {
+      this.Estilistas = res.filter(estilista => estilista.estado == true);
+    });
+
+  }
+  onEstilistaChange(event: any): void {
+
+    this.turnosService.getTurnos(this.estilistaSeleccionado).subscribe((res) => {
+      this.turnos = res;
+
 
     })
 
-
-  };
-  calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin], // Agrega listPlugin a la lista de plugins
-    initialView: 'timeGridWeek',
-    locale: esLocale,
-    headerToolbar: {
-      left: 'prev,next',
-      center: 'title',
-      right: 'timeGridWeek,timeGridDay, dayGridMonth, listWeek' // user can switch between the two
-    },
-
-    // validRange: {
-    //   start: new Date(), // Solo permite fechas desde la fecha actual
-    // },
-    dayMaxEvents: 3,
-    events: [],
-    eventBackgroundColor:'#dbcbf7',
-    eventClick: this.handleEventClick.bind(this),
-    // Otros ajustes y opciones...
-
-
   }
+  cambioEstado(id: string) {
+    this.turnosService.actulizarEstado(id).subscribe(res => {
 
-  handleEventClick(clickInfo: { event: EventApi }) {
-    const event = clickInfo.event;
-
-    // Obtiene los valores de nombre y apellido de extendedProps
-
-
-    // Puedes usar estas propiedades como necesit
-    this.myForm.patchValue({
-      start: event.start,
-      end: event.end,
-// O establece otros campos según tus necesidades
     });
   }
 
 
+
+
 }
+

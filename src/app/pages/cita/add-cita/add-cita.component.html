@@ -1,29 +1,57 @@
-<form [formGroup]="myForm" (ngSubmit)="onSave(myForm.value)" method="post">
-
-    <!-- <div class="mb-3">
-        <label for="" class="form-label required">Email </label>
-        <input type="email" class="form-control" formControlName="email" placeholder="Ingrese correo electrónico"
-          [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched}">
-    </div> -->
-    <input type="time" name="" id="">
-    
-        <mat-form-field appearance="fill">
-            <mat-label>Seleccione estilista</mat-label>
-            <mat-select formControlName="extendedProps" multiple class="mat-select-lg"> 
-                <mat-option *ngFor="let estilista of estilista" [value]="estilista._id">{{estilista.nombre}}</mat-option>
-            </mat-select>
-        </mat-form-field>  
-    <div class="form-row">
+<div class="container mt-5">
+  <div class="card sombra">
+    <div class="card-body">
+      <form [formGroup]="myForm" method="post">
         <div class="mb-3">
-            <label for="" class="form-label">Hora inicio:</label>
-            <p-calendar  inputStyleClass="form-control" [showTime]="true" [showSeconds]="true"
-                formControlName="start"></p-calendar>
+          <label for="" class="form-label required">Clientes</label>
+          <select class="form-control" formControlName="cliente">
+            <option value="">Selecione un cliente</option>
+            <option [value]="cliente._id" *ngFor="let cliente of cliente">{{cliente.nombre}}
+              {{cliente.apellido}}</option>
+          </select>
+          <span class="text-danger" *ngIf="myForm.get('cliente')?.invalid && myForm.get('cliente')?.touched">
+            Por favor, seleccione una opción
+          </span>
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Hora fin: </label>
-            <p-calendar [showTime]="true"  [showSeconds]="true" formControlName="end"></p-calendar>
+          <label for="" class="form-label required">Servicio</label>
+          <select class="form-control" formControlName="servicio">
+            <option value="">Selecione un servicio</option>
+            <option [value]="servicio._id" *ngFor="let servicio of servicio">{{servicio.nombre_servicio}}
+            </option>
+          </select>
+          <span class="text-danger" *ngIf="myForm.get('servicio')?.invalid && myForm.get('servicio')?.touched">
+            Por favor, seleccione una opción
+          </span>
         </div>
+        <div class="mb-3">
+          <label for="" class="form-label required">Estilista</label>
+            <select class="form-control"
+                formControlName="cliente">
+                <option value="">Selecione un cliente</option>
+                <option [value]="estilista._id" *ngFor="let estilista of estilista">{{estilista.nombre}}
+                    {{estilista.apellido}}</option>
+            </select>
+            <span class="text-danger"
+                *ngIf="myForm.get('cliente')?.invalid && myForm.get('cliente')?.touched">
+                Por favor, seleccione una opción
+            </span>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label required">Fecha de la cita</label>
+          <input type="date" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label required">Hora de la cita</label>
+          <input class="form-control" formControlName="horaCita" [ngxTimepicker]="picker4">
+          <ngx-material-timepicker #picker4></ngx-material-timepicker>
+        </div>
+        <div class="botones">
+          <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
+            [disabled]="myForm.invalid" (click)="onSave(myForm.value)">Guardar</button>
+          <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/venta/list">Atrás</button>
+        </div>
+      </form>
     </div>
-    <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
-        [disabled]="myForm.invalid">Guardar</button>
-</form>
+  </div>
+</div>

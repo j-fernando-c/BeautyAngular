@@ -29,21 +29,21 @@ export class CalendarioComponent implements OnInit {
     estilista:['', Validators.required]
   })
   ngOnInit(): void {
-    this.turnosService.getTurnos().subscribe(data => {
-      const eventos = data.map((evento: ITurnos) => {
-        return {
+    // this.turnosService.getTurnos().subscribe(data => {
+    //   const eventos = data.map((evento: ITurnos) => {
+    //     return {
           
-          title: evento.title, // Puedes cambiar el título según tu estructura de datos
-          start: evento.start,
-          end: evento.end,
+    //       title: evento.title, // Puedes cambiar el título según tu estructura de datos
+    //       start: evento.start,
+    //       end: evento.end,
   
-        }
-      });
-      this.calendarOptions.events = eventos;
-      console.log(data)
+    //     }
+    //   });
+    //   this.calendarOptions.events = eventos;
+    //   console.log(data)
 
 
-    })
+    // })
 
 
   };

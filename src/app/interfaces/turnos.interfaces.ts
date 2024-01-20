@@ -1,8 +1,11 @@
 export interface ITurnos {
+    id:string,
     _id: string,
-    title:string,
-    start: Date,
-    end: Date,
-
+    dia:string,
+    estado:boolean,
+    inicioM:string
+    finM:string
+    inicioT:string
+    finT:string
 }
 

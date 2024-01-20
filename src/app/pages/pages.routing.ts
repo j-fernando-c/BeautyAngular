@@ -27,6 +27,7 @@ import { CalendarioComponent } from './cita/calendario/calendario.component';
 import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
+import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
 
 import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
 import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
@@ -64,8 +65,10 @@ const routes: Routes = [
       {path:'servicio/edit/:id', component:CreateServicioComponent},
 
       //Ruta turno
-      {path:'turno/list', component:CitaComponent},
-      {path:'turno/nuevo', component:AddTurnoComponent},
+      { path: 'turno/list', component: CitaComponent },
+      { path: 'turno/nuevo', component: AddTurnoComponent },
+      {path:'turno/edit/:id', component:EditTurnoComponent},
+
 
       //Ruta cita
       {path:'cita/list', component:CalendarioComponent},

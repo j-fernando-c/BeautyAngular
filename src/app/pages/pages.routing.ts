@@ -28,54 +28,60 @@ import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
+import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-cliente-activo.component';
+import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
+import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
 
 
 const routes: Routes = [
   {
-    path: 'dashboard'  ,
+    path: 'dashboard',
     component: PagesComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     children: [
-      {path: '', component: DashboardComponent, },
-      {path: 'progress', component: ProgressComponent},
-      {path: 'dashboard', component: DashboardComponent,},
-      {path: 'grafica1', component: Grafica1Component,},
+      { path: '', component: DashboardComponent, },
+      { path: 'progress', component: ProgressComponent },
+      { path: 'dashboard', component: DashboardComponent, },
+      { path: 'grafica1', component: Grafica1Component, },
       //Rutas para estilista
-      {path: 'estilista/nuevo', component: CreateEstilistaComponent, },
-      {path: 'estilista/list', component: ListEstilistaComponent, },
-      {path: 'estilista/edit/:id', component: CreateEstilistaComponent, },
+      { path: 'estilista/nuevo', component: CreateEstilistaComponent, },
+      { path: 'estilista/list', component: ListEstilistaComponent, },
+      { path: 'estilista/edit/:id', component: CreateEstilistaComponent, },
       //Rutas para cliente
-      {path:'cliente/nuevo', component: CreateClienteComponent},
-      {path: 'cliente/list', component: ListClienteComponent,},
-      {path: 'cliente/edit/:id', component:CreateClienteComponent, },
+      { path: 'cliente/nuevo', component: CreateClienteComponent },
+      { path: 'cliente/list', component: ListClienteComponent, },
+      { path: 'cliente/activo/list', component: ListClienteActivoComponent },
+      { path: 'cliente/edit/:id', component: CreateClienteComponent, },
       //Rutas para Usuario
-      {path: 'usuarios/list', component:ListUsuarioComponent, },
-      {path: 'usuarios/nuevo', component:CreateUsuarioComponent, },
-      {path: 'usuarios/edit/:id', component:EditUsuarioComponent, },
+      { path: 'usuarios/list', component: ListUsuarioComponent, },
+      { path: 'usuarios/nuevo', component: CreateUsuarioComponent, },
+      { path: 'usuarios/edit/:id', component: EditUsuarioComponent, },
       //Rutas para Roles
-      {path: 'roles/list', component:RolesComponent},
-      {path: 'config', component:ConfigComponent},
+      { path: 'roles/list', component: RolesComponent },
+      { path: 'config', component: ConfigComponent },
 
       //Ruta servicios
-      {path:'servicio/list', component:ListServicioComponent},
-      {path:'servicio/nuevo', component:CreateServicioComponent},
-      {path:'servicio/edit/:id', component:CreateServicioComponent},
+      { path: 'servicio/list', component: ListServicioComponent },
+      { path: 'servicio/nuevo', component: CreateServicioComponent },
+      { path: 'servicio/edit/:id', component: CreateServicioComponent },
 
       //Ruta turno
       { path: 'turno/list', component: CitaComponent },
+      { path: 'turno/estilista/:id', component: EstilistaTurnoComponent },
+      { path: 'turno/estilista/edit/:id', component: EstilistaTurnoEditComponent },
       { path: 'turno/nuevo', component: AddTurnoComponent },
-      {path:'turno/edit/:id', component:EditTurnoComponent},
+      { path: 'turno/edit/:id', component: EditTurnoComponent },
 
 
       //Ruta cita
-      {path:'cita/list', component:CalendarioComponent},
-      {path:'cita/nuevo', component:AddCitaComponent},
+      { path: 'cita/list', component: CalendarioComponent },
+      { path: 'cita/nuevo', component: AddCitaComponent },
 
 
       //Ruta ventas
-      {path: 'venta/list', component:ListVentasComponent},
-      {path: 'venta/nuevo', component: AddVentasComponent},
-      {path: 'venta/detalle/:id', component:DetalleVentaComponent}
+      { path: 'venta/list', component: ListVentasComponent },
+      { path: 'venta/nuevo', component: AddVentasComponent },
+      { path: 'venta/detalle/:id', component: DetalleVentaComponent }
 
 
 
@@ -88,8 +94,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

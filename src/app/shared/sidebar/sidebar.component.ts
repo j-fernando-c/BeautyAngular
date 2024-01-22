@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +11,9 @@ import { Subscription } from 'rxjs';
 })
 export class SidebarComponent implements OnInit {
   userRoles: string[] = [];
+  private jwtHelper = new JwtHelperService();
   private rolesSubscription: Subscription;
+  userId: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -20,13 +22,12 @@ export class SidebarComponent implements OnInit {
     this.rolesSubscription = this.authService.getRolesObservable().subscribe((roles) => {
       this.userRoles = roles;
     });
+    this.getUserId();  // Llama a esta función para obtener el ID del usuario al iniciar
   }
 
   ngOnDestroy(): void {
     this.rolesSubscription.unsubscribe(); // Desuscribirse para evitar posibles fugas de memoria
   }
-
-
 
   private loadUserRoles(): void {
     const userInfo = this.authService.getUserInfo();
@@ -35,31 +36,36 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  canAccessModule(moduleName: string): boolean {
-    // console.log('Checking access for module:', moduleName);
-    // console.log('User roles:', this.userRoles);
-    // Lógica para verificar si el usuario tiene acceso al módulo
+  getUserId(): void {
+    const userInfo = this.authService.getUserInfo();
+    this.userId = userInfo ? userInfo._id : null;
+  }
 
-    // Si el usuario tiene el rol 'admin', tiene acceso a todos los módulos
+  canAccessModule(moduleName: string): boolean {
     if (this.userRoles.includes('admin')) {
       return true;
     }
 
-     // Convierte el nombre del módulo a minúsculas para hacer coincidir con el formato del rol
     const lowerCaseModuleName = moduleName.toLowerCase();
 
-
-    // Verifica si el usuario tiene acceso al módulo según su rol
     if (this.userRoles.includes(lowerCaseModuleName)) {
       return true;
     }
 
-    // En cualquier otro caso, no tiene acceso
     return false;
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
+  }
+
+  getUserInfo(): { _id: string, roles: string[] } | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      return decodedToken;
+    }
+    return null;
   }
 }

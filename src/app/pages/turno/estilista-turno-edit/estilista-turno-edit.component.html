@@ -4,7 +4,7 @@
         <form [formGroup]="myForm" method="post">
           <div class="mb-3">
             <label for="" class="form-label required">Día</label>
-            <select class="form-control" formControlName="dia" >
+            <select class="form-control" formControlName="dia">
               <option value="">Seleccione un día</option>
               <option value="lunes">Lunes</option>
               <option value="martes">Martes</option>
@@ -14,31 +14,33 @@
               <option value="sabado">Sabádo</option>
               <option value="domingo">Domingo</option>
             </select>
-            
+            <span class="text-danger" *ngIf="myForm.get('dia')?.invalid && myForm.get('dia')?.touched">
+              Por favor, seleccione un día.
+            </span>
           </div>
           <div class="mb-3">
             <label for="" class="form-label required">Turno mañana</label>
-            <timepicker [formControlName]="'inicioM'"></timepicker>
-      
+            <input class="form-control" formControlName="inicioM" [ngxTimepicker]="picker">
+            <ngx-material-timepicker #picker ></ngx-material-timepicker>
           </div>
           <div class="mb-3">
-          <timepicker [formControlName]="'finM'" ></timepicker>
-
+            <input class="form-control" formControlName="finM" [ngxTimepicker]="picker2">
+            <ngx-material-timepicker #picker2></ngx-material-timepicker>
           </div>
           <div class="mb-3">
             <label for="" class="form-label required">Turno tarde</label>
-          <timepicker [formControlName]="'inicioT'" ></timepicker>
-            
+            <input class="form-control" formControlName="inicioT" [ngxTimepicker]="picker3">
+            <ngx-material-timepicker #picker3></ngx-material-timepicker>
   
           </div>
           <div class="mb-3">
-          <timepicker [formControlName]="'finT'" ></timepicker>
-            
+            <input class="form-control" formControlName="finT" [ngxTimepicker]="picker4">
+            <ngx-material-timepicker #picker4></ngx-material-timepicker>
           </div>
           <div class="botones">
             <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
               (click)="onSave(myForm.value)">Guardar</button>
-            <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/turno/list">Atrás</button>
+            <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/turno/estilista">Atrás</button>
           </div>
         </form>
       </div>

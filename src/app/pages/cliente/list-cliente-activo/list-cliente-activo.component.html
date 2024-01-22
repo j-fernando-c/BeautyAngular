@@ -1,0 +1,65 @@
+
+<!-- list-usuario.component.html -->
+<div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-end">
+     
+        <input type="text" class="barra mb-4" placeholder="Buscar cliente..." #buscar (keyup)="aplicarFiltro(buscar.value)">
+      </div>
+      <div class="table-responsive sombra">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+          <!-- Nombre Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let usuario">{{ usuario.nombre | titlecase }}</td>
+          </ng-container>
+  
+          <!-- Apellido Column -->
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+            <td mat-cell *matCellDef="let usuario">{{ usuario.apellido | titlecase }}</td>
+          </ng-container>
+  
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+            <td mat-cell *matCellDef="let usuario">{{ usuario.email }}</td>
+          </ng-container>
+  
+          <!-- Rol Column -->
+          <ng-container matColumnDef="rol">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
+            <td mat-cell *matCellDef="let usuario">
+              <span *ngFor="let rol of usuario.roles">{{ rol.nombre }}</span>
+            </td>
+          </ng-container>
+  
+  
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let usuario" [ngSwitch]="usuario.estado">
+              <ng-container *ngSwitchCase="true">
+                <!-- Contenido cuando el usuario está activo -->
+                <a id="link" class="btn btn-primary btn-sm" routerLink="">
+                  Ver detalle <i class="fas fa-eye"></i>
+                </a>
+              </ng-container>
+              <ng-container *ngSwitchCase="false">
+                <!-- Contenido cuando el usuario está inactivo -->
+                <!-- Puedes poner algo diferente o dejarlo vacío -->
+              </ng-container>
+            </td>
+          </ng-container>
+  
+          <!-- Define las filas de la tabla -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!-- Agrega el paginador -->
+        <mat-paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+  

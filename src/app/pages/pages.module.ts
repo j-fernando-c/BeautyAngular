@@ -48,6 +48,7 @@ import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { CitaComponent } from './turno/cita/cita.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
 import { Grafica3Component } from './dashboard/grafica3/grafica3.component';
@@ -58,6 +59,9 @@ import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.compon
 import { NgxMaterialTimepickerModule, NgxTimepickerFieldComponent } from 'ngx-material-timepicker';
 import { NgxMaterialTimepicker12HoursFaceComponent } from 'ngx-material-timepicker/src/app/material-timepicker/components/timepicker-12-hours-face/ngx-material-timepicker-12-hours-face.component';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
+import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-cliente-activo.component';
+import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
+import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
 
 
 
@@ -96,6 +100,9 @@ import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
     DetalleVentaComponent,
     EditUsuarioComponent,
     EditTurnoComponent,
+    ListClienteActivoComponent,
+    EstilistaTurnoComponent,
+    EstilistaTurnoEditComponent,
 
 
 
@@ -126,15 +133,11 @@ import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
     MatSelectModule,
     CdkAccordionModule,
     NgxChartsModule,
-    NgxMaterialTimepickerModule
-
-
-
-
-
-
-
-
+    NgxMaterialTimepickerModule,
+    TimepickerModule.forRoot()
+    
+  
+    
 
   ]
 })

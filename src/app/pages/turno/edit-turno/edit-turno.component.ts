@@ -69,18 +69,25 @@ export class EditTurnoComponent  implements OnInit{
           });
           this.route.navigateByUrl('/dashboard/turno/list');
         },
-        error: (error) => {
-          // console.log('HTTP Status Code:', error.status);
-          // let errorMessage;
-     
-          
-        
-          // Swal.fire({
-          //   icon: 'error',
-          //   iconColor: '#f44336',
-          //   title: 'Error',
-          //   text: errorMessage,
-          // });
+         error: (error) => {
+            console.log('HTTP Status Code:', error.status);
+            
+            // Muestra mensajes de error específicos usando SweetAlert
+            if (error.status === 400 && error.error && error.error.error) {
+                Swal.fire({
+                    icon: 'error',
+                    iconColor: '#f44336',
+                    title: 'Error de validación',
+                    text: error.error.error,
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    iconColor: '#f44336',
+                    title: 'Error',
+                    text: 'Error al procesar la solicitud',
+                });
+            }
         }
         
       });

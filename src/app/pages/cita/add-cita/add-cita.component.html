@@ -3,7 +3,7 @@
     <div class="card-body">
       <form [formGroup]="myForm" method="post">
         <div class="mb-3">
-          <label for="" class="form-label required">Clientes</label>
+          <label for="" class="form-label required">Cliente</label>
           <select class="form-control" formControlName="cliente">
             <option value="">Selecione un cliente</option>
             <option [value]="cliente._id" *ngFor="let cliente of cliente">{{cliente.nombre}}
@@ -28,23 +28,23 @@
           <label for="" class="form-label required">Estilista</label>
             <select class="form-control"
                 formControlName="cliente">
-                <option value="">Selecione un cliente</option>
+                <option value="">Selecione un estilista</option>
                 <option [value]="estilista._id" *ngFor="let estilista of estilista">{{estilista.nombre}}
                     {{estilista.apellido}}</option>
             </select>
             <span class="text-danger"
-                *ngIf="myForm.get('cliente')?.invalid && myForm.get('cliente')?.touched">
+                *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
                 Por favor, seleccione una opción
             </span>
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Fecha de la cita</label>
-          <input type="date" class="form-control">
+          <input type="date" class="form-control" formControlName="fechaCita">
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Hora de la cita</label>
-          <input class="form-control" formControlName="horaCita" [ngxTimepicker]="picker4">
-          <ngx-material-timepicker #picker4></ngx-material-timepicker>
+          <timepicker class="form-control" [formControlName]="'horaCita'" ></timepicker>
+          
         </div>
         <div class="botones">
           <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"

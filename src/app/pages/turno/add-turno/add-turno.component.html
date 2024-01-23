@@ -6,8 +6,8 @@
           <label for="" class="form-label required">Estilista</label>
           <select id= "estilista" class="form-control" formControlName="estilista">
             <option value="">Seleccione un estilista</option>
-            <option [value]="estilista._id" *ngFor="let estilista of Estilista">{{estilista.nombre}}
-              {{estilista.apellido}}</option>
+            <option [value]="estilista._id" *ngFor="let estilista of Estilista">{{estilista.nombre | titlecase}}
+              {{estilista.apellido | titlecase}}</option>
           </select>
           <span class="text-danger" *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
             Por favor, seleccione un estilista.
@@ -31,57 +31,20 @@
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Turno mañana</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="Hora de inicio" formControlName="inicioM" bsTimepicker [timepickerConfig]="timepickerConfig">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('inicioM')?.markAsTouched()" tabindex="-1">
-                <i class="fa fa-clock"></i>
-              </button>
-            </div>
-          </div>
-          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('inicioM')?.touched">
-            Por favor, seleccione una hora de inicio.
-          </span>
+          <timepicker [formControlName]="'inicioM'"></timepicker>
+
         </div>
+
         <div class="mb-3">
-          <div class="input-group">
-            <input class="form-control" placeholder="Hora de finalizacion" formControlName="finM" ngbTimepicker>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('finM')?.markAsTouched()" tabindex="-1">
-                <i class="fa fa-clock"></i>
-              </button>
-            </div>
-          </div>
-          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('finM')?.touched">
-            Por favor, seleccione una hora de finalizacion.
-          </span>
+          <timepicker [formControlName]="'finM'" ></timepicker>
+
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Turno tarde</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="Hora de finalizacion" formControlName="inicioT" ngbTimepicker>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('inicioT')?.markAsTouched()" tabindex="-1">
-                <i class="fa fa-clock"></i>
-              </button>
-            </div>
-          </div>
-          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('inicioT')?.touched">
-            Por favor, seleccione una hora de inicio.
-          </span>
+          <timepicker [formControlName]="'inicioT'" ></timepicker>
         </div>
         <div class="mb-3">
-          <div class="input-group">
-            <input class="form-control" placeholder="Hora de finalizacion" formControlName="finT" Timepicker>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('finT')?.markAsTouched()" tabindex="-1">
-                <i class="fa fa-clock"></i>
-              </button>
-            </div>
-          </div>
-          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('finT')?.touched">
-            Por favor, seleccione una hora de finalizacion.
-          </span>
+          <timepicker [formControlName]="'finT'" ></timepicker>
         </div>
         <div class="botones">
           <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"

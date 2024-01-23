@@ -40,9 +40,11 @@ export class AddCitaComponent implements OnInit {
     })
   }
     myForm :FormGroup=this.fb.group({
-      start:['', Validators.required],
-      end:['', Validators.required],
-      extendedProps:['', Validators.required]
+      cliente:['', Validators.required],
+      servicio:['', Validators.required],
+      estilista:['', Validators.required],
+      fechaCita:['', Validators.required],
+      horaCita:['', Validators.required]
     })
 
 

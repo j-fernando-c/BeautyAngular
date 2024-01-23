@@ -6,4 +6,5 @@ export interface Cliente {
     estado: boolean;
     telefono: string;
     direccion: string;
+    
 }

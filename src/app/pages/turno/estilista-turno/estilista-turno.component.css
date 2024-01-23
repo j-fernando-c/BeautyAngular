@@ -1,4 +1,34 @@
-.contenedor-paginacion {
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+
+  select {
+    padding: 7px;
+    width: 700px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #555;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  select:hover {
+    border-color: #aaa;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+
+  .contenedor-paginacion {
     display: flex;
     justify-content: center;
     margin-top: 1rem; /* Espacio adicional en la parte superior */
@@ -15,14 +45,14 @@
 
 .estado,
 .estado-cambiado {
-  background-color: rgba(116, 90, 242);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  border-radius: 0.2rem;
-  text-align: center;
-  cursor: pointer;
-  color: white;
+    background-color: rgba(116, 90, 242);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    text-align: center;
+    cursor: pointer;
+    color: white;
 }
 
 .estado-cambiado {
@@ -79,3 +109,24 @@ th{
     color: rgb(116, 90, 242);
   
   }
+
+
+
+.estado,
+.estado-cambiado {
+    background-color: rgba(116, 90, 242);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+}
+
+.estado-cambiado {
+    background-color: #242a33;
+}
+#link {
+    color: white;
+}

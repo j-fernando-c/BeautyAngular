@@ -66,6 +66,7 @@ import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
 import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
 import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
 import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 
 
@@ -106,7 +107,8 @@ import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calend
     EditTurnoComponent,
     AgregarCitaComponent,
     DetalleCitaComponent,
-    CalendarioAgendaComponent
+    CalendarioAgendaComponent,
+
 
 
 
@@ -137,7 +139,8 @@ import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calend
     MatSelectModule,
     CdkAccordionModule,
     NgxChartsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    TimepickerModule.forRoot()
 
 
 

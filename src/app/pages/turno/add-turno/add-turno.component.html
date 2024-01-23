@@ -4,7 +4,7 @@
       <form [formGroup]="myForm" method="post">
         <div class="mb-3">
           <label for="" class="form-label required">Estilista</label>
-          <select class="form-control" formControlName="estilista">
+          <select id= "estilista" class="form-control" formControlName="estilista">
             <option value="">Seleccione un estilista</option>
             <option [value]="estilista._id" *ngFor="let estilista of Estilista">{{estilista.nombre}}
               {{estilista.apellido}}</option>
@@ -31,22 +31,57 @@
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Turno mañana</label>
-          <input class="form-control" formControlName="inicioM" [ngxTimepicker]="picker">
-          <ngx-material-timepicker #picker ></ngx-material-timepicker>
+          <div class="input-group">
+            <input class="form-control" placeholder="Hora de inicio" formControlName="inicioM" bsTimepicker [timepickerConfig]="timepickerConfig">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('inicioM')?.markAsTouched()" tabindex="-1">
+                <i class="fa fa-clock"></i>
+              </button>
+            </div>
+          </div>
+          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('inicioM')?.touched">
+            Por favor, seleccione una hora de inicio.
+          </span>
         </div>
         <div class="mb-3">
-          <input class="form-control" formControlName="finM" [ngxTimepicker]="picker2">
-          <ngx-material-timepicker #picker2></ngx-material-timepicker>
+          <div class="input-group">
+            <input class="form-control" placeholder="Hora de finalizacion" formControlName="finM" ngbTimepicker>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('finM')?.markAsTouched()" tabindex="-1">
+                <i class="fa fa-clock"></i>
+              </button>
+            </div>
+          </div>
+          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('finM')?.touched">
+            Por favor, seleccione una hora de finalizacion.
+          </span>
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Turno tarde</label>
-          <input class="form-control" formControlName="inicioT" [ngxTimepicker]="picker3">
-          <ngx-material-timepicker #picker3></ngx-material-timepicker>
-
+          <div class="input-group">
+            <input class="form-control" placeholder="Hora de finalizacion" formControlName="inicioT" ngbTimepicker>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('inicioT')?.markAsTouched()" tabindex="-1">
+                <i class="fa fa-clock"></i>
+              </button>
+            </div>
+          </div>
+          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('inicioT')?.touched">
+            Por favor, seleccione una hora de inicio.
+          </span>
         </div>
         <div class="mb-3">
-          <input class="form-control" formControlName="finT" [ngxTimepicker]="picker4">
-          <ngx-material-timepicker #picker4></ngx-material-timepicker>
+          <div class="input-group">
+            <input class="form-control" placeholder="Hora de finalizacion" formControlName="finT" Timepicker>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="myForm.get('finT')?.markAsTouched()" tabindex="-1">
+                <i class="fa fa-clock"></i>
+              </button>
+            </div>
+          </div>
+          <span class="text-danger" *ngIf="myForm.get('inicioM')?.invalid && myForm.get('finT')?.touched">
+            Por favor, seleccione una hora de finalizacion.
+          </span>
         </div>
         <div class="botones">
           <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"

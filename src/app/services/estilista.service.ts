@@ -28,11 +28,7 @@ export class EstilistaService {
         tap(() => {
           this.refresh$.next();
         }),
-        catchError((error) => {
-          console.error('Error en la solicitud HTTP:', error);
-          // Puedes manejar el error de alguna manera, por ejemplo, lanzando un nuevo Observable con throwError
-          return throwError(error);
-        })
+        
       );
   }
   actualizarEstilista(id:string, body:Estilista):Observable<Estilista>{
@@ -66,4 +62,6 @@ export class EstilistaService {
     const body = { contrasena };
     return this.http.put(`${this.url}${id}/actualizar-contrasena`, body);
   }
+
+
 }

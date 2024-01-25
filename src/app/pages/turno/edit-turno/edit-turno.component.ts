@@ -58,7 +58,6 @@ export class EditTurnoComponent  implements OnInit{
 
     onSave(body: ITurnos) {
       this.turnoService.actualizarTurno(this.id, body).subscribe({
-        
         next: (res) => {
 
           Swal.fire({

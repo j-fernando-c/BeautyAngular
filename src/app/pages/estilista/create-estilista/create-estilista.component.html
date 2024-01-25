@@ -54,7 +54,7 @@
         <div class="mb-3">
           <div class="form-group ">
             <label for="" class="form-label">Ingrese su contraseña: </label>
-            <input class="form-control input" type="text" formControlName="contrasena" >
+            <input class="form-control input" type="text" formControlName="contrasena" onfocus="(this.type='password')">
             <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
                 La contraseña es requerida
               </span>

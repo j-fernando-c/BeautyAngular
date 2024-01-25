@@ -35,6 +35,8 @@ import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estili
 import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
 import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
 import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,8 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, },
       { path: 'progress', component: ProgressComponent },
       { path: 'dashboard', component: DashboardComponent, },
+      { path: 'perfil', component: MiPerfilComponent, },
+      { path: 'edit/perfil', component: EditarPerfilComponent, },
       { path: 'grafica1', component: Grafica1Component, },
       //Rutas para estilista
       { path: 'estilista/nuevo', component: CreateEstilistaComponent, },

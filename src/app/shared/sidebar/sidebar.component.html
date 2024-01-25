@@ -13,13 +13,13 @@
             <span class="hide-menu">Admin </span>
           </a>
           <ul aria-expanded="false" class="collapse">
-            <li><a href="javascript:void()">Mi Perfil </a></li>
+            <li><a routerLink="/dashboard/perfil">Mi Perfil </a></li>
             <li><a routerLink="" (click)="logout()">Salir</a></li>
           </ul>
         </li>
 
-        
-        
+
+
 
         <li *ngIf="canAccessModule('estilista')">
           <a *ngIf="userId" [routerLink]="'/dashboard/turno/estilista/' + userId" aria-expanded="false">
@@ -43,7 +43,7 @@
           </a>
         </li>
 
-        
+
 
         <li *ngIf="canAccessModule('admin') || canAccessModule('cliente') ">
           <a routerLink="/dashboard/citas/list" aria-expanded="false">

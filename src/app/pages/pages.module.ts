@@ -53,7 +53,6 @@ import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { CitaComponent } from './turno/cita/cita.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
 import { Grafica3Component } from './dashboard/grafica3/grafica3.component';
@@ -71,6 +70,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-cliente-activo.component';
 import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
 import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 
 
@@ -116,6 +117,8 @@ import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estili
     ListClienteActivoComponent,
     EstilistaTurnoComponent,
     EstilistaTurnoEditComponent,
+    MiPerfilComponent,
+    EditarPerfilComponent,
 
 
 

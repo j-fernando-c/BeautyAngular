@@ -1,18 +1,11 @@
-import { TurnosService } from 'src/app/services/turnos.service';
-import interactionPlugin from '@fullcalendar/interaction';
+
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CalendarOptions, EventApi } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid'
-import listPlugin from '@fullcalendar/list';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ITurnos } from 'src/app/interfaces/turnos.interfaces';
-import esLocale from '@fullcalendar/core/locales/es';
-import { FullCalendarComponent } from '@fullcalendar/angular';
-
-
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Citas } from 'src/app/interfaces/cita.interfaces';
+import { CitaService } from 'src/app/services/cita.service';
 
 @Component({
   selector: 'app-calendario',
@@ -20,73 +13,34 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent implements OnInit {
-  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-  turnos: ITurnos[] = []
-  constructor(private fb: FormBuilder, private turnosService: TurnosService) { }
-  myForm :FormGroup=this.fb.group({
-    start:['', Validators.required],
-    end:['', Validators.required],
-    estilista:['', Validators.required]
-  })
+  cita: Citas[] = [];
+  search: string = '';
+
+
+  // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
+  dataSource = new MatTableDataSource<Citas>();
+  displayedColumns: string[] = ['nombre', 'apellido', 'nombre_servicio', 'nombre_estilista', 'fechaCita', 'horaCita', 'estado', 'acciones'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  constructor(private citaService: CitaService) { }
+
   ngOnInit(): void {
-    // this.turnosService.getTurnos().subscribe(data => {
-    //   const eventos = data.map((evento: ITurnos) => {
-    //     return {
-          
-    //       title: evento.title, // Puedes cambiar el título según tu estructura de datos
-    //       start: evento.start,
-    //       end: evento.end,
-  
-    //     }
-    //   });
-    //   this.calendarOptions.events = eventos;
-    //   console.log(data)
-
-
-    // })
-
+    this.citaService.getCita().subscribe(data => {
+      this.cita = data
+      this.dataSource.data = data;
+      console.log(this.cita)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
 
   };
-  calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin], // Agrega listPlugin a la lista de plugins
-    initialView: 'timeGridWeek',
-    locale: esLocale,
-    headerToolbar: {
-      left: 'prev,next',
-      center: 'title',
-      right: 'timeGridWeek,timeGridDay, listWeek' // user can switch between the two
-    },
 
-    // validRange: {
-    //   start: new Date(), // Solo permite fechas desde la fecha actual
-    // },
-    dayMaxEvents: 3,
 
-    events: [
-   
-    ],
-    eventBackgroundColor:'#dbcbf7',
-    eventClick: this.handleEventClick.bind(this),
-    // Otros ajustes y opciones...
-    
-  
+  aplicarFiltro(valor: string): void {
+    this.search = valor.trim().toLowerCase();
+    this.dataSource.filter = valor;
   }
-
-  handleEventClick(clickInfo: { event: EventApi }) {
-    const event = clickInfo.event;
-  
-    // Obtiene los valores de nombre y apellido de extendedProps
-  
-  
-    // Puedes usar estas propiedades como necesit  
-    this.myForm.patchValue({
-      start: event.start,
-      end: event.end,
-// O establece otros campos según tus necesidades
-    });
-  }
-  
-
 
 
 

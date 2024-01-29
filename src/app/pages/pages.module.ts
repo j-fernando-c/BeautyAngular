@@ -53,6 +53,9 @@ import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { CitaComponent } from './turno/cita/cita.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
 import { Grafica3Component } from './dashboard/grafica3/grafica3.component';
@@ -61,18 +64,17 @@ import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.component';
 import { NgxMaterialTimepickerModule, NgxTimepickerFieldComponent } from 'ngx-material-timepicker';
-import { NgxMaterialTimepicker12HoursFaceComponent } from 'ngx-material-timepicker/src/app/material-timepicker/components/timepicker-12-hours-face/ngx-material-timepicker-12-hours-face.component';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
 import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
 import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
 import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-cliente-activo.component';
 import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
 import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 
 
@@ -152,7 +154,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     CdkAccordionModule,
     NgxChartsModule,
     NgxMaterialTimepickerModule,
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule
+
 
 
 

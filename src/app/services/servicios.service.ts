@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { Servicio } from '../interfaces/servicios.interfaces';
+import { Estilista } from '../interfaces/estilista.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class ServiciosService {
 
   getOneServicio(id:string):Observable<Servicio>{
     return this.http.get<Servicio>(this.url + id)
+  }
+
+  getEstilistaSeleccionado(id:string):Observable<Estilista[]>{
+    return this.http.get<Estilista[]>(this.url + id + '/estilista');
   }
 
   

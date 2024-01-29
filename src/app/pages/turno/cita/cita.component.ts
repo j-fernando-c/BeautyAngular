@@ -31,7 +31,7 @@ export class CitaComponent implements OnInit {
 
   }
   onEstilistaChange(event: any): void {
-
+    console.log(this.estilistaSeleccionado);
     this.turnosService.getTurnos(this.estilistaSeleccionado).subscribe((res) => {
       this.turnos = res;
 

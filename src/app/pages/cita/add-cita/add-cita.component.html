@@ -3,52 +3,51 @@
     <div class="card-body">
       <form [formGroup]="myForm" method="post">
         <div class="mb-3">
-          <label for="" class="form-label required">Cliente</label>
+          <label for="" class="form-label required">Participante</label>
           <select class="form-control" formControlName="cliente">
-            <option value="">Selecione un cliente</option>
-            <option [value]="cliente._id" *ngFor="let cliente of cliente">{{cliente.nombre}}
-              {{cliente.apellido}}</option>
+            <option value="">Seleccione un participante</option>
+            <option [value]="p._id" *ngFor="let p of resultado">{{p.nombre | titlecase}} {{p.apellido | titlecase}}</option>
+
           </select>
-          <span class="text-danger" *ngIf="myForm.get('cliente')?.invalid && myForm.get('cliente')?.touched">
+          <span class="text-danger" *ngIf="myForm.get('participante')?.invalid && myForm.get('participante')?.touched">
             Por favor, seleccione una opción
           </span>
         </div>
+
         <div class="mb-3">
           <label for="" class="form-label required">Servicio</label>
-          <select class="form-control" formControlName="servicio">
-            <option value="">Selecione un servicio</option>
-            <option [value]="servicio._id" *ngFor="let servicio of servicio">{{servicio.nombre_servicio}}
-            </option>
+          <select class="form-control" formControlName="servicio" (change)="cargarEstilistasPorServicio()">
+            <option value="">Seleccione un servicio</option>
+            <option [value]="s._id" *ngFor="let s of servicio">{{ s.nombre_servicio | titlecase }}</option>
           </select>
           <span class="text-danger" *ngIf="myForm.get('servicio')?.invalid && myForm.get('servicio')?.touched">
             Por favor, seleccione una opción
           </span>
         </div>
+
         <div class="mb-3">
           <label for="" class="form-label required">Estilista</label>
-            <select class="form-control"
-                formControlName="cliente">
-                <option value="">Selecione un estilista</option>
-                <option [value]="estilista._id" *ngFor="let estilista of estilista">{{estilista.nombre}}
-                    {{estilista.apellido}}</option>
-            </select>
-            <span class="text-danger"
-                *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
-                Por favor, seleccione una opción
-            </span>
+          <select class="form-control" formControlName="estilista">
+            <option value="">Selecione un estilista</option>
+            <option [value]="e._id" *ngFor="let e of estilista">{{e.nombre | titlecase}} {{e.apellido | titlecase}}</option>
+          </select>
+          <span class="text-danger" *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
+            Por favor, seleccione una opción
+          </span>
         </div>
+
         <div class="mb-3">
           <label for="" class="form-label required">Fecha de la cita</label>
-          <input type="date" class="form-control" formControlName="fechaCita">
+          <input type="date" name="" id="" formControlName="fechaCita" [min]="fechaActual" class="form-control">
         </div>
+
         <div class="mb-3">
           <label for="" class="form-label required">Hora de la cita</label>
-          <timepicker class="form-control" [formControlName]="'horaCita'" ></timepicker>
-          
+          <timepicker class="form-control" [formControlName]="'horaCita'"></timepicker>
         </div>
+
         <div class="botones">
-          <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
-            [disabled]="myForm.invalid" (click)="onSave(myForm.value)">Guardar</button>
+          <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid" (click)="onSave(myForm.value)">Guardar</button>
           <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/venta/list">Atrás</button>
         </div>
       </form>

@@ -19,7 +19,7 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private servicioEstilista: EstilistaService,
+    private estilistaService: EstilistaService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -79,22 +79,17 @@ export class ChangePasswordComponent implements OnInit {
 
     const userInfo = this.authService.getUserInfo();
 
-    // Ejemplo: Mostrar información específica según el rol de estilista
     if (this.userRoles.includes('estilista')) {
-      // const idEstilista
-    if (this.id) {
-      this.sExiste = true
-      this.servicioEstilista.getOneEstilista(this.id).subscribe((res: Estilista) => {
-        if(res){
-        this.myForm.patchValue({
-          contrasena: res.contrasena
-        });
-      }
+      // Obtener información del estilista
+      this.estilistaService.getOneEstilista(this.userId!).subscribe((res: any) => {
+        this.sExiste = !!res;
+        if (this.sExiste) {
+          this.myForm.patchValue({
+            contrasena: res.contrasena
+          });
+        }
       });
     }
-    console.log("informacion del usuario",userInfo);
-    }
-
     // Ejemplo: Mostrar información específica según el rol de cliente
     if (this.userRoles.includes('cliente') || this.userRoles.includes('admin') ) {
 
@@ -114,7 +109,7 @@ export class ChangePasswordComponent implements OnInit {
 
 
 
-  onSave(usuario: any) {
+  onSave() {
     const oldcontrasena = this.myForm.get('oldcontrasena')?.value;
     const newcontrasena = this.myForm.get('newcontrasena')?.value;
     const recontrasena = this.myForm.get('recontrasena')?.value;
@@ -123,9 +118,6 @@ export class ChangePasswordComponent implements OnInit {
       console.error("ID del usuario no disponible.");
       return;
     }
-
-    // Actualizar usuario y/o contraseña
-    const body = { ...usuario };
 
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
@@ -139,8 +131,8 @@ export class ChangePasswordComponent implements OnInit {
     } else if (newcontrasena !== recontrasena) {
     Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
     return;
-    }else if (this.sExiste) {
-      console.log("-------------------")
+    }else if (this.sExiste &&  this.userRoles.includes('cliente') || this.userRoles.includes('admin')) {
+      console.log("BUCLE USUARIO")
       this.usuarioService.actualizarContraseña(this.userId, oldcontrasena, newcontrasena).subscribe((res: Usuario) => {
         Swal.fire({
           icon: 'success',
@@ -159,6 +151,28 @@ export class ChangePasswordComponent implements OnInit {
         }
       }
       );
+    }
+    else if(this.sExiste &&  this.userRoles.includes('estilista')){
+      console.log("BUCLE ESTILISTA")
+      const service = this.userRoles.includes('estilista') ? this.estilistaService : this.usuarioService;
+      service.actualizarContraseña(this.userId, oldcontrasena, newcontrasena).subscribe(
+        (res: any) => {
+          Swal.fire({
+            icon: 'success',
+            iconColor: '#745af2',
+            title: '¡Actualizado!',
+            text: 'La información se ha actualizado exitosamente.',
+          });
+        },
+        (error) => {
+          if (error.status === 401) {
+            Swal.fire('Error', 'La contraseña antigua no coincide', 'error');
+          }
+          if (error.status === 500) {
+            Swal.fire('Error', 'Error en el servidor', 'error');
+          }
+        }
+      )
     }
   }
 }

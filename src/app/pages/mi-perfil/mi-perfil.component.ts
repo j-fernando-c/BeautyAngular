@@ -95,10 +95,12 @@ export class MiPerfilComponent implements OnInit {
 
     // Ejemplo: Mostrar información específica según el rol de estilista
     if (this.userRoles.includes('estilista')) {
+
+      const idEstilista = this.userId;
       // const idEstilista
-    if (this.id) {
+    if (idEstilista) {
       this.sExiste = true
-      this.servicioEstilista.getOneEstilista(this.id).subscribe((res: Estilista) => {
+      this.servicioEstilista.getOneEstilista(idEstilista).subscribe((res: Estilista | null) => {
         if(res){
         const roleId = res.roles.length > 0 ? res.roles[0]._id : null;
         this.selectedRole = roleId;
@@ -106,11 +108,12 @@ export class MiPerfilComponent implements OnInit {
           nombre: res.nombre,
           apellido: res.apellido,
           email: res.email,
+          rol: this.userRoles.join(', ')
         });
       }
       });
     }
-    console.log("informacion del usuario",userInfo);
+    console.log("informacion del Estilista",userInfo);
     }
 
     // Ejemplo: Mostrar información específica según el rol de cliente

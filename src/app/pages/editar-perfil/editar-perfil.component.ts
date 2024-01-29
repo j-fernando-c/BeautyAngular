@@ -95,10 +95,12 @@ export class EditarPerfilComponent implements OnInit{
 
     // Ejemplo: Mostrar información específica según el rol de estilista
     if (this.userRoles.includes('estilista')) {
+
+      const idEstilista = this.userId;
       // const idEstilista
-    if (this.id) {
+    if (idEstilista) {
       this.sExiste = true
-      this.servicioEstilista.getOneEstilista(this.id).subscribe((res: Estilista) => {
+      this.servicioEstilista.getOneEstilista(idEstilista).subscribe((res: Estilista | null) => {
         if(res){
         const roleId = res.roles.length > 0 ? res.roles[0]._id : null;
         this.selectedRole = roleId;
@@ -111,13 +113,13 @@ export class EditarPerfilComponent implements OnInit{
       }
       });
     }
-    console.log("informacion del usuario",userInfo);
+    console.log("informacion del Estilista",userInfo);
     }
 
     // Ejemplo: Mostrar información específica según el rol de cliente
     if (this.userRoles.includes('cliente') || this.userRoles.includes('admin') ) {
 
-      const idUsuario = this.userId
+      const idUsuario = this.userId;
       if (idUsuario) {
         this.sExiste = true;
         this.usuarioService.getOneUsuario(idUsuario).subscribe((res: Usuario | null) => {

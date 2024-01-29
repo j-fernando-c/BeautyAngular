@@ -37,6 +37,7 @@ import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.com
 import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, },
       { path: 'perfil', component: MiPerfilComponent, },
       { path: 'edit/perfil', component: EditarPerfilComponent, },
+      { path: 'edit/contraseña', component: ChangePasswordComponent, },
       { path: 'grafica1', component: Grafica1Component, },
       //Rutas para estilista
       { path: 'estilista/nuevo', component: CreateEstilistaComponent, },

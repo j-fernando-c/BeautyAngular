@@ -72,6 +72,7 @@ import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno
 import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -119,6 +120,7 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
     EstilistaTurnoEditComponent,
     MiPerfilComponent,
     EditarPerfilComponent,
+    ChangePasswordComponent,
 
 
 

@@ -154,7 +154,7 @@ export class ChangePasswordComponent implements OnInit {
     }
     else if(this.sExiste &&  this.userRoles.includes('estilista')){
       console.log("BUCLE ESTILISTA")
-      const service = this.userRoles.includes('estilista') ? this.estilistaService : this.usuarioService;
+      const service = this.userRoles.includes('estilista') ? this.estilistaService : this.estilistaService;
       service.actualizarContraseña(this.userId, oldcontrasena, newcontrasena).subscribe(
         (res: any) => {
           Swal.fire({

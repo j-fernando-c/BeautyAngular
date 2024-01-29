@@ -8,25 +8,25 @@ import { Router } from '@angular/router';
   styles: [
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent{
 
   message: ""
   constructor(private http:HttpClient,private router: Router) {}
 
 
-  ngOnInit(): void{
-    this.http.get('http://localhost:5000/api/user',{
-      // withCredentials:true
-    })
-    .subscribe(
-      (res:any)=>{
-      // this.message = `Hola ${res.nombre}`;
-    },
-    (err) => {
-      this.message = err
-    }
-    );
-  }
+  // ngOnInit(): void{
+    // this.http.get('http://localhost:5000/api/user',{
+    //   // withCredentials:true
+    // })
+    // .subscribe(
+    //   (res:any)=>{
+    //   // this.message = `Hola ${res.nombre}`;
+    // },
+    // (err) => {
+    //   this.message = err
+    // }
+    // );
+  // }
 
   reloadPage(): void {
     this.router.navigateByUrl('/dashboard', { skipLocationChange: true }).then(() => {

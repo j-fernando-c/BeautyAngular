@@ -1,0 +1,81 @@
+.contenedor-paginacion {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem; /* Espacio adicional en la parte superior */
+}
+
+.barra {
+    border: 1px solid rgba(116, 90, 242);
+    border-radius: 15px;
+    width: 300px;
+    padding: 7px;
+    color: rgba(116, 90, 242);
+ 
+}
+
+.estado,
+.estado-cambiado {
+  background-color: rgba(116, 90, 242);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+
+.estado-cambiado {
+    background-color: #242a33;
+}
+
+#link {
+    color: white;
+}
+
+.sombra {
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Reglas para el diseño responsivo */
+@media (max-width: 970px) {
+    .table-responsive.sombra {
+        overflow-x: auto;
+    }
+
+    th,
+    td {
+        text-align: left;
+        width: 100%;
+        display: block;
+        box-sizing: border-box;
+        margin-bottom: 0.5rem; /* Espacio entre tarjetas */
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+     td {
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    th,
+     td:before {
+        display: none;
+    }
+
+    .contenedor-paginacion {
+        margin-top: 0;
+    }
+
+    .barra {
+        margin-bottom: 4px;
+    }
+}
+
+th{
+    color: rgb(116, 90, 242);
+  
+  }

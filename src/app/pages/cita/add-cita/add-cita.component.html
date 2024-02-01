@@ -2,6 +2,7 @@
   <div class="card sombra">
     <div class="card-body">
       <form [formGroup]="myForm" method="post">
+        
         <div class="mb-3">
           <label for="" class="form-label required">Participante</label>
           <select class="form-control" formControlName="cliente">
@@ -38,7 +39,7 @@
 
         <div class="mb-3">
           <label for="" class="form-label required">Fecha de la cita</label>
-          <input type="date" name="" id="" formControlName="fechaCita" [min]="fechaActual" class="form-control">
+          <input type="date" name="" id="" formControlName="fechaCita" class="form-control">
         </div>
 
         <div class="mb-3">

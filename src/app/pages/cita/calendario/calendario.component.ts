@@ -37,8 +37,9 @@ export class CalendarioComponent implements OnInit {
   };
 
 
-  aplicarFiltro(valor: string): void {
-    this.search = valor.trim().toLowerCase();
+  aplicarFiltro(event: Event): void {
+    const valor = (event.target as HTMLInputElement).value;
+    this.search= valor.trim().toLowerCase();
     this.dataSource.filter = valor;
   }
 

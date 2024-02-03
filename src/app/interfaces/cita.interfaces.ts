@@ -4,6 +4,7 @@ export interface Citas {
     estilista: Estilista2;
     fechaCita: Date;
     horaCita: Date;
+    horaFinCita:Date
 }
 
 export interface Cliente2{

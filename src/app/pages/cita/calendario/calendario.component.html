@@ -45,15 +45,15 @@
         <td mat-cell *matCellDef="let cita">{{ cita.horaCita| date: 'HH:mm a' }}</td>
       </ng-container>
 
-  
+
 
         <!-- Estado Column -->
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
           <td mat-cell *matCellDef="let cita">
-            <a id="link" [ngClass]="{'estado': cita.estado, 'estado-cambiado': !cita.estado}">
-              {{ cita.estado ? 'Activo' : 'Inactivo' }}
-            </a>
+            <button class="btn" [class.btn-success]="cita.estado === 'confirmada'" [class.btn-danger]="cita.estado === 'cancelada'" [class.btn-]="cita.estado === 'En espera'" (click)="toggleEstadoCita(cita)">
+              {{ cita.estado === 'confirmar' ? 'Cancelada' : 'Confirmar'  }}
+            </button>
           </td>
         </ng-container>
 
@@ -67,7 +67,7 @@
                 Editar <i class="fas fa-pencil-alt"></i>
               </a>
               <a id="link" class="btn btn-danger btn-sm ml-1">
-                Eliminar <i class="fas fa-trash-alt"></i>
+                Eliminar<i class="fas fa-trash-alt"></i>
               </a>
             </ng-container>
             <ng-container *ngSwitchCase="false">

@@ -23,6 +23,7 @@ export class CalendarioComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   constructor(private citaService: CitaService) { }
 
   ngOnInit(): void {
@@ -36,6 +37,15 @@ export class CalendarioComponent implements OnInit {
 
   };
 
+  toggleEstadoCita(cita: Citas): void {
+    const nuevoEstado = cita.estado === 'confirmada' ? 'cancelada' : 'confirmada';
+    this.citaService.actulizarEstado(cita._id, nuevoEstado).subscribe(() => {
+      // Realiza acciones adicionales después de la actualización si es necesario
+    });
+  }
+
+
+
 
   aplicarFiltro(event: Event): void {
     const valor = (event.target as HTMLInputElement).value;
@@ -44,8 +54,11 @@ export class CalendarioComponent implements OnInit {
   }
 
 
-
 }
+
+
+
+
 
 
 

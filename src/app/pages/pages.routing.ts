@@ -87,9 +87,9 @@ const routes: Routes = [
       { path: 'cita/nuevo', component: AddCitaComponent },
 
       //Ruta cita
-      {path:'citas/list', component:CalendarioAgendaComponent},
-      {path:'cita/detalle', component:DetalleCitaComponent},
-      {path:'cita/agregar', component:AgregarCitaComponent},
+      // {path:'citas/list', component:CalendarioAgendaComponent},
+      // {path:'cita/detalle', component:DetalleCitaComponent},
+      // {path:'cita/agregar', component:AgregarCitaComponent},
 
       //Ruta ventas
       { path: 'venta/list', component: ListVentasComponent },

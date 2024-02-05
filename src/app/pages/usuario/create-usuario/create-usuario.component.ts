@@ -51,7 +51,7 @@ export class CreateUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.rolesService.getRoles().subscribe(data => {
-      this.roles = data.filter(role => role.nombre !== 'estilista');
+      this.roles = data.filter(role => role.nombre !== 'estilista' && role.nombre!=='cliente');
     });
 
     this.id = this.route.snapshot.params['id'];

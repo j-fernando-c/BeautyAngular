@@ -5,44 +5,153 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Nombre</label>
-            <input type="text" class="form-control" formControlName="nombre"
-              [ngClass]="{'input-error':myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched,
-              'input-pattern-error': myForm.get('nombre')?.hasError('pattern')  }" >
-            <span class="text-danger" *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched ">
-              El nombre es requerido
-            </span><br>
-            <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
-              El nombre no debe contener números ni espacios en blanco ni caracteres especiales.
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nombre"
+              [ngClass]="{
+                'input-error':
+                  myForm.get('nombre')?.invalid &&
+                  myForm.get('nombre')?.touched,
+                'input-pattern-error': myForm.get('nombre')?.hasError('pattern')
+              }"
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched
+              "
+            >
+              El nombre es requerido </span
+            ><br />
+            <span
+              class="text-danger"
+              *ngIf="myForm.get('nombre')?.hasError('pattern')"
+            >
+              El nombre no debe contener números ni espacios en blanco ni
+              caracteres especiales.
             </span>
           </div>
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Apellido</label>
-            <input type="text" class="form-control" formControlName="apellido"
-              [ngClass]="{'input-error':myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched,
-              'input-pattern-error': myForm.get('apellido')?.hasError('pattern') }" >
-            <span class="text-danger" *ngIf="myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched">
-              El apellido es requerido
-            </span><br>
-            <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('pattern')">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="apellido"
+              [ngClass]="{
+                'input-error':
+                  myForm.get('apellido')?.invalid &&
+                  myForm.get('apellido')?.touched,
+                'input-pattern-error': myForm
+                  .get('apellido')
+                  ?.hasError('pattern')
+              }"
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                myForm.get('apellido')?.invalid &&
+                myForm.get('apellido')?.touched
+              "
+            >
+              El apellido es requerido </span
+            ><br />
+            <span
+              class="text-danger"
+              *ngIf="myForm.get('apellido')?.hasError('pattern')"
+            >
               El apellido no debe contener números ni espacios en blanco.
             </span>
           </div>
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Email </label>
-          <input type="email" class="form-control" formControlName="email"
-            [ngClass]="{'input-error':myForm.get('email')?.invalid && myForm.get('email')?.touched,
-            'input-pattern-error': myForm.get('email')?.hasError('pattern') }" >
-          <span class="text-danger" *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched" >
-            El email es requerido.
-          </span><br>
-          <span class="text-danger" *ngIf="myForm.get('email')?.hasError('sinExtensionCom')">
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            [ngClass]="{
+              'input-error':
+                myForm.get('email')?.invalid && myForm.get('email')?.touched,
+              'input-pattern-error': myForm.get('email')?.hasError('pattern')
+            }"
+          />
+          <span
+            class="text-danger"
+            *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched"
+          >
+            El email es requerido. </span
+          ><br />
+          <span
+            class="text-danger"
+            *ngIf="myForm.get('email')?.hasError('sinExtensionCom')"
+          >
             El correo electrónico debe una extensión válida.
           </span>
         </div>
+        <div class="mb-3" *ngIf="userRoles.includes('cliente')">
+          <label for="" class="form-label required">Teléfono</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="telefono"
+            placeholder="Ingrese teléfono"
+            [ngClass]="{
+              'input-error':
+                myForm.get('telefono')?.invalid &&
+                myForm.get('telefono')?.touched,
+              'input-pattern-error': myForm.get('telefono')?.hasError('pattern')
+            }"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              myForm.get('telefono')?.invalid && myForm.get('telefono')?.touched
+            "
+          >
+            El telefono es requerido
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="myForm.get('telefono')?.hasError('pattern')"
+          >
+            El teléfono debe tener entre 7 y 10 dígitos
+          </span>
+        </div>
+
+        <div class="mb-3" *ngIf="userRoles.includes('cliente')">
+          <label for="" class="form-label required">Dirección</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="direccion"
+            placeholder="Ingrese dirección"
+            [ngClass]="{
+              'input-error':
+                myForm.get('direccion')?.invalid &&
+                myForm.get('direccion')?.touched
+            }"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              myForm.get('direccion')?.invalid &&
+              myForm.get('direccion')?.touched
+            "
+          >
+            La dirección es requerida
+          </span>
+        </div>
+
         <div class="mb-3">
           <label for="" class="form-label required">Rol</label>
-          <input type="email" class="form-control" formControlName="rol" value="role.nombre" readonly >
+          <input
+            type="email"
+            class="form-control"
+            formControlName="rol"
+            value="role.nombre"
+            readonly
+          />
         </div>
 
         <!-- <div class="mb-3">
@@ -50,15 +159,25 @@
           <span type="text" class="form-control">{{ myForm.get('rol')?.value}}</span>
         </div> -->
 
-
         <div class="botones">
-          <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid"
-          (click)="onSave(myForm.value)">Guardar</button>
+          <button
+            type="submit"
+            [ngClass]="{ disabled: myForm.invalid, activo: myForm.valid }"
+            [disabled]="myForm.invalid"
+            (click)="onSave(myForm.value)"
+          >
+            Guardar
+          </button>
 
-          <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/perfil">Atrás</button>
-      </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            routerLink="/dashboard/perfil"
+          >
+            Atrás
+          </button>
+        </div>
       </form>
-
     </div>
   </div>
 </div>

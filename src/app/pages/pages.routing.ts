@@ -1,3 +1,5 @@
+import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
+import { MisCitasComponent } from './cita/mis-citas/mis-citas.component';
 import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
@@ -60,7 +62,7 @@ const routes: Routes = [
       { path: 'cliente/nuevo', component: CreateClienteComponent },
       { path: 'cliente/list', component: ListClienteComponent, },
       { path: 'cliente/activo/list', component: ListClienteActivoComponent },
-      { path: 'cliente/edit/:id', component: CreateClienteComponent, },
+      { path: 'cliente/edit/:id', component: EditarClienteComponent, },
       //Rutas para Usuario
       { path: 'usuarios/list', component: ListUsuarioComponent, },
       { path: 'usuarios/nuevo', component: CreateUsuarioComponent, },
@@ -85,6 +87,7 @@ const routes: Routes = [
       //Ruta cita
       { path: 'cita/list', component: CalendarioComponent },
       { path: 'cita/nuevo', component: AddCitaComponent },
+      {path:'cita/estilista/:id', component:MisCitasComponent},
 
       //Ruta cita
       // {path:'citas/list', component:CalendarioAgendaComponent},

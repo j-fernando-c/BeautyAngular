@@ -8,6 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Usuario } from 'src/app/interfaces/usuario.interfaces';
 
 @Component({
   selector: 'app-list-cliente',
@@ -17,13 +19,13 @@ import Swal from 'sweetalert2';
 export class ListClienteComponent implements OnInit {
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
-  dataSource = new MatTableDataSource<Cliente>();
+  dataSource = new MatTableDataSource<Usuario>();
   displayedColumns: string[] = [ 'nombre', 'apellido', 'email', 'telefono', 'direccion', 'estado', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private clienteServicio: ClienteService, private fb: FormBuilder, private router: Router) { }
+  constructor(private clienteServicio: ClienteService, private fb: FormBuilder, private router: Router, private usuarioService: UsuarioService) { }
 
   pages: number = 0;
   subcripcion!: Subscription;
@@ -34,28 +36,29 @@ export class ListClienteComponent implements OnInit {
 
   ngOnInit(): void {
     // Método para listar
-    this.clienteServicio.getCliente().subscribe(data => {
-      this.dataSource.data = data;
+    this.usuarioService.getUsuarios().subscribe(data => {
+      this.dataSource.data = data.filter(usuario => usuario.roles.some(rol => rol.nombre === 'cliente'));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
 
-    // Método para refrescar
-    this.subcripcion = this.clienteServicio.refresh.subscribe(() => {
-      this.clienteServicio.getCliente().subscribe(data => {
-        this.dataSource.data = data;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
+  // Método para refrescar
+  this.subcripcion = this.usuarioService.refresh.subscribe(() => {
+    this.usuarioService.getUsuarios().subscribe(data => {
+      this.dataSource.data = data.filter(usuario => usuario.roles.some(rol => rol.nombre === 'cliente'));
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-  }
+  });
+}
 
-  cambioEstado(id: string) {
-    this.clienteServicio.actulizarEstado(id).subscribe(res => {
+cambioEstado(id: string) {
+  this.usuarioService.actulizarEstado(id).subscribe(res => {
+    
+  });
+}
 
-    });
-  }
-
+  // Método para eliminar
   eliminarCliente(id: string) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -66,10 +69,10 @@ export class ListClienteComponent implements OnInit {
       confirmButtonColor: '#745af2',
       cancelButtonColor: '#745af2',
       confirmButtonText: 'Sí, eliminarlo'
-    }).then((result) => {
+    }).then(result => {
       if (result.isConfirmed) {
-        this.clienteServicio.eliminarCliente(id).subscribe(res => {
-          console.log("Se eliminó con exito");
+        this.usuarioService.EliminarUsuario(id).subscribe(res => {
+          console.log('Se eliminó con éxito');
         });
       }
     });

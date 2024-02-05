@@ -41,6 +41,8 @@ export class EditarPerfilComponent implements OnInit{
 
 
   myForm: FormGroup = this.fb.group({
+    telefono:['', [Validators.pattern(/^\d{7,10}$/)]],
+    direccion:[''],
     nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
@@ -129,6 +131,8 @@ export class EditarPerfilComponent implements OnInit{
               nombre: res.nombre,
               apellido: res.apellido,
               email: res.email,
+              telefono:res.telefono,
+              direccion:res.direccion,
               rol: this.userRoles.join(', ')
             });
           }

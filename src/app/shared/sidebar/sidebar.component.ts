@@ -42,6 +42,7 @@ export class SidebarComponent implements OnInit {
   }
 
   canAccessModule(moduleName: string): boolean {
+    
     if (this.userRoles.includes('admin')) {
       return true;
     }
@@ -53,6 +54,11 @@ export class SidebarComponent implements OnInit {
     }
 
     return false;
+  }
+
+  
+  canAccessEstilistaModule(): boolean {
+    return this.userRoles.includes('estilista');
   }
 
   logout() {

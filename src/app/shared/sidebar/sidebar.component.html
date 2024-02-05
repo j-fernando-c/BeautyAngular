@@ -21,9 +21,9 @@
         
         
 
-        <li *ngIf="canAccessModule('estilista')">
+        <li *ngIf="canAccessEstilistaModule()">
           <a *ngIf="userId" [routerLink]="'/dashboard/turno/estilista/' + userId" aria-expanded="false">
-            <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">Mi horario</span>
+            <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">Mis turnos</span>
           </a>
         </li>
         <li *ngIf="canAccessModule('admin')" class="nav-small-cap">PERSONAL</li>

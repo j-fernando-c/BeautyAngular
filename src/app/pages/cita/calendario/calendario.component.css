@@ -10,7 +10,7 @@
     width: 300px;
     padding: 7px;
     color: rgba(116, 90, 242);
- 
+
 }
 
 .estado,
@@ -77,5 +77,10 @@
 
 th{
     color: rgb(116, 90, 242);
-  
+
   }
+
+  /* .dropdown-container {
+    position: relative;
+    z-index: 1000;
+  } */

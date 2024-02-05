@@ -34,7 +34,7 @@ export class CitaComponent implements OnInit {
     console.log(this.estilistaSeleccionado);
     this.turnosService.getTurnos(this.estilistaSeleccionado).subscribe((res) => {
       this.turnos = res;
-    
+
 
     })
 
@@ -44,6 +44,7 @@ export class CitaComponent implements OnInit {
 
     });
   }
+
 
 
 

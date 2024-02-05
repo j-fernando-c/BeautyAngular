@@ -87,7 +87,7 @@ export class AuthService {
   get refresh() {
     return this.refresh$;
   }
-  //Me permite enviarle un email a la persona 
+  //Me permite enviarle un email a la persona
   existeEmail(body: any) {
     return this.http.post(this.forgot, body)
       .pipe(

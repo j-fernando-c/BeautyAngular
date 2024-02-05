@@ -30,11 +30,11 @@
               [ngClass]="{'estado':turno.estado, 'estado-cambiado':!turno.estado}">
                 {{ turno.estado ? 'Activo' : 'Inactivo' }}
               </a>
-            </td>  
-            
+            </td>
+
             <td *ngIf="turno.estado">
               <input class=""[value]="turno.inicioM | date:'h:mm a'" readonly>
-     
+
 
               <input class=""[value]="(turno.finM | date:'h:mm a') ?? ''" readonly>
 
@@ -42,7 +42,7 @@
 
             <td *ngIf="turno.estado">
               <input class=""[value]="turno.inicioT | date:'h:mm a'" readonly>
-     
+
 
               <input class=""[value]="(turno.finT | date:'h:mm a') ?? ''" readonly>
             </td>

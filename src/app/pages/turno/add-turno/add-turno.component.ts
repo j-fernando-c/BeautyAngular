@@ -1,10 +1,17 @@
 import { Estilista } from 'src/app/interfaces/estilista.interfaces';
 import { EstilistaService } from 'src/app/services/estilista.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ITurnos } from 'src/app/interfaces/turnos.interfaces';
 import { TurnosService } from 'src/app/services/turnos.service';
+
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -47,7 +54,7 @@ export class AddTurnoComponent implements OnInit {
 
   })
 
-  
+
 
   // En tu componente Angular
   onSave(body: ITurnos) {
@@ -63,7 +70,7 @@ export class AddTurnoComponent implements OnInit {
         },
         error: (error) => {
             console.log('HTTP Status Code:', error.status);
-            
+
             // Muestra mensajes de error específicos usando SweetAlert
             if (error.status === 400 && error.error && error.error.error) {
                 Swal.fire({

@@ -28,7 +28,7 @@ export class EstilistaService {
         tap(() => {
           this.refresh$.next();
         }),
-        
+
       );
   }
   actualizarEstilista(id:string, body:Estilista):Observable<Estilista>{
@@ -58,9 +58,9 @@ export class EstilistaService {
   }
 
 
-  actualizarContraseña(id: string, contrasena: string): Observable<any> {
-    const body = { contrasena };
-    return this.http.put(`${this.url}${id}/actualizar-contrasena`, body);
+  actualizarContraseña(id: string, oldcontrasena: string, newcontrasena: string): Observable<any> {
+    const body = { oldcontrasena, newcontrasena };
+    return this.http.put(`${this.url}contrasena/${id}`, body);
   }
 
 

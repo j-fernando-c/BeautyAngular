@@ -6,4 +6,6 @@ export interface Estilista {
     contrasena:       string;
     estado:           boolean;
     telefono:         string;
+    roles: { _id: string, nombre: string }[];
+
 }

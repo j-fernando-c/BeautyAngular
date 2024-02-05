@@ -17,8 +17,8 @@
                     </span>
                 </div>
                 <div class="mb-3">
-                    <label  class="form-label required">Duración:</label>
-                    <input type="time" class="form-control" formControlName="duracion"
+                    <label  class="form-label required">Duración(minutos):</label>
+                    <input type="number" class="form-control" formControlName="duracion"
                         placeholder="Ingrese la duración"
                         [ngClass]="{'input-error':myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched}">
                         <span class="text-danger" *ngIf="myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched">
@@ -37,10 +37,10 @@
                   <label for="" class="form-label required">Estilista</label>
                   <mat-form-field class="form-control">
                     <mat-label>Seleccione estilista</mat-label>
-                    <mat-select formControlName="estilista" multiple class="mat-select-lg"> 
+                    <mat-select formControlName="estilista" multiple class="mat-select-lg">
                         <mat-option *ngFor="let estilista of estilista" [value]="estilista._id">{{estilista.nombre}}</mat-option>
                     </mat-select>
-                </mat-form-field>  
+                </mat-form-field>
                     <span class="text-danger"
                         *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
                         Por favor, seleccione una opción

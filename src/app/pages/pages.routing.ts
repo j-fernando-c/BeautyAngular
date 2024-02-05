@@ -32,6 +32,12 @@ import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-c
 import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
 import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
 
+import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
+import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
+import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -42,6 +48,9 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, },
       { path: 'progress', component: ProgressComponent },
       { path: 'dashboard', component: DashboardComponent, },
+      { path: 'perfil', component: MiPerfilComponent, },
+      { path: 'edit/perfil', component: EditarPerfilComponent, },
+      { path: 'edit/contraseña', component: ChangePasswordComponent, },
       { path: 'grafica1', component: Grafica1Component, },
       //Rutas para estilista
       { path: 'estilista/nuevo', component: CreateEstilistaComponent, },
@@ -77,6 +86,10 @@ const routes: Routes = [
       { path: 'cita/list', component: CalendarioComponent },
       { path: 'cita/nuevo', component: AddCitaComponent },
 
+      //Ruta cita
+      // {path:'citas/list', component:CalendarioAgendaComponent},
+      // {path:'cita/detalle', component:DetalleCitaComponent},
+      // {path:'cita/agregar', component:AgregarCitaComponent},
 
       //Ruta ventas
       { path: 'venta/list', component: ListVentasComponent },

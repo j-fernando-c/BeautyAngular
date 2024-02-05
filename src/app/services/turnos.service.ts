@@ -48,7 +48,7 @@ export class TurnosService {
     return this.http.get<ITurnos>(this.url3 + id)
   }
 
-  
+
   getOneTurnoIndividual(id: string): Observable<ITurnos[]> {
     return this.http.get<ITurnos[]>(`${this.url}/${id}`)
   }

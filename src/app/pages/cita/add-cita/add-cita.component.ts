@@ -41,6 +41,8 @@ export class AddCitaComponent implements OnInit {
     private router: Router) {
 
   }
+
+
   ngOnInit(): void {
 
     this.obtenerFechaActual();
@@ -57,12 +59,21 @@ export class AddCitaComponent implements OnInit {
     this.usuarioService.getUsuarios().subscribe(res => {
       this.usuarioActivo = res.filter(usuario => usuario.estado == true && usuario.roles.some(rol => rol.nombre === 'cliente'));
       this.resultado = [...this.cliente, ...this.usuarioActivo]
-      
+
 
     })
 
-    
+    // console.log(this.)
+    // console.log(this.estilista)
   }
+
+  myForm: FormGroup = this.fb.group({
+    cliente: ['', Validators.required],
+    servicio: ['', Validators.required],
+    estilista: ['', Validators.required],
+    fechaCita: ['', Validators.required],
+    horaCita: ['', Validators.required]
+  })
 
   obtenerFechaActual(): void {
     const today = new Date();
@@ -81,21 +92,31 @@ cargarEstilistasPorServicio() {
   });
 }
 
-  myForm: FormGroup = this.fb.group({
-    cliente: ['', Validators.required],
-    servicio: ['', Validators.required],
-    estilista: ['', Validators.required],
-    fechaCita: ['', Validators.required],
-    horaCita: ['', Validators.required]
-  })
+calcularDuracionServicio() {
+  const servicioSeleccionado = this.myForm.get('servicio')?.value;
+
+  // Obtén la duración del servicio desde el servicio seleccionado
+  const duracionServicio = servicioSeleccionado ? servicioSeleccionado.duracion : 0;
+
+  // Obtén la hora de la cita desde el formulario
+  const horaCita =  this.myForm.get('horaCita')?.value;
+
+  // Calcula la hora de finalización de la cita sumando la duración del servicio
+  const horaFinCita = {
+    hour: horaCita.hour + Math.floor(duracionServicio / 60),
+    minute: horaCita.minute + (duracionServicio % 60),
+    second: 0,
+  };
+}
+
 
 
 
   onSave(body: Citas) {
-    
+
 
     this.citaService.createCitas(body).subscribe({
-      
+
       next: (res) => {
         Swal.fire({
           icon: 'success',

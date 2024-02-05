@@ -57,8 +57,9 @@ export class UsuarioService {
       );
   }
 
-  actualizarContraseña(id: string, contrasena: string): Observable<any> {
-    const body = { contrasena };
-    return this.http.put(`${this.apiUrl}${id}/actualizar-contrasena`, body);
+  actualizarContraseña(id: string, oldcontrasena: string, newcontrasena: string): Observable<any> {
+    const body = { oldcontrasena, newcontrasena };
+   return this.http.put(`${this.apiUrl}contrasena/${id}`, body);
   }
+
 }

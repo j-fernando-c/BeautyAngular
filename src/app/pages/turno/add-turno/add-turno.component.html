@@ -4,7 +4,7 @@
       <form [formGroup]="myForm" method="post">
         <div class="mb-3">
           <label for="" class="form-label required">Estilista</label>
-          <select class="form-control" formControlName="estilista">
+          <select id= "estilista" class="form-control" formControlName="estilista">
             <option value="">Seleccione un estilista</option>
             <option [value]="estilista._id" *ngFor="let estilista of Estilista">{{estilista.nombre | titlecase}}
               {{estilista.apellido | titlecase}}</option>
@@ -32,12 +32,12 @@
         <div class="mb-3">
           <label for="" class="form-label required">Turno mañana</label>
           <timepicker [formControlName]="'inicioM'"></timepicker>
-          
+
         </div>
-        
+
         <div class="mb-3">
           <timepicker [formControlName]="'finM'" ></timepicker>
-    
+
         </div>
         <div class="mb-3">
           <label for="" class="form-label required">Turno tarde</label>

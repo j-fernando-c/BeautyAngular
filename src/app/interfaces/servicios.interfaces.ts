@@ -1,7 +1,7 @@
 export interface Servicio {
     _id:             string;
     nombre_servicio: string;
-    duracion:        string;
+    duracion:        number;
     precio:          number;
     estado:          boolean;
     estilista:       Estilista[];

@@ -6,7 +6,7 @@ export interface Citas {
     fechaCita: Date;
     horaCita: Date;
     horaFinCita:Date;
-    estado: 'confirmada' | 'cancelada' | 'en espera' | 'pendiente';
+    estado: 'confirmada' | 'cancelada' | 'pendiente';
 }
 
 export interface Cliente2{

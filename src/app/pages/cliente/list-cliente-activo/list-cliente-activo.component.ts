@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class ListClienteActivoComponent implements OnInit {
 
-  dataSource = new MatTableDataSource<Usuario>([]); 
+  dataSource = new MatTableDataSource<Usuario>([]);
   displayedColumns: string[] = ['nombre', 'apellido', 'email',  'acciones'];
   clienteActivo: Usuario[] = [];
 
@@ -27,9 +27,10 @@ export class ListClienteActivoComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.getUsuarios().subscribe(res => {
       this.clienteActivo = res.filter(usuario => usuario.estado === true && usuario.roles.some(rol => rol.nombre === 'cliente'));
-      this.dataSource.data = this.clienteActivo; 
-      this.dataSource.paginator = this.paginator; 
-      this.dataSource.sort = this.sort; 
+      this.dataSource.data = this.clienteActivo;
+      this.dataSource.paginator = this.paginator;
+      console.log("usuarios activos",this.clienteActivo);
+      this.dataSource.sort = this.sort;
     });
   }
 

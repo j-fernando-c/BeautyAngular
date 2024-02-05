@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { CitaService } from 'src/app/services/cita.service';
 
@@ -13,6 +14,8 @@ import { CitaService } from 'src/app/services/cita.service';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent implements OnInit {
+
+
   cita: Citas[] = [];
   search: string = '';
 
@@ -23,6 +26,8 @@ export class CalendarioComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  subcripcion!: Subscription;
 
   constructor(private citaService: CitaService) { }
 
@@ -35,6 +40,15 @@ export class CalendarioComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
 
+        // Método para refrescar
+        this.subcripcion = this.citaService.refresh.subscribe(() => {
+          this.citaService.getCita().subscribe(data => {
+            this.cita = data;
+            this.dataSource.data = data;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          });
+        });
   };
 
   toggleEstadoCita(cita: Citas): void {
@@ -42,18 +56,15 @@ export class CalendarioComponent implements OnInit {
 
     switch (cita.estado) {
       case 'confirmada':
-        nuevoEstado = 'cancelada';
-        break;
+          nuevoEstado = 'cancelada';
+          break;
       case 'cancelada':
-        nuevoEstado = 'en espera';
-        break;
-      case 'en espera':
-        nuevoEstado = 'pendiente';
-        break;
+          nuevoEstado = 'pendiente';
+          break;
       case 'pendiente':
-        nuevoEstado = 'confirmada';
-        break;
-    }
+          nuevoEstado = 'confirmada';
+          break;
+  }
 
     this.citaService.actualizarEstado(cita._id, nuevoEstado).subscribe(
       () => {

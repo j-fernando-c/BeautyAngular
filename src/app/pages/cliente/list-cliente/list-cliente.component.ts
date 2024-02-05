@@ -38,6 +38,7 @@ export class ListClienteComponent implements OnInit {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+
     });
 
     // Método para refrescar

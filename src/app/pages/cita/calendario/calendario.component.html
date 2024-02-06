@@ -52,11 +52,11 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
           <td mat-cell *matCellDef="let cita">
             <button class="btn" [ngClass]="{
-              'btn-success': cita.estado === 'confirmada',
-              'btn-danger': cita.estado === 'cancelada',
-              'btn-warning': cita.estado === 'pendiente',
+              'btn btn-primary': cita.estado === 'confirmada',
+              'btn btn-danger': cita.estado === 'cancelada',
+              'btn btn-info': cita.estado === 'pendiente',
             }" (click)="toggleEstadoCita(cita)">
-              {{ cita.estado === 'confirmada' ? 'Cancelada' : cita.estado === 'cancelada' ? 'Pendiente' : cita.estado === 'pendiente' }}
+              {{   cita.estado === 'confirmada' ? 'Cancelada' : cita.estado === 'cancelada' ? 'Pendiente' : cita.estado === 'pendiente' }}
             </button>
           </td>
         </ng-container>

@@ -1,5 +1,5 @@
 
-
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -29,7 +29,7 @@ export class CalendarioComponent implements OnInit {
 
   subcripcion!: Subscription;
 
-  constructor(private citaService: CitaService) { }
+  constructor(private citaService: CitaService,private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.citaService.getCita().subscribe(data => {
@@ -66,9 +66,14 @@ export class CalendarioComponent implements OnInit {
           break;
   }
 
+  console.log('Estado anterior:', cita.estado);
+  console.log('Nuevo estado:', nuevoEstado);
+
     this.citaService.actualizarEstado(cita._id, nuevoEstado).subscribe(
       () => {
         // Realiza acciones adicionales después de la actualización si es necesario
+        console.log('Estado actualizado correctamente');
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error al cambiar el estado de la cita:', error);

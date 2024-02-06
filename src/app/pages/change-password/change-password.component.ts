@@ -163,6 +163,7 @@ export class ChangePasswordComponent implements OnInit {
             title: '¡Actualizado!',
             text: 'La información se ha actualizado exitosamente.',
           });
+          this.router.navigateByUrl("/dashboard/perfil");
         },
         (error) => {
           if (error.status === 401) {

@@ -33,16 +33,6 @@ export class VentasService {
      )
   }
 
-  actulizarEstado(id:string):Observable<Ventas>{
-    return this.http.get<Ventas>(this.url2+id)
-    .pipe(
-      tap(()=>{
-        this.refresh$.next();
-      })
-
-      )
-  }
-
   EliminarVenta(id:string):Observable<Ventas>{
     return this.http.delete<Ventas>(this.url + id)
     .pipe(

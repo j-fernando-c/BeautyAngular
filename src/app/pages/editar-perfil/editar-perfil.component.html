@@ -89,7 +89,7 @@
             El correo electrónico debe una extensión válida.
           </span>
         </div>
-        <div class="mb-3" *ngIf="userRoles.includes('cliente')">
+        <div class="mb-3" *ngIf="userRoles.includes('cliente') || userRoles.includes('estilista')">
           <label for="" class="form-label required">Teléfono</label>
           <input
             type="text"

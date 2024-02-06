@@ -2,8 +2,8 @@ export interface Ventas{
     _id:string
     cliente:Cliente,
     servicio:Servicio
-    metodoPago:string,
-    estado:boolean
+    metodoPago:string
+    
 }
 
 export interface Cliente {

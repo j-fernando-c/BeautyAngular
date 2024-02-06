@@ -13,15 +13,6 @@
                 <h2>{{venta.servicio.nombre_servicio |titlecase}}</h2>
             </div>
         </div>
-        <div class="card3" *ngIf="venta">
-            <div class="box2">
-                <h1>Metodo de pago:</h1>
-                <h2>{{venta.metodoPago}}</h2>
-                <h1>Estado de la venta:</h1>
-                <a id="link" [ngClass]="{'estado':venta.estado, 'estado-cambiado':!venta.estado}">{{venta.estado ?
-                    'Pagada' : 'Pendiente'}}</a>
-            </div>
-        </div>
     </div>
     <div class="contenedor-principal2">
         <div class="card2" *ngIf="venta">

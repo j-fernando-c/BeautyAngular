@@ -17,7 +17,7 @@ import { EstilistaService } from 'src/app/services/estilista.service';
   templateUrl: './editar-perfil.component.html',
   styleUrls: ['./editar-perfil.component.css']
 })
-export class EditarPerfilComponent implements OnInit{
+export class EditarPerfilComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
@@ -33,6 +33,7 @@ export class EditarPerfilComponent implements OnInit{
 
   userRoles: string[] = [];
   id!: string;
+
   sExiste: boolean = false;
   userId: string | null = null;
   private jwtHelper = new JwtHelperService();
@@ -41,6 +42,8 @@ export class EditarPerfilComponent implements OnInit{
 
 
   myForm: FormGroup = this.fb.group({
+    telefono: ['', [Validators.pattern(/^\d{7,10}$/)]],
+    direccion: [''],
     nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
@@ -49,15 +52,15 @@ export class EditarPerfilComponent implements OnInit{
     rol: [''],
   });
 
-    ngOnInit(): void {
-      this.loadUserRoles();
-      this.rolesSubscription = this.authService.getRolesObservable().subscribe((roles) => {
-        this.userRoles = roles;
-      });
-      this.getUserId();
-      this.mostrarInfo();
+  ngOnInit(): void {
+    this.loadUserRoles();
+    this.rolesSubscription = this.authService.getRolesObservable().subscribe((roles) => {
+      this.userRoles = roles;
+    });
+    this.getUserId();
+    this.mostrarInfo();
 
-    }
+  }
 
   getUserInfo(): { _id: string, roles: string[] } | null {
     const token = localStorage.getItem('token');
@@ -97,27 +100,29 @@ export class EditarPerfilComponent implements OnInit{
     if (this.userRoles.includes('estilista')) {
 
       const idEstilista = this.userId;
+      console.log(idEstilista)
       // const idEstilista
-    if (idEstilista) {
-      this.sExiste = true
-      this.servicioEstilista.getOneEstilista(idEstilista).subscribe((res: Estilista | null) => {
-        if(res){
-        const roleId = res.roles.length > 0 ? res.roles[0]._id : null;
-        this.selectedRole = roleId;
-        this.myForm.patchValue({
-          nombre: res.nombre,
-          apellido: res.apellido,
-          email: res.email,
-          rol: this.userRoles.join(', ')
+      if (idEstilista) {
+        this.sExiste = true
+        this.servicioEstilista.getOneEstilista(idEstilista).subscribe((res: Estilista | null) => {
+          if (res) {
+            const roleId = res.roles.length > 0 ? res.roles[0]._id : null;
+            this.selectedRole = roleId;
+            this.myForm.patchValue({
+              nombre: res.nombre,
+              apellido: res.apellido,
+              email: res.email,
+              telefono: res.telefono,
+              rol: this.userRoles.join(', ')
+            });
+          }
         });
       }
-      });
-    }
-    console.log("informacion del Estilista",userInfo);
+      console.log("informacion del Estilista", userInfo);
     }
 
     // Ejemplo: Mostrar información específica según el rol de cliente
-    if (this.userRoles.includes('cliente') || this.userRoles.includes('admin') ) {
+    if (this.userRoles.includes('cliente') || this.userRoles.includes('admin')) {
 
       const idUsuario = this.userId;
       if (idUsuario) {
@@ -129,49 +134,69 @@ export class EditarPerfilComponent implements OnInit{
               nombre: res.nombre,
               apellido: res.apellido,
               email: res.email,
+              telefono: res.telefono,
+              direccion: res.direccion,
               rol: this.userRoles.join(', ')
             });
           }
         });
       }
-      console.log("informacion del usuario",userInfo,"rol del usuario",this.myForm.get('rol')?.value);
-      console.log("id del usuario",this.userId)
+      console.log("informacion del usuario", userInfo, "rol del usuario", this.myForm.get('rol')?.value);
+      console.log("id del usuario", this.userId)
     }
   }
 
 
-  onSave(usuario: Usuario) {
-
+  onSave(usuario: any) {
     if (!this.userId) {
       console.error("ID del usuario no disponible.");
       return;
     }
 
-    // Actualizar usuario y/o contraseña
     const body = { ...usuario };
 
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;
-    } else if (this.sExiste) {
-
-      this.usuarioService.actualizarUsuario(this.userId, body).subscribe((res: Usuario) => {
-        Swal.fire({
-          icon: 'success',
-          iconColor: '#745af2',
-          title: '¡Actualizado!',
-          text: 'La información se ha actualizado exitosamente.',
-        });
-        this.router.navigateByUrl("/dashboard/perfil");
-      });
     }
+    const isEstilista = this.userRoles.includes('estilista');
 
+    if (this.sExiste && !isEstilista) {
+      this.actualizarUsuario(body);
+    } else if (isEstilista) {
+      this.actualizarEstilista(body);
+    } else {
+      Swal.fire('Error', 'Usuario no autorizado para esta acción', 'error');
+
+    }
+  }
+
+  private actualizarUsuario(body: Usuario) {
+
+    this.usuarioService.actualizarUsuario(this.userId ?? '', body).subscribe((res: Usuario) => {
+      this.mostrarMensajeExito();
+    });
+  }
+
+  private actualizarEstilista(body: Estilista) {
+    this.servicioEstilista.actualizarEstilista(this.userId ?? '', body).subscribe((res: Estilista) => {
+      this.mostrarMensajeExito();
+    });
 
   }
 
-
-
-
-
-
+  private mostrarMensajeExito() {
+    Swal.fire({
+      icon: 'success',
+      iconColor: '#745af2',
+      title: '¡Actualizado!',
+      text: 'La información se ha actualizado exitosamente.',
+    });
+    this.router.navigateByUrl("/dashboard/perfil");
+  }
 }
+
+
+
+
+

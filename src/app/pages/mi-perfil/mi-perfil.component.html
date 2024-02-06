@@ -40,6 +40,26 @@
             El correo electrónico debe una extensión válida.
           </span>
         </div>
+        <div class="mb-3" *ngIf="userRoles.includes('cliente') || userRoles.includes('estilista')">
+          <label for="" class="form-label required">Teléfono</label>
+          <input type="text" class="form-control" formControlName="telefono" placeholder="Ingrese teléfono"
+            [ngClass]="{'input-error':myForm.get('telefono')?.invalid && myForm.get('telefono')?.touched, 'input-pattern-error': myForm.get('telefono')?.hasError('pattern')}" readonly>
+          <span class="text-danger" *ngIf="myForm.get('telefono')?.invalid && myForm.get('telefono')?.touched">
+            El telefono es requerido
+          </span>
+          <span class="text-danger" *ngIf="myForm.get('telefono')?.hasError('pattern')">
+            El teléfono debe tener entre 7 y 10 dígitos
+          </span>
+        </div>
+        
+        <div class="mb-3" *ngIf="userRoles.includes('cliente')">
+          <label for="" class="form-label required">Dirección</label>
+          <input type="text" class="form-control" formControlName="direccion" placeholder="Ingrese dirección"
+            [ngClass]="{'input-error':myForm.get('direccion')?.invalid && myForm.get('direccion')?.touched}" readonly>
+          <span class="text-danger" *ngIf="myForm.get('direccion')?.invalid && myForm.get('direccion')?.touched">
+            La dirección es requerida
+          </span>
+        </div>
         <div class="mb-3">
           <label for="" class="form-label required">Rol</label>
           <input type="email" class="form-control" formControlName="rol" value="role.nombre" readonly>
@@ -57,7 +77,6 @@
 
       </div>
       </form>
-
     </div>
   </div>
 </div>

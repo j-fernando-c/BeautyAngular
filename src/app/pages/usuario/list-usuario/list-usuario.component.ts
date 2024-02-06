@@ -40,16 +40,17 @@ export class ListUsuarioComponent implements OnInit {
     // Método para listar
     this.usuarioService.getUsuarios().subscribe(data => {
       this.usuarios = data;
-      this.dataSource.data = data;
+      this.dataSource.data = data.filter(usuario => usuario.roles.some(rol => rol.nombre === 'admin'));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+    
 
     // Método para refrescar
     this.subcripcion = this.usuarioService.refresh.subscribe(() => {
       this.usuarioService.getUsuarios().subscribe(data => {
         this.usuarios = data;
-        this.dataSource.data = data;
+        this.dataSource.data = data.filter(usuario => usuario.roles.some(rol => rol.nombre === 'admin'));
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });

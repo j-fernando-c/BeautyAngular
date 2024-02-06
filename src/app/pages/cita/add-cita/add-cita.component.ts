@@ -58,7 +58,7 @@ export class AddCitaComponent implements OnInit {
 
     this.usuarioService.getUsuarios().subscribe(res => {
       this.usuarioActivo = res.filter(usuario => usuario.estado == true && usuario.roles.some(rol => rol.nombre === 'cliente'));
-      this.resultado = [...this.cliente, ...this.usuarioActivo]
+      this.resultado = this.usuarioActivo
 
 
     })

@@ -19,7 +19,7 @@ export class ListVentasComponent implements OnInit {
 
   // Contiene los usuarios
   dataSource = new MatTableDataSource<Ventas>();
-  displayedColumns: string[] = [ 'clientes', 'servicios', 'precio', 'medio-pago','acciones'];
+  displayedColumns: string[] = [ 'clientes', 'servicios', 'precio', 'medio-pago', 'estado', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -36,7 +36,7 @@ export class ListVentasComponent implements OnInit {
   ngOnInit(): void {
     this.ventasService.getVentas().subscribe(data => {
       this.ventas = data;
-      this.dataSource.data = data;
+      this.dataSource.data = data.filter(venta=>venta.estado==true);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -44,7 +44,7 @@ export class ListVentasComponent implements OnInit {
     this.subcripcion = this.ventasService.refresh.subscribe(() => {
       this.ventasService.getVentas().subscribe(data => {
       this.ventas = data;
-      this.dataSource.data = data;
+      this.dataSource.data = data.filter(venta=>venta.estado==true);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       });
@@ -68,6 +68,15 @@ export class ListVentasComponent implements OnInit {
         })
       }
     })
+
+  }
+
+  //Metódo que me permite cambiar de estado
+  cambioEstado(id:string){
+    this.ventasService.actualizarEstado(id).subscribe(res=>{
+
+    })
+
 
   }
     aplicarFiltro(valor: string): void {

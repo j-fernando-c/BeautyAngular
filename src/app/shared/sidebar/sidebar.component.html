@@ -8,7 +8,7 @@
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
         <li class="user-profile">
-          <a  aria-expanded="false">
+          <a aria-expanded="false">
             <img src="./assets/images/users/profile.png" alt="user" />
             <span class="hide-menu">Admin </span>
           </a>
@@ -19,8 +19,6 @@
         </li>
 
 
-
-
         <li *ngIf="canAccessEstilistaModule()">
           <a *ngIf="userId" [routerLink]="'/dashboard/turno/estilista/' + userId" aria-expanded="false">
             <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">Mis turnos</span>
@@ -28,7 +26,18 @@
           <a *ngIf="userId" [routerLink]="'/dashboard/cita/estilista/' + userId" aria-expanded="false">
             <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">Mis citas</span>
           </a>
+
         </li>
+        <li *ngIf="canAccessClienteModule()">
+          <a *ngIf="userId" [routerLink]="'/dashboard/cita/nuevo/cliente/' + userId" aria-expanded="false">
+            <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">Agenda una cita</span>
+          </a>
+          <a  *ngIf="userId" [routerLink]="'/dashboard/cita/list/cliente/' + userId"  aria-expanded="false">
+            <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">Mis citas</span>
+          </a>
+        </li>
+
+
         <li *ngIf="canAccessModule('admin')" class="nav-small-cap">PERSONAL</li>
 
         <li *ngIf="canAccessModule('admin')">
@@ -38,9 +47,9 @@
           </a>
         </li>
 
-        <li class="nav-small-cap">AGENDA</li>
+        <li *ngIf="canAccessModule('admin') " class="nav-small-cap">AGENDA</li>
 
-        <li *ngIf="canAccessModule('admin') || canAccessModule('cliente')">
+        <li *ngIf="canAccessModule('admin')">
           <a routerLink="/dashboard/turno/list" aria-expanded="false">
             <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">TURNOS </span>
           </a>
@@ -48,7 +57,7 @@
 
 
 
-        <li *ngIf="canAccessModule('admin') || canAccessModule('cliente') ">
+        <li *ngIf="canAccessModule('admin')">
           <a routerLink="/dashboard/cita/list" aria-expanded="false">
             <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">CITAS</span>
           </a>
@@ -78,7 +87,7 @@
         </li>
 
 
-        <li class="nav-small-cap">GESTIÓN</li>
+        <li *ngIf="canAccessModule('admin') " class="nav-small-cap">GESTIÓN</li>
 
         <li *ngIf="canAccessModule('admin')">
           <a routerLink="/dashboard/venta/list" routerLinkActive="active" aria-expanded="false">
@@ -99,7 +108,7 @@
           </a>
         </li>
 
-        <li>
+        <li *ngIf="canAccessModule('admin') ">
           <a routerLink="/dashboard/config" routerLinkActive="active" aria-expanded="false">
             <i class="fa-solid fa-gear"></i>
             <span class="hide-menu">CONFIGURACIÓN</span>

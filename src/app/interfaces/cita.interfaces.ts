@@ -1,11 +1,10 @@
 export interface Citas {
     _id: string;
-    participante: { tipo: 'Cliente' | 'Usuario'; participanteId: string }[];
+    participante: string;
     servicio: Servicio2;
     estilista: Estilista2;
     fechaCita: Date;
     horaCita: Date;
-    horaFinCita:Date;
     estado: 'confirmada' | 'cancelada' | 'en espera' | 'pendiente';
 }
 

@@ -61,6 +61,10 @@ export class SidebarComponent implements OnInit {
     return this.userRoles.includes('estilista');
   }
 
+  canAccessClienteModule():boolean{
+    return this.userRoles.includes('cliente')
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

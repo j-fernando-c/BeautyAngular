@@ -3,6 +3,7 @@ export interface Ventas{
     cliente:Cliente,
     servicio:Servicio
     metodoPago:string
+    estado:boolean
     
 }
 

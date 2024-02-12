@@ -65,17 +65,17 @@ import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.comp
 import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.component';
 import { NgxMaterialTimepickerModule, NgxTimepickerFieldComponent } from 'ngx-material-timepicker';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
-import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
-import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
-import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
 import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-cliente-activo.component';
 import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
 import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { MisCitasComponent } from './cita/mis-citas/mis-citas.component';
+import { MisCitasComponent } from './cita/mis-citas-estilista/mis-citas.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
+import { ListVentasInactivasComponent } from './ventas/list-ventas-inactivas/list-ventas-inactivas.component';
+import { AddCitaClienteComponent } from './cita/add-cita-cliente/add-cita-cliente.component';
+import { MisCitasClientesComponent } from './cita/mis-citas-clientes/mis-citas-clientes.component';
 
 
 
@@ -115,9 +115,7 @@ import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.
     DetalleVentaComponent,
     EditUsuarioComponent,
     EditTurnoComponent,
-    AgregarCitaComponent,
-    DetalleCitaComponent,
-    CalendarioAgendaComponent,
+
 
     ListClienteActivoComponent,
     EstilistaTurnoComponent,
@@ -127,6 +125,9 @@ import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.
     ChangePasswordComponent,
     MisCitasComponent,
     EditarClienteComponent,
+    ListVentasInactivasComponent,
+    AddCitaClienteComponent,
+    MisCitasClientesComponent,
 
 
 

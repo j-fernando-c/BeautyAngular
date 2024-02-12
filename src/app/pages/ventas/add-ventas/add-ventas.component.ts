@@ -9,7 +9,7 @@ import { Servicio } from 'src/app/interfaces/servicios.interfaces';
 import { VentasService } from 'src/app/services/ventas.service';
 import { Ventas } from 'src/app/interfaces/ventas.interfaces';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -20,10 +20,14 @@ import { Router } from '@angular/router';
 export class AddVentasComponent {
   cliente: Usuario[] = [];
   servicio: Servicio[] = [];
+
+  id!: string;
+  sExiste: Boolean;
   constructor(
     private UsuarioServicio: UsuarioService,
     private fb: FormBuilder, private servicioServices: ServiciosService,
-    private ventasService: VentasService, private router: Router) { }
+    private ventasService: VentasService, private router: Router,
+    private route: ActivatedRoute) { }
 
 
   myForm: FormGroup = this.fb.group({
@@ -38,18 +42,48 @@ export class AddVentasComponent {
     this.servicioServices.getServicios().subscribe(res => {
       this.servicio = res.filter(servicio => servicio.estado == true)
     })
+
+
+    //Me permite recuperar el id
+    this.id = this.route.snapshot.params['id']
+    if (this.id) {
+      this.sExiste = true
+      this.ventasService.getOneVenta(this.id).subscribe((Venta: Ventas) => {
+        this.myForm.patchValue({
+          cliente: Venta.cliente._id,
+          servicio: Venta.servicio._id,
+          metodoPago: Venta.metodoPago
+
+        })
+      })
+    }
   }
 
   onSave(body: Ventas) {
-    this.ventasService.createVenta(body).subscribe(res => {
-      Swal.fire({
-        icon: 'success',
-        iconColor: '#745af2',
-        title: '¡Guardado!',
-        text: 'La información se ha guardado exitosamente.',
-      });
-      this.router.navigateByUrl("/dashboard/venta/list")
 
-    })
+    if (this.sExiste) {
+      this.ventasService.actualizarVenta(this.id, body).subscribe((venta: Ventas) => {
+        Swal.fire({
+          icon: 'success',
+          iconColor: 'success',
+          title: '¡Actualizado!',
+          text: 'La información se ha actualizado exitosamente.',
+        });
+        this.router.navigateByUrl("/dashboard/venta/list")
+      })
+
+    } else {
+
+      this.ventasService.createVenta(body).subscribe(res => {
+        Swal.fire({
+          icon: 'success',
+          iconColor: '#745af2',
+          title: '¡Guardado!',
+          text: 'La información se ha guardado exitosamente.',
+        });
+        this.router.navigateByUrl("/dashboard/venta/list")
+
+      })
+    }
   }
 }

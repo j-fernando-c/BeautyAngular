@@ -30,7 +30,6 @@ export class CalendarioComponent implements OnInit {
     this.citaService.getCita().subscribe(data => {
       this.cita = data
       this.dataSource.data = data;
-      console.log(this.cita)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

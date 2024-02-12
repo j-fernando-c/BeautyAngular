@@ -32,9 +32,22 @@ export class VentasService {
         }),
      )
   }
+  actualizarVenta(id:string, body:Ventas):Observable<Ventas>{
+    return this.http.put<Ventas>(this.url + id, body);
+  }
 
   EliminarVenta(id:string):Observable<Ventas>{
     return this.http.delete<Ventas>(this.url + id)
+    .pipe(
+      tap(()=>{
+        this.refresh$.next();
+      })
+
+      )
+  }
+
+  actualizarEstado(id:string):Observable<Ventas>{
+    return this.http.get<Ventas>(this.url2 + id) 
     .pipe(
       tap(()=>{
         this.refresh$.next();

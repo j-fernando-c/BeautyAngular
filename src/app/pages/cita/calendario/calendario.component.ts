@@ -20,8 +20,9 @@ export class CalendarioComponent implements OnInit {
 
   cita: Citas[] = [];
   search: string = '';
+  id: string;
   estilistas: Estilista[] = [];
-  estilistaSeleccionado: Estilista | null = null;
+  estilistaSeleccionado: string = '';
 
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
@@ -67,10 +68,12 @@ export class CalendarioComponent implements OnInit {
   }
 
 cargarCitas(): void {
-    if (this.estilistaSeleccionado?._id) {
-      // Obtener citas para el estilista seleccionado
-      // Puedes ajustar esto según tu API
-      this.citaService.getCitaPorEstilista(this.estilistaSeleccionado._id).subscribe(
+  console.log("id desde cargar citas:",this.estilistaSeleccionado)
+  if (this.estilistaSeleccionado) {
+    // Obtener citas para el estilista seleccionado
+    // Puedes ajustar esto según tu API
+    console.log("id desde cargar citas estilista:",this.estilistaSeleccionado)
+    this.citaService.getCitaPorEstilista(this.estilistaSeleccionado).subscribe(
         (data) => {
           this.cita = data;
           this.dataSource.data = data;
@@ -100,8 +103,8 @@ cargarCitas(): void {
 
   cargarEstilistas(): void {
     this.estilistaService.getEstilistas().subscribe(
-      (data) => {
-        this.estilistas = data;
+      (res) => {
+        this.estilistas= res.filter(estilista => estilista.estado == true);
       },
       (error) => {
         console.error('Error al obtener la lista de estilistas:', error);
@@ -111,7 +114,9 @@ cargarCitas(): void {
 
     // Método para cambiar el estilista seleccionado
     cambiarEstilistaSeleccionado(estilista: Estilista): void {
-      this.estilistaSeleccionado = estilista;
+      this.citaService.getCitaPorEstilista(this.estilistaSeleccionado).subscribe((res)=> {
+        this.cita = res
+      })
       this.cargarCitas();
     }
 

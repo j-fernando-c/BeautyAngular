@@ -7,6 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { CitaService } from 'src/app/services/cita.service';
+import { Estilista } from 'src/app/interfaces/estilista.interfaces';
+import { EstilistaService } from 'src/app/services/estilista.service';
 
 @Component({
   selector: 'app-calendario',
@@ -18,6 +20,8 @@ export class CalendarioComponent implements OnInit {
 
   cita: Citas[] = [];
   search: string = '';
+  estilistas: Estilista[] = [];
+  estilistaSeleccionado: Estilista | null = null;
 
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
@@ -29,9 +33,14 @@ export class CalendarioComponent implements OnInit {
 
   subcripcion!: Subscription;
 
-  constructor(private citaService: CitaService,private cdr: ChangeDetectorRef) { }
+  constructor(private citaService: CitaService,
+              private cdr: ChangeDetectorRef,
+              private estilistaService: EstilistaService) { }
 
   ngOnInit(): void {
+    this.cargarEstilistas();
+    this.cargarCitas();
+
     this.citaService.getCita().subscribe(data => {
       this.cita = data
       this.dataSource.data = data;
@@ -50,6 +59,61 @@ export class CalendarioComponent implements OnInit {
           });
         });
   };
+
+  onEstilistaChange(): void {
+    console.log('Estilista seleccionado:', this.estilistaSeleccionado);
+    // Llama a la función para cargar citas
+    this.cargarCitas();
+  }
+
+cargarCitas(): void {
+    if (this.estilistaSeleccionado?._id) {
+      // Obtener citas para el estilista seleccionado
+      // Puedes ajustar esto según tu API
+      this.citaService.getCitaPorEstilista(this.estilistaSeleccionado._id).subscribe(
+        (data) => {
+          this.cita = data;
+          this.dataSource.data = data;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          console.log('Citas cargadas por estilista:', data)
+        },
+        (error) => {
+          console.error('Error al obtener las citas:', error);
+        }
+      );
+    } else {
+      // Obtener todas las citas
+      this.citaService.getCita().subscribe(
+        (data) => {
+          this.cita = data;
+          this.dataSource.data = data;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        (error) => {
+          console.error('Error al obtener las citas:', error);
+        }
+      );
+    }
+  }
+
+  cargarEstilistas(): void {
+    this.estilistaService.getEstilistas().subscribe(
+      (data) => {
+        this.estilistas = data;
+      },
+      (error) => {
+        console.error('Error al obtener la lista de estilistas:', error);
+      }
+    );
+  }
+
+    // Método para cambiar el estilista seleccionado
+    cambiarEstilistaSeleccionado(estilista: Estilista): void {
+      this.estilistaSeleccionado = estilista;
+      this.cargarCitas();
+    }
 
   toggleEstadoCita(cita: Citas): void {
     let nuevoEstado = '';
@@ -92,10 +156,3 @@ export class CalendarioComponent implements OnInit {
 
 
 }
-
-
-
-
-
-
-

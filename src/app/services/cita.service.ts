@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, tap } from 'rxjs';
 import { Citas } from '../interfaces/cita.interfaces';
 
 @Injectable({
@@ -38,6 +38,18 @@ export class CitaService {
           this.refresh$.next();
         })
       );
+  }
+
+  getCitaPorEstilista(estilistaId: string): Observable<Citas[]> {
+
+    if (!estilistaId) {
+      console.error('EstilistaId no definido');
+      return EMPTY// Puedes ajustar esto según tus necesidades
+    }
+    // Asumo que tu backend espera el ID del estilista como un parámetro en la URL
+    const urlPorEstilista = `${this.url}estilista/${estilistaId}`;
+
+    return this.http.get<Citas[]>(urlPorEstilista);
   }
 
 

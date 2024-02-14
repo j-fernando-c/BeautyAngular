@@ -76,6 +76,8 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { MisCitasComponent } from './cita/mis-citas/mis-citas.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
+import { EditarCitaComponent } from './cita/editar-cita/editar-cita.component';
+import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilista.component';
 
 
 
@@ -127,6 +129,8 @@ import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.
     ChangePasswordComponent,
     MisCitasComponent,
     EditarClienteComponent,
+    EditarCitaComponent,
+    EditEstilistaComponent,
 
 
 

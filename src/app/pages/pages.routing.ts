@@ -40,6 +40,8 @@ import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.com
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditarCitaComponent } from './cita/editar-cita/editar-cita.component';
+import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilista.component';
 
 const routes: Routes = [
   {
@@ -57,7 +59,7 @@ const routes: Routes = [
       //Rutas para estilista
       { path: 'estilista/nuevo', component: CreateEstilistaComponent, },
       { path: 'estilista/list', component: ListEstilistaComponent, },
-      { path: 'estilista/edit/:id', component: CreateEstilistaComponent, },
+      { path: 'estilista/edit/:id', component: EditEstilistaComponent, },
       //Rutas para cliente
       { path: 'cliente/nuevo', component: CreateClienteComponent },
       { path: 'cliente/list', component: ListClienteComponent, },
@@ -87,6 +89,7 @@ const routes: Routes = [
       //Ruta cita
       { path: 'cita/list', component: CalendarioComponent },
       { path: 'cita/nuevo', component: AddCitaComponent },
+      { path: 'cita/edit/:id', component: EditarCitaComponent },
       {path:'cita/estilista/:id', component:MisCitasComponent},
 
       //Ruta cita

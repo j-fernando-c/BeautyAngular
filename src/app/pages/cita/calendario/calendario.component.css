@@ -80,7 +80,24 @@ th{
 
   }
 
-  /* .dropdown-container {
-    position: relative;
-    z-index: 1000;
+  /* select {
+    padding: 7px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #555;
+    appearance: none;
+    cursor: pointer;
+  } */
+
+
+  /* select:hover {
+    border-color: #aaa;
+  }
+
+  select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
   } */

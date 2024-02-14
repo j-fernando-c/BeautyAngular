@@ -118,20 +118,7 @@ export class ChangePasswordComponent implements OnInit {
       console.error("ID del usuario no disponible.");
       return;
     }
-
-    if (!this.myForm.valid) {
-      Swal.fire('Error', 'Complete el formulario correctamente', 'error');
-      return;
-    }else if (newcontrasena.length < 6) {
-      Swal.fire('Error', 'La nueva contraseña debe tener al menos 6 caracteres', 'error');
-      return;
-    }else if (recontrasena.length < 6) {
-      Swal.fire('Error', 'La nueva contraseña debe tener al menos 6 caracteres', 'error');
-      return;
-    } else if (newcontrasena !== recontrasena) {
-    Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
-    return;
-    }else if (this.sExiste &&  this.userRoles.includes('cliente') || this.userRoles.includes('admin')) {
+    if (this.sExiste &&  this.userRoles.includes('cliente') || this.userRoles.includes('admin')) {
       console.log("BUCLE USUARIO")
       this.usuarioService.actualizarContraseña(this.userId, oldcontrasena, newcontrasena).subscribe((res: Usuario) => {
         Swal.fire({
@@ -149,8 +136,16 @@ export class ChangePasswordComponent implements OnInit {
         if (error.status === 500) {
           Swal.fire('Error', 'Error en el servidor', 'error');
         }
+        else if (recontrasena.length < 6) {
+          Swal.fire('Error', 'La nueva contraseña debe tener al menos 6 caracteres', 'error');
+          return;
+        } else if (newcontrasena !== recontrasena) {
+        Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
+        return;
+        }
       }
       );
+
     }
     else if(this.sExiste &&  this.userRoles.includes('estilista')){
       console.log("BUCLE ESTILISTA")
@@ -172,6 +167,13 @@ export class ChangePasswordComponent implements OnInit {
           if (error.status === 500) {
             Swal.fire('Error', 'Error en el servidor', 'error');
           }
+          else if (recontrasena.length < 6) {
+          Swal.fire('Error', 'La nueva contraseña debe tener al menos 6 caracteres', 'error');
+          return;
+        } else if (newcontrasena !== recontrasena) {
+        Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
+        return;
+        }
         }
       )
     }

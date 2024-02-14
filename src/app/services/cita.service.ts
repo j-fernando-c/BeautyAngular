@@ -57,5 +57,21 @@ export class CitaService {
     );
   }
 
+  getOneCita(id: string): Observable<Citas> {
+    return this.http.get<Citas>(`${this.url}${id}`);
+  }
 
+  actualizarCita(id: string, body: Citas): Observable<Citas> {
+    return this.http.put<Citas>(`${this.url}${id}`, body);
+  }
+
+
+  EliminarCita(id: string): Observable<Citas> {
+    return this.http.delete<Citas>(`${this.url}${id}`)
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        })
+      );
+  }
 }

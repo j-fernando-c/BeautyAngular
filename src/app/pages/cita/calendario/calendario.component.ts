@@ -9,6 +9,8 @@ import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { CitaService } from 'src/app/services/cita.service';
 import { Estilista } from 'src/app/interfaces/estilista.interfaces';
 import { EstilistaService } from 'src/app/services/estilista.service';
+import { DatePipe } from '@angular/common'; // libreria de fechas
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-calendario',
@@ -36,7 +38,8 @@ export class CalendarioComponent implements OnInit {
 
   constructor(private citaService: CitaService,
               private cdr: ChangeDetectorRef,
-              private estilistaService: EstilistaService) { }
+              private estilistaService: EstilistaService
+              ) { }
 
   ngOnInit(): void {
     this.cargarEstilistas();
@@ -153,11 +156,30 @@ cargarCitas(): void {
 
 
 
-  aplicarFiltro(event: Event): void {
-    const valor = (event.target as HTMLInputElement).value;
-    this.search= valor.trim().toLowerCase();
-    this.dataSource.filter = valor;
+  aplicarFiltro(valor: string): void {
+    this.search = valor.trim().toLowerCase();
+    this.dataSource.filter = this.search;
   }
+
+    // Método para eliminar
+    eliminarCita(id: string) {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¡No podrás revertir esto!',
+        icon: 'warning',
+        iconColor: '#745af2',
+        showCancelButton: true,
+        confirmButtonColor: '#745af2',
+        cancelButtonColor: '#745af2',
+        confirmButtonText: 'Sí, eliminarlo'
+      }).then(result => {
+        if (result.isConfirmed) {
+          this.citaService.EliminarCita(id).subscribe(res => {
+            console.log('Se eliminó con éxito');
+          });
+        }
+      });
+    }
 
 
 }

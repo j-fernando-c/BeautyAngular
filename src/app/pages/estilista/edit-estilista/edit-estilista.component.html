@@ -51,23 +51,7 @@
             El correo electrónico debe una extensión válida.
           </span>
         </div>
-        <div class="mb-3">
-          <div class="form-group ">
-            <label for="" class="form-label">Ingrese su contraseña: </label>
-            <input class="form-control input" type="password" formControlName="contrasena" onfocus="(this.type='password')">
-            <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
-                La contraseña es requerida
-              </span>
-          </div>
 
-            <div class="form-group">
-              <label for="" class="form-label">Confirme su contraseña: </label>
-              <input class="form-control input" type="password" formControlName="recontrasena" >
-              <span class="text-danger" *ngIf="myForm.get('recontrasena')?.invalid && myForm.get('recontrasena')?.touched">
-                  La confirmación de contraseña es requerida
-                </span>
-            </div>
-          </div>
         <div class="mb-3">
           <label for="" class="form-label required">Teléfono</label>
           <input type="text"

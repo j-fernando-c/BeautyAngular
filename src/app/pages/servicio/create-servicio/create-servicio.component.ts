@@ -49,7 +49,6 @@ export class CreateServicioComponent implements OnInit {
           duracion: servicio.duracion,
           precio: servicio.precio,
           estilista: servicio.estilista.map(servicio => ({ _id: servicio._id, nombre: servicio.nombre }))
-
         })
       })
     }

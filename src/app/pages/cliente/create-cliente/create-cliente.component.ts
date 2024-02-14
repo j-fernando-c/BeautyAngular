@@ -38,7 +38,7 @@ export class CreateClienteComponent implements OnInit {
     Validators.maxLength(20), Validators.minLength(3)]],
     contrasena: ['', Validators.required],
     recontrasena: ['', Validators.required],
-    roles: [[], Validators.required]
+    roles: ['cliente', Validators.required]
   });
 
 

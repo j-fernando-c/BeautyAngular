@@ -25,6 +25,7 @@ export class EditarClienteComponent {
 
   
   roles: Role[] = [];
+  selectedRole: string | null = null;
   id!: string;
   sExiste: boolean = false;
   myForm: FormGroup = this.fb.group({
@@ -35,7 +36,7 @@ export class EditarClienteComponent {
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
-    roles: [[], Validators.required]
+    roles: ['', Validators.required]
   });
 
 
@@ -51,11 +52,12 @@ export class EditarClienteComponent {
     return null;
   }
 
-  selectedRole: string | null = null;
 
   ngOnInit(): void {
     this.rolesService.getRoles().subscribe(data => {
+
       this.roles = data.filter(role => role.nombre !== 'estilista' && role.nombre!=='admin');
+
       
     });
 

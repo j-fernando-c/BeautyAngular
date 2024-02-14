@@ -42,7 +42,12 @@ export class CitaService {
   }
 
   getByEstilistaId(id:string):Observable<Citas[]>{
-    return this.http.get<Citas[]>(`${this.url2}${id}/citas`)
+    return this.http.get<Citas[]>(`${this.url2}${id}/citas`)    
+     .pipe(
+      tap(() => {
+        this.refresh$.next();
+      })
+    );
   }
 
   getByClienteId(id:string):Observable<Citas[]>{

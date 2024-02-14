@@ -55,7 +55,7 @@
                 'btn-danger': cita.estado === 'cancelada',
                 'btn-warning': cita.estado === 'en espera',
                 'btn-info': cita.estado === 'pendiente'
-              }">
+              }"(click)="toggleEstadoCita(cita)">
                 {{ cita.estado === 'confirmada' ? 'Cancelada' : cita.estado === 'cancelada' ? 'En Espera' : cita.estado === 'en espera' ? 'Pendiente' : 'pendiente' }}
               </button>
             </td>

@@ -1,0 +1,18 @@
+.contenedores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  
+  .chart-container {
+    flex: 1;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.2), 0 6px 20px 0 rgba(0,0,0, 0.19);
+    margin: 0 10px 20px 0; /* Ajusta los márgenes según sea necesario */
+  }
+
+  p{
+    margin-top: 2em;
+    font-weight: bold;
+    text-align: center;
+  }
+  

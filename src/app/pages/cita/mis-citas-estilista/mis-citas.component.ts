@@ -49,5 +49,31 @@ export class MisCitasComponent implements OnInit {
     this.search= valor.trim().toLowerCase();
     this.dataSource.filter = valor;
   }
+  toggleEstadoCita(cita: Citas): void {
+    let nuevoEstado = '';
 
+    switch (cita.estado) {
+      case 'confirmada':
+        nuevoEstado = 'cancelada';
+        break;
+      case 'cancelada':
+        nuevoEstado = 'en espera';
+        break;
+      case 'en espera':
+        nuevoEstado = 'pendiente';
+        break;
+      case 'pendiente':
+        nuevoEstado = 'confirmada';
+        break;
+    }
+
+    this.citasService.actualizarEstado(cita._id, nuevoEstado).subscribe(
+      () => {
+        // Realiza acciones adicionales después de la actualización si es necesario
+      },
+      (error) => {
+        console.error('Error al cambiar el estado de la cita:', error);
+      }
+    );
+  }
 }

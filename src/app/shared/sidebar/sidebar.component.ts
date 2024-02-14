@@ -78,4 +78,23 @@ export class SidebarComponent implements OnInit {
     }
     return null;
   }
+  getUserRoleDisplayName(): string {
+    const userInfo = this.authService.getUserInfo();
+    if (userInfo) {
+      const mainRole = userInfo.roles[0]; 
+   
+      switch (mainRole.toLowerCase()) {
+        case 'admin':
+          return 'Administrador';
+        case 'estilista':
+          return 'Estilista';
+        case 'cliente':
+          return 'Cliente';
+        
+        default:
+          return 'Usuario'; 
+      }
+    }
+    return 'Usuario';
+  }
 }

@@ -12,8 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 
 //full calendar
 import { FullCalendarModule } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+
 
 
 import { NgChartsModule } from 'ng2-charts';
@@ -23,7 +22,7 @@ import { RouterModule } from '@angular/router'
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { CdkAccordionItem } from '@angular/cdk/accordion';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -161,7 +160,10 @@ import { MisCitasClientesComponent } from './cita/mis-citas-clientes/mis-citas-c
     NgxMaterialTimepickerModule,
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgChartsModule
+    
+    
 
 
 

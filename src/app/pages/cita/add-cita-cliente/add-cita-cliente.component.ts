@@ -119,7 +119,7 @@ export class AddCitaClienteComponent implements OnInit {
           title: '¡Guardado!',
           text: 'La información se ha guardado exitosamente.',
         });
-        this.router.navigateByUrl('/dashboard/cita/list/cliente');
+        this.router.navigateByUrl('/dashboard/cita/list/cliente/');
       },
       error: (error) => {
         console.log('HTTP Status Code:', error.status);

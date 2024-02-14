@@ -90,9 +90,9 @@
             </div>
           </div>
         <div class="mb-3">
-          <label for="" class="form-label required">Rol</label>
-          <select class="form-control" formControlName="roles" >
-            <option *ngFor="let role of roles" [value]="role.nombre">{{role.nombre}}</option>
+          
+          <select class="form-control"  formControlName="roles" hidden [disabled]="myForm.get('roles')!.disabled">
+            <option *ngFor="let role of roles" [value]="role.nombre" >{{role.nombre}}</option>
           </select>
           <span class="text-danger"
           *ngIf="myForm.get('roles')?.invalid && myForm.get('roles')?.touched">

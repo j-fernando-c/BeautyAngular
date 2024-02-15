@@ -19,25 +19,35 @@
 <div class="contenedores">
   <div class="chart-container">
     <p>Ranking de servicios utilizados</p>
-    <ngx-charts-pie-chart
-      [view]="[600, 400]"
-      [results]="chartData"
-      [doughnut]="true"
-      [labels]="true"
-      [legend]="true"
-  
-    ></ngx-charts-pie-chart>
+    <ngx-charts-bar-horizontal
+    [view]="[600,400]"
+    [customColors]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="'Porcentajes'"
+    [yAxisLabel]="'Servicios'"
+    [animations]="animations">
+    </ngx-charts-bar-horizontal>
   </div>
 
   <div class="chart-container">
     <p>Rerservas por Días de la Semana</p>
-    <ngx-charts-pie-chart
-      [view]="[600, 400]"
-      [results]="chartData2"
-      [doughnut]="true"
-      [labels]="true"
-      [legend]="true"
-   
-    ></ngx-charts-pie-chart>
+    <ngx-charts-line-chart
+    [view]="[600, 400]"
+    [customColors]="colorScheme"
+    [results]="chartData3"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="'Días'"
+    [yAxisLabel]="'Citas'">
+  </ngx-charts-line-chart>
   </div>
 </div>

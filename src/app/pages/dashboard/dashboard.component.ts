@@ -42,23 +42,13 @@ export class DashboardComponent {
       this.cantidadEstilistas = estilistas.length;
       
     });
-    this.clienteService.getCliente().subscribe(clientes=>{
+    this.usuarioService.getUsuarios().subscribe(clientes=>{
 
-      this.cantidadClientes=clientes.length;
-      this.cantidadDeClientesActivos=clientes.filter(cliente=>cliente.estado==true).length;
-      this.cantidadDeClientesInactivos=clientes.filter(cliente=>!cliente.estado==true).length;
+      this.cantidadClientes=clientes.filter(cliente=>cliente.roles.some(rol => rol.nombre === 'cliente')).length 
+      
+      
 
-      this.single = [
-        {
-          "name": "Activo",
-          "value": this.cantidadDeClientesActivos
-        },
-        {
-          "name": "Inactivo",
-          "value": this.cantidadDeClientesInactivos
-        },
-    
-      ];
+  
     })
 
     this.serviciosServices.getServicios().subscribe(servicios=>{

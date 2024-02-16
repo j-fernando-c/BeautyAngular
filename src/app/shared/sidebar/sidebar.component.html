@@ -41,7 +41,7 @@
         <li class="nav-small-cap">AGENDA</li>
 
         <li *ngIf="canAccessModule('admin') || canAccessModule('cliente')">
-          <a routerLink="/dashboard/turno/list" aria-expanded="false">
+          <a routerLink="/dashboard/turno/list" routerLinkActive="active" aria-expanded="false">
             <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">TURNOS </span>
           </a>
         </li>
@@ -49,7 +49,7 @@
 
 
         <li *ngIf="canAccessModule('admin') || canAccessModule('cliente') ">
-          <a routerLink="/dashboard/cita/list" aria-expanded="false">
+          <a routerLink="/dashboard/cita/list" routerLinkActive="active" aria-expanded="false">
             <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">CITAS</span>
           </a>
         </li>

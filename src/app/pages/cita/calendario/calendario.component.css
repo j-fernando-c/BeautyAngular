@@ -80,7 +80,7 @@ th{
 
   }
 
-  /* select {
+  select {
     padding: 7px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -89,15 +89,15 @@ th{
     color: #555;
     appearance: none;
     cursor: pointer;
-  } */
+  }
 
 
-  /* select:hover {
+  select:hover {
     border-color: #aaa;
   }
 
   select:focus {
     outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-  } */
+    border-color: #745af2;
+    box-shadow: 0 0 5px rgba(92, 92, 212, 0.5);
+  }

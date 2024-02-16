@@ -80,13 +80,13 @@ export class EditarCitaComponent implements OnInit {
     if (this.id) {
       this.sExiste = true;
       this.citaService.getOneCita(this.id).subscribe((res: Citas | null) => {
-        console.log(res?.estilista)
-        console.log(res?.participante)
+        console.log(res?.estilista.nombre)
+        console.log(res?.cliente.nombre)
         if (res) {
           this.myForm.patchValue({
-            cliente: res.participante,
-            servicio: res.servicio?._id,
-            estilista: res.estilista?._id,
+            cliente: res.cliente?._id,
+            // servicio: res.servicio?._id,
+            // estilista: res.estilista?._id,
             fechaCita: this.datePipe.transform(res.fechaCita, 'yyyy-MM-dd'), // Formatea la fecha
             horaCita: res.horaCita,
 
@@ -145,10 +145,11 @@ calcularDuracionServicio() {
 
 
 
-  onSave(body: Citas) {
+  onSave(citas: Citas) {
 
+    const body = {...citas}
 
-    this.citaService.createCitas(body).subscribe({
+    this.citaService.actualizarCita(this.id, body).subscribe({
 
       next: (res) => {
         Swal.fire({

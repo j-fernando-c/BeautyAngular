@@ -1,6 +1,7 @@
+
 export interface Citas {
     _id: string;
-    participante: { tipo: 'Cliente' | 'Usuario'; participanteId: string }[];
+    cliente: Cliente2;
     servicio: Servicio2;
     estilista: Estilista2;
     fechaCita: Date;

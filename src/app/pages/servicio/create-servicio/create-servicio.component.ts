@@ -29,7 +29,7 @@ export class CreateServicioComponent implements OnInit {
   myForm: FormGroup = this.fb.group({
     nombre_servicio: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ][a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ\s\-_]*[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]$/
       ),]],
-    duracion: ['', Validators.required],
+    duracion: ['', [Validators.required, Validators.min(1)]],
     precio: ['', Validators.required],
     estilista: ['', Validators.required]
   })

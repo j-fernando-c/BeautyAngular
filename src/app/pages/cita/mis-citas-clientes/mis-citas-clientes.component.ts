@@ -13,43 +13,43 @@ import { CitaService } from 'src/app/services/cita.service';
 })
 export class MisCitasClientesComponent implements OnInit {
   constructor(
-    private citasService:CitaService,
-    private router:ActivatedRoute){}
+    private citasService: CitaService,
+    private router: ActivatedRoute) { }
 
 
-  id!:string;
-  sExiste:boolean;
-  search:string;
-  citas:Citas[]=[]
+  id!: string;
+  sExiste: boolean;
+  search: string;
+  citas: Citas[] = []
 
 
-    // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
-    dataSource = new MatTableDataSource<Citas>();
-    displayedColumns: string[] = ['nombre', 'apellido', 'nombre_servicio', 'nombre_estilista', 'fechaCita', 'horaCita', 'estado'];
-  
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
-    @ViewChild(MatSort) sort!: MatSort;
+  // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
+  dataSource = new MatTableDataSource<Citas>();
+  displayedColumns: string[] = ['nombre_servicio', 'duracion', 'precio', 'nombre_estilista', 'fechaCita', 'horaCita', 'horaFinCita', 'estado'];
 
-    ngOnInit(): void {
-      this.id = this.router.snapshot.params['id'];
-  
-      if (this.id) {
-        this.sExiste = true;
-        this.citasService.getByClienteId(this.id).subscribe(data => {
-        
-           this.citas = data
-           this.dataSource.data = data;
-           this.dataSource.paginator = this.paginator;
-           this.dataSource.sort = this.sort;
-           
-        });
-      }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngOnInit(): void {
+    this.id = this.router.snapshot.params['id'];
+
+    if (this.id) {
+      this.sExiste = true;
+      this.citasService.getByClienteId(this.id).subscribe(data => {
+
+        this.citas = data
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      });
     }
-  
-    aplicarFiltro(event: Event): void {
-      const valor = (event.target as HTMLInputElement).value;
-      this.search= valor.trim().toLowerCase();
-      this.dataSource.filter = valor;
-    }
+  }
+
+  aplicarFiltro(event: Event): void {
+    const valor = (event.target as HTMLInputElement).value;
+    this.search = valor.trim().toLowerCase();
+    this.dataSource.filter = valor;
+  }
 
 }

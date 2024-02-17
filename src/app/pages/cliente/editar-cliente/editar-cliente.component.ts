@@ -29,14 +29,15 @@ export class EditarClienteComponent {
   id!: string;
   sExiste: boolean = false;
   myForm: FormGroup = this.fb.group({
-    telefono:['', Validators.required],
+    telefono:['', [Validators.required,  Validators.pattern(/^[1-9]\d{6,9}$/
+    )]],
     direccion:['', Validators.required],
     nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
-    roles: ['', Validators.required]
+
   });
 
 
@@ -74,7 +75,6 @@ export class EditarClienteComponent {
             email: res.email,
             telefono:res.telefono,
             direccion:res.direccion,
-            roles: roleId
           });
         }
       });

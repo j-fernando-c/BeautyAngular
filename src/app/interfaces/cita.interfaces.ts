@@ -5,6 +5,7 @@ export interface Citas {
     estilista: Estilista2;
     fechaCita: Date;
     horaCita: Date;
+    horaFinCita:Date;
     estado: 'confirmada' | 'cancelada' | 'en espera' | 'pendiente';
 }
 

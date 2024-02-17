@@ -42,7 +42,8 @@ export class EditarPerfilComponent implements OnInit {
 
 
   myForm: FormGroup = this.fb.group({
-    telefono: ['', [Validators.pattern(/^\d{7,10}$/)]],
+    telefono: ['', [Validators.pattern(/^[1-9]\d{6,9}$/
+    )]],
     direccion: [''],
     nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],

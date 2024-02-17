@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Subscription, from } from 'rxjs';
 import { Ventas } from 'src/app/interfaces/ventas.interfaces';
-import { MatDialog } from '@angular/material/dialog';
 import { VentasService } from 'src/app/services/ventas.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,7 +18,7 @@ export class ListVentasComponent implements OnInit {
 
   // Contiene los usuarios
   dataSource = new MatTableDataSource<Ventas>();
-  displayedColumns: string[] = [ 'clientes', 'servicios', 'precio', 'medio-pago', 'estado', 'acciones'];
+  displayedColumns: string[] = [ 'nombre','apellido', 'servicios', 'precio', 'medio-pago', 'estado', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

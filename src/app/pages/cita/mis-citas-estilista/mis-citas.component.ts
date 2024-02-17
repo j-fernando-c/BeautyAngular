@@ -20,7 +20,7 @@ export class MisCitasComponent implements OnInit {
 
     // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
     dataSource = new MatTableDataSource<Citas>();
-    displayedColumns: string[] = ['nombre', 'apellido', 'nombre_servicio', 'nombre_estilista', 'fechaCita', 'horaCita', 'estado'];
+    displayedColumns: string[] = ['nombre', 'apellido', 'nombre_servicio', 'duracion', 'fechaCita', 'horaCita', 'horaFinCita', 'estado'];
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -39,16 +39,17 @@ export class MisCitasComponent implements OnInit {
          this.dataSource.data = data;
          this.dataSource.paginator = this.paginator;
          this.dataSource.sort = this.sort;
-         
       });
     }
   }
 
-  aplicarFiltro(event: Event): void {
-    const valor = (event.target as HTMLInputElement).value;
-    this.search= valor.trim().toLowerCase();
-    this.dataSource.filter = valor;
+  aplicarFiltro(): void {
+    this.dataSource.filter = this.search.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
+  
   toggleEstadoCita(cita: Citas): void {
     let nuevoEstado = '';
 

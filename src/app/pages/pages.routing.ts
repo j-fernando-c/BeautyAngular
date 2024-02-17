@@ -90,8 +90,10 @@ const routes: Routes = [
       //Ruta cita
       { path: 'cita/list', component: CalendarioComponent },
       { path: 'cita/nuevo', component: AddCitaComponent },
+      { path: 'cita/nuevo/cliente/:id', component: AddCitaClienteComponent },
       { path: 'cita/edit/:id', component: EditarCitaComponent },
-      {path:'cita/estilista/:id', component:MisCitasComponent},
+      { path: 'cita/list/cliente/:id', component: MisCitasClientesComponent },
+      { path: 'cita/estilista/:id', component: MisCitasComponent },
 
       //Ruta cita
       // {path:'citas/list', component:CalendarioAgendaComponent},

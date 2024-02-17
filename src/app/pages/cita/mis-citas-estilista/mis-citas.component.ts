@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CitaService } from 'src/app/services/cita.service';
 import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,7 +27,8 @@ export class MisCitasComponent implements OnInit {
 
   constructor(
     private citasService:CitaService,
-    private router:ActivatedRoute){}
+    private router:ActivatedRoute,
+    private cdr: ChangeDetectorRef,){}
   ngOnInit(): void {
     this.id = this.router.snapshot.params['id'];
 
@@ -68,6 +69,7 @@ export class MisCitasComponent implements OnInit {
     this.citasService.actualizarEstado(cita._id, nuevoEstado).subscribe(
       () => {
         // Realiza acciones adicionales después de la actualización si es necesario
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error al cambiar el estado de la cita:', error);

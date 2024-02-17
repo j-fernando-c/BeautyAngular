@@ -34,7 +34,6 @@ export class EditUsuarioComponent implements OnInit {
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
-    roles: [[], Validators.required]
   });
 
 
@@ -69,7 +68,6 @@ export class EditUsuarioComponent implements OnInit {
             nombre: res.nombre,
             apellido: res.apellido,
             email: res.email,
-            roles: roleId,
           });
         }
       });

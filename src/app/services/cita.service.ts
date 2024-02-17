@@ -11,7 +11,8 @@ export class CitaService {
   private refresh$ = new Subject<void>
   constructor(private http:HttpClient) { }
 
-  private url = "http://localhost:5000/api/citas/"
+  private url = "http://localhost:5000/api/citas/";
+  private url2="http://localhost:5000/api/citas/";
 
 
   get refresh(){

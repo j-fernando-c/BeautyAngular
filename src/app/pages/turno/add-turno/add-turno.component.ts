@@ -40,6 +40,7 @@ export class AddTurnoComponent implements OnInit {
     this.serviceEtilista.getEstilistas().subscribe(res => {
       this.Estilista = res.filter(estilista => estilista.estado == true);
     })
+    
   }
 
 

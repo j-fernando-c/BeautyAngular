@@ -1,14 +1,53 @@
-<ngx-charts-bar-vertical
-  [view]="[1000, 400]"
-  [results]="citasPorDia"
-  [gradient]="gradient"
-  [showGridLines]="showGridLines"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
->
-</ngx-charts-bar-vertical>
+<form action="" [formGroup]="myForm">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="">Desde</label>
+      <input type="date" class="form-control" formControlName="startDate">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="">Hasta:</label>
+      <div class="input-group">
+        <input type="date" class="form-control" formControlName="endDate">
+        <div class="input-group-append">
+          <button class="btn btn-primary ml-2" type="submit" (click)="onSave()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="contenedores">
+  <div class="chart-container">
+    <p>Ranking de servicios utilizados</p>
+    <ngx-charts-bar-horizontal
+    [view]="[600,400]"
+    [customColors]="colorScheme"
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="'Porcentajes'"
+    [yAxisLabel]="'Servicios'"
+    [animations]="animations">
+    </ngx-charts-bar-horizontal>
+  </div>
+
+  <div class="chart-container">
+    <p>Rerservas por Días de la Semana</p>
+    <ngx-charts-line-chart
+    [view]="[600, 400]"
+    [customColors]="colorScheme"
+    [results]="chartData3"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="'Días'"
+    [yAxisLabel]="'Citas'">
+  </ngx-charts-line-chart>
+  </div>
+</div>

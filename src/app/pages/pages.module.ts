@@ -12,8 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 
 //full calendar
 import { FullCalendarModule } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+
 
 
 import { NgChartsModule } from 'ng2-charts';
@@ -23,7 +22,7 @@ import { RouterModule } from '@angular/router'
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { CdkAccordionItem } from '@angular/cdk/accordion';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -65,17 +64,17 @@ import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.comp
 import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.component';
 import { NgxMaterialTimepickerModule, NgxTimepickerFieldComponent } from 'ngx-material-timepicker';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
-import { AgregarCitaComponent } from './calendario/agregar-cita/agregar-cita.component';
-import { DetalleCitaComponent } from './calendario/detalle-cita/detalle-cita.component';
-import { CalendarioAgendaComponent } from './calendario/calendario-agenda/calendario-agenda.component';
 import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-cliente-activo.component';
 import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
 import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estilista-turno-edit.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { MisCitasComponent } from './cita/mis-citas/mis-citas.component';
+import { MisCitasComponent } from './cita/mis-citas-estilista/mis-citas.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
+import { ListVentasInactivasComponent } from './ventas/list-ventas-inactivas/list-ventas-inactivas.component';
+import { AddCitaClienteComponent } from './cita/add-cita-cliente/add-cita-cliente.component';
+import { MisCitasClientesComponent } from './cita/mis-citas-clientes/mis-citas-clientes.component';
 import { EditarCitaComponent } from './cita/editar-cita/editar-cita.component';
 import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilista.component';
 
@@ -117,9 +116,7 @@ import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilist
     DetalleVentaComponent,
     EditUsuarioComponent,
     EditTurnoComponent,
-    AgregarCitaComponent,
-    DetalleCitaComponent,
-    CalendarioAgendaComponent,
+
 
     ListClienteActivoComponent,
     EstilistaTurnoComponent,
@@ -129,6 +126,9 @@ import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilist
     ChangePasswordComponent,
     MisCitasComponent,
     EditarClienteComponent,
+    ListVentasInactivasComponent,
+    AddCitaClienteComponent,
+    MisCitasClientesComponent,
     EditarCitaComponent,
     EditEstilistaComponent,
 
@@ -164,7 +164,10 @@ import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilist
     NgxMaterialTimepickerModule,
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgChartsModule
+
+
 
 
 

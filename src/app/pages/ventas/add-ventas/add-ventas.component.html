@@ -7,8 +7,8 @@
                   <select class="form-control"
                       formControlName="cliente">
                       <option value="">Selecione un cliente</option>
-                      <option [value]="cliente._id" *ngFor="let cliente of cliente">{{cliente.nombre}}
-                          {{cliente.apellido}}</option>
+                      <option [value]="c._id" *ngFor="let c of cliente">{{c.nombre}}
+                          {{c.apellido}}</option>
                   </select>
                   <span class="text-danger"
                       *ngIf="myForm.get('cliente')?.invalid && myForm.get('cliente')?.touched">

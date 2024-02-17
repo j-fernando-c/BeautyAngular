@@ -1,0 +1,95 @@
+<!-- list-usuario.component.html -->
+<div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-end">
+        <input type="text" class="barra mb-4" placeholder="Buscar cita..." [(ngModel)]="search" (keyup)="aplicarFiltro()">
+      </div>
+      <div class="table-responsive sombra">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+          <!-- Nombre Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre cliente</th>
+            <td mat-cell *matCellDef="let cita">{{ cita.cliente.nombre | titlecase }}</td>
+          </ng-container>
+  
+          <!-- Apellido Column -->
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido cliente</th>
+            <td mat-cell *matCellDef="let cita">{{ cita.cliente.apellido | titlecase }}</td>
+          </ng-container>
+  
+          <!-- Email Column -->
+          <ng-container matColumnDef="nombre_servicio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre servicio</th>
+            <td mat-cell *matCellDef="let cita">{{ cita.servicio.nombre_servicio | titlecase }}</td>
+          </ng-container>
+  
+          <!-- Estilista Column -->
+          <ng-container matColumnDef="duracion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Duracion(min)</th>
+            <td mat-cell *matCellDef="let cita">{{cita.servicio.duracion}}</td>
+          </ng-container>
+  
+          <!-- fecha Column -->
+          <ng-container matColumnDef="fechaCita">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha cita</th>
+            <td mat-cell *matCellDef="let cita">{{ cita.fechaCita | date: 'YYYY-MM-dd' : 'UTC' }}</td>
+          </ng-container>
+  
+        <!-- hora Column -->
+        <ng-container matColumnDef="horaCita">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora cita</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.horaCita| date: 'HH:mm a' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="horaFinCita">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora fin</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.horaFinCita |  date: 'HH:mm a'  }}</td>
+        </ng-container>
+
+          <!-- Estado Column -->
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let cita">
+              <button class="btn" [ngClass]="{
+                'btn-success': cita.estado === 'confirmada',
+                'btn-danger': cita.estado === 'cancelada',
+                'btn-warning': cita.estado === 'en espera',
+                'btn-info': cita.estado === 'pendiente'
+              }"(click)="toggleEstadoCita(cita)">
+                {{ cita.estado === 'confirmada' ? 'Cancelada' : cita.estado === 'cancelada' ? 'En Espera' : cita.estado === 'en espera' ? 'Pendiente' : 'pendiente' }}
+              </button>
+            </td>
+          </ng-container>
+  
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let cita" [ngSwitch]="cita.estado">
+              <ng-container *ngSwitchCase="true">
+                <!-- Contenido cuando el usuario está activo -->
+                <a id="link" class="btn btn-success btn-sm" routerLink="">
+                  Editar <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a id="link" class="btn btn-danger btn-sm ml-1">
+                  Eliminar<i class="fas fa-trash-alt"></i>
+                </a>
+              </ng-container>
+              <ng-container *ngSwitchCase="false">
+                <!-- Contenido cuando el usuario está inactivo -->
+                <!-- Puedes poner algo diferente o dejarlo vacío -->
+              </ng-container>
+            </td>
+          </ng-container>
+  
+          <!-- Define las filas de la tabla -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!-- Agrega el paginador -->
+        <mat-paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+  

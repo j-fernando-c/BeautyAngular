@@ -29,7 +29,8 @@ export class CreateClienteComponent implements OnInit {
   sExiste: boolean = false;
   roles:Role[]=[]
   myForm: FormGroup = this.fb.group({
-    telefono: ['', [Validators.required,  Validators.pattern(/^\d{7,10}$/)]],
+    telefono: ['', [Validators.required,  Validators.pattern(/^[1-9]\d{6,9}$/
+    )]],
     direccion: ['', Validators.required],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
@@ -38,7 +39,7 @@ export class CreateClienteComponent implements OnInit {
     Validators.maxLength(20), Validators.minLength(3)]],
     contrasena: ['', Validators.required],
     recontrasena: ['', Validators.required],
-    roles: [[], Validators.required]
+    roles: ['cliente', Validators.required]
   });
 
 

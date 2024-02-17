@@ -61,7 +61,7 @@
               El telefono es requerido
             </span>
             <span class="text-danger" *ngIf="myForm.get('telefono')?.hasError('pattern')">
-              El teléfono debe tener entre 7 y 10 dígitos
+              El teléfono debe tener entre 7 y 10 dígitos y no puede iniciar en 0
             </span>
           </div>
           <div class="mb-3">
@@ -71,17 +71,6 @@
             <span class="text-danger" *ngIf="myForm.get('direccion')?.invalid && myForm.get('direccion')?.touched">
               La dirección es requerida
             </span>
-          </div>
-         
-          <div class="mb-3">
-            <label for="" class="form-label required">Rol</label>
-            <select class="form-control" formControlName="roles" >
-              <option *ngFor="let role of roles" [value]="role._id">{{role.nombre}}</option>
-            </select>
-            <span class="text-danger"
-            *ngIf="myForm.get('roles')?.invalid && myForm.get('roles')?.touched">
-            Por favor, seleccione un rol
-        </span>
           </div>
           <div class="botones">
           <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"

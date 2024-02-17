@@ -34,7 +34,7 @@ export class CreateUsuarioComponent implements OnInit {
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
     contrasena: ['', Validators.required],
     recontrasena: ['', Validators.required],
-    roles: [[], Validators.required]
+    roles: ['admin', Validators.required]
   });
 
   get correo() {

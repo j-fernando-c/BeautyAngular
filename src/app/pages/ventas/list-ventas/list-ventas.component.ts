@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Subscription, from } from 'rxjs';
 import { Ventas } from 'src/app/interfaces/ventas.interfaces';
-import { MatDialog } from '@angular/material/dialog';
 import { VentasService } from 'src/app/services/ventas.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,7 +18,7 @@ export class ListVentasComponent implements OnInit {
 
   // Contiene los usuarios
   dataSource = new MatTableDataSource<Ventas>();
-  displayedColumns: string[] = [ 'clientes', 'servicios', 'precio', 'medio-pago','acciones'];
+  displayedColumns: string[] = [ 'nombre','apellido', 'servicios', 'precio', 'medio-pago', 'estado', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -36,7 +35,7 @@ export class ListVentasComponent implements OnInit {
   ngOnInit(): void {
     this.ventasService.getVentas().subscribe(data => {
       this.ventas = data;
-      this.dataSource.data = data;
+      this.dataSource.data = data.filter(venta=>venta.estado==true);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -44,7 +43,7 @@ export class ListVentasComponent implements OnInit {
     this.subcripcion = this.ventasService.refresh.subscribe(() => {
       this.ventasService.getVentas().subscribe(data => {
       this.ventas = data;
-      this.dataSource.data = data;
+      this.dataSource.data = data.filter(venta=>venta.estado==true);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       });
@@ -68,6 +67,15 @@ export class ListVentasComponent implements OnInit {
         })
       }
     })
+
+  }
+
+  //Metódo que me permite cambiar de estado
+  cambioEstado(id:string){
+    this.ventasService.actualizarEstado(id).subscribe(res=>{
+
+    })
+
 
   }
     aplicarFiltro(valor: string): void {

@@ -21,10 +21,10 @@ export class MisCitasComponent implements OnInit {
     // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
     dataSource = new MatTableDataSource<Citas>();
     displayedColumns: string[] = ['nombre', 'apellido', 'nombre_servicio', 'duracion', 'fechaCita', 'horaCita', 'horaFinCita', 'estado'];
-  
+
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
-  
+
   constructor(
     private citasService:CitaService,
     private router:ActivatedRoute){}
@@ -34,7 +34,7 @@ export class MisCitasComponent implements OnInit {
     if (this.id) {
       this.sExiste = true;
       this.citasService.getByEstilistaId(this.id).subscribe(data => {
-      
+
          this.citas = data
          this.dataSource.data = data;
          this.dataSource.paginator = this.paginator;
@@ -49,24 +49,21 @@ export class MisCitasComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
   toggleEstadoCita(cita: Citas): void {
     let nuevoEstado = '';
 
     switch (cita.estado) {
       case 'confirmada':
-        nuevoEstado = 'cancelada';
-        break;
+          nuevoEstado = 'cancelada';
+          break;
       case 'cancelada':
-        nuevoEstado = 'en espera';
-        break;
-      case 'en espera':
-        nuevoEstado = 'pendiente';
-        break;
+          nuevoEstado = 'pendiente';
+          break;
       case 'pendiente':
-        nuevoEstado = 'confirmada';
-        break;
-    }
+          nuevoEstado = 'confirmada';
+          break;
+  }
 
     this.citasService.actualizarEstado(cita._id, nuevoEstado).subscribe(
       () => {

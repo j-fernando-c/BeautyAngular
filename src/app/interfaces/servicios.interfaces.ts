@@ -4,7 +4,7 @@ export interface Servicio {
     duracion:        number;
     precio:          number;
     estado:          boolean;
-    estilista:       Estilista[];
+    estilista:       Estilista;
 
 }
 

@@ -31,7 +31,7 @@ export class CreateServicioComponent implements OnInit {
       ),]],
     duracion: ['', [Validators.required, Validators.min(1)]],
     precio: ['', Validators.required],
-    estilista: ['', Validators.required]
+    estilista: [, Validators.required]
   })
   ngOnInit(): void {
     this.estilistaService.getEstilistas().subscribe(data => {
@@ -43,12 +43,12 @@ export class CreateServicioComponent implements OnInit {
     this.id = this.route.snapshot.params['id']
     if (this.id) {
       this.sExiste = true
-      this.servicioService.getOneServicio(this.id).subscribe((servicio: Servicio) => {
+      this.servicioService.getOneServicio(this.id).subscribe((servicio:Servicio | null) => {
         this.myForm.patchValue({
-          nombre_servicio: servicio.nombre_servicio,
-          duracion: servicio.duracion,
-          precio: servicio.precio,
-          estilista: servicio.estilista.map(servicio => ({ _id: servicio._id, nombre: servicio.nombre }))
+          nombre_servicio: servicio?.nombre_servicio,
+          duracion: servicio?.duracion,
+          precio: servicio?.precio,
+          estilista: servicio?.estilista._id
         })
       })
     }

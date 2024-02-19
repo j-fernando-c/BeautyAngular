@@ -3,6 +3,7 @@ import { EstilistaService } from './../../../services/estilista.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { setDay } from 'ngx-bootstrap/chronos/utils/date-setters';
 import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { Estilista } from 'src/app/interfaces/estilista.interfaces';
 import { Servicio } from 'src/app/interfaces/servicios.interfaces';
@@ -77,13 +78,19 @@ export class AddCitaComponent implements OnInit {
 
   obtenerFechaActual(): void {
     const today = new Date();
-    const year = today.getFullYear();
-    const month = ('0' + (today.getMonth() + 1)).slice(-2);
-    const day = ('0' + today.getDate()).slice(-2);
-
-    this.fechaActual = `${year}-${month}-${day}`;
+    let fechaActual = new Date(today);
+  
+    // Ajustar la fecha al día siguiente si es hoy
+    fechaActual.setDate(today.getDate() + 1);
+  
+    const year = fechaActual.getFullYear();
+    const month = ('0' + (fechaActual.getMonth() + 1)).slice(-2);
+    const day = ('0' + fechaActual.getDate()).slice(-2);
+  
+    const nuevaFecha = `${year}-${month}-${day}`;
+    this.fechaActual = nuevaFecha;
   }
-
+  
 
 cargarEstilistasPorServicio() {
   const servicioSeleccionado = this.myForm.get('servicio')?.value;

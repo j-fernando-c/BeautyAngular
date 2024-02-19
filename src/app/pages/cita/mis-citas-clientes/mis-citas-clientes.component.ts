@@ -52,4 +52,21 @@ export class MisCitasClientesComponent implements OnInit {
     this.dataSource.filter = valor;
   }
 
+  toggleEstadoCita(cita: Citas): void {
+    let nuevoEstado = '';
+
+    switch (cita.estado) {
+      case 'confirmada':
+          nuevoEstado = 'cancelada';
+          break;
+      case 'cancelada':
+          nuevoEstado = 'pendiente';
+          break;
+      case 'pendiente':
+          nuevoEstado = 'confirmada';
+          break;
+  }
+}
+
+
 }

@@ -54,7 +54,6 @@ export class MisCitasComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
   toggleEstadoCita(cita: Citas): void {
     let nuevoEstado = '';
 
@@ -70,15 +69,19 @@ export class MisCitasComponent implements OnInit {
           break;
   }
 
+  console.log('Estado anterior:', cita.estado);
+  console.log('Nuevo estado:', nuevoEstado);
+
     this.citasService.actualizarEstado(cita._id, nuevoEstado).subscribe(
-      (next) => {
+      () => {
         // Realiza acciones adicionales después de la actualización si es necesario
+        console.log('Estado actualizado correctamente');
         this.cdr.detectChanges();
-        window.location.reload()
+        
       },
       (error) => {
-     
+        console.error('Error al cambiar el estado de la cita:', error);
       }
     );
-  }
-}
+
+}}

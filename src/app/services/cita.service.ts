@@ -50,6 +50,7 @@ export class CitaService {
     const urlPorEstilista = `${this.url}estilista/${estilistaId}`;
 
     return this.http.get<Citas[]>(urlPorEstilista).pipe(
+      
       catchError((error) => {
         console.error('Error al obtener citas por estilista:', error);
         // Puedes manejar el error según tus necesidades

@@ -1,10 +1,11 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CitaService } from 'src/app/services/cita.service';
 import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mis-citas',
@@ -24,11 +25,13 @@ export class MisCitasComponent implements OnInit {
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
+    private refreshSubscription: Subscription;
 
   constructor(
     private citasService:CitaService,
     private router:ActivatedRoute,
-    private cdr: ChangeDetectorRef,){}
+    private cdr: ChangeDetectorRef,
+    private route:Router){}
   ngOnInit(): void {
     this.id = this.router.snapshot.params['id'];
 
@@ -42,6 +45,7 @@ export class MisCitasComponent implements OnInit {
          this.dataSource.sort = this.sort;
       });
     }
+
   }
 
   aplicarFiltro(): void {
@@ -67,12 +71,13 @@ export class MisCitasComponent implements OnInit {
   }
 
     this.citasService.actualizarEstado(cita._id, nuevoEstado).subscribe(
-      () => {
+      (next) => {
         // Realiza acciones adicionales después de la actualización si es necesario
         this.cdr.detectChanges();
+        window.location.reload()
       },
       (error) => {
-        console.error('Error al cambiar el estado de la cita:', error);
+     
       }
     );
   }

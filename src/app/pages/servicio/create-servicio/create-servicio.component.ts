@@ -36,11 +36,12 @@ export class CreateServicioComponent implements OnInit {
   ngOnInit(): void {
     this.estilistaService.getEstilistas().subscribe(data => {
       this.estilista=data.filter(estilista=>estilista.estado==true);
-      
+
     });
 
     //Me permite recuperar el id
     this.id = this.route.snapshot.params['id']
+    console.log()
     if (this.id) {
       this.sExiste = true
       this.servicioService.getOneServicio(this.id).subscribe((servicio: Servicio) => {
@@ -48,7 +49,8 @@ export class CreateServicioComponent implements OnInit {
           nombre_servicio: servicio.nombre_servicio,
           duracion: servicio.duracion,
           precio: servicio.precio,
-          estilista: servicio.estilista.map(servicio => ({ _id: servicio._id, nombre: servicio.nombre }))
+          // estilista: servicio.estilista.map(servicio => ({ _id: this.estilista._id }))
+          estilista: servicio.estilista.map(estilista => estilista._id)
         })
       })
     }
@@ -64,7 +66,7 @@ export class CreateServicioComponent implements OnInit {
             text: 'La información se ha actualizado exitosamente.',
           });
           this.router.navigateByUrl("/dashboard/servicio/list")
-        })      
+        })
     }else{
       this.servicioService.createServicio(servicio).subscribe(res=>{
         Swal.fire({

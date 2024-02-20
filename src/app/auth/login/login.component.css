@@ -61,7 +61,7 @@ Login register and recover password Page
   border-bottom: 1px solid rgba(110, 48, 131, 1);
   outline: none;
   box-sizing: border-box;
-  
+
 }
 
 .input:focus {
@@ -69,5 +69,10 @@ Login register and recover password Page
   border-bottom: 1px solid rgba(110, 48, 131, 1);
   outline: none;
   box-sizing: border-box;
-  
+
+}
+
+#loginform{
+  margin-top: 50px;
+
 }

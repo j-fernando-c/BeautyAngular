@@ -63,6 +63,7 @@ export class CitaService {
     return this.http.get<Citas>(`${this.url}${id}`);
   }
 
+
   actualizarCita(id: string, body: Citas): Observable<Citas> {
     return this.http.put<Citas>(`${this.url}${id}`, body);
   }

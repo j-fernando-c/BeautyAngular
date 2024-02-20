@@ -64,7 +64,7 @@ const routes: Routes = [
       //Rutas para cliente
       { path: 'cliente/nuevo', component: CreateClienteComponent },
       { path: 'cliente/list', component: ListClienteComponent, },
-      { path: 'cliente/activo/list', component: ListClienteActivoComponent },
+      { path: 'cliente/historial/:id', component: ListClienteActivoComponent },
       { path: 'cliente/edit/:id', component: EditarClienteComponent, },
       //Rutas para Usuario
       { path: 'usuarios/list', component: ListUsuarioComponent, },

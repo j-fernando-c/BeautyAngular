@@ -77,6 +77,7 @@ export class MisCitasComponent implements OnInit {
         // Realiza acciones adicionales después de la actualización si es necesario
         console.log('Estado actualizado correctamente');
         this.cdr.detectChanges();
+        window.location.reload()
         
       },
       (error) => {

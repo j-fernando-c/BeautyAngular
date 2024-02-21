@@ -80,6 +80,7 @@ export class EditarCitaComponent implements OnInit {
     if (this.id) {
       this.sExiste = true;
       this.citaService.getOneCita(this.id).subscribe((res: Citas | null) => {
+        console.log(res)
         console.log(res?.estilista.nombre)
         console.log(res?.cliente.nombre)
         if (res) {

@@ -18,6 +18,7 @@ export class DashboardComponent {
   single: any[]=[]
   citasPorDias:any[]=[]
   singleUusario:any[]=[];
+  cantidadUsuario:number;
   cantidadEstilistas:number=0;
   cantidadClientes:number=0;
   cantidadServicios:number=0;
@@ -45,10 +46,8 @@ export class DashboardComponent {
     this.usuarioService.getUsuarios().subscribe(clientes=>{
 
       this.cantidadClientes=clientes.filter(cliente=>cliente.roles.some(rol => rol.nombre === 'cliente')).length 
-      
-      
-
-  
+      this.cantidadUsuario=clientes.filter(cliente=>cliente.roles.some(rol => rol.nombre === 'admin')).length 
+        
     })
 
     this.serviciosServices.getServicios().subscribe(servicios=>{

@@ -31,21 +31,16 @@ export class CitaComponent implements OnInit {
 
   }
   onEstilistaChange(event: any): void {
-    console.log(this.estilistaSeleccionado);
     this.turnosService.getTurnos(this.estilistaSeleccionado).subscribe((res) => {
       this.turnos = res;
-
-
     })
 
   }
   cambioEstado(id: string) {
     this.turnosService.actulizarEstado(id).subscribe(res => {
-
+      this.onEstilistaChange(this.estilistaSeleccionado);
     });
   }
-
-
 
 
 }

@@ -46,7 +46,7 @@
 
               <input class=""[value]="(turno.finT | date:'h:mm a') ?? ''" readonly>
             </td>
-            <td>
+            <td *ngIf="turno.estado">
               <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/turno/edit/{{turno._id}}">
                 Editar <i class="fas fa-pencil-alt"></i>
               </a>

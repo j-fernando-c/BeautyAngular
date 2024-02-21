@@ -47,9 +47,10 @@ export class CitaService {
       console.error('EstilistaId no definido');
       return EMPTY;
     }
-    const urlPorEstilista = `${this.url}estilista/${estilistaId}`;
+    const urlPorEstilista = `${this.url}${estilistaId}/citas`;
 
     return this.http.get<Citas[]>(urlPorEstilista).pipe(
+      
       catchError((error) => {
         console.error('Error al obtener citas por estilista:', error);
         // Puedes manejar el error según tus necesidades
@@ -61,6 +62,7 @@ export class CitaService {
   getOneCita(id: string): Observable<Citas> {
     return this.http.get<Citas>(`${this.url}${id}`);
   }
+
 
   actualizarCita(id: string, body: Citas): Observable<Citas> {
     return this.http.put<Citas>(`${this.url}${id}`, body);

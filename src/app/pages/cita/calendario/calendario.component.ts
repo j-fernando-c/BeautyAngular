@@ -64,17 +64,16 @@ export class CalendarioComponent implements OnInit {
   };
 
   onEstilistaChange(): void {
-    console.log('Estilista seleccionado:', this.estilistaSeleccionado);
+
     // Llama a la función para cargar citas
     this.cargarCitas();
   }
 
 cargarCitas(): void {
-  console.log("id desde cargar citas:",this.estilistaSeleccionado)
+
   if (this.estilistaSeleccionado) {
     // Obtener citas para el estilista seleccionado
     // Puedes ajustar esto según tu API
-    console.log("id desde cargar citas estilista:",this.estilistaSeleccionado)
     this.citaService.getCitaPorEstilista(this.estilistaSeleccionado).subscribe(
         (data) => {
           this.cita = data;

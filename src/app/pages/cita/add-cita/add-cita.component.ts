@@ -95,7 +95,7 @@ export class AddCitaComponent implements OnInit {
 cargarEstilistasPorServicio() {
   const servicioSeleccionado = this.myForm.get('servicio')?.value;
   this.servicioService.getEstilistaSeleccionado(servicioSeleccionado).subscribe(data => {
-    this.estilista = data;
+    this.estilista = data.filter(estilista=>estilista.estado==true);
   });
 }
 

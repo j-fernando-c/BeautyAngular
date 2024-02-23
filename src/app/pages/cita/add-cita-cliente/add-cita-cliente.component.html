@@ -26,7 +26,7 @@
 
         <div class="mb-3">
           <label for="" class="form-label required">Fecha de la cita</label>
-          <input type="date" name="" id="" formControlName="fechaCita" class="form-control">
+          <input type="date" name="" id="" [min]="fechaActual" formControlName="fechaCita" class="form-control">
         </div>
 
         <div class="mb-3">

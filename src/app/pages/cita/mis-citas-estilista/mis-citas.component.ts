@@ -36,7 +36,7 @@ export class MisCitasComponent implements OnInit {
     this.id = this.router.snapshot.params['id'];
 
     if (this.id) {
-      this.sExiste = true;
+      this.sExiste = true;  
       this.citasService.getByEstilistaId(this.id).subscribe(data => {
 
          this.citas = data
@@ -54,6 +54,7 @@ export class MisCitasComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  
   toggleEstadoCita(cita: Citas): void {
     let nuevoEstado = '';
 

@@ -47,7 +47,7 @@ export class CalendarioComponent implements OnInit {
 
     this.citaService.getCita().subscribe(data => {
       this.cita = data
-      this.dataSource.data = data;
+      this.dataSource.data = data.filter(cita=>cita.estado!=='finalizada');
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -56,7 +56,7 @@ export class CalendarioComponent implements OnInit {
         this.subcripcion = this.citaService.refresh.subscribe(() => {
           this.citaService.getCita().subscribe(data => {
             this.cita = data;
-            this.dataSource.data = data;
+            this.dataSource.data = data.filter(cita=>cita.estado!=='finalizada');;
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           });
@@ -77,7 +77,7 @@ cargarCitas(): void {
     this.citaService.getCitaPorEstilista(this.estilistaSeleccionado).subscribe(
         (data) => {
           this.cita = data;
-          this.dataSource.data = data;
+          this.dataSource.data = data.filter(cita=>cita.estado!=='finalizada');
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           console.log('Citas cargadas por estilista:', data)
@@ -91,7 +91,7 @@ cargarCitas(): void {
       this.citaService.getCita().subscribe(
         (data) => {
           this.cita = data;
-          this.dataSource.data = data;
+          this.dataSource.data = data.filter(cita=>cita.estado!=='finalizada');
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
@@ -125,15 +125,15 @@ cargarCitas(): void {
     let nuevoEstado = '';
 
     switch (cita.estado) {
-      case 'confirmada':
-          nuevoEstado = 'cancelada';
-          break;
       case 'cancelada':
           nuevoEstado = 'pendiente';
           break;
       case 'pendiente':
-          nuevoEstado = 'confirmada';
+          nuevoEstado = 'cancelada';
           break;
+      case 'confirmada':
+            nuevoEstado = 'finalizada';
+            break;
   }
 
   console.log('Estado anterior:', cita.estado);

@@ -77,12 +77,20 @@ export class AddCitaClienteComponent implements OnInit {
 
   obtenerFechaActual(): void {
     const today = new Date();
-    const year = today.getFullYear();
-    const month = ('0' + (today.getMonth() + 1)).slice(-2);
-    const day = ('0' + today.getDate()).slice(-2);
-
-    this.fechaActual = `${year}-${month}-${day}`;
+    let fechaActual = new Date(today);
+  
+    // Ajustar la fecha al día siguiente si es hoy
+    fechaActual.setDate(today.getDate() + 1);
+  
+    const year = fechaActual.getFullYear();
+    const month = ('0' + (fechaActual.getMonth() + 1)).slice(-2);
+    const day = ('0' + fechaActual.getDate()).slice(-2);
+  
+    const nuevaFecha = `${year}-${month}-${day}`;
+    this.fechaActual = nuevaFecha;
   }
+
+ 
 
 
   cargarEstilistasPorServicio() {

@@ -51,7 +51,7 @@
             El teléfono debe tener entre 7 y 10 dígitos
           </span>
         </div>
-        
+
         <div class="mb-3" *ngIf="userRoles.includes('cliente')">
           <label for="" class="form-label required">Dirección</label>
           <input type="text" class="form-control" formControlName="direccion" placeholder="Ingrese dirección"
@@ -72,8 +72,8 @@
 
 
         <div class="botones">
-            <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/edit/contraseña">cambiar contraseña</button>
-            <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/edit/perfil">editar perfil</button>
+            <button type="button" class="btn btn-primary btn-bg" routerLink="/dashboard/edit/contraseña">cambiar contraseña</button>
+            <button type="button" class="btn btn-primary btn-bg" routerLink="/dashboard/edit/perfil">editar perfil</button>
 
       </div>
       </form>

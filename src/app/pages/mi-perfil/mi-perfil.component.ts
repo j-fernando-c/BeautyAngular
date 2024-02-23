@@ -121,6 +121,7 @@ export class MiPerfilComponent implements OnInit {
 
     // Ejemplo: Mostrar información específica según el rol de cliente
     if (this.userRoles.includes('cliente') || this.userRoles.includes('admin') ) {
+      console.log(this.userId);
 
       const idUsuario = this.userId
       if (idUsuario) {

@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +23,49 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
   ) {}
 
+  private jwtHelper = new JwtHelperService();
+  private rolesSubscription: Subscription;
+  userRoles: string[] = [];
+  id!: string;
+  userId: string | null = null;
+
+
 
   myForm: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     contrasena: ['', Validators.required],
   });
 
-  ngOnInit(): void {}
+    ngOnInit(): void {
+      this.loadUserRoles();
+      this.rolesSubscription = this.authService.getRolesObservable().subscribe((roles) => {
+        this.userRoles = roles;
+      });
+      this.getUserId();
+    }
+
+  getUserInfo(): { _id: string, roles: string[] } | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+
+      return decodedToken;
+    }
+    return null;
+  }
+
+  private loadUserRoles(): void {
+    const userInfo = this.authService.getUserInfo();
+    if (userInfo) {
+      this.userRoles = userInfo.roles;
+    }
+  }
+
+  getUserId(): void {
+    const userInfo = this.authService.getUserInfo();
+    this.userId = userInfo ? userInfo._id : null;
+  }
+
 
   loading: boolean = false;
 
@@ -45,9 +83,34 @@ export class LoginComponent implements OnInit {
         // console.log('Usuario logeado:', response);
         const token = response.token;
         localStorage.setItem('token', token);
+
+        // Obtener roles del usuario
+        const roles = this.authService.getUserRoles();
         // console.log('Token JWT:', token);
+        console.log(roles);
+
+        const idUserP = this.authService.getUserInfo();
+        console.log(idUserP);
+        const idUserID = this.getUserId();
+        // console.log(idUserID);
+
+        console.log(this.userId);
+
+        const decodedToken = this.jwtHelper.decodeToken(token);
+        console.log(decodedToken);
+
+        // http://localhost:4200/dashboard/cita/estilista/65d3b956dff3c63e47f10a63
+
+        // Redirección según los roles
+        if (roles.includes('admin')) {
+          this.router.navigate(['/dashboard']);
+        } else if (roles.includes('estilista')) {
+          this.router.navigate([`/dashboard/cita/estilista/${this.userId}`]);
+        } else if (roles.includes('cliente')) {
+          // Manejar otros roles o redirigir a una ruta predeterminada
+          this.router.navigate([`/dashboard/cita/cliente/${this.userId}`]);
+        }
         Swal.fire('Éxito', 'Inicio de sesión exitoso', 'success');
-        this.router.navigate(['/dashboard']);
       },
       (error) => {
         if (error.status === 403) {
@@ -63,5 +126,3 @@ export class LoginComponent implements OnInit {
     ).add(() => this.loading = false);
   }
 }
-
-

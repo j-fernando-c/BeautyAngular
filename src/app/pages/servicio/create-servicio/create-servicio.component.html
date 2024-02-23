@@ -27,7 +27,7 @@
                         </span><br>
                         <span class="text-danger" *ngIf="myForm.get('duracion')?.hasError('min')">
                             La duración no puede ser 0
-                        </span>  
+                        </span>
                 </div>
                 <div class="mb-3">
                     <label  class="form-label required" >Precio:</label>
@@ -53,7 +53,7 @@
                 <div class="botones">
                 <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid"
                     (click)="onSave(myForm.value)">Guardar</button>
-                    <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/servicio/list">Atrás</button>
+                    <button type="button" class="btn btn-primary btn-bg" routerLink="/dashboard/servicio/list">Atrás</button>
                   </div>
 
             </form>

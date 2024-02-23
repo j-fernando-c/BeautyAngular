@@ -54,7 +54,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      
+
       return decodedToken;
     }
     return null;
@@ -71,6 +71,10 @@ export class AuthService {
   // Nuevo método para obtener los roles del usuario como un observable
   getRolesObservable(): Observable<string[]> {
     return this.rolesSubject.asObservable();
+  }
+
+  getUserRoles(): string[] {
+    return this.userRoles;
   }
 
 

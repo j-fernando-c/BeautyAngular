@@ -20,7 +20,7 @@ export class ListClienteComponent implements OnInit {
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
   dataSource = new MatTableDataSource<Usuario>();
-  displayedColumns: string[] = [ 'nombre', 'apellido', 'email', 'telefono', 'direccion', 'estado', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'email', 'telefono', 'direccion', 'estado', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -43,21 +43,38 @@ export class ListClienteComponent implements OnInit {
 
     });
 
-  // Método para refrescar
-  this.subcripcion = this.usuarioService.refresh.subscribe(() => {
-    this.usuarioService.getUsuarios().subscribe(data => {
-      this.dataSource.data = data.filter(usuario => usuario.roles.some(rol => rol.nombre === 'cliente'));
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    // Método para refrescar
+    this.subcripcion = this.usuarioService.refresh.subscribe(() => {
+      this.usuarioService.getUsuarios().subscribe(data => {
+        this.dataSource.data = data.filter(usuario => usuario.roles.some(rol => rol.nombre === 'cliente'));
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
     });
-  });
-}
+  }
 
-cambioEstado(id: string) {
-  this.usuarioService.actulizarEstado(id).subscribe(res => {
-    
-  });
-}
+  cambioEstado(id: string) {
+    this.usuarioService.actulizarEstado(id).subscribe({
+      next: (res) => {
+
+
+      },
+      error: (error) => {
+
+        if (error.status === 400 && error.error.message) {
+          // Mostrar mensaje de error usando SweetAlert2
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al cambiar el estado',
+            text: error.error.message,
+            confirmButtonColor: '#745af2',
+          });
+        }
+      }
+    },
+    );
+  }
+
 
   // Método para eliminar
   eliminarCliente(id: string) {

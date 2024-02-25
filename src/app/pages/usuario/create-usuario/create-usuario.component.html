@@ -14,6 +14,12 @@
             <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
               El nombre no debe contener números ni espacios en blanco ni caracteres especiales.
             </span>
+            <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('maxlength')">
+              El nombre no puede tener más de 20 caracteres.
+            </span>
+            <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('minlength')">
+              El nombre no puede tener menos de 3 caracteres.
+            </span>
           </div>
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Apellido</label>
@@ -25,6 +31,12 @@
             </span><br>
             <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('pattern')">
               El números no debe contener números ni espacios en blanco.
+            </span>
+            <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('maxlength')">
+              El nombre no puede tener más de 20 caracteres.
+            </span>
+            <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('minlength')">
+              El nombre no puede tener menos de 3 caracteres.
             </span>
           </div>
         </div>
@@ -41,13 +53,18 @@
             El correo electrónico debe una extensión válida.
           </span>
         </div>
-        <div class="mb-3">
         <div class="form-group ">
           <label for="" class="form-label">Ingrese su contraseña: </label>
           <input class="form-control input" type="password" formControlName="contrasena" >
-          <span class="text-danger" *ngIf="myForm.get('contrasena')?.invalid && myForm.get('contrasena')?.touched">
-              La contraseña es requerida
-            </span>
+          <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('required') && myForm.get('contrasena')?.touched">
+            La contraseña es requerida
+          </span>
+          <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('noUppercase') && myForm.get('contrasena')?.touched && myForm.get('contrasena')?.value.length > 0">
+            La contraseña debe contener al menos una letra mayúscula y una minúscula
+          </span>
+          <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('invalidLength') && myForm.get('contrasena')?.touched">
+            La contraseña debe tener entre 8 y 15 caracteres
+          </span>
         </div>
 
           <div class="form-group">
@@ -55,9 +72,14 @@
             <input class="form-control input" type="password" formControlName="recontrasena" >
             <span class="text-danger" *ngIf="myForm.get('recontrasena')?.invalid && myForm.get('recontrasena')?.touched">
                 La confirmación de contraseña es requerida
-              </span>
+            </span>
+            <span class="text-danger" *ngIf="myForm.get('recontrasena')?.hasError('noUppercase') && myForm.get('recontrasena')?.touched && myForm.get('recontrasena')?.value.length > 0">
+                La contraseña debe contener al menos una letra mayúscula y una minúscula
+            </span>
+            <span class="text-danger" *ngIf="myForm.get('recontrasena')?.hasError('invalidLength') && myForm.get('recontrasena')?.touched">
+              La contraseña debe tener entre 8 y 15 caracteres
+            </span>
           </div>
-        </div>
           <div class="mb-3">
             <select class="form-control" formControlName="roles" hidden>
               <option *ngFor="let role of roles" [value]="role.nombre">{{ role.nombre }}</option>

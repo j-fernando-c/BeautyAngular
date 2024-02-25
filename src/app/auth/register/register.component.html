@@ -66,7 +66,10 @@
             La contraseña es requerida
           </span>
           <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('noUppercase') && myForm.get('contrasena')?.touched && myForm.get('contrasena')?.value.length > 0">
-            La contraseña debe contener al menos una letra mayúscula
+            La contraseña debe contener al menos una letra mayúscula y una minúscula
+          </span>
+          <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('invalidLength') && myForm.get('contrasena')?.touched">
+            La contraseña debe tener entre 8 y 15 caracteres
           </span>
         </div>
 
@@ -77,9 +80,9 @@
                 La confirmación de contraseña es requerida
             </span>
             <span class="text-danger" *ngIf="myForm.get('recontrasena')?.hasError('noUppercase') && myForm.get('recontrasena')?.touched && myForm.get('recontrasena')?.value.length > 0">
-                La contraseña debe contener al menos una letra mayúscula
+                La contraseña debe contener al menos una letra mayúscula y una minúscula
             </span>
-            <span class="text-danger" *ngIf="myForm.get('contrasena')?.hasError('invalidLength') && myForm.get('recontrasena')?.touched">
+            <span class="text-danger" *ngIf="myForm.get('recontrasena')?.hasError('invalidLength') && myForm.get('recontrasena')?.touched">
               La contraseña debe tener entre 8 y 15 caracteres
             </span>
           </div>

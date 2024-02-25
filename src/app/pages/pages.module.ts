@@ -1,4 +1,4 @@
-import { CalendarModule } from 'primeng/calendar';
+// import { CalendarModule } from 'primeng/calendar';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -78,6 +78,8 @@ import { MisCitasClientesComponent } from './cita/mis-citas-clientes/mis-citas-c
 import { EditarCitaComponent } from './cita/editar-cita/editar-cita.component';
 import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilista.component';
 
+import { CalendarioCitasComponent } from './calendario/calendario.component';
+
 
 
 
@@ -132,6 +134,9 @@ import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilist
     EditarCitaComponent,
     EditEstilistaComponent,
 
+    CalendarioCitasComponent
+
+
 
 
   ],
@@ -157,7 +162,7 @@ import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilist
     MatSlideToggleModule,
     FullCalendarModule,
     MatDatepickerModule,
-    CalendarModule,
+    // CalendarModule,
     MatSelectModule,
     CdkAccordionModule,
     NgxChartsModule,
@@ -165,7 +170,8 @@ import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilist
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    NgChartsModule
+    NgChartsModule,
+
 
 
 

@@ -1,64 +1,88 @@
+<!-- list-usuario.component.html -->
 <div class="card">
   <div class="card-body">
-    <div class="d-flex justify-content-between">
-      <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/venta/nuevo">Agregar venta</button>
-      <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/venta/list/inactivas">Ventas inactivas</button>
-
-      <input type="text" class="barra mb-4" placeholder="Buscar ventas..." #buscar (keyup)="aplicarFiltro(buscar.value)">
+    <div class="d-flex justify-content-end">
+      <input type="text" class="barra mb-4" placeholder="Buscar venta... " #buscar (keyup)="aplicarFiltro(buscar.value)">
     </div>
     <div class="table-responsive sombra">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <!-- Nombre Column -->
         <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let i">{{ i.cliente.nombre | titlecase }}</td>
-        </ng-container>
-        <ng-container matColumnDef="apellido">
-          <th mat-header-cell *matHeaderCellDef>Apellido</th>
-          <td mat-cell *matCellDef="let i">{{ i.cliente.apellido | titlecase }}</td>
-        </ng-container>
-        <ng-container matColumnDef="servicios">
-          <th mat-header-cell *matHeaderCellDef>Servicio</th>
-          <td mat-cell *matCellDef="let i">{{ i.servicio.nombre_servicio | titlecase }}</td>
-        </ng-container>
-        <ng-container matColumnDef="precio">
-          <th mat-header-cell *matHeaderCellDef>Precio</th>
-          <td mat-cell *matCellDef="let i">{{ i.servicio.precio | currency:'COP':'symbol':'1.0' }}</td>
-        </ng-container>
-        <ng-container matColumnDef="medio-pago">
-          <th mat-header-cell *matHeaderCellDef>Medio de pago</th>
-          <td mat-cell *matCellDef="let i">{{ i.metodoPago | titlecase }}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre cliente</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.cliente.nombre | titlecase }}</td>
         </ng-container>
 
+        <!-- Apellido Column -->
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido cliente</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.cliente.apellido | titlecase }}</td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="nombre_servicio">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre servicio</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.servicio.nombre_servicio | titlecase }}</td>
+        </ng-container>
+
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="precio">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.servicio.precio | currency:'COP':'symbol':'1.0' }}</td>
+        </ng-container>
+
+           <!-- Email Column -->
+           <ng-container matColumnDef="duracion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Duracion(min)</th>
+            <td mat-cell *matCellDef="let cita">{{ cita.servicio.duracion}}</td>
+          </ng-container>
+
+        <!-- Estilista Column -->
+        <ng-container matColumnDef="nombre_estilista">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre estilista</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.estilista.nombre | titlecase }} {{cita.estilista.apellido |
+            titlecase}}</td>
+        </ng-container>
+
+        <!-- fecha Column -->
+        <ng-container matColumnDef="fechaCita">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha cita</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.fechaCita | date: 'YYYY-MM-dd' : 'UTC' }}</td>
+        </ng-container>
+
+        <!-- hora Column -->
+        <ng-container matColumnDef="horaCita">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora cita</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.horaCita| date: 'HH:mm a' }}</td>
+        </ng-container>
+
+
+
+        <!-- Estado Column -->
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-          <td mat-cell *matCellDef="let i">
-            <a id="link" (click)="cambioEstado(i._id)"
-            [ngClass]="{'estado':i.estado, 'estado-cambiado':!i.estado}">
-              {{ i.estado ? 'Activa' : 'Inactiva' }}
-            </a>
+          <td mat-cell *matCellDef="let cita">
+            <button class="btn-sm" [ngClass]="{
+              'btn-primary btn-sm ': cita.estado === 'confirmada',
+              'btn-warning btn-sm ': cita.estado === 'finalizada',
+              'btn-danger btn-sm': cita.estado === 'cancelada',
+              'btn-info btn-sm': cita.estado === 'pendiente',
+            }" (click)="toggleEstadoCita(cita)">
+              {{ cita.estado | titlecase }}
+            </button>
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef>Acciones</th>
-          <td mat-cell *matCellDef="let i">
-            <a id="link" class="btn btn-warning btn-sm" 
-            routerLink="/dashboard/venta/detalle/{{ i._id }}">Ver <i class="fa-solid fa-eye"></i></a>
-            <a id="link" class="btn btn-success btn-sm ml-1" routerLink="/dashboard/venta/edit/{{ i._id }}">
-              Editar <i class="fas fa-pencil-alt"></i>
-            </a>
-            <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarVenta(i._id)">
-              Eliminar <i class="fas fa-trash-alt"></i>
-            </a>
-          </td>
-        </ng-container>
+        <!-- Acciones Column -->
 
+
+        <!-- Define las filas de la tabla -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-    </div>
-    <mat-paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons></mat-paginator>
-    <div class="contenedor-paginacion mt-3">
+      <!-- Agrega el paginador -->
+      <mat-paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@ import { Usuario } from 'src/app/interfaces/usuario.interfaces';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Role } from 'src/app/interfaces/role.interfaces';
 import { RolesService } from 'src/app/services/roles.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
@@ -32,8 +32,8 @@ export class CreateUsuarioComponent implements OnInit {
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, this.validarExtensionCom]],
-    contrasena: ['', Validators.required],
-    recontrasena: ['', Validators.required],
+    contrasena: ['', [Validators.required, this.atLeastOneUppercase]],
+    recontrasena: ['', [Validators.required, this.atLeastOneUppercase]],
     roles: ['admin', Validators.required]
   });
 
@@ -69,6 +69,23 @@ export class CreateUsuarioComponent implements OnInit {
         }
       });
     }
+  }
+
+  atLeastOneUppercase(control: AbstractControl): { [key: string]: boolean } | null {
+    const value: string = control.value || '';
+
+    // Verificar si la cadena tiene al menos un carácter y si contiene al menos una letra mayúscula
+    if (!/[A-Z]/.test(value) || !/[a-z]/.test(value) ) {
+      return { noUppercase: true };
+    }
+
+      // Verificar la longitud de la contraseña
+    if (value.length < 8 || value.length > 15) {
+    return { invalidLength: true };
+    }
+
+
+    return null;
   }
 
   onSave(usuario: Usuario) {

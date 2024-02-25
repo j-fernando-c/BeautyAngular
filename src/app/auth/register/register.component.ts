@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
     const value: string = control.value || '';
 
     // Verificar si la cadena tiene al menos un carácter y si contiene al menos una letra mayúscula
-    if (value.length > 0 && !/[A-Z]/.test(value)) {
+    if (!/[A-Z]/.test(value) || !/[a-z]/.test(value) ) {
       return { noUppercase: true };
     }
 

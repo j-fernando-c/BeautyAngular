@@ -27,6 +27,7 @@ import { AuthGuard } from '../auth.guard';
 import { CreateServicioComponent } from './servicio/create-servicio/create-servicio.component';
 import { CitaComponent } from './turno/cita/cita.component';
 import { CalendarioComponent } from './cita/calendario/calendario.component';
+import { CalendarioCitasComponent } from './calendario/calendario.component';
 import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
 import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
@@ -94,6 +95,10 @@ const routes: Routes = [
       { path: 'cita/edit/:id', component: EditarCitaComponent },
       { path: 'cita/list/cliente/:id', component: MisCitasClientesComponent },
       { path: 'cita/estilista/:id', component: MisCitasComponent },
+
+      { path: 'cita/calendario', component: CalendarioCitasComponent },
+
+
 
       //Ruta cita
       // {path:'citas/list', component:CalendarioAgendaComponent},

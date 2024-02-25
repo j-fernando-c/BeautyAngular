@@ -3,10 +3,9 @@
         <div class="card-body">
             <form [formGroup]="myForm" method="post">
                 <div class="mb-3">
-                    <label  class="form-label required">Nombre:</label>
+                    <label class="form-label required">Nombre:</label>
                     <input type="text" class="form-control" formControlName="nombre_servicio"
-                        placeholder="Ingrese nombre del servicio"
-                        [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched,
+                        placeholder="Ingrese nombre del servicio" [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched,
                     'input-pattern-error': myForm.get('nombre_servicio')?.hasError('pattern')}">
                     <span class="text-danger"
                         *ngIf="myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched ">
@@ -17,44 +16,50 @@
                     </span>
                 </div>
                 <div class="mb-3">
-                    <label  class="form-label required">Duración(minutos):</label>
-                    <input type="number" class="form-control" formControlName="duracion"
-                        placeholder="Ingrese la duración"
+                    <label class="form-label required">Duración(minutos):</label>
+                    <input type="text" class="form-control" formControlName="duracion"  placeholder="Ingrese la duración"
                         [ngClass]="{'input-error':myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched,
-                        'input-pattern-error': myForm.get('duracion')?.hasError('min')}">
-                        <span class="text-danger" *ngIf="myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched">
-                            La duración es requerida
-                        </span><br>
-                        <span class="text-danger" *ngIf="myForm.get('duracion')?.hasError('min')">
-                            La duración no puede ser 0
-                        </span>  
+                        'input-pattern-error': myForm.get('duracion')?.hasError('pattern')}">
+                    <span class="text-danger"
+                        *ngIf="myForm.get('duracion')?.invalid && myForm.get('duracion')?.touched">
+                        La duración es requerida
+                    </span><br>
+                    <span class="text-danger" *ngIf="myForm.get('duracion')?.hasError('pattern')">
+                        Tiempo no válido
+                    </span>
+                
                 </div>
                 <div class="mb-3">
-                    <label  class="form-label required" >Precio:</label>
+                    <label class="form-label required">Precio:</label>
                     <input type="number" class="form-control" formControlName="precio" placeholder="Ingrese el precio"
-                    [ngClass]="{'input-error':myForm.get('precio')?.invalid && myForm.get('precio')?.touched}">
+                        [ngClass]="{'input-error':myForm.get('precio')?.invalid && myForm.get('precio')?.touched,  'input-pattern-error': myForm.get('precio')?.hasError('min')}">
                     <span class="text-danger" *ngIf="myForm.get('precio')?.invalid && myForm.get('precio')?.touched">
                         El precio es requerido y debe ser válido.
                     </span>
+                    <span class="text-danger" *ngIf="myForm.get('precio')?.hasError('min')">
+                        El precio debe ser mayor a 0
+                    </span>
                 </div>
                 <div class="mb-3">
-                  <label for="" class="form-label required">Estilista</label>
-                  <mat-form-field class="form-control">
-                    <mat-label>Seleccione estilista</mat-label>
-                    <mat-select formControlName="estilista" multiple class="mat-select-lg">
-                        <mat-option *ngFor="let estilista of estilista" [value]="estilista._id">{{estilista.nombre}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <label for="" class="form-label required">Estilista</label>
+                    <mat-form-field class="form-control">
+                        <mat-label>Seleccione estilista</mat-label>
+                        <mat-select formControlName="estilista" multiple class="mat-select-lg">
+                            <mat-option *ngFor="let estilista of estilista"
+                                [value]="estilista._id">{{estilista.nombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                     <span class="text-danger"
                         *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">
                         Por favor, seleccione una opción
                     </span>
                 </div>
                 <div class="botones">
-                <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}" [disabled]="myForm.invalid"
-                    (click)="onSave(myForm.value)">Guardar</button>
-                    <button type="button" class="btn btn-primary btn-sm" routerLink="/dashboard/servicio/list">Atrás</button>
-                  </div>
+                    <button type="submit" [ngClass]="{'disabled':myForm.invalid, 'activo': myForm.valid}"
+                        [disabled]="myForm.invalid" (click)="onSave(myForm.value)">Guardar</button>
+                    <button type="button" class="btn btn-primary btn-sm"
+                        routerLink="/dashboard/servicio/list">Atrás</button>
+                </div>
 
             </form>
         </div>

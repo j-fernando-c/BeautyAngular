@@ -126,7 +126,7 @@ cargarCitas(): void {
 
     switch (cita.estado) {
       case 'cancelada':
-          nuevoEstado = 'pendiente';
+          nuevoEstado = 'confirmada';
           break;
       case 'pendiente':
           nuevoEstado = 'cancelada';
@@ -142,7 +142,7 @@ cargarCitas(): void {
     this.citaService.actualizarEstado(cita._id, nuevoEstado).subscribe(
       () => {
         // Realiza acciones adicionales después de la actualización si es necesario
-        console.log('Estado actualizado correctamente');
+        console.log('Estado actualizado correctamente', nuevoEstado);
         this.cdr.detectChanges();
       },
       (error) => {

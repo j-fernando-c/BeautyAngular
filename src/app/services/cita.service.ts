@@ -33,6 +33,7 @@ export class CitaService {
       )
   }
 
+
   actualizarEstado(id: string, nuevoEstado: string): Observable<Citas> {
     return this.http.put<Citas>(`${this.url}estado/${id}`, { estado: nuevoEstado })
       .pipe(

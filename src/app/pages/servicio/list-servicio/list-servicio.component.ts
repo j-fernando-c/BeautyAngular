@@ -48,13 +48,26 @@ export class ListServicioComponent implements OnInit {
     })
   }
 //Metódo que me permite cambiar de estado
-  cambioEstado(id:string){
-    this.servicioServices.actualizarEstado(id).subscribe(res=>{
-
-    })
-
-
-  }
+cambioEstado(id: string) {
+  this.servicioServices.actualizarEstado(id).subscribe({
+   next: (res)=> {
+      
+    },
+    error: (error) => {
+      
+      if (error.status === 400 && error.error.message) {
+        // Mostrar mensaje de error usando SweetAlert2
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al cambiar el estado',
+          text: error.error.message,
+          confirmButtonColor: '#745af2',
+        });
+      } 
+    }
+  },
+  );
+}
 //Metodo que me permite eliminar
   eliminarServicio(id:string){
     Swal.fire({

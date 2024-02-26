@@ -23,10 +23,11 @@ export class ListClienteActivoComponent implements OnInit {
   citasConfirmadas:number;
   citasCanceladas:number;
   citasPendientes:number;
+  citasFinalizadas:number;
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
   dataSource = new MatTableDataSource<Citas>();
-  displayedColumns: string[] = ['nombre_servicio', 'duracion', 'precio', 'nombre_estilista', 'fechaCita', 'horaCita', 'horaFinCita'];
+  displayedColumns: string[] = ['nombre_servicio', 'duracion', 'precio', 'nombre_estilista', 'fechaCita', 'horaCita', 'horaFinCita', 'estado'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,6 +43,9 @@ export class ListClienteActivoComponent implements OnInit {
       this.citasConfirmadas=res.filter(res=>res.estado==='confirmada').length
       this.citasCanceladas=res.filter(res=>res.estado==='cancelada').length
       this.citasPendientes=res.filter(res=>res.estado==='pendiente').length
+      console.log(this.citasPendientes)
+      this.citasFinalizadas=res.filter(res=>res.estado==='finalizada').length
+
     })
 
     if (this.id) {

@@ -13,6 +13,12 @@
                 <h3>Canceladas</h3>
             </div>
         </div>
+        <div class="card">
+            <div class="box">
+                <h2 class="finalizadas">{{citasFinalizadas}}</h2>
+                <h3>Finalizadas</h3>
+            </div>
+        </div>
         <div class="row">
             <div class="card">
                 <div class="box">
@@ -73,29 +79,20 @@
                     <td mat-cell *matCellDef="let cita">{{ cita.horaFinCita | date: 'HH:mm a' }}</td>
                 </ng-container>
 
-
-
-
-
-                <!-- Acciones Column -->
-                <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
-                    <td mat-cell *matCellDef="let cita" [ngSwitch]="cita.estado">
-                        <ng-container *ngSwitchCase="true">
-                            <!-- Contenido cuando el usuario está activo -->
-                            <a id="link" class="btn btn-success btn-sm" routerLink="">
-                                Editar <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <a id="link" class="btn btn-danger btn-sm ml-1">
-                                Eliminar<i class="fas fa-trash-alt"></i>
-                            </a>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="false">
-                            <!-- Contenido cuando el usuario está inactivo -->
-                            <!-- Puedes poner algo diferente o dejarlo vacío -->
-                        </ng-container>
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                    <td mat-cell *matCellDef="let cita">
+                      <button class="btn-sm" [ngClass]="{
+                        'btn-primary btn-sm ': cita.estado === 'confirmada',
+                        'btn-warning btn-sm ': cita.estado === 'finalizada',
+                        'btn-danger btn-sm': cita.estado === 'cancelada',
+                        'btn-info btn-sm': cita.estado === 'pendiente',
+                      }">
+                        {{ cita.estado | titlecase }}
+                      </button>
                     </td>
-                </ng-container>
+                  </ng-container>
+
 
                 <!-- Define las filas de la tabla -->
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

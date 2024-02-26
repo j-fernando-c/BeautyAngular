@@ -18,7 +18,10 @@
     font-weight: bold;
     color:rgb(57, 139, 247)
 }
-
+.finalizadas{
+    font-weight: bold;
+    color: rgb(243, 172, 41);
+}
 
 
 .cards .card .box{
@@ -29,6 +32,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -115,7 +119,4 @@ th{
 
   }
 
-  /* .dropdown-container {
-    position: relative;
-    z-index: 1000;
-  } */
+

@@ -4,7 +4,7 @@
       <form [formGroup]="myForm" method="post">
 
         <div class="mb-3">
-          <label for="" class="form-label required">Participante</label>
+          <label for="" class="form-label required">Cliente</label>
           <select class="form-control" formControlName="cliente">
             <option value="">Seleccione un participante</option>
             <option [value]="p._id" *ngFor="let p of resultado">{{p.nombre | titlecase}} {{p.apellido | titlecase}}</option>

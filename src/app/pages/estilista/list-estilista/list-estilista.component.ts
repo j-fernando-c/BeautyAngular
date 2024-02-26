@@ -59,10 +59,26 @@ export class ListEstilistaComponent implements OnInit {
 
 
   }
-  cambioEstado(id:string){
-    this.servicioEstilista.actulizarEstado(id).subscribe(res=>{
-      // console.log(res)
-    })
+  cambioEstado(id: string) {
+    this.servicioEstilista.actulizarEstado(id).subscribe({
+     next: (res)=> {
+        
+        
+      },
+      error: (error) => {
+        
+        if (error.status === 400 && error.error.message) {
+          // Mostrar mensaje de error usando SweetAlert2
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al cambiar el estado',
+            text: error.error.message,
+            confirmButtonColor: '#745af2',
+          });
+        } 
+      }
+    },
+    );
   }
 
 

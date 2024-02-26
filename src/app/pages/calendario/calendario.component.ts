@@ -15,6 +15,7 @@ export class CalendarioCitasComponent implements OnInit {
   citas: Citas[] = [];
 
   calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
     plugins: [dayGridPlugin], // Agrega el plugin necesario
     events: [], // Los eventos se llenarán dinámicamente después de cargar las citas
   };
@@ -24,6 +25,8 @@ export class CalendarioCitasComponent implements OnInit {
   ngOnInit(): void {
     this.cargarCitas();
   }
+
+
 
   cargarCitas() {
     this.citaService.getCita().subscribe((citas) => {

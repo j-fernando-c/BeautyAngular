@@ -88,6 +88,7 @@ export class CreateServicioComponent implements OnInit {
           this.router.navigateByUrl("/dashboard/servicio/list");
         },
         error: (error) => {
+          console.log(error)
           const errorConfig = this.manejoError(error);
           Swal.fire(errorConfig);
         }

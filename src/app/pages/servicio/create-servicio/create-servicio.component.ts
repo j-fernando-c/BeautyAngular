@@ -28,7 +28,7 @@ export class CreateServicioComponent implements OnInit {
   //Validación formulario
   myForm: FormGroup = this.fb.group({
     nombre_servicio: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ][a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ\s\-_]*[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]$/
-    ),]],
+    ), Validators.maxLength(30), Validators.minLength(3)]],
     duracion: ['', [Validators.required, Validators.pattern(/^[1-3]\d{0,2}$/)]],
     precio: ['', [Validators.required, Validators.min(1)]],
     estilista: [, Validators.required]

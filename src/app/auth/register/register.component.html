@@ -20,8 +20,11 @@
                 <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('pattern')">
                   El nombre no debe contener números, espacios en blanco, o caracteres especiales.
                 </span>
-                <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('invalidSize') && myForm.get('nombre')?.touched">
-                  el nombre debe de contener entre 3 y 20 caracteres
+                <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('maxlength')">
+                  El nombre no puede tener más de 20 caracteres.
+                </span>
+                <span class="text-danger" *ngIf="myForm.get('nombre')?.hasError('minlength')">
+                  El nombre no puede tener menos de 3 caracteres.
                 </span>
             </div>
         </div>
@@ -36,8 +39,11 @@
                 <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('pattern')">
                   el apellido no debe contener números, espacios en blanco, o caracteres especiales.
                 </span>
-                <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('invalidSize') && myForm.get('apellido')?.touched">
-                  el apellido debe de contener entre 3 y 20 caracteres
+                <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('maxlength')">
+                  El apellido no puede tener más de 20 caracteres.
+                </span>
+                <span class="text-danger" *ngIf="myForm.get('apellido')?.hasError('minlength')">
+                  El apellido no puede tener menos de 3 caracteres.
                 </span>
           </div>
         </div>

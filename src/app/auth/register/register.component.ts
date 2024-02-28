@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       [
         Validators.required,
         Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
-        this.atSize
+        Validators.maxLength(20), Validators.minLength(3)
       ],
     ],
     apellido: [
@@ -32,22 +32,15 @@ export class RegisterComponent implements OnInit {
       [
         Validators.required,
         Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
-        this.atSize
+        Validators.maxLength(20), Validators.minLength(3)
       ],
     ],
     email: [
       '',
       [Validators.required, Validators.email, this.validarExtensionCom],
     ],
-    contrasena: [
-      '',
-      [Validators.required, this.atLeastOneUppercase],
-      Validators.maxLength(8),
-      Validators.minLength(15),
-    ],
-    recontrasena: ['', [Validators.required, this.atLeastOneUppercase],
-    Validators.maxLength(8),
-    Validators.minLength(15),],
+    contrasena: ['', [Validators.required, this.atLeastOneUppercase]],
+    recontrasena: ['', [Validators.required, this.atLeastOneUppercase]],
   });
 
   validarExtensionCom(control: any) {
@@ -81,17 +74,6 @@ export class RegisterComponent implements OnInit {
     return null;
   }
 
-  atSize(control: AbstractControl): { [key: string]: boolean } | null {
-    const value: string = control.value || '';
-
-
-      // Verificar la longitud de los caracteres
-      if (value.length < 3 || value.length > 20) {
-        return { invalidSize: true };
-        }
-
-    return null;
-  }
 
   ngOnInit(): void {}
 

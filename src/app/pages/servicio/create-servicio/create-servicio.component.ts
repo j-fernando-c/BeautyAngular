@@ -77,7 +77,15 @@ export class CreateServicioComponent implements OnInit {
 
   onSave(servicio: Servicio) {
     if (this.sExiste) {
-      this.servicioService.actualizarServicio(this.id, servicio).subscribe({
+      const objetoServicio: Servicio = {
+        _id: servicio._id,
+        nombre_servicio: servicio.nombre_servicio.toLowerCase(),
+        duracion: servicio.duracion,
+        precio: servicio.precio,
+        estilista: servicio.estilista,
+        estado: servicio.estado
+      }
+      this.servicioService.actualizarServicio(this.id, objetoServicio).subscribe({
         next: (res: Servicio) => {
           Swal.fire({
             icon: 'success',
@@ -94,7 +102,16 @@ export class CreateServicioComponent implements OnInit {
         }
       });
     } else {
-      this.servicioService.createServicio(servicio).subscribe({
+      const objetoServicio: Servicio = {
+        _id: servicio._id,
+        nombre_servicio: servicio.nombre_servicio.toLowerCase(),
+        duracion: servicio.duracion,
+        precio: servicio.precio,
+        estilista: servicio.estilista,
+        estado: servicio.estado
+      }
+      console.log(objetoServicio)
+      this.servicioService.createServicio(objetoServicio).subscribe({
         next: (res) => {
           Swal.fire({
             icon: 'success',

@@ -46,12 +46,23 @@ export class LoginComponent implements OnInit {
         const token = response.token;
         localStorage.setItem('token', token);
         // console.log('Token JWT:', token);
+        const userInfo = this.authService.getUserInfo();
+
+        // Redirigir según el rol
+        if (userInfo && userInfo.roles && userInfo.roles.includes('cliente')) {
+          this.router.navigate([`/dashboard/cita/nuevo/cliente/${userInfo._id}`]);
+        }else if(userInfo && userInfo.roles && userInfo.roles.includes('estilista')){
+          this.router.navigate([`/dashboard/turno/estilista/${userInfo._id}`]);
+
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
         Swal.fire('Éxito', 'Inicio de sesión exitoso', 'success');
-        this.router.navigate(['/dashboard']);
+
       },
       (error) => {
         if (error.status === 403) {
-          Swal.fire('Error', 'El usuario no existe', 'error');
+          Swal.fire('Error', 'Credenciales invalidas', 'error');
         } else if (error.status === 401) {
           Swal.fire('Error', 'Contraseña incorrecta', 'error');
         } else if (error.status === 400) {

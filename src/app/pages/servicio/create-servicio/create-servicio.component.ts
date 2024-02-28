@@ -28,7 +28,7 @@ export class CreateServicioComponent implements OnInit {
   //Validación formulario
   myForm: FormGroup = this.fb.group({
     nombre_servicio: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ][a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ\s\-_]*[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]$/
-    ),]],
+    ), Validators.maxLength(30), Validators.minLength(3)]],
     duracion: ['', [Validators.required, Validators.pattern(/^[1-3]\d{0,2}$/)]],
     precio: ['', [Validators.required, Validators.min(1)]],
     estilista: [, Validators.required]
@@ -77,7 +77,15 @@ export class CreateServicioComponent implements OnInit {
 
   onSave(servicio: Servicio) {
     if (this.sExiste) {
-      this.servicioService.actualizarServicio(this.id, servicio).subscribe({
+      const objetoServicio: Servicio = {
+        _id: servicio._id,
+        nombre_servicio: servicio.nombre_servicio.toLowerCase(),
+        duracion: servicio.duracion,
+        precio: servicio.precio,
+        estilista: servicio.estilista,
+        estado: servicio.estado
+      }
+      this.servicioService.actualizarServicio(this.id, objetoServicio).subscribe({
         next: (res: Servicio) => {
           Swal.fire({
             icon: 'success',
@@ -88,12 +96,22 @@ export class CreateServicioComponent implements OnInit {
           this.router.navigateByUrl("/dashboard/servicio/list");
         },
         error: (error) => {
+          console.log(error)
           const errorConfig = this.manejoError(error);
           Swal.fire(errorConfig);
         }
       });
     } else {
-      this.servicioService.createServicio(servicio).subscribe({
+      const objetoServicio: Servicio = {
+        _id: servicio._id,
+        nombre_servicio: servicio.nombre_servicio.toLowerCase(),
+        duracion: servicio.duracion,
+        precio: servicio.precio,
+        estilista: servicio.estilista,
+        estado: servicio.estado
+      }
+      console.log(objetoServicio)
+      this.servicioService.createServicio(objetoServicio).subscribe({
         next: (res) => {
           Swal.fire({
             icon: 'success',

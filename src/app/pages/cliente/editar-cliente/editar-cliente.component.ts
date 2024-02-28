@@ -96,14 +96,25 @@ export class EditarClienteComponent {
       return;
     } else if (this.sExiste) {
 
-      this.usuarioService.actualizarUsuario(this.id, body).subscribe((res: Usuario) => {
-        Swal.fire({
-          icon: 'success',
-          iconColor: '#745af2',
-          title: '¡Actualizado!',
-          text: 'La información se ha actualizado exitosamente.',
-        });
-        this.router.navigateByUrl("/dashboard/cliente/list");
+      this.usuarioService.actualizarUsuario(this.id, body).subscribe({
+
+        next:(res)=>{
+
+          Swal.fire({
+            icon: 'success',
+            iconColor: '#745af2',
+            title: '¡Actualizado!',
+            text: 'La información se ha actualizado exitosamente.',
+          });
+          this.router.navigateByUrl("/dashboard/cliente/list");
+        },   error: (error:any) => {
+          Swal.fire({
+            icon: 'error',
+            iconColor: '#f25252',
+            title: 'Error en la recuperación',
+            text: 'El correo ya existe',
+          });
+        }
       });
     }
   }

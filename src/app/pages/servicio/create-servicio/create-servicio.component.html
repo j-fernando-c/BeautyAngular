@@ -6,14 +6,20 @@
                     <label class="form-label required">Nombre:</label>
                     <input type="text" class="form-control" formControlName="nombre_servicio"
                         placeholder="Ingrese nombre del servicio" [ngClass]="{'input-error':myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched,
-                    'input-pattern-error': myForm.get('nombre_servicio')?.hasError('pattern')}">
+                    'input-pattern-error': myForm.get('nombre_servicio')?.hasError('pattern') && myForm.get('nombre_servicio')?.hasError('maxlength')}">
                     <span class="text-danger"
                         *ngIf="myForm.get('nombre_servicio')?.invalid && myForm.get('nombre_servicio')?.touched ">
                         El nombre del servicio es requerido.
                     </span><br>
                     <span class="text-danger" *ngIf="myForm.get('nombre_servicio')?.hasError('pattern')">
                         El nombre del servicio no debe contener números ni caracteres especiales.
-                    </span>
+                    </span><br>
+                    <span class="text-danger" *ngIf="myForm.get('nombre_servicio')?.hasError('maxlength')">
+                        El nombre del servicio no puede tener más de 30 caracteres
+                      </span>
+                      <span class="text-danger" *ngIf="myForm.get('nombre_servicio')?.hasError('minlength')">
+                        El nombre del servicio no puede tener menos de 3 caracteres
+                      </span>
                 </div>
                 <div class="mb-3">
                     <label class="form-label required">Duración(minutos):</label>

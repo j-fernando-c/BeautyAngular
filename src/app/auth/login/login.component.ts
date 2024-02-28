@@ -87,34 +87,23 @@ export class LoginComponent implements OnInit {
         // Obtener roles del usuario
         const roles = this.authService.getUserRoles();
         // console.log('Token JWT:', token);
-        console.log(roles);
+        const userInfo = this.authService.getUserInfo();
 
-        const idUserP = this.authService.getUserInfo();
-        console.log(idUserP);
-        const idUserID = this.getUserId();
-        // console.log(idUserID);
+        // Redirigir según el rol
+        if (userInfo && userInfo.roles && userInfo.roles.includes('cliente')) {
+          this.router.navigate([`/dashboard/cita/nuevo/cliente/${userInfo._id}`]);
+        }else if(userInfo && userInfo.roles && userInfo.roles.includes('estilista')){
+          this.router.navigate([`/dashboard/turno/estilista/${userInfo._id}`]);
 
-        console.log(this.userId);
-
-        const decodedToken = this.jwtHelper.decodeToken(token);
-        console.log(decodedToken);
-
-        // http://localhost:4200/dashboard/cita/estilista/65d3b956dff3c63e47f10a63
-
-        // Redirección según los roles
-        if (roles.includes('admin')) {
+        } else {
           this.router.navigate(['/dashboard']);
-        } else if (roles.includes('estilista')) {
-          this.router.navigate([`/dashboard/cita/estilista/${this.userId}`]);
-        } else if (roles.includes('cliente')) {
-          // Manejar otros roles o redirigir a una ruta predeterminada
-          this.router.navigate([`/dashboard/cita/cliente/${this.userId}`]);
         }
         Swal.fire('Éxito', 'Inicio de sesión exitoso', 'success');
+
       },
       (error) => {
         if (error.status === 403) {
-          Swal.fire('Error', 'El usuario no existe', 'error');
+          Swal.fire('Error', 'Credenciales invalidas', 'error');
         } else if (error.status === 401) {
           Swal.fire('Error', 'Contraseña incorrecta', 'error');
         } else if (error.status === 400) {

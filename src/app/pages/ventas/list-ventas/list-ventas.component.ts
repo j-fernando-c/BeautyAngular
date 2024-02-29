@@ -1,12 +1,10 @@
 import { ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription, from, window } from 'rxjs';
-import { Ventas } from 'src/app/interfaces/ventas.interfaces';
 import { VentasService } from 'src/app/services/ventas.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import Swal from 'sweetalert2';
 import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { CitasService } from 'src/app/services/citas.service';
 import { CitaService } from 'src/app/services/cita.service';
@@ -64,41 +62,6 @@ export class ListVentasComponent implements OnInit {
       this.dataSource.filter = valor;
     }
 
-
-    toggleEstadoCita(cita: Citas): void {
-      let nuevoEstado = '';
-  
-      switch (cita.estado) {
-        case 'finalizada':
-            nuevoEstado = 'cancelada';
-            break;
-        case 'cancelada':
-            nuevoEstado = 'pendiente';
-            break;
-        case 'pendiente':
-            nuevoEstado = 'confirmada';
-            break;
-        case 'confirmada':
-              nuevoEstado = 'finalizada';
-              break;
-    }
-
-    
-    this.cita.actualizarEstado(cita._id, nuevoEstado).subscribe(
-      () => {
-        // Realiza acciones adicionales después de la actualización si es necesario
-        console.log('Estado actualizado correctamente');
-        this.cdr.detectChanges();
-        // window.location.reload()
-        
-        
-      },
-      (error) => {
-        console.error('Error al cambiar el estado de la cita:', error);
-      }
-    );
-    }
-  
 }
 
 

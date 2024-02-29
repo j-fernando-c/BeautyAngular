@@ -63,14 +63,11 @@
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
           <td mat-cell *matCellDef="let cita">
-            <button class="btn-sm" [ngClass]="{
-              'btn-primary btn-sm ': cita.estado === 'confirmada',
-              'btn-warning btn-sm ': cita.estado === 'finalizada',
-              'btn-danger btn-sm': cita.estado === 'cancelada',
-              'btn-info btn-sm': cita.estado === 'pendiente',
-            }" (click)="toggleEstadoCita(cita)">
+            <p disabled [ngClass]="{
+              'btn-warning btn-sm p3': cita.estado === 'finalizada',
+            }">
               {{ cita.estado | titlecase }}
-            </button>
+            </p>
           </td>
         </ng-container>
 

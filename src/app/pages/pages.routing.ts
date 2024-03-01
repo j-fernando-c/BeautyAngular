@@ -1,7 +1,6 @@
 import { MisCitasClientesComponent } from './cita/mis-citas-clientes/mis-citas-clientes.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
 import { MisCitasComponent } from './cita/mis-citas-estilista/mis-citas.component';
-import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { ListServicioComponent } from './servicio/list-servicio/list-servicio.component';
 import { AddTurnoComponent } from './turno/add-turno/add-turno.component';
 import { CreateEstilistaComponent } from './estilista/create-estilista/create-estilista.component';
@@ -30,7 +29,6 @@ import { CalendarioComponent } from './cita/calendario/calendario.component';
 import { CalendarioCitasComponent } from './calendario/calendario.component';
 import { AddCitaComponent } from './cita/add-cita/add-cita.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
-import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
 import { ListClienteActivoComponent } from './cliente/list-cliente-activo/list-cliente-activo.component';
 import { EstilistaTurnoComponent } from './turno/estilista-turno/estilista-turno.component';
@@ -40,7 +38,6 @@ import { EstilistaTurnoEditComponent } from './turno/estilista-turno-edit/estili
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ListVentasInactivasComponent } from './ventas/list-ventas-inactivas/list-ventas-inactivas.component';
 import { AddCitaClienteComponent } from './cita/add-cita-cliente/add-cita-cliente.component';
 import { EditarCitaComponent } from './cita/editar-cita/editar-cita.component';
 import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilista.component';
@@ -107,10 +104,7 @@ const routes: Routes = [
 
       //Ruta ventas
       { path: 'venta/list', component: ListVentasComponent },
-      { path: 'venta/list/inactivas', component: ListVentasInactivasComponent },
-      { path: 'venta/nuevo', component: AddVentasComponent },
-      { path: 'venta/edit/:id', component: AddVentasComponent },
-      { path: 'venta/detalle/:id', component: DetalleVentaComponent }
+
 
 
 

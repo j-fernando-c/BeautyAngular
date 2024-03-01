@@ -59,8 +59,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FiltroPipeUsuario } from './usuario/pipe/filtro.pipe.usuario';
 import { Grafica3Component } from './dashboard/grafica3/grafica3.component';
 import { ListVentasComponent } from './ventas/list-ventas/list-ventas.component';
-import { AddVentasComponent } from './ventas/add-ventas/add-ventas.component';
-import { DetalleVentaComponent } from './ventas/detalle-venta/detalle-venta.component';
 import { EditUsuarioComponent } from './usuario/edit-usuario/edit-usuario.component';
 import { NgxMaterialTimepickerModule, NgxTimepickerFieldComponent } from 'ngx-material-timepicker';
 import { EditTurnoComponent } from './turno/edit-turno/edit-turno.component';
@@ -72,7 +70,6 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { MisCitasComponent } from './cita/mis-citas-estilista/mis-citas.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
-import { ListVentasInactivasComponent } from './ventas/list-ventas-inactivas/list-ventas-inactivas.component';
 import { AddCitaClienteComponent } from './cita/add-cita-cliente/add-cita-cliente.component';
 import { MisCitasClientesComponent } from './cita/mis-citas-clientes/mis-citas-clientes.component';
 import { EditarCitaComponent } from './cita/editar-cita/editar-cita.component';
@@ -114,8 +111,6 @@ import { CalendarioCitasComponent } from './calendario/calendario.component';
     AddTurnoComponent,
     Grafica3Component,
     ListVentasComponent,
-    AddVentasComponent,
-    DetalleVentaComponent,
     EditUsuarioComponent,
     EditTurnoComponent,
 
@@ -128,7 +123,6 @@ import { CalendarioCitasComponent } from './calendario/calendario.component';
     ChangePasswordComponent,
     MisCitasComponent,
     EditarClienteComponent,
-    ListVentasInactivasComponent,
     AddCitaClienteComponent,
     MisCitasClientesComponent,
     EditarCitaComponent,

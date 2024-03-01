@@ -1,4 +1,3 @@
-
 <!-- list-usuario.component.html -->
 <div class="card">
   <div class="card-body">
@@ -8,11 +7,11 @@
         <label for="estilista">Seleccionar Estilista: </label>
         <select id="estilista" [(ngModel)]="estilistaSeleccionado" (change)="onEstilistaChange()">
           <option value="">Todos los estilistas</option>
-          <option *ngFor="let estilista of estilistas" [value]="estilista._id">{{ estilista.nombre }} {{ estilista.apellido }}</option>
+          <option *ngFor="let estilista of estilistas" [value]="estilista._id">{{ estilista.nombre }} {{
+            estilista.apellido }}</option>
         </select>
       </div>
-      <input type="text" class="barra mb-4" placeholder="Buscar cita..." #buscar
-        (keyup)="aplicarFiltro(buscar.value)">
+      <input type="text" class="barra mb-4" placeholder="Buscar cita..." #buscar (keyup)="aplicarFiltro(buscar.value)">
     </div>
     <div class="table-responsive sombra">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -38,7 +37,8 @@
         <!-- Estilista Column -->
         <ng-container matColumnDef="nombre_estilista">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre estilista</th>
-          <td mat-cell *matCellDef="let cita">{{ cita.estilista.nombre | titlecase }} {{cita.estilista.apellido | titlecase}}</td>
+          <td mat-cell *matCellDef="let cita">{{ cita.estilista.nombre | titlecase }} {{cita.estilista.apellido |
+            titlecase}}</td>
         </ng-container>
 
         <!-- fecha Column -->
@@ -47,13 +47,11 @@
           <td mat-cell *matCellDef="let cita">{{ cita.fechaCita | date: 'YYYY-MM-dd'}}</td>
         </ng-container>
 
-      <!-- hora Column -->
-      <ng-container matColumnDef="horaCita">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora cita</th>
-        <td mat-cell *matCellDef="let cita">{{ cita.horaCita| date: 'HH:mm a' }}</td>
-      </ng-container>
-
-
+        <!-- hora Column -->
+        <ng-container matColumnDef="horaCita">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora cita</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.horaCita| date: 'HH:mm a' }}</td>
+        </ng-container>
 
         <!-- Estado Column -->
         <ng-container matColumnDef="estado">
@@ -64,9 +62,25 @@
               'btn-warning btn-sm ': cita.estado === 'finalizada',
               'btn-danger btn-sm': cita.estado === 'cancelada',
               'btn-info btn-sm': cita.estado === 'pendiente',
-            }" (click)="toggleEstadoCita(cita)">
+            }">
               {{ cita.estado | titlecase }}
             </button>
+          </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="cambiar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cambiar estados</th>
+          <td mat-cell *matCellDef="let cita">
+            <form action="" [formGroup]="myForm">
+              <select class="form-select" formControlName="estado" (change)="actualizarEstado(cita._id)">
+                <option value="">Opciones</option>
+                <option value="confirmada">Confirmada</option>
+                <option value="cancelada">Cancelada</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="finalizada">Finalizada</option>
+              </select>
+            </form>
           </td>
         </ng-container>
 
@@ -74,19 +88,15 @@
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let cita" [ngSwitch]="cita.estado">
-            <ng-container>
+            <div class="d-flex">
               <!-- Contenido cuando el usuario está activo -->
-              <a id="link" class="btn btn-success btn-sm" routerLink="/dashboard/cita/edit/{{ cita._id}}">
+              <a id="link" class="btn btn-success btn-sm mr-2" routerLink="/dashboard/cita/edit/{{ cita._id }}">
                 Editar <i class="fas fa-pencil-alt"></i>
               </a>
-              <a id="link" class="btn btn-danger btn-sm ml-1" (click)="eliminarCita(cita._id)">
-                Eliminar<i class="fas fa-trash-alt"></i>
+              <a id="link" class="btn btn-danger btn-sm" (click)="eliminarCita(cita._id)">
+                Eliminar <i class="fas fa-trash-alt"></i>
               </a>
-            </ng-container>
-            <ng-container *ngSwitchCase="false">
-              <!-- Contenido cuando el usuario está inactivo -->
-              <!-- Puedes poner algo diferente o dejarlo vacío -->
-            </ng-container>
+            </div>
           </td>
         </ng-container>
 
@@ -99,5 +109,3 @@
     </div>
   </div>
 </div>
-
-

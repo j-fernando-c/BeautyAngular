@@ -26,8 +26,8 @@ export class TurnosService {
 
 
 
-  createTurnos(body: ITurnos): Observable<ITurnos> {
-    return this.http.post<ITurnos>(this.url, body)
+  createTurnos(body: ITurnos | ITurnos[]): Observable<ITurnos | ITurnos[]> {
+    return this.http.post<ITurnos | ITurnos[]>(this.url, body);
   }
 
   actulizarEstado(id: string): Observable<ITurnos> {

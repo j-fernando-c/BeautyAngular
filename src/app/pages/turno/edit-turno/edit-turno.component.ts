@@ -12,84 +12,84 @@ import Swal from 'sweetalert2';
   templateUrl: './edit-turno.component.html',
   styleUrls: ['./edit-turno.component.css']
 })
-export class EditTurnoComponent  implements OnInit{
+export class EditTurnoComponent implements OnInit {
 
-  Estilista:Estilista[]=[]
-  sExiste:boolean;
-  id!:string;
+  Estilista: Estilista[] = []
+  sExiste: boolean;
+  id!: string;
+  disable:boolean=true;
 
-  constructor(private fb:FormBuilder, 
-    private route:Router, 
-    private turnoService:TurnosService, 
-    private serviceEtilista:EstilistaService,
-    private router:ActivatedRoute){}
+  constructor(private fb: FormBuilder,
+    private route: Router,
+    private turnoService: TurnosService,
+    private serviceEtilista: EstilistaService,
+    private router: ActivatedRoute) { }
 
-    
-    myForm:FormGroup=this.fb.group({
-      dia:['', Validators.required],
-      inicioM:['', Validators.required],
-      finM:['', Validators.required],
-      inicioT:['', Validators.required],
-      finT:['', Validators.required],
-  
+
+  myForm: FormGroup = this.fb.group({
+    estilista: [''],
+    dia: ['', Validators.required],
+    inicioM: ['', Validators.required],
+    finM: ['', Validators.required],
+    inicioT: ['', Validators.required],
+    finT: ['', Validators.required],
+
+  })
+  ngOnInit(): void {
+
+    this.serviceEtilista.getEstilistas().subscribe(res => {
+      this.Estilista = res.filter(estilista => estilista.estado == true);
     })
-    ngOnInit(): void {
-      
-      this.serviceEtilista.getEstilistas().subscribe(res=>{
-        this.Estilista=res.filter(estilista=>estilista.estado==true);
-      })
-  
-      //Me permite recuperar el id
-      this.id = this.router.snapshot.params['id']
-      if (this.id) {
-        this.sExiste = true
-        this.turnoService.getOneTurno(this.id).subscribe((turno:ITurnos) => {
-          console.log(turno)
-          this.myForm.patchValue({
-            dia: turno.dia,
-            inicioM:turno.inicioM,
-            finM:turno.finM,
-            inicioT:turno.inicioT,
-            finT:turno.finT
+
+    //Me permite recuperar el id
+    this.id = this.router.snapshot.params['id']
+    if (this.id) {
+      this.sExiste = true
+      this.turnoService.getOneTurno(this.id).subscribe((turno: ITurnos) => {
+        this.myForm.patchValue({
+          estilista:turno.estilista._id,
+          dia: turno.dia,
+          inicioM: turno.inicioM,
+          finM: turno.finM,
+          inicioT: turno.inicioT,
+          finT: turno.finT,
         })
       })
     }
-    }
+  }
 
-    onSave(body: ITurnos) {
-      this.turnoService.actualizarTurno(this.id, body).subscribe({
-        next: (res) => {
+  onSave(body: ITurnos) {
+    this.turnoService.actualizarTurno(this.id, body).subscribe({
+      next: (res) => {
 
+        Swal.fire({
+          icon: 'success',
+          iconColor: '#4caf50',
+          title: '¡Actualizado',
+          text: 'La información se ha actualizado exitosamente',
+        });
+        this.route.navigateByUrl('/dashboard/turno/list');
+      },
+      error: (error) => {
+        // Muestra mensajes de error específicos usando SweetAlert
+        if (error.status === 400 && error.error && error.error.error) {
           Swal.fire({
-            icon: 'success',
-            iconColor: '#4caf50',
-            title: '¡Actualizado',
-            text: 'La información se ha actualizado exitosamente',
+            icon: 'error',
+            iconColor: '#f44336',
+            title: 'Error de validación',
+            text: error.error.error,
           });
-          this.route.navigateByUrl('/dashboard/turno/list');
-        },
-         error: (error) => {
-            console.log('HTTP Status Code:', error.status);
-            
-            // Muestra mensajes de error específicos usando SweetAlert
-            if (error.status === 400 && error.error && error.error.error) {
-                Swal.fire({
-                    icon: 'error',
-                    iconColor: '#f44336',
-                    title: 'Error de validación',
-                    text: error.error.error,
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    iconColor: '#f44336',
-                    title: 'Error',
-                    text: 'Error al procesar la solicitud',
-                });
-            }
+        } else {
+          Swal.fire({
+            icon: 'error',
+            iconColor: '#f44336',
+            title: 'Error',
+            text: 'Error al procesar la solicitud',
+          });
         }
-        
-      });
-    }
+      }
+
+    });
+  }
 
 }

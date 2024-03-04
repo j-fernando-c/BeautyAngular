@@ -21,7 +21,18 @@ export class MisCitasClientesComponent implements OnInit {
   sExiste: boolean;
   search: string;
   citas: Citas[] = []
+  estilistaSeleccionado: string = '';
 
+  selectedEstado: string = 'Todos'; // Valor inicial, 'Todos' significa sin filtrar
+  estados: string[] = ['Todos', 'Confirmada', 'Cancelada', 'Pendiente'];
+
+  aplicarFiltroEstado(): void {
+    if (this.selectedEstado === 'Todos') {
+      this.dataSource.filter = ''; // Sin filtro si se elige 'Todos'
+    } else {
+      this.dataSource.filter = this.selectedEstado.toLowerCase();
+    }
+  }
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
   dataSource = new MatTableDataSource<Citas>();

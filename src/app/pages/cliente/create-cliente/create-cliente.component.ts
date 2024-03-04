@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente.interfaces';
 import { Role } from 'src/app/interfaces/role.interfaces';
@@ -37,8 +37,8 @@ export class CreateClienteComponent implements OnInit {
     Validators.maxLength(20), Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+(?: [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/),
     Validators.maxLength(20), Validators.minLength(3)]],
-    contrasena: ['', Validators.required],
-    recontrasena: ['', Validators.required],
+    contrasena: ['', [Validators.required, this.atLeastOneUppercase]],
+    recontrasena: ['', [Validators.required, this.atLeastOneUppercase]],
     roles: ['cliente', Validators.required]
   });
 
@@ -111,6 +111,23 @@ export class CreateClienteComponent implements OnInit {
         }
       });
     }
+  }
+
+  atLeastOneUppercase(control: AbstractControl): { [key: string]: boolean } | null {
+    const value: string = control.value || '';
+
+    // Verificar si la cadena tiene al menos un carácter y si contiene al menos una letra mayúscula
+    if (!/[A-Z]/.test(value) || !/[a-z]/.test(value) ) {
+      return { noUppercase: true };
+    }
+
+      // Verificar la longitud de la contraseña
+    if (value.length < 8 || value.length > 15) {
+    return { invalidLength: true };
+    }
+
+
+    return null;
   }
 
 

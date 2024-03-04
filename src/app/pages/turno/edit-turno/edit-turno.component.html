@@ -5,9 +5,9 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="" class="form-label required">Estilista</label>
-            <select id="estilista" class="form-control" formControlName="estilista" >
+            <select id="estilista" class="form-control" formControlName="estilista"  >
               <option value="" disabled >Seleccione un estilista</option>
-              <option disabled  [value]="estilista._id" *ngFor="let estilista of Estilista">{{estilista.nombre | titlecase}}
+              <option disabled [value]="estilista._id" *ngFor="let estilista of Estilista">{{estilista.nombre | titlecase}}
                 {{estilista.apellido | titlecase}}</option>
             </select>
             <span class="text-danger" *ngIf="myForm.get('estilista')?.invalid && myForm.get('estilista')?.touched">

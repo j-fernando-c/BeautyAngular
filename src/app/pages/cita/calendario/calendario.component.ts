@@ -151,9 +151,6 @@ export class CalendarioComponent implements OnInit {
     )
   }
 
-
-
-
   aplicarFiltro(valor: string): void {
     this.search = valor.trim().toLowerCase();
     this.dataSource.filter = this.search;

@@ -32,6 +32,7 @@ export class ListVentasComponent implements OnInit {
     // Variable para buscar
   search: string = '';
   modalSwith: boolean = false;
+  fecha:Date;
   ventas: Citas[] = []
   subcripcion!: Subscription;
 
@@ -39,6 +40,8 @@ export class ListVentasComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log();
+    
     this.citasService.getCitas().subscribe(data => {
       this.ventas = data;
       this.dataSource.data = data.filter(venta=>venta.estado==='finalizada');
@@ -48,7 +51,7 @@ export class ListVentasComponent implements OnInit {
     //Metódo para refrescar
     this.subcripcion = this.ventasService.refresh.subscribe(() => {
       this.citasService.getCitas().subscribe(data => {
-        this.ventas = data;
+      this.ventas = data;
       this.dataSource.data = data.filter(venta=>venta.estado==='finalizada');
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -64,7 +67,10 @@ export class ListVentasComponent implements OnInit {
     }
 
     exportarExcel(): void {
-      const datosInforme = this.dataSource.filteredData.map(cita => ({
+      
+      const datosInforme = this.dataSource.filteredData.map((cita:Citas) => (
+        {
+        
         'Nombre Cliente': cita.cliente.nombre,
         'Apellido Cliente': cita.cliente.apellido,
         'Nombre Servicio': cita.servicio.nombre_servicio,

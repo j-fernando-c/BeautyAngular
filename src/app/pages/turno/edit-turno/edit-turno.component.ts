@@ -47,7 +47,7 @@ export class EditTurnoComponent implements OnInit {
       this.sExiste = true
       this.turnoService.getOneTurno(this.id).subscribe((turno: ITurnos) => {
         this.myForm.patchValue({
-          estilista:turno.estilista._id,
+          estilista:`${turno.estilista._id}`,
           dia: turno.dia,
           inicioM: turno.inicioM,
           finM: turno.finM,

@@ -72,6 +72,34 @@ export class CalendarioComponent implements OnInit {
     });
   };
 
+getEstadoStyle(estado: string): { class: string, label: string } {
+  switch (estado) {
+    case 'confirmada':
+      return { class: 'btn-primary', label: 'Confirmada' };
+    case 'finalizada':
+      return { class: 'btn-warning', label: 'Finalizada' };
+    case 'cancelada':
+      return { class: 'btn-danger', label: 'Cancelada' };
+    case 'pendiente':
+      return { class: 'btn-info', label: 'Pendiente' };
+    default:
+      return { class: '', label: '' };
+  }
+}
+
+getEstadoOptions(currentEstado: string): { value: string, label: string, disabled: boolean }[] {
+  const allEstados = ['confirmada', 'finalizada', 'cancelada', 'pendiente'];
+  const availableEstados = allEstados.filter(estado => estado !== currentEstado);
+
+  return availableEstados.map(estado => {
+    return {
+      value: estado,
+      label: estado.charAt(0).toUpperCase() + estado.slice(1),
+      disabled: false
+    };
+  });
+}
+
   onEstilistaChange(): void {
 
     // Llama a la función para cargar citas
@@ -134,7 +162,6 @@ export class CalendarioComponent implements OnInit {
 
   actualizarEstado(id: string) {
     const nuevoEstado = this.myForm.get('estado')?.value;
-    this.id = id
 
     this.citaService.actualizarEstado(id, nuevoEstado).subscribe({
       next: (res) => {
@@ -146,12 +173,14 @@ export class CalendarioComponent implements OnInit {
             icon: 'success',
             iconColor: '#4caf50',
             title: '¡Información!',
-            text: 'La cita pasó a un estado de venta.Por favor, revisar la tabla de venta.',
+            text: 'La cita pasó a un estado de venta. Por favor, revisar la tabla de venta.',
           });
         }
+
+        // Actualiza la lista de citas después de cambiar el estado
+        this.cargarCitas();
       }
-    }
-    )
+    });
   }
 
   aplicarFiltro(valor: string): void {

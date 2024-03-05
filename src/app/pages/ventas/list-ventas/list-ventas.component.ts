@@ -8,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { Citas } from 'src/app/interfaces/cita.interfaces';
 import { CitasService } from 'src/app/services/citas.service';
 import { CitaService } from 'src/app/services/cita.service';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-list-ventas',
@@ -30,6 +32,7 @@ export class ListVentasComponent implements OnInit {
     // Variable para buscar
   search: string = '';
   modalSwith: boolean = false;
+  fecha:Date;
   ventas: Citas[] = []
   subcripcion!: Subscription;
 
@@ -37,9 +40,10 @@ export class ListVentasComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log();
+    
     this.citasService.getCitas().subscribe(data => {
       this.ventas = data;
-      console.log(this.ventas)
       this.dataSource.data = data.filter(venta=>venta.estado==='finalizada');
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -47,7 +51,7 @@ export class ListVentasComponent implements OnInit {
     //Metódo para refrescar
     this.subcripcion = this.ventasService.refresh.subscribe(() => {
       this.citasService.getCitas().subscribe(data => {
-        this.ventas = data;
+      this.ventas = data;
       this.dataSource.data = data.filter(venta=>venta.estado==='finalizada');
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -62,6 +66,29 @@ export class ListVentasComponent implements OnInit {
       this.dataSource.filter = valor;
     }
 
+    exportarExcel(): void {
+      
+      const datosInforme = this.dataSource.filteredData.map((cita:Citas) => (
+        {
+        
+        'Nombre Cliente': cita.cliente.nombre,
+        'Apellido Cliente': cita.cliente.apellido,
+        'Nombre Servicio': cita.servicio.nombre_servicio,
+        'Precio': cita.servicio.precio,
+        'Duracion (min)': cita.servicio.duracion,
+        'Nombre Estilista': `${cita.estilista.nombre} ${cita.estilista.apellido}`,
+        'Fecha Cita': cita.fechaCita,
+        'Hora Cita': cita.horaCita,
+        'Estado': cita.estado,
+      }));
+    
+      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosInforme);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'InformeCitas');
+    
+   
+      XLSX.writeFile(wb, 'informe_ventas.xlsx');
+    }
 }
 
 

@@ -1,8 +1,10 @@
 <!-- list-usuario.component.html -->
 <div class="card">
   <div class="card-body">
+    <button class="btn btn-primary btn-sm" (click)="exportarExcel()">Exportar</button>
     <div class="d-flex justify-content-end">
-      <input type="text" class="barra mb-4" placeholder="Buscar venta... " #buscar (keyup)="aplicarFiltro(buscar.value)">
+      <input type="text" class="barra mb-4" placeholder="Buscar venta... " #buscar
+        (keyup)="aplicarFiltro(buscar.value)">
     </div>
     <div class="table-responsive sombra">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -32,11 +34,11 @@
           <td mat-cell *matCellDef="let cita">{{ cita.servicio.precio | currency:'COP':'symbol':'1.0' }}</td>
         </ng-container>
 
-           <!-- Email Column -->
-           <ng-container matColumnDef="duracion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Duracion(min)</th>
-            <td mat-cell *matCellDef="let cita">{{ cita.servicio.duracion}}</td>
-          </ng-container>
+        <!-- Email Column -->
+        <ng-container matColumnDef="duracion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Duracion(min)</th>
+          <td mat-cell *matCellDef="let cita">{{ cita.servicio.duracion}}</td>
+        </ng-container>
 
         <!-- Estilista Column -->
         <ng-container matColumnDef="nombre_estilista">

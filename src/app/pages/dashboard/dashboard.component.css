@@ -21,6 +21,22 @@ img{
     width: 50px;
 }
 
+.ver-mas{
+    color: white;
+    background-color:transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.ver-mas:hover{
+    color: black;
+    background-color:white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 3px;
+}
+
 
 
 

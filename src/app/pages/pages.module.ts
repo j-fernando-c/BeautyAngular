@@ -76,6 +76,7 @@ import { EditarCitaComponent } from './cita/editar-cita/editar-cita.component';
 import { EditEstilistaComponent } from './estilista/edit-estilista/edit-estilista.component';
 
 import { CalendarioCitasComponent } from './calendario/calendario.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -156,6 +157,7 @@ import { CalendarioCitasComponent } from './calendario/calendario.component';
     MatSlideToggleModule,
     FullCalendarModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     // CalendarModule,
     MatSelectModule,
     CdkAccordionModule,

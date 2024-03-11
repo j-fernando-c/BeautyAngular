@@ -2,6 +2,27 @@
 <div class="card">
   <div class="card-body">
     <div class="d-flex justify-content-end">
+<!--filtro por fechas-->
+<div class="filtroFecha">
+  <!-- Fecha Inicial -->
+  <div class="form-group col-md-4">
+  <div class="fecha-input">
+    <label for="fechaInicial">Fecha Inicial</label>
+    <input type="date" class="form-control" id="fechaInicial" [(ngModel)]="fechaInicial">
+  </div>
+</div>
+
+  <!-- Fecha Final -->
+  <div class="form-group col-md-4">
+  <div class="fecha-input">
+    <label for="fechaFinal">Fecha Final</label>
+    <input type="date" class="form-control" id="fechaFinal" [(ngModel)]="fechaFinal">
+  </div>
+
+</div>
+<button mat-button (click)="aplicarFiltroFecha()">Buscar</button>
+</div>
+
       <input type="text" class="barra mb-4" placeholder="Buscar cita..." [(ngModel)]="search" (keyup)="aplicarFiltro()">
     </div>
     <div class="table-responsive sombra">

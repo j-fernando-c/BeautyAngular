@@ -2,16 +2,17 @@
 <div class="card">
     <div class="card-body">
       <div class="d-flex justify-content-end">
-            <!-- Filtro por estado -->
-    <div class="d-flex justify-content-end mb-2">
-      <mat-form-field appearance="fill">
-        <mat-label>Estado</mat-label>
-        <mat-select [(value)]="selectedEstado">
-          <mat-option *ngFor="let estado of estados" [value]="estado">{{ estado }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-button (click)="aplicarFiltroEstado()">Filtrar</button>
-    </div>
+          <!-- Filtro por estado -->
+          <div class="filtroEstado">
+            <mat-form-field appearance="fill">
+                <mat-label>Estado</mat-label>
+                <mat-select [(value)]="selectedEstado">
+                    <mat-option *ngFor="let estado of estados" [value]="estado">{{ estado }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button class="btn-bg" (click)="aplicarFiltroEstado()">Filtrar</button>
+        </div>
+
         <input type="text" class="barra mb-4" placeholder="Buscar cita..." #buscar
           (keyup)="aplicarFiltro($event)">
       </div>

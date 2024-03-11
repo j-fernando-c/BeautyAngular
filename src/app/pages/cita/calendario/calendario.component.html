@@ -13,6 +13,25 @@
       </div>
       <input type="text" class="barra mb-4" placeholder="Buscar cita..." #buscar (keyup)="aplicarFiltro(buscar.value)">
     </div>
+    <!-- <div class="filtroFecha"> -->
+      <!-- Fecha Inicial -->
+      <!-- <div class="form-group col-md-4">
+      <div class="fecha-input">
+        <label for="fechaInicial">Fecha Inicial</label>
+        <input type="date" class="form-control" id="fechaInicial" [(ngModel)]="fechaInicial">
+      </div>
+    </div> -->
+
+      <!-- Fecha Final -->
+      <!-- <div class="form-group col-md-4">
+      <div class="fecha-input">
+        <label for="fechaFinal">Fecha Final</label>
+        <input type="date" class="form-control" id="fechaFinal" [(ngModel)]="fechaFinal">
+      </div>
+
+    </div>
+    <button mat-button (click)="aplicarFiltroFecha()">Buscar</button>
+    </div> -->
     <div class="table-responsive sombra">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 

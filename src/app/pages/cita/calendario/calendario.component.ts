@@ -27,6 +27,8 @@ export class CalendarioComponent implements OnInit {
   id: string;
   estilistas: Estilista[] = [];
   estilistaSeleccionado: string = '';
+  fechaInicial: string;
+  fechaFinal: string;
 
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
@@ -104,6 +106,31 @@ getEstadoOptions(currentEstado: string): { value: string, label: string, disable
 
     // Llama a la función para cargar citas
     this.cargarCitas();
+  }
+
+  aplicarFiltroFecha(): void {
+    // Asegurarse de que ambas fechas estén presentes antes de aplicar el filtro
+    if (this.fechaInicial && this.fechaFinal) {
+      const fechaInicial = new Date(this.fechaInicial);
+      const fechaFinal = new Date(this.fechaFinal);
+
+      // Filtra las citas basadas en el rango de fechas
+      const citasFiltradas = this.cita.filter(cita => {
+        const fechaCita = new Date(cita.fechaCita);
+        return fechaCita >= fechaInicial && fechaCita <= fechaFinal;
+      });
+
+      // Actualiza el origen de datos con las citas filtradas
+      this.dataSource.data = citasFiltradas;
+
+      // Si estás utilizando paginación, puedes volver a la primera página
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    } else {
+      // Si falta alguna fecha, muestra un mensaje de advertencia o manejo adecuado
+      console.warn('Por favor, seleccione ambas fechas.');
+    }
   }
 
   cargarCitas(): void {

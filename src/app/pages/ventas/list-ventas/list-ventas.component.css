@@ -8,8 +8,10 @@
     border: 1px solid rgba(116, 90, 242);
     border-radius: 15px;
     width: 300px;
+    height: 40px;
     padding: 7px;
     color: rgba(116, 90, 242);
+    margin-top: 10px;
 
 }
 
@@ -98,7 +100,7 @@ th{
     margin-left: 2rem; /* Añade un espacio entre el filtro y el siguiente elemento */
 }
 
-.filtroFecha button {
+/* .filtroFecha button {
     background-color: rgb(116, 90, 242);
     color: white;
     width: 70px;
@@ -108,4 +110,4 @@ th{
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
-}
+} */

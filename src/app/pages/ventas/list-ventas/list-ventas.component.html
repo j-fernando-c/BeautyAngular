@@ -20,7 +20,8 @@
     <input type="date" class="form-control" id="fechaFinal" [(ngModel)]="fechaFinal">
   </div>
 </div>
-<button mat-button (click)="aplicarFiltroFecha()">Buscar</button>
+<button class="btn btn-sm btn-primary"  (click)="aplicarFiltroFecha()">Buscar</button>
+<button class="btn btn-primary btn-sm ml-5" (click)="exportarExcel()">Exportar</button>
 </div>
   <input type="text" class="barra mb-4" placeholder="Buscar venta... " #buscar
   (keyup)="aplicarFiltro(buscar.value)">
@@ -102,7 +103,7 @@
 
       <!-- Agrega el paginador -->
       <div class="button-export">
-      <button class="btn btn-primary btn-sm" (click)="exportarExcel()">Exportar</button>
+      
       </div>
       <mat-paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons></mat-paginator>
     </div>

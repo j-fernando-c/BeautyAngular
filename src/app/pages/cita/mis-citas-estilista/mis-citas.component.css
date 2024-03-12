@@ -7,9 +7,9 @@
 .barra {
     border: 1px solid rgba(116, 90, 242);
     border-radius: 15px;
-    width: 300px;
+    width: 200px;
     height: 40px;
-    padding: 7px;
+    padding: 2px;
     color: rgba(116, 90, 242);
 
 }
@@ -81,25 +81,74 @@ th{
 
   }
 
-
-  .filtroFecha {
+  .filtros {
     display: flex;
-    align-items: center; /* Alinea verticalmente los elementos del filtro */
-    margin-right: auto; /* Mueve el filtro a la izquierda, dejando espacio a la derecha para el resto de los elementos */
-}
-
-.filtroFecha mat-form-field {
-    margin-right: 1rem; /* Añade un espacio entre el filtro y el siguiente elemento */
-}
-
-.filtroFecha button {
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    align-items: center; /* Alinea verticalmente los elementos */
+  }
+  
+  .filtroFecha,
+  .filtroEstado {
+    display: flex;
+    align-items: center;
+  }
+  .filtroFecha input{
+    display: flex;
+  } 
+  
+  .filtroFecha mat-form-field,
+  .filtroEstado mat-form-field {
+    margin-right: 0.5rem;
+  }
+  
+  .filtroFecha button,
+  .filtroEstado button {
     background-color: rgb(116, 90, 242);
     color: white;
-    width: 70px;
-    height: 40px;
+    /* width: 70px;
+    height: 40px; */
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
+  }
+
+  .filtroFecha button{
+    margin-right: 5px;
+  }
+
+  .filtroFecha button {
+    margin-left: 50px;
+    margin-top: 10px;
+  }
+
+  .buscador{
+    margin-left: 10px;
+  }
+
+  .filtroEstado mat-form-field {
+    margin-right: 0.5rem; /* Reducir el espacio entre el campo de selección y el botón */
+    width: auto; /* Hacer que el campo de selección ocupe solo el espacio necesario */
+  }
+  
+  /* Reducir el tamaño del dropdown */
+  .filtroEstado mat-select {
+    font-size: 0.75rem; /* Reducir el tamaño de la fuente */
+    min-width: 80px; /* Ajustar el ancho mínimo del dropdown */
+  }
+  
+  /* Reducir el tamaño de cada opción dentro del dropdown */
+  .filtroEstado mat-option {
+    font-size: 0.75rem; /* Reducir el tamaño de la fuente */
+  }
+
+  .mat-mdc-text-field-wrapper {
+    width: 120px;
 }
+  
+
+
+
+
+

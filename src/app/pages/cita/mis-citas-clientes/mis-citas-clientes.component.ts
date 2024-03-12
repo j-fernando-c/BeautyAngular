@@ -24,7 +24,7 @@ export class MisCitasClientesComponent implements OnInit {
   estilistaSeleccionado: string = '';
 
   selectedEstado: string = 'Todos'; // Valor inicial, 'Todos' significa sin filtrar
-  estados: string[] = ['Todos', 'Confirmada', 'Cancelada', 'Pendiente'];
+  estados: string[] = ['Todos', 'Confirmada', 'Cancelada', 'Pendiente', 'finalizada'];
 
   aplicarFiltroEstado(): void {
     if (this.selectedEstado === 'Todos') {

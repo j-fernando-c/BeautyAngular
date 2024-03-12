@@ -22,7 +22,8 @@ export class MisCitasComponent implements OnInit {
   fechaInicial: string;
   fechaFinal: string;
 
-
+  selectedEstado: string = 'Todos'; // Valor inicial, 'Todos' significa sin filtrar
+  estados: string[] = ['Todos', 'Confirmada', 'Cancelada', 'Pendiente', 'finalizada'];
 
 
 
@@ -85,6 +86,14 @@ export class MisCitasComponent implements OnInit {
     } else {
       // Si falta alguna fecha, muestra un mensaje de advertencia o manejo adecuado
       console.warn('Por favor, seleccione ambas fechas.');
+    }
+  }
+
+  aplicarFiltroEstado(): void {
+    if (this.selectedEstado === 'Todos') {
+      this.dataSource.filter = ''; // Sin filtro si se elige 'Todos'
+    } else {
+      this.dataSource.filter = this.selectedEstado.toLowerCase();
     }
   }
 

@@ -19,8 +19,17 @@
     <input type="date" class="form-control" id="fechaFinal" [(ngModel)]="fechaFinal">
   </div>
 
+  <button mat-button (click)="aplicarFiltroFecha()">Buscar</button>
 </div>
-<button mat-button (click)="aplicarFiltroFecha()">Buscar</button>
+<div class="filtroEstado">
+  <mat-form-field appearance="fill">
+      <mat-label>Estado</mat-label>
+      <mat-select [(value)]="selectedEstado">
+          <mat-option *ngFor="let estado of estados" [value]="estado">{{ estado }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <button class="btn-bg" (click)="aplicarFiltroEstado()">Filtrar</button>
+</div>
 </div>
 
       <input type="text" class="barra mb-4" placeholder="Buscar cita..." [(ngModel)]="search" (keyup)="aplicarFiltro()">
@@ -79,7 +88,8 @@
                       'btn-warning': cita.estado === 'finalizada',
                       'btn-danger': cita.estado === 'cancelada',
                       'btn-info': cita.estado === 'pendiente',
-                    }" (click)="toggleEstadoCita(cita)">
+                    }">
+                    <!-- }" (click)="toggleEstadoCita(cita)"> -->
               {{ cita.estado | titlecase }}
             </button>
           </td>

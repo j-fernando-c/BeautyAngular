@@ -20,7 +20,7 @@ export class ListVentasComponent implements OnInit {
 
   pages: number = 0;
 
-  
+
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
   dataSource = new MatTableDataSource<Citas>();
   displayedColumns: string[] = ['nombre', 'apellido', 'nombre_servicio','precio', 'duracion', 'nombre_estilista', 'fechaCita', 'horaCita', 'estado'];
@@ -34,6 +34,8 @@ export class ListVentasComponent implements OnInit {
   modalSwith: boolean = false;
   fecha:Date;
   ventas: Citas[] = []
+  fechaInicial: string;
+  fechaFinal: string;
   subcripcion!: Subscription;
 
   constructor(private ventasService: VentasService, private citasService:CitasService, private cita:CitaService, private cdr: ChangeDetectorRef,private router:ActivatedRoute,) { }
@@ -41,7 +43,7 @@ export class ListVentasComponent implements OnInit {
 
   ngOnInit(): void {
     console.log();
-    
+
     this.citasService.getCitas().subscribe(data => {
       this.ventas = data;
       this.dataSource.data = data.filter(venta=>venta.estado==='finalizada');
@@ -59,18 +61,47 @@ export class ListVentasComponent implements OnInit {
     })
   }
 
-  
+
 
     aplicarFiltro(valor: string): void {
       this.search = valor.trim().toLowerCase();
       this.dataSource.filter = valor;
     }
 
+    aplicarFiltroFecha(): void {
+      // Asegurarse de que ambas fechas estén presentes antes de aplicar el filtro
+      if (this.fechaInicial && this.fechaFinal) {
+        const fechaInicial = new Date(this.fechaInicial);
+        const fechaFinal = new Date(this.fechaFinal);
+
+        // Filtra las citas basadas en el rango de fechas y el estado 'finalizado'
+        const citasFiltradas = this.ventas.filter(cita => {
+          const fechaCita = new Date(cita.fechaCita);
+          return (
+            fechaCita >= fechaInicial &&
+            fechaCita <= fechaFinal &&
+            cita.estado === 'finalizada'
+          );
+        });
+
+        // Actualiza el origen de datos con las citas filtradas
+        this.dataSource.data = citasFiltradas;
+
+        // Si estás utilizando paginación, puedes volver a la primera página
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+      } else {
+        // Si falta alguna fecha, muestra un mensaje de advertencia o manejo adecuado
+        console.warn('Por favor, seleccione ambas fechas.');
+      }
+    }
+
     exportarExcel(): void {
-      
+
       const datosInforme = this.dataSource.filteredData.map((cita:Citas) => (
         {
-        
+
         'Nombre Cliente': cita.cliente.nombre,
         'Apellido Cliente': cita.cliente.apellido,
         'Nombre Servicio': cita.servicio.nombre_servicio,
@@ -81,12 +112,12 @@ export class ListVentasComponent implements OnInit {
         'Hora Cita': cita.horaCita,
         'Estado': cita.estado,
       }));
-    
+
       const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosInforme);
       const wb: XLSX.WorkBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'InformeCitas');
-    
-   
+
+
       XLSX.writeFile(wb, 'informe_ventas.xlsx');
     }
 }

@@ -84,3 +84,28 @@ th{
     flex-direction: row;
     justify-content: space-around;
   }
+
+
+
+  .filtroFecha {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos del filtro */
+    margin-right: auto; /* Mueve el filtro a la izquierda, dejando espacio a la derecha para el resto de los elementos */
+}
+
+.filtroFecha mat-form-field {
+    margin-right: 1rem; /* Añade un espacio entre el filtro y el siguiente elemento */
+    margin-left: 2rem; /* Añade un espacio entre el filtro y el siguiente elemento */
+}
+
+.filtroFecha button {
+    background-color: rgb(116, 90, 242);
+    color: white;
+    width: 70px;
+    height: 40px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}

@@ -2,7 +2,7 @@
     <div class="cards">
         <div class="card">
             <div class="box">
-                <span class="dot"></span> 
+                <span class="dot"></span>
                 <h2 class="confirmadas">{{citasConfirmadas}}</h2>
                 <h3>Confirmadas</h3>
             </div>
@@ -32,9 +32,28 @@
 <!-- list-usuario.component.html -->
 <div class="card">
     <div class="card-body">
-        <div class="d-flex justify-content-start">
-            <h3 class="nombre">Reservas de {{nombre | titlecase}} </h3>
+        <div class="filtros d-flex justify-content-start">
+            <h3 class="nombre">Reservas de:  {{nombre | titlecase}} </h3>
+            <button type="button" id="voler" class="btn btn-primary btn-sm" routerLink="/dashboard/cliente/list">Volver</button>
+            <div class="d-flex justify-content-end">
+
+              <div class="fecha-inicial">
+            <div class="fecha-input">
+              <label for="fechaInicial">Fecha Inicial</label>
+              <input type="date" class="form-control" id="fechaInicial" [(ngModel)]="fechaInicial">
+            </div>
+          </div>
+
+          <!-- Fecha Final -->
+            <div class="fecha-input">
+              <div class="fecha-final">
+              <label for="fechaFinal">Fecha Final</label>
+              <input type="date" class="form-control ml-2" id="fechaFinal" [(ngModel)]="fechaFinal">
+            </div>
+          </div>
+          <button class="btn btn-sm" (click)="aplicarFiltroFecha()">Buscar</button>
         </div>
+      </div>
         <div class="table-responsive sombra">
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 

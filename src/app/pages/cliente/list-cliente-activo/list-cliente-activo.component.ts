@@ -24,6 +24,8 @@ export class ListClienteActivoComponent implements OnInit {
   citasCanceladas:number;
   citasPendientes:number;
   citasFinalizadas:number;
+  fechaInicial: string;
+  fechaFinal: string;
 
   // Agrega estas líneas para usar el MatTableDataSource, MatPaginator y MatSort
   dataSource = new MatTableDataSource<Citas>();
@@ -64,6 +66,31 @@ export class ListClienteActivoComponent implements OnInit {
       this.usuarioService.getOneUsuario(this.id).subscribe((res: Usuario | null) => {
         this.nombre=`${res?.nombre} ${res?.apellido}`
       });
+    }
+  }
+
+  aplicarFiltroFecha(): void {
+    // Asegurarse de que ambas fechas estén presentes antes de aplicar el filtro
+    if (this.fechaInicial && this.fechaFinal) {
+      const fechaInicial = new Date(this.fechaInicial);
+      const fechaFinal = new Date(this.fechaFinal);
+
+      // Filtra las citas basadas en el rango de fechas
+      const citasFiltradas = this.citas.filter(cita => {
+        const fechaCita = new Date(cita.fechaCita);
+        return fechaCita >= fechaInicial && fechaCita <= fechaFinal;
+      });
+
+      // Actualiza el origen de datos con las citas filtradas
+      this.dataSource.data = citasFiltradas;
+
+      // Si estás utilizando paginación, puedes volver a la primera página
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    } else {
+      // Si falta alguna fecha, muestra un mensaje de advertencia o manejo adecuado
+      console.warn('Por favor, seleccione ambas fechas.');
     }
   }
 

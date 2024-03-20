@@ -120,3 +120,65 @@ th{
   }
 
 
+.fecha-inicial{
+  margin-left: 200px;
+}
+
+.filtroFecha,
+.filtroEstado {
+  display: flex;
+  align-items: center;
+}
+.filtroFecha input{
+  display: flex;
+}
+
+.filtroFecha mat-form-field,
+.filtroEstado mat-form-field {
+  margin-right: 0.5rem;
+}
+
+
+.filtros button {
+  background-color: rgb(116, 90, 242);
+  color: white;
+  margin-top: 28px;
+  margin-left: 20px;
+  width: 70px;
+  height: 40px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.filtroEstado mat-form-field {
+  margin-right: 0.5rem; /* Reducir el espacio entre el campo de selección y el botón */
+  width: auto; /* Hacer que el campo de selección ocupe solo el espacio necesario */
+}
+
+/* Reducir el tamaño del dropdown */
+.filtroEstado mat-select {
+  font-size: 0.75rem; /* Reducir el tamaño de la fuente */
+  min-width: 80px; /* Ajustar el ancho mínimo del dropdown */
+}
+
+/* Reducir el tamaño de cada opción dentro del dropdown */
+.filtroEstado mat-option {
+  font-size: 0.75rem; /* Reducir el tamaño de la fuente */
+}
+
+.mat-mdc-text-field-wrapper {
+  width: 120px;
+}
+
+.filtros{
+  margin-bottom: 15px;
+}
+
+
+#voler{
+  margin-top: 37px;
+  margin-left: -137px;
+}

@@ -3,6 +3,8 @@
   <div class="card-body">
     <div class="d-flex justify-content-between">
       <button class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/usuarios/nuevo">Agregar Usuario</button>
+      <button type="button" class="btn btn-primary btn-sm mb-4" routerLink="/dashboard/roles/list">Roles</button>
+
       <input type="text" class="barra mb-4" placeholder="Buscar usuario..." #buscar (keyup)="aplicarFiltro(buscar.value)">
     </div>
     <div class="table-responsive sombra">

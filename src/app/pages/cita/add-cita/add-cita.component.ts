@@ -110,7 +110,6 @@ calcularDuracionServicio() {
 
 
   onSave(body: Citas) {
-
     this.citaService.createCitas(body).subscribe({
 
       next: (res) => {

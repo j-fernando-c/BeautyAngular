@@ -22,13 +22,26 @@
         <li *ngIf="canAccessEstilistaModule()" class="nav-small-cap" >AGENDA</li>
         <li *ngIf="canAccessEstilistaModule()">
           <a *ngIf="userId" [routerLink]="'/dashboard/turno/estilista/' + userId" aria-expanded="false">
-            <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">Mis turnos</span>
+            <i class="fa-regular fa-calendar-check"></i><span class="hide-menu">MIS TURNOS</span>
           </a>
 
           <a *ngIf="userId" [routerLink]="'/dashboard/cita/estilista/' + userId" aria-expanded="false">
-            <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">Mis citas</span>
+            <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">MIS CITAS</span>
+          </a>
+  
+        </li>
+        <li *ngIf="canAccessEstilistaModule()" class="nav-small-cap" >DESCARGAS</li>
+        <li *ngIf="canAccessEstilistaModule()">
+          <a *ngIf="userId" href="https://drive.google.com/file/d/1qk7XqL7MQb5Yxxe0_5uTASCEnLJk1a4E/view?usp=drive_link" target="_blank" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-solid fa-mobile-alt"></i><span class="hide-menu">APK CELULAR</span>
+          </a>
+          <a *ngIf="userId" href="https://docs.google.com/document/d/1mZB2pzTMEHxqicimvQHz7TIGm64znsZQ/edit?usp=sharing&ouid=104838635013069024003&rtpof=true&sd=true" target="_blank">
+            <i class="fa-solid fa-book"></i> MANUAL DE USUARIO
           </a>
         </li>
+          
+      
+        
         <li *ngIf="canAccessClienteModule()" class="nav-small-cap" >AGENDA</li>
         <li *ngIf="canAccessClienteModule()">
           <a *ngIf="userId" [routerLink]="'/dashboard/cita/nuevo/cliente/' + userId" aria-expanded="false">
@@ -37,6 +50,12 @@
 
           <a *ngIf="userId" [routerLink]="'/dashboard/cita/list/cliente/' + userId" aria-expanded="false">
             <i class="fa-regular fa-calendar-days"></i><span class="hide-menu">Mis citas</span>
+          </a>
+        </li>
+        <li *ngIf="canAccessClienteModule()" class="nav-small-cap" >DESCARGAS</li>
+        <li *ngIf="canAccessClienteModule()">
+          <a *ngIf="userId" href="https://docs.google.com/document/d/1mZB2pzTMEHxqicimvQHz7TIGm64znsZQ/edit?usp=sharing&ouid=104838635013069024003&rtpof=true&sd=true" target="_blank">
+            <i class="fa-solid fa-book"></i> MANUAL DE USUARIO
           </a>
         </li>
 
@@ -104,11 +123,14 @@
           </a>
         </li>
 
+        <li *ngIf="canAccessModule('admin') " class="nav-small-cap">DESCARGAS</li>
         <li *ngIf="canAccessModule('admin')">
-          <a routerLink="/dashboard/roles/list" routerLinkActive="active" aria-expanded="false">
-            <!-- <i class="fa-regular fa-face-smile"></i>
-            <span class="hide-menu">ROLES</span> -->
+          <a *ngIf="userId" href="https://drive.google.com/file/d/1qk7XqL7MQb5Yxxe0_5uTASCEnLJk1a4E/view?usp=drive_link" target="_blank" routerLinkActive="active" aria-expanded="false">
+            <i class="fa-solid fa-mobile-alt"></i><span class="hide-menu">APK CELULAR</span>
           </a>
+          <a *ngIf="userId" href="https://docs.google.com/document/d/1mZB2pzTMEHxqicimvQHz7TIGm64znsZQ/edit?usp=sharing&ouid=104838635013069024003&rtpof=true&sd=true" target="_blank">
+            <i class="fa-solid fa-book"></i> MANUAL DE USUARIO
+          </a>      
         </li>
 
       </ul>

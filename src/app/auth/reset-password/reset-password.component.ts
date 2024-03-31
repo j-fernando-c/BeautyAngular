@@ -29,9 +29,9 @@ export class ResetPasswordComponent implements OnInit {
 
 
   myForm: FormGroup = this.fb.group({
-    nueva: ['', [Validators.required, Validators.minLength(6)]],
-    contrasena: ['', [Validators.required, Validators.minLength(6)]],
-  }, { validators: this.validarContraseñas.bind(this) });
+    nueva: ['', [Validators.required, this.atLeastOneUppercase]],
+    contrasena: ['', [Validators.required,this.atLeastOneUppercase]],
+  }, { validators: this.validarContraseñas.bind(this), });
 
   // ... (resto del código)
 
@@ -42,6 +42,22 @@ export class ResetPasswordComponent implements OnInit {
     return password1 !== password2 ? { contrasenasNoCoinciden: true } : null;
   }
 
+  atLeastOneUppercase(control: AbstractControl): { [key: string]: boolean } | null {
+    const value: string = control.value || '';
+
+    // Verificar si la cadena tiene al menos un carácter y si contiene al menos una letra mayúscula
+    if (!/[A-Z]/.test(value) || !/[a-z]/.test(value) ) {
+      return { noUppercase: true };
+    }
+
+      // Verificar la longitud de la contraseña
+    if (value.length < 8 || value.length > 15) {
+    return { invalidLength: true };
+    }
+
+
+    return null;
+  }
 
   onSave(body: any) {
     this.auth.enviarNuevaContrasena(this.id, this.token, body).subscribe({

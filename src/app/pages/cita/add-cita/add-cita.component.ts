@@ -64,8 +64,6 @@ export class AddCitaComponent implements OnInit {
 
     })
 
-    // console.log(this.)
-    // console.log(this.estilista)
   }
 
   myForm: FormGroup = this.fb.group({
@@ -113,7 +111,6 @@ calcularDuracionServicio() {
 
   onSave(body: Citas) {
 
-
     this.citaService.createCitas(body).subscribe({
 
       next: (res) => {
@@ -126,8 +123,7 @@ calcularDuracionServicio() {
         this.router.navigateByUrl('/dashboard/cita/list');
       },
       error: (error) => {
-        console.log('HTTP Status Code:', error.status);
-
+     
         // Muestra mensajes de error específicos usando SweetAlert
         if (error.status === 400 && error.error && error.error.error) {
           Swal.fire({

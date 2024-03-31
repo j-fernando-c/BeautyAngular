@@ -96,7 +96,6 @@ export class ListEstilistaComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.servicioEstilista.EliminarEstilista(id).subscribe(res => {
-          console.log("Se eliminó con exito")
         })
       }
     })

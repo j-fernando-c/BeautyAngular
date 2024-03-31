@@ -162,7 +162,7 @@ calcularDuracionServicio() {
         this.router.navigateByUrl('/dashboard/cita/list');
       },
       error: (error) => {
-        console.log('HTTP Status Code:', error.status);
+
 
         // Muestra mensajes de error específicos usando SweetAlert
         if (error.status === 400 && error.error && error.error.error) {

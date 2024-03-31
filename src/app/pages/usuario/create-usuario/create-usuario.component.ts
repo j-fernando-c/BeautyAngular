@@ -103,8 +103,7 @@ export class CreateUsuarioComponent implements OnInit {
 
     // Actualizar usuario y/o contraseña
     const body = { ...usuario, roles: usuario.roles.map(role => role.nombre), contrasena: contrasena || contrasena };
-    console.log('Body antes de enviar:', JSON.stringify(body));
-
+   
     if (!this.myForm.valid) {
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;

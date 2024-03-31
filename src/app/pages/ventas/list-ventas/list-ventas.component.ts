@@ -93,7 +93,7 @@ export class ListVentasComponent implements OnInit {
         }
       } else {
         // Si falta alguna fecha, muestra un mensaje de advertencia o manejo adecuado
-        console.warn('Por favor, seleccione ambas fechas.');
+     
       }
     }
 

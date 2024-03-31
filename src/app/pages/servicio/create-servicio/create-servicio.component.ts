@@ -41,7 +41,6 @@ export class CreateServicioComponent implements OnInit {
 
     //Me permite recuperar el id
     this.id = this.route.snapshot.params['id']
-    console.log()
     if (this.id) {
       this.sExiste = true
       this.servicioService.getOneServicio(this.id).subscribe((servicio: Servicio | null) => {
@@ -110,7 +109,6 @@ export class CreateServicioComponent implements OnInit {
         estilista: servicio.estilista,
         estado: servicio.estado
       }
-      console.log(objetoServicio)
       this.servicioService.createServicio(objetoServicio).subscribe({
         next: (res) => {
           Swal.fire({

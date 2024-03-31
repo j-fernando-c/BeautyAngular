@@ -101,7 +101,7 @@ export class EditarPerfilComponent implements OnInit {
     if (this.userRoles.includes('estilista')) {
 
       const idEstilista = this.userId;
-      console.log(idEstilista)
+      
       // const idEstilista
       if (idEstilista) {
         this.sExiste = true
@@ -119,7 +119,7 @@ export class EditarPerfilComponent implements OnInit {
           }
         });
       }
-      console.log("informacion del Estilista", userInfo);
+      
     }
 
     // Ejemplo: Mostrar información específica según el rol de cliente
@@ -142,15 +142,13 @@ export class EditarPerfilComponent implements OnInit {
           }
         });
       }
-      console.log("informacion del usuario", userInfo, "rol del usuario", this.myForm.get('rol')?.value);
-      console.log("id del usuario", this.userId)
+     
     }
   }
 
 
   onSave(usuario: any) {
     if (!this.userId) {
-      console.error("ID del usuario no disponible.");
       return;
     }
 

@@ -57,7 +57,7 @@ export class CalendarioComponent implements OnInit {
 
     this.citaService.getCita().subscribe(data => {
       this.cita = data
-      console.log(this.cita);
+      
       this.dataSource.data = data.filter(cita=>cita.estado!=='finalizada');
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -129,7 +129,7 @@ getEstadoOptions(currentEstado: string): { value: string, label: string, disable
       }
     } else {
       // Si falta alguna fecha, muestra un mensaje de advertencia o manejo adecuado
-      console.warn('Por favor, seleccione ambas fechas.');
+     
     }
   }
 
@@ -144,10 +144,10 @@ getEstadoOptions(currentEstado: string): { value: string, label: string, disable
           this.dataSource.data = data.filter(cita => cita.estado !== 'finalizada');
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          console.log('Citas cargadas por estilista:', data)
+        
         },
         (error) => {
-          console.error('Error al obtener las citas:', error);
+         
         }
       );
     } else {
@@ -160,7 +160,7 @@ getEstadoOptions(currentEstado: string): { value: string, label: string, disable
           this.dataSource.sort = this.sort;
         },
         (error) => {
-          console.error('Error al obtener las citas:', error);
+          
         }
       );
     }
@@ -172,7 +172,7 @@ getEstadoOptions(currentEstado: string): { value: string, label: string, disable
         this.estilistas = res.filter(estilista => estilista.estado == true);
       },
       (error) => {
-        console.error('Error al obtener la lista de estilistas:', error);
+       
       }
     );
   }
@@ -229,7 +229,7 @@ getEstadoOptions(currentEstado: string): { value: string, label: string, disable
     }).then(result => {
       if (result.isConfirmed) {
         this.citaService.EliminarCita(id).subscribe(res => {
-          console.log('Se eliminó con éxito');
+      
         });
       }
     });

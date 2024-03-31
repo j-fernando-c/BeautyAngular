@@ -65,7 +65,7 @@ export class CreateClienteComponent implements OnInit {
   }
 
   onSave(usuario: Usuario) {
-    console.log('Form Data:', usuario);
+  
     if (typeof usuario.roles === 'string') {
       usuario.roles = [{ _id: usuario.roles, nombre: usuario.roles }];
     }

@@ -116,13 +116,11 @@ export class MiPerfilComponent implements OnInit {
       }
       });
     }
-    console.log("informacion del Estilista",userInfo);
+
     }
 
     // Ejemplo: Mostrar información específica según el rol de cliente
     if (this.userRoles.includes('cliente') || this.userRoles.includes('admin') ) {
-      console.log(this.userId);
-
       const idUsuario = this.userId
       if (idUsuario) {
         this.sExiste = true;
@@ -140,7 +138,7 @@ export class MiPerfilComponent implements OnInit {
           }
         });
       }
-      console.log("informacion del usuario",userInfo,"rol del usuario",this.myForm.get('rol')?.value);
+
     }
   }
 }

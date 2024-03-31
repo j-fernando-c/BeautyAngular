@@ -85,7 +85,7 @@ export class MisCitasComponent implements OnInit {
       }
     } else {
       // Si falta alguna fecha, muestra un mensaje de advertencia o manejo adecuado
-      console.warn('Por favor, seleccione ambas fechas.');
+
     }
   }
 
@@ -112,19 +112,17 @@ export class MisCitasComponent implements OnInit {
           break;
   }
 
-  console.log('Estado anterior:', cita.estado);
-  console.log('Nuevo estado:', nuevoEstado);
+
 
     this.citasService.actualizarEstado(cita._id, nuevoEstado).subscribe(
       () => {
         // Realiza acciones adicionales después de la actualización si es necesario
-        console.log('Estado actualizado correctamente');
+    
         this.cdr.detectChanges();
         window.location.reload()
 
       },
       (error) => {
-        console.error('Error al cambiar el estado de la cita:', error);
       }
     );
 

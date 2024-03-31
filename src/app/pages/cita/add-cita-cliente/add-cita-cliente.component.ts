@@ -130,7 +130,7 @@ export class AddCitaClienteComponent implements OnInit {
         this.router.navigateByUrl(`/dashboard/cita/list/cliente/${this.id}`);
       },
       error: (error) => {
-        console.log('HTTP Status Code:', error.status);
+  
 
         // Muestra mensajes de error específicos usando SweetAlert
         if (error.status === 400 && error.error && error.error.error) {

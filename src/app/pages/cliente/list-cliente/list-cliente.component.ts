@@ -90,7 +90,7 @@ export class ListClienteComponent implements OnInit {
     }).then(result => {
       if (result.isConfirmed) {
         this.usuarioService.EliminarUsuario(id).subscribe(res => {
-          console.log('Se eliminó con éxito');
+          
         });
       }
     });

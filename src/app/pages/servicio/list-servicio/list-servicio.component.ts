@@ -82,7 +82,7 @@ cambioEstado(id: string) {
     }).then((result)=>{
       if(result.isConfirmed){
         this.servicioServices.eliminarServicio(id).subscribe(res=>{
-          console.log("Se eliminó con exito")
+          
         })
       }
     })

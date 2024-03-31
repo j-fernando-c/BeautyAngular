@@ -71,27 +71,18 @@ export class EditEstilistaComponent implements OnInit{
       Swal.fire('Error', 'Complete el formulario correctamente', 'error');
       return;
     }else if (this.sExiste) {
-      this.servicioEstilista.actualizarEstilista(this.id, estilista).subscribe((res: Estilista) => {
-        Swal.fire({
-          icon: 'success',
-          iconColor: '#745af2',
-          title: '¡Actualizado!',
-          text: 'La información se ha actualizado exitosamente.',
-        });
-        this.router.navigateByUrl("/dashboard/estilista/list")
-      })
-    } else {
-      this.servicioEstilista.createEstilista(estilista).subscribe({
-        next: (res) => {
+      this.servicioEstilista.actualizarEstilista(this.id, estilista).subscribe({
+
+        next:(res)=>{
+
           Swal.fire({
             icon: 'success',
             iconColor: '#745af2',
-            title: '¡Guardado!',
-            text: 'La información se ha guardado exitosamente.',
+            title: '¡Actualizado!',
+            text: 'La información se ha actualizado exitosamente.',
           });
           this.router.navigateByUrl("/dashboard/estilista/list");
-        },
-        error: (error) => {
+        },   error: (error:any) => {
           Swal.fire({
             icon: 'error',
             iconColor: '#f25252',
@@ -100,7 +91,7 @@ export class EditEstilistaComponent implements OnInit{
           });
         }
       });
-    }
+    } 
     }
   }
 

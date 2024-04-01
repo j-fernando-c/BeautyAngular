@@ -80,15 +80,12 @@ export class EditarCitaComponent implements OnInit {
     if (this.id) {
       this.sExiste = true;
       this.citaService.getOneCita(this.id).subscribe((res: Citas | null) => {
-        console.log(res)
-        console.log(res?.estilista.nombre)
-        console.log(res?.cliente.nombre)
         if (res) {
           this.myForm.patchValue({
             cliente: res.cliente?._id,
             // servicio: res.servicio?._id,
             // estilista: res.estilista?._id,
-            fechaCita: this.datePipe.transform(res.fechaCita, 'yyyy-MM-dd'), // Formatea la fecha
+            fechaCita: this.datePipe.transform(res.fechaCita, 'yyyy-MM-dd', 'UTC'), // Formatea la fecha
             horaCita: res.horaCita,
 
           });
@@ -113,7 +110,7 @@ export class EditarCitaComponent implements OnInit {
         this.estilista= res.filter(estilista => estilista.estado == true);
       },
       (error) => {
-        console.error('Error al obtener la lista de estilistas:', error);
+     
       }
     );
   }

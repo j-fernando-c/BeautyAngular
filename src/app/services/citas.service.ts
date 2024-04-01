@@ -27,7 +27,7 @@ export class CitasService {
   }
 
   createCita(body: Citas): Observable<Citas> {
-    console.log('Body antes de enviar:', body);
+    
     return this.http.post<Citas>(this.apiUrl, body)
       .pipe(
         tap(() => {

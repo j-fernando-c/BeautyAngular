@@ -87,7 +87,7 @@ export class Grafica3Component implements OnInit {
 
         this.chartData = servicios;
       } else {
-        console.error('Los datos obtenidos no son un array:', data);
+   
       }
     });
 
